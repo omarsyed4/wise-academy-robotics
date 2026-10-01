@@ -1,0 +1,17 @@
+# Official FIRST BIOGLOW materials — freely downloadable, far too big for git.
+# Re-fetch any time with: ./scripts/fetch-materials.sh
+FIRST LEGO League (BIOGLOW)/01 Core Documents/
+FIRST LEGO League (BIOGLOW)/02 Judging/
+FIRST LEGO League (BIOGLOW)/03 Robot Game/
+FIRST LEGO League (BIOGLOW)/04 Building Instructions/
+FIRST LEGO League (BIOGLOW)/05 Session Slides/
+FIRST LEGO League (BIOGLOW)/06 Event Resources/
+
+# Personal email exports
+FIRST LEGO League (BIOGLOW)/00 Correspondence/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
