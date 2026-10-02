@@ -50,3 +50,24 @@ Google Docs cannot be version-controlled, so these stay in Drive:
 - Four equally weighted ranks decide Champion's: Core Values, Innovation Project, Robot Design, Robot Game
 - 70 points are procedural: 20 for passing inspection inside one launch area, 50 for keeping precision tokens
 - [BIOGLOW season materials](https://www.firstinspires.org/resources/library/fll/season-materials)
+
+## The season tracker
+
+`docs/index.html` is a static status board — roster, missions, trifold panel progress,
+evidence logs, and today's action items. Open it locally, or publish it.
+
+**Before you publish it:** GitHub Pages sites are **public on the open internet even when the
+repo is private** — that only changes on GitHub Enterprise. This page names eight students and
+their school. Decide that deliberately.
+
+```bash
+# makes the tracker public at https://omarsyed4.github.io/wise-academy-robotics/
+gh api -X POST repos/omarsyed4/wise-academy-robotics/pages \
+  -f 'source[branch]=main' -f 'source[path]=/docs'
+
+# turns it back off
+gh api -X DELETE repos/omarsyed4/wise-academy-robotics/pages
+```
+
+A private alternative that needs no decision: the tracker is also published as a
+link-shared Claude Artifact, same content, not indexed and not public.
