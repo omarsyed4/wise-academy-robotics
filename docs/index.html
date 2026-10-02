@@ -6,12 +6,13 @@
 <title>Ctrl+Alt+Defeat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,700;100,800;112,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,700;112,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
   --bg:#0B1120;
   --surface:#141C2E;
   --surface-2:#1C263B;
+  --surface-3:#243049;
   --ink:#E7ECF5;
   --ink-2:#9FACC4;
   --ink-3:#6A7793;
@@ -32,31 +33,49 @@ body{
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 img{max-width:100%}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:22px;padding-block:44px 90px}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px;padding-block:0 90px}
 
-/* masthead */
-header.mast{margin-bottom:52px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 16px}
-h1{
-  font-family:var(--display);font-variation-settings:"wdth" 112,"wght" 800;
-  font-size:clamp(2.6rem,8vw,4.6rem);line-height:.9;letter-spacing:-.035em;
-  margin:0 0 18px;text-wrap:balance;
+/* ============ keycap hero ============ */
+.hero{display:flex;justify-content:center;align-items:center;padding:74px 0 70px;perspective:900px}
+.keys{display:flex;gap:16px;align-items:flex-end;transform:rotateX(11deg);transform-style:preserve-3d}
+@media (max-width:620px){.keys{gap:9px;transform:rotateX(8deg)}}
+.key{
+  position:relative;border-radius:12px;padding:20px 24px 22px;
+  background:linear-gradient(180deg,#2C3A58 0%,#1B2439 100%);
+  border:1px solid #3A4A6B;
+  box-shadow:
+    0 7px 0 #141C2E,
+    0 8px 0 #0E1524,
+    0 16px 26px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  transform:translateY(0);
+  transition:transform .11s ease-out, box-shadow .11s ease-out;
 }
-h1 i{font-style:normal;color:var(--blue)}
-.sub{color:var(--ink-2);margin:0 0 22px;max-width:52ch;font-size:16px}
-.facts{display:flex;flex-wrap:wrap;gap:0}
-.facts div{padding-right:26px;margin-right:26px;border-right:1px solid var(--line);margin-bottom:10px}
-.facts div:last-child{border-right:0;padding-right:0;margin-right:0}
-.facts dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
-.facts dd{margin:0;font-weight:600;font-size:14.5px}
+.key span{
+  display:block;font-family:var(--display);font-variation-settings:"wdth" 112,"wght" 800;
+  font-size:clamp(1.9rem,6.4vw,3.6rem);line-height:1;letter-spacing:-.02em;color:var(--ink);
+  text-shadow:0 1px 0 rgba(0,0,0,.5);
+}
+.key.accent span{color:var(--blue)}
+.key::after{
+  content:"";position:absolute;left:7px;right:7px;top:6px;height:42%;
+  border-radius:8px 8px 14px 14px;background:linear-gradient(180deg,rgba(255,255,255,.055),transparent);
+  pointer-events:none;
+}
+.key.down,.key:hover{
+  transform:translateY(6px);
+  box-shadow:0 1px 0 #141C2E,0 2px 0 #0E1524,0 6px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.plus{font-family:var(--display);font-variation-settings:"wght" 700;font-size:clamp(1.3rem,3.6vw,2.1rem);color:var(--ink-3);padding-bottom:26px}
 
-/* sections */
-section{margin-bottom:56px;scroll-margin-top:16px}
+/* ============ sections ============ */
+section{margin-bottom:62px;scroll-margin-top:16px}
 .shead{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
 .shead span{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
 h2{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.6rem;letter-spacing:-.02em;margin:0}
-.note{color:var(--ink-3);font-size:13.5px;margin:0 0 22px;max-width:66ch}
+.note{color:var(--ink-3);font-size:13.5px;margin:0 0 22px;max-width:70ch}
 .note code{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.note b{color:var(--ink-2);font-weight:600}
 
 .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;white-space:nowrap;line-height:1.7}
 .t-red{background:rgba(238,127,104,.15);color:var(--red)}
@@ -65,48 +84,101 @@ h2{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.6re
 .t-green{background:rgba(84,204,166,.15);color:var(--green)}
 .t-grey{background:var(--surface-2);color:var(--ink-3)}
 
-/* boards */
-.board{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:22px;margin-bottom:14px}
-.bhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:18px}
-.bhead h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.2rem;margin:0;letter-spacing:-.015em}
+/* ============ trifold board with visible folds ============ */
+.board{margin-bottom:34px}
+.bhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
+.bhead h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.22rem;margin:0;letter-spacing:-.015em}
 .bhead em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
-.bhead b{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink-3)}
-.panels{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:10px}
-@media (max-width:640px){.panels{grid-template-columns:1fr}}
-.col{display:flex;flex-direction:column;gap:10px}
-.pan{border:1px solid var(--line);border-radius:4px;padding:13px;background:var(--bg);flex:1}
-.pan h4{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);margin:0 0 8px;font-weight:600}
-.pan ul{margin:0;padding-left:16px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
-.pan li{margin-bottom:3px}
-.pan li.ok{color:var(--green)}
-.pan.part{border-color:rgba(239,190,61,.45)}
-.pan.part h4{color:var(--gold)}
-.pan.empty{border-style:dashed}
-
-/* missions */
-details.m{border:1px solid var(--line);border-radius:5px;background:var(--surface);margin-bottom:8px;overflow:hidden}
-details.m summary{display:grid;grid-template-columns:38px 1fr auto;gap:14px;align-items:center;padding:14px 16px;cursor:pointer;list-style:none}
-details.m summary::-webkit-details-marker{display:none}
-details.m summary:hover{background:var(--surface-2)}
-.mn{font-family:var(--mono);font-size:14px;color:var(--ink-3);text-align:center;font-variant-numeric:tabular-nums}
-details.m[open] .mn{color:var(--blue)}
-.mt{font-weight:600;font-size:14.5px}
-.mt small{display:block;font-weight:400;font-size:12.5px;color:var(--ink-3);margin-top:2px}
-.mr{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
-.mp{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums}
-.mbody{padding:2px 16px 16px 68px;font-size:13.5px;color:var(--ink-2)}
-.mbody p{margin:0 0 14px}
-.mbody b{color:var(--gold);font-weight:600}
-.mlab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);margin-bottom:8px}
-.shot{border:1px dashed var(--line);border-radius:4px;background:var(--bg);padding:20px;text-align:center;color:var(--ink-3);font-family:var(--mono);font-size:12px}
-.shot img{border-radius:3px;display:block;width:100%}
-@media (max-width:560px){
-  details.m summary{grid-template-columns:30px 1fr;gap:11px}
-  .mr{grid-column:1/-1;justify-content:flex-start;padding-left:41px}
-  .mbody{padding-left:16px}
+.tri{
+  display:grid;grid-template-columns:1fr 20px 1.16fr 20px 1fr;
+  background:#0E1625;border:1px solid var(--line);border-radius:4px;padding:16px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.wing{display:flex;flex-direction:column;gap:14px}
+.fold{position:relative}
+.fold::before,.fold::after{
+  content:"";position:absolute;top:-16px;bottom:-16px;width:1px;background:var(--line);
+}
+.fold::before{left:7px}
+.fold::after{right:7px}
+.fold i{
+  position:absolute;top:-16px;bottom:-16px;left:8px;right:8px;display:block;
+  background:linear-gradient(90deg,rgba(0,0,0,.42),rgba(255,255,255,.028),rgba(0,0,0,.42));
+}
+@media (max-width:760px){
+  .tri{grid-template-columns:1fr;gap:14px}
+  .fold{display:none}
 }
 
-/* people */
+/* ============ flip cards ============ */
+.flip{perspective:1400px;cursor:pointer;outline:none}
+.flip:focus-visible .in{outline:2px solid var(--gold);outline-offset:3px}
+.in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.75,.25,1)}
+.flip.on .in{transform:rotateY(180deg)}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid var(--line);border-radius:4px;background:var(--surface);
+  padding:14px;overflow:hidden;
+}
+.face.back{transform:rotateY(180deg);background:var(--surface-2);overflow-y:auto}
+.flip.on .face.front{pointer-events:none}
+
+/* panel cards */
+.pcard{height:318px}
+.pcard .in{height:100%}
+.pcard h4{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);margin:0 0 9px;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.pcard ul{margin:0;padding-left:16px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.pcard li{margin-bottom:3px}
+.pcard li.ok{color:var(--green)}
+.pcard .hint{position:absolute;left:14px;bottom:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink-3);opacity:.75}
+.pcard.part .face.front{border-color:rgba(239,190,61,.45)}
+.pcard.part h4{color:var(--gold)}
+.pcard.empty .face.front{border-style:dashed}
+.item{border:1px solid var(--line);border-radius:3px;background:var(--bg);padding:7px 9px;margin-bottom:6px}
+.item:last-child{margin-bottom:0}
+.item b{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.item p{margin:0;font-size:11.5px;color:var(--ink-3);line-height:1.45}
+.item.done{border-color:rgba(84,204,166,.4)}
+.item.done b{color:var(--green)}
+
+/* mission cards */
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media (max-width:900px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.mgrid{grid-template-columns:1fr}}
+.mcard{height:202px}
+.mcard .in{height:100%}
+.mtop{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.mnum{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.mpts{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums}
+.mcard h4{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1rem;margin:0 0 6px;letter-spacing:-.015em;line-height:1.2}
+.mcard .cond{font-size:12px;color:var(--ink-3);line-height:1.45;margin:0 0 10px}
+.mcard .tags{display:flex;gap:5px;flex-wrap:wrap;position:absolute;left:14px;bottom:12px}
+.mcard.skip .face.front{opacity:.58;border-style:dashed}
+.mcard .back p{margin:0 0 10px;font-size:12px;color:var(--ink-2);line-height:1.5}
+.mcard .back b{color:var(--gold);font-weight:600}
+.mlab{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-3);margin-bottom:6px}
+.shot{border:1px dashed var(--line);border-radius:3px;background:var(--bg);padding:14px;text-align:center;color:var(--ink-3);font-family:var(--mono);font-size:10.5px}
+.shot img{border-radius:3px;display:block;width:100%}
+
+/* ============ run order ============ */
+.track{border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:18px;margin-bottom:12px}
+.track h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.05rem;margin:0 0 3px;display:flex;align-items:center;gap:9px}
+.track .meta{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:16px}
+.seq{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.step{border:1px solid var(--line);border-radius:4px;background:var(--bg);padding:11px 14px;min-width:150px;flex:1}
+.step .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;color:var(--ink-3);margin-bottom:4px}
+.step .n{font-weight:600;font-size:13.5px;margin-bottom:3px}
+.step .d{font-family:var(--mono);font-size:11px;color:var(--gold)}
+.arrow{display:flex;align-items:center;padding:0 9px;color:var(--ink-3);flex:none}
+.arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:700px){
+  .seq{flex-direction:column}
+  .arrow{padding:7px 0;justify-content:center;transform:rotate(90deg)}
+}
+.gapnote{margin-top:14px;padding:11px 13px;border:1px solid rgba(239,190,61,.33);border-radius:4px;font-size:12.5px;color:var(--ink-2)}
+.gapnote b{color:var(--gold);font-weight:600}
+
+/* ============ people ============ */
 .people{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media (max-width:920px){.people{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:480px){.people{grid-template-columns:1fr}}
@@ -123,248 +195,370 @@ details.m[open] .mn{color:var(--blue)}
 .p dd{margin:0 0 9px;color:var(--ink-2);line-height:1.4}
 .p dd:last-child{margin-bottom:0}
 
-/* links */
+/* ============ links ============ */
 .links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 @media (max-width:920px){.links{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:480px){.links{grid-template-columns:1fr}}
-.links a{
-  display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink-2);
-  border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:13px 14px;font-size:13.5px;
-}
+.links a{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink-2);border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:13px 14px;font-size:13.5px}
 .links a:hover{border-color:var(--blue);color:var(--ink)}
 .links svg{flex:none;width:19px;height:19px;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 a{color:var(--blue)}
-a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 footer{border-top:1px solid var(--line);margin-top:54px;padding-top:22px;font-size:12.5px;color:var(--ink-3)}
-footer p{margin:0 0 6px;max-width:70ch}
+footer p{margin:0 0 6px;max-width:72ch}
 footer code{font-family:var(--mono);color:var(--ink-2)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .key:hover,.key.down{transform:none}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header class="mast">
-  <p class="eyebrow">WISE Academy Robotics / FIRST LEGO League Challenge</p>
-  <h1>Ctrl<i>+</i>Alt<i>+</i>Defeat</h1>
-  <p class="sub">The two boards, the mission plan with the code behind each one, and who does what.</p>
-  <dl class="facts">
-    <div><dt>Season</dt><dd>BIOGLOW 2026/27</dd></div>
-    <div><dt>Division</dt><dd>Founders, Grades 4 to 8</dd></div>
-    <div><dt>Squad</dt><dd>8 students</dd></div>
-    <div><dt>Project</dt><dd>Deforestation</dd></div>
-    <div><dt>On plan</dt><dd>260 points</dd></div>
-  </dl>
-</header>
+<div class="hero">
+  <div class="keys" id="keys">
+    <div class="key" data-k="0"><span>Ctrl</span></div>
+    <div class="plus">+</div>
+    <div class="key" data-k="1"><span>Alt</span></div>
+    <div class="plus">+</div>
+    <div class="key accent" data-k="2"><span>Defeat</span></div>
+  </div>
+</div>
 
+<!-- ===================== TRIFOLDS ===================== -->
 <section id="boards">
   <div class="shead"><span>01</span><h2>Trifold designs</h2></div>
-  <p class="note">Panels follow the judges' own words: Identify, Design, Create, Iterate, Communicate. That is the order they tick the rubric in. Gold means started, dashed means empty.</p>
+  <p class="note">Click any panel to flip it and see what goes in each box. Panels follow the judges' own words, because that is the order they tick the rubric in.</p>
 
   <div class="board">
-    <div class="bhead"><h3>Robot Design</h3><em>Mohamed Dharsi</em></div>
-    <div class="panels">
-      <div class="col">
-        <div class="pan part"><h4>1 / IDENTIFY</h4><ul><li class="ok">Headline, done</li><li class="ok">Six missions and why, done</li><li>Missions we skipped</li><li>Resources we used</li><li>Mat photo with the route</li></ul></div>
-        <div class="pan empty"><h4>2 / DESIGN</h4><ul><li>Who built or coded what, all eight</li><li>How we decide</li><li>Three photos of real work</li></ul></div>
+    <div class="bhead"><h3>Robot Design</h3><em>Mohamed Dharsi / one of five panels started</em></div>
+    <div class="tri">
+      <div class="wing">
+        <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
+          <div class="face front">
+            <h4><span>1 / IDENTIFY</span><span class="tag t-gold">2 of 5</span></h4>
+            <ul><li class="ok">Headline</li><li class="ok">Six missions and why</li><li>Missions we skipped</li><li>Resources we used</li><li>Mat photo with route</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item done"><b>Headline</b><p>"We finished seven missions, all of them are easy but they give many points."</p></div>
+            <div class="item done"><b>Six missions and why</b><p>M11 easy. M6 good points, not too hard. M12 close to starting. M1 easy. M3 close to starting. M8 good points. M10 easy.</p></div>
+            <div class="item"><b>Missions we skipped</b><p>Seven of the fifteen are untouched. Naming two or three with a reason shows the choice was deliberate.</p></div>
+            <div class="item"><b>Resources we used</b><p>Comes from Ammar's resource log, which has no entries yet. This is a Core Values row.</p></div>
+            <div class="item"><b>Mat photo with route</b><p>One photo, route drawn on, six missions numbered.</p></div>
+          </div>
+        </div></div>
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 2, Design"><div class="in">
+          <div class="face front">
+            <h4><span>2 / DESIGN</span><span class="tag t-grey">0 of 3</span></h4>
+            <ul><li>Who built or coded what</li><li>How we decide</li><li>Three photos of real work</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Who built or coded what</b><p>All eight names, something real against each. Haider owns the grid. An empty cell here costs a Core Values row.</p></div>
+            <div class="item"><b>How we decide</b><p>One or two sentences on what happens when people disagree. Judges ask this out loud.</p></div>
+            <div class="item"><b>Three photos of real work</b><p>People actually building, not posing.</p></div>
+          </div>
+        </div></div>
       </div>
-      <div class="col">
-        <div class="pan empty"><h4>3 / CREATE, centre</h4><ul><li>Hero photo of the robot</li><li>Each attachment, two photos</li><li>Sensors and why those</li><li>Two code screenshots</li><li>The one clever thing</li></ul></div>
-      </div>
-      <div class="col">
-        <div class="pan empty"><h4>4 / ITERATE, biggest</h4><ul><li>Total test runs</li><li>Version 1 to 2 to 3</li><li>Three failures and fixes</li><li>A quote, with a name</li></ul></div>
-        <div class="pan empty"><h4>5 / COMMUNICATE</h4><ul><li>Three things we learned</li><li>What we would do differently</li><li>Closing line</li></ul></div>
+
+      <div class="fold"><i></i></div>
+
+      <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 3, Create" style="height:auto"><div class="in" style="min-height:100%">
+        <div class="face front">
+          <h4><span>3 / CREATE, centre</span><span class="tag t-grey">0 of 5</span></h4>
+          <ul><li>Hero photo of the robot</li><li>Each attachment, two photos</li><li>Sensors and why those</li><li>Two code screenshots</li><li>The one clever thing</li></ul>
+          <div class="hint">click to open</div>
+        </div>
+        <div class="face back">
+          <div class="item"><b>Hero photo of the robot</b><p>The single best shot. This is the middle of the board, so it carries the most weight.</p></div>
+          <div class="item"><b>Each attachment, two photos</b><p>Detached on the table and mounted on the robot. Judges ask to see both.</p></div>
+          <div class="item"><b>Sensors and why those</b><p>Which sensor on which mission, and why that one rather than another.</p></div>
+          <div class="item"><b>Two code screenshots</b><p>With an arrow pointing at the important part. A plain screenshot scores less.</p></div>
+          <div class="item"><b>The one clever thing</b><p>Every team shows code. What did we do that another team would not have thought of.</p></div>
+        </div>
+      </div></div>
+
+      <div class="fold"><i></i></div>
+
+      <div class="wing">
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 4, Iterate"><div class="in">
+          <div class="face front">
+            <h4><span>4 / ITERATE, biggest</span><span class="tag t-grey">0 of 4</span></h4>
+            <ul><li>Total test runs</li><li>Version 1 to 2 to 3</li><li>Three failures and fixes</li><li>A quote, with a name</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Total test runs</b><p>A real number, in large type. Comes from Husayn's test log, which has no rows yet.</p></div>
+            <div class="item"><b>Version 1 to 2 to 3</b><p>One mission shown three ways with what changed between each.</p></div>
+            <div class="item"><b>Three failures and fixes</b><p>Use the real wording from the log, not a cleaned up version.</p></div>
+            <div class="item"><b>A quote, with a name</b><p>Named quotes are evidence that everyone contributed.</p></div>
+          </div>
+        </div></div>
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 5, Communicate"><div class="in">
+          <div class="face front">
+            <h4><span>5 / COMMUNICATE</span><span class="tag t-grey">0 of 3</span></h4>
+            <ul><li>Three things we learned</li><li>What we would do differently</li><li>Closing line</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Three things we learned</b><p>Specific. Not "we learned teamwork." Something nobody knew in September.</p></div>
+            <div class="item"><b>What we would do differently</b><p>Honest beats impressive here.</p></div>
+            <div class="item"><b>Closing line</b><p>The last sentence said to the judges. Both Communicate rows are Core Values rows.</p></div>
+          </div>
+        </div></div>
       </div>
     </div>
-    <div class="bhead" style="margin:18px 0 0"><b>One of five panels started</b></div>
   </div>
 
   <div class="board">
-    <div class="bhead"><h3>Innovation Project</h3><em>Mahdi Jessa / deforestation</em></div>
-    <div class="panels">
-      <div class="col">
-        <div class="pan part"><h4>1 / IDENTIFY</h4><ul><li class="ok">Problem chosen</li><li class="ok">Photo of the problem</li><li>Problem statement</li><li>Research, three or more sources</li></ul></div>
-        <div class="pan empty"><h4>2 / DESIGN</h4><ul><li>Project plan</li><li>All eight involved</li></ul></div>
+    <div class="bhead"><h3>Innovation Project</h3><em>Mahdi Jessa / deforestation / topic only</em></div>
+    <div class="tri">
+      <div class="wing">
+        <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
+          <div class="face front">
+            <h4><span>1 / IDENTIFY</span><span class="tag t-gold">2 of 4</span></h4>
+            <ul><li class="ok">Problem chosen</li><li class="ok">Photo of the problem</li><li>Problem statement</li><li>Research, three sources</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item done"><b>Problem chosen</b><p>Deforestation. Picked 25 September.</p></div>
+            <div class="item done"><b>Photo of the problem</b><p>Taken in class.</p></div>
+            <div class="item"><b>Problem statement</b><p>One sentence every student can repeat, naming what is at risk and who it affects.</p></div>
+            <div class="item"><b>Research, three sources</b><p>A variety, not five of the same kind. One named person counts for more than any website. This is a Core Values row.</p></div>
+          </div>
+        </div></div>
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 2, Design"><div class="in">
+          <div class="face front">
+            <h4><span>2 / DESIGN</span><span class="tag t-grey">0 of 2</span></h4>
+            <ul><li>Project plan</li><li>All eight involved</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Project plan</b><p>A dated timeline showing the work actually happened over weeks.</p></div>
+            <div class="item"><b>All eight involved</b><p>Photos and quotes attributed by name. Core Values row.</p></div>
+          </div>
+        </div></div>
       </div>
-      <div class="col">
-        <div class="pan empty"><h4>3 / CREATE, centre</h4><ul><li>The solution</li><li>Prototype or drawing</li><li>What makes it new</li></ul></div>
-      </div>
-      <div class="col">
-        <div class="pan empty"><h4>4 / ITERATE</h4><ul><li>Who we showed it to</li><li>What they said</li><li>Before and after</li></ul></div>
-        <div class="pan empty"><h4>5 / COMMUNICATE</h4><ul><li>Who it helps</li><li>Potential impact</li><li>Team photo</li></ul></div>
+
+      <div class="fold"><i></i></div>
+
+      <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 3, Create" style="height:auto"><div class="in" style="min-height:100%">
+        <div class="face front">
+          <h4><span>3 / CREATE, centre</span><span class="tag t-grey">0 of 3</span></h4>
+          <ul><li>The solution</li><li>Prototype or drawing</li><li>What makes it new</li></ul>
+          <div class="hint">click to open</div>
+        </div>
+        <div class="face back">
+          <div class="item"><b>The solution</b><p>What we are proposing against deforestation, in plain language a stranger understands.</p></div>
+          <div class="item"><b>Prototype or drawing</b><p>Physical build, detailed drawing, or a Tinkercad render. Abbas and Elias both know Tinkercad.</p></div>
+          <div class="item"><b>What makes it new</b><p>What already exists, and how ours differs. Core Values row.</p></div>
+        </div>
+      </div></div>
+
+      <div class="fold"><i></i></div>
+
+      <div class="wing">
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 4, Iterate"><div class="in">
+          <div class="face front">
+            <h4><span>4 / ITERATE</span><span class="tag t-grey">0 of 3</span></h4>
+            <ul><li>Who we showed it to</li><li>What they said</li><li>Before and after</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Who we showed it to</b><p>Aim for three groups outside the team. Elias owns arranging these.</p></div>
+            <div class="item"><b>What they said</b><p>Written down with names, at the time.</p></div>
+            <div class="item"><b>Before and after</b><p>One real change made because of feedback. This is the row teams most often score lowest on.</p></div>
+          </div>
+        </div></div>
+        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 5, Communicate"><div class="in">
+          <div class="face front">
+            <h4><span>5 / COMMUNICATE</span><span class="tag t-grey">0 of 3</span></h4>
+            <ul><li>Who it helps</li><li>Potential impact</li><li>Team photo</li></ul>
+            <div class="hint">click to open</div>
+          </div>
+          <div class="face back">
+            <div class="item"><b>Who it helps</b><p>Name them. Core Values row.</p></div>
+            <div class="item"><b>Potential impact</b><p>What actually changes for those people. Mahdi's closing 45 seconds.</p></div>
+            <div class="item"><b>Team photo</b><p>The one that shows pride. Enthusiasm is literally a scored row on both rubrics.</p></div>
+          </div>
+        </div></div>
       </div>
     </div>
-    <div class="bhead" style="margin:18px 0 0"><b>Topic only</b></div>
   </div>
 </section>
 
+<!-- ===================== RUN ORDER ===================== -->
+<section id="order">
+  <div class="shead"><span>02</span><h2>Run order</h2></div>
+  <p class="note">The sequence each squad runs inside a 2:30 match. Blue has theirs written down with timings. Red has three missions chosen but no recorded order.</p>
+
+  <div class="track">
+    <h3>Blue <span class="tag t-blue">90 points</span></h3>
+    <div class="meta">Order recorded, two missions timed</div>
+    <div class="seq">
+      <div class="step"><div class="s">FIRST</div><div class="n">11 Window to the Past</div><div class="d">20 pts</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">SECOND</div><div class="n">06 Leafcutter Frenzy</div><div class="d">40 pts / 7.10s and 8.99s</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">THIRD</div><div class="n">12 Forest Elder</div><div class="d">30 pts / 7 to 8s</div></div>
+    </div>
+  </div>
+
+  <div class="track">
+    <h3>Red <span class="tag t-red">80 points</span></h3>
+    <div class="meta">Missions chosen, order not written down</div>
+    <div class="seq">
+      <div class="step"><div class="s">UNORDERED</div><div class="n">03 Flip the Rock</div><div class="d">30 pts / 4 to 5s</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">UNORDERED</div><div class="n">05 Reaching Roots</div><div class="d">20 pts</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">UNORDERED</div><div class="n">01 Drone Survey</div><div class="d">30 pts</div></div>
+    </div>
+    <div class="gapnote"><b>Red needs to pick an order and time each leg.</b> Blue can say how long their run takes. Red cannot, which means nobody knows whether all three fit inside 2:30.</div>
+  </div>
+
+  <div class="track">
+    <h3>Running throughout</h3>
+    <div class="meta">No code, no launch</div>
+    <div class="seq">
+      <div class="step"><div class="s">PRE MATCH</div><div class="n">Equipment inspection</div><div class="d">20 pts</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">WHOLE MATCH</div><div class="n">10 Fragile Microhabitats</div><div class="d">20 pts if untouched</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">WHOLE MATCH</div><div class="n">Precision tokens</div><div class="d">50 pts if 5 or 6 left</div></div>
+    </div>
+    <div class="gapnote"><b>08 Tangled is still unassigned.</b> 30 points for a single action, and it belongs in one of the two sequences above.</div>
+  </div>
+</section>
+
+<!-- ===================== MISSIONS ===================== -->
 <section id="missions">
-  <div class="shead"><span>02</span><h2>Missions</h2></div>
-  <p class="note">Two practice squads, each simulating a full run. Open a mission to see the code behind it. Drop a screenshot into <code>docs/code/</code> and it shows up here.</p>
+  <div class="shead"><span>03</span><h2>All fifteen missions</h2></div>
+  <p class="note">Click a mission to flip it. Eight are in the plan, seven are untouched, and the dashed cards are the ones nobody has looked at. <b>Everything together is 530 points. We are planning for 260.</b></p>
 
-  <details class="m">
-    <summary><span class="mn">11</span><span class="mt">Window to the Past<small>Root cover down, touching the mat</small></span><span class="mr"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span><span class="mp">20</span></span></summary>
-    <div class="mbody">
-      <p>Rated 3 out of 10 for difficulty, the easiest on the plan, and first in the Blue run order.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m11.png" alt="Mission 11 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m11.png'"></div>
-    </div>
-  </details>
+  <div class="mgrid">
 
-  <details class="m">
-    <summary><span class="mn">06</span><span class="mt">Leafcutter Frenzy<small>Ant touching the nest, 10 per leaf fragment inside it</small></span><span class="mr"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span><span class="mp">40</span></span></summary>
-    <div class="mbody">
-      <p>The only mission with measured times so far, at <b>7.10s</b> and <b>8.99s</b>. Highest value mission on the plan.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m06.png" alt="Mission 6 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m06.png'"></div>
-    </div>
-  </details>
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 1"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">01</span><span class="mpts">30</span></div><h4>Drone Survey</h4><p class="cond">Drone off the mat 20, LiDAR map flipped with the scan marker in the survey area plus 10.</p><div class="tags"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p>Red rates this easy, though the bonus is the harder half. Back in September, Elias and Ali both wrote it off as low value and hard, yet it stayed in the plan.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m01.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m01.png'"></div></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">12</span><span class="mt">Forest Elder<small>Cane raised touching the tree 20, support tie around the post 10</small></span><span class="mr"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span><span class="mp">30</span></span></summary>
-    <div class="mbody">
-      <p>Rated 8 out of 10, the hardest on the plan. <b>The Blue game plan logs this as 20 points. It is 30.</b> The support tie is a separate scoring line, not a bonus.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m12.png" alt="Mission 12 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m12.png'"></div>
-    </div>
-  </details>
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 2"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">02</span><span class="mpts">30</span></div><h4>Exploding Seeds</h4><p class="cond">10 for each of three seeds no longer touching the stalk.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p>Rated "mid value, relatively easy, 30 points for not much work" by both Elias and Ali. Nobody has tried it.</p></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">03</span><span class="mt">Flip the Rock<small>Research flag down 20, rock returned to its start plus 10</small></span><span class="mr"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span><span class="mp">30</span></span></summary>
-    <div class="mbody">
-      <p>Red rates this hard. Measured at 4 to 5 seconds.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m03.png" alt="Mission 3 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m03.png'"></div>
-    </div>
-  </details>
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 3"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">03</span><span class="mpts">30</span></div><h4>Flip the Rock</h4><p class="cond">Research flag down 20, rock returned to its starting position plus 10.</p><div class="tags"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p>Red rates this hard. Measured at 4 to 5 seconds, the fastest timing we have.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m03.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m03.png'"></div></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">05</span><span class="mt">Reaching Roots<small>Partially extended 10, or completely extended 20</small></span><span class="mr"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span><span class="mp">20</span></span></summary>
-    <div class="mbody">
-      <p><b>There is no bonus here.</b> The Red game plan has it written as 10 plus a 10 bonus. It scores 10 or 20, never both. Aiming for a bonus that does not exist means building the wrong attachment.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m05.png" alt="Mission 5 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m05.png'"></div>
-    </div>
-  </details>
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 4"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">04</span><span class="mpts">30</span></div><h4>Lucky Leaves</h4><p class="cond">First leaf off the nest 10, second leaf off with the katydid still in place plus 20.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p><b>The only mission that can score zero after you do the work.</b> The leaves are randomised and you are not told where the katydid starts. If it ends up completely outside the leaf habitat, the whole mission scores nothing. Late season at the earliest.</p></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">01</span><span class="mt">Drone Survey<small>Drone off the mat 20, LiDAR map flipped with the scan marker in the survey area plus 10</small></span><span class="mr"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span><span class="mp">30</span></span></summary>
-    <div class="mbody">
-      <p>Red rates this easy. The bonus is the harder half.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m01.png" alt="Mission 1 code" onerror="this.parentNode.textContent='No screenshot yet. Save it as docs/code/m01.png'"></div>
-    </div>
-  </details>
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 5"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">05</span><span class="mpts">20</span></div><h4>Reaching Roots</h4><p class="cond">Partially extended 10, or completely extended 20.</p><div class="tags"><span class="tag t-red">Red</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p><b>There is no bonus here.</b> The Red game plan has it as 10 plus a 10 bonus. It scores 10 or 20, never both. Aiming for a bonus that does not exist means building the wrong attachment.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m05.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m05.png'"></div></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">08</span><span class="mt">Tangled<small>Vine touching the mat, one action</small></span><span class="mr"><span class="tag t-gold">No owner</span><span class="mp">30</span></span></summary>
-    <div class="mbody">
-      <p>Best points per line of code on the whole board, and in neither squad's plan. Every student rated it top tier in their notebook back in September.</p>
-      <div class="mlab">CODE</div>
-      <div class="shot"><img src="code/m08.png" alt="Mission 8 code" onerror="this.parentNode.textContent='Not written yet'"></div>
-    </div>
-  </details>
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 6"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">06</span><span class="mpts">40</span></div><h4>Leafcutter Frenzy</h4><p class="cond">Ant touching the nest, then 10 for each of four leaf fragments inside it.</p><div class="tags"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p>Highest value mission on the plan, and the only one with real timings: <b>7.10s</b> and <b>8.99s</b>. Every student rated it top tier.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m06.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m06.png'"></div></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">10</span><span class="mt">Fragile Microhabitats<small>Spider and snail habitats left in their starting positions</small></span><span class="mr"><span class="tag t-green">Free</span><span class="mp">20</span></span></summary>
-    <div class="mbody"><p>No code. Twenty points for not hitting anything, which means every other route has to stay clear of them.</p></div>
-  </details>
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 7"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">07</span><span class="mpts">40</span></div><h4>Humongous Fungus</h4><p class="cond">Mycelium fully extended 20, plus 10 for each connection with the opposing team's extended root.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p>Only 20 of this is in our control. The other 20 depends on the opposing team fully extending their root, so treat it as a 20 point mission with upside.</p></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">00</span><span class="mt">Equipment inspection<small>Robot and all equipment inside one launch area, under 12 inches</small></span><span class="mr"><span class="tag t-grey">Drill</span><span class="mp">20</span></span></summary>
-    <div class="mbody"><p>Worth more than Window to the Past and takes thirty seconds to practise. The pack down should be identical every time.</p></div>
-  </details>
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 8"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">08</span><span class="mpts">30</span></div><h4>Tangled</h4><p class="cond">Vine touching the mat. One action.</p><div class="tags"><span class="tag t-gold">No owner</span></div></div>
+      <div class="face back"><p><b>Best points per line of code on the whole board</b>, and in neither squad's plan. All eight students independently rated it top tier in September. Elias: "amazing value, do this as early as possible."</p><div class="mlab">CODE</div><div class="shot"><img src="code/m08.png" alt="" onerror="this.parentNode.textContent='Not written yet'"></div></div>
+    </div></div>
 
-  <details class="m">
-    <summary><span class="mn">00</span><span class="mt">Precision tokens<small>Six at the start, worth 50 points</small></span><span class="mr"><span class="tag t-grey">Drill</span><span class="mp">50</span></span></summary>
-    <div class="mbody"><p>Six tokens and five tokens both pay 50, so <b>the first interruption outside home is free</b>. The second costs 15, more than Mission 11 is worth. Wait the extra two seconds for the robot to come home.</p></div>
-  </details>
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 9"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">09</span><span class="mpts">30</span></div><h4>Research Platform</h4><p class="cond">Platform raised 10, camera trap deployed 10, seed off the tree 10.</p><div class="tags"><span class="tag t-gold">Best unclaimed</span></div></div>
+      <div class="face back"><p><b>Thirty points in one location.</b> Three separate conditions clustered together, so even two of the three is worth the trip. Elias and Ali both called it "solid value, multiple bonuses." The strongest mission we are not attempting.</p></div>
+    </div></div>
+
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 10"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">10</span><span class="mpts">20</span></div><h4>Fragile Microhabitats</h4><p class="cond">Spider and snail habitats left in their starting positions, 10 each.</p><div class="tags"><span class="tag t-green">Free</span></div></div>
+      <div class="face back"><p>No code and no launch. Twenty points for not hitting anything, which means every other route has to stay clear of them. Three students wrote this down as 30 points. It is 20.</p></div>
+    </div></div>
+
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 11"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">11</span><span class="mpts">20</span></div><h4>Window to the Past</h4><p class="cond">Root cover down, touching the mat.</p><div class="tags"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p>Rated 3 out of 10, the easiest on the plan, and first in the Blue run order. Ali and Elias both logged it as Mission 7 by mistake, which is Humongous Fungus.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m11.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m11.png'"></div></div>
+    </div></div>
+
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 12"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">12</span><span class="mpts">30</span></div><h4>Forest Elder</h4><p class="cond">Cane raised touching the tree 20, support tie around the post 10.</p><div class="tags"><span class="tag t-blue">Blue</span><span class="tag t-green">Coded</span></div></div>
+      <div class="face back"><p>Rated 8 out of 10, the hardest on the plan. <b>The Blue game plan logs this as 20 points. It is 30.</b> The support tie is a separate scoring line, not a bonus, so they are writing off 10 points they could have.</p><div class="mlab">CODE</div><div class="shot"><img src="code/m12.png" alt="" onerror="this.parentNode.textContent='Save as docs/code/m12.png'"></div></div>
+    </div></div>
+
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 13"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">13</span><span class="mpts">30</span></div><h4>Keystone Species</h4><p class="cond">Our own keystone species model on the restoration platform, young trees raised.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p>We build the model ourselves from bag 20. It counts as equipment and goes through pre match inspection, so the referee will ask us to identify it.</p></div>
+    </div></div>
+
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 14"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">14</span><span class="mpts">40</span></div><h4>Seeds of Renewal</h4><p class="cond">5 for each of four seeds in the replantation station, plus 5 each if also touching the mat.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p>Forty points but spread across eight separate conditions, so partial credit comes easily. Mohamed and Ammar both logged it as 30.</p></div>
+    </div></div>
+
+    <div class="flip mcard skip" tabindex="0" role="button" aria-label="Mission 15"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">15</span><span class="mpts">40</span></div><h4>Biocentric Architecture</h4><p class="cond">Canopy raised 10, skylight in 10, compost hatch open 10, plus a 10 environmental bonus.</p><div class="tags"><span class="tag t-grey">Not in plan</span></div></div>
+      <div class="face back"><p>Do all three actions and <b>the dock position stops mattering</b>, because the bonus scores from whichever dock the model sits on. Mohamed and Ammar both logged this as 60 points. It is 40.</p></div>
+    </div></div>
+
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Equipment inspection"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">PRE</span><span class="mpts">20</span></div><h4>Equipment inspection</h4><p class="cond">Robot and all equipment inside one launch area, under 12 inches.</p><div class="tags"><span class="tag t-grey">Drill</span></div></div>
+      <div class="face back"><p>Worth more than Window to the Past and takes thirty seconds to practise. The pack down should be identical every single time.</p></div>
+    </div></div>
+
+    <div class="flip mcard" tabindex="0" role="button" aria-label="Precision tokens"><div class="in">
+      <div class="face front"><div class="mtop"><span class="mnum">ALL</span><span class="mpts">50</span></div><h4>Precision tokens</h4><p class="cond">Six at the start. Six or five left both pay 50.</p><div class="tags"><span class="tag t-grey">Drill</span></div></div>
+      <div class="face back"><p><b>The first interruption outside home is free.</b> The second costs 15, more than Mission 11 is worth. After that: 4 tokens is 35, 3 is 25, 2 is 15, 1 is 10. Wait the extra two seconds for the robot to come home.</p></div>
+    </div></div>
+
+  </div>
 </section>
 
+<!-- ===================== PEOPLE ===================== -->
 <section id="team">
-  <div class="shead"><span>03</span><h2>The eight</h2></div>
+  <div class="shead"><span>04</span><h2>The eight</h2></div>
   <p class="note">Squad colour is the home area at the table. Rule 11 locks sides for the whole match, so it applies to bench members too. Photos go in <code>docs/avatars/</code>, initials show until then.</p>
 
   <div class="people">
-    <div class="p">
-      <div class="av red"><span>AY</span><img src="avatars/abbas.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Siraj Abbas Yusufali</h3>
-      <p class="role">Team lead, lead technician <span class="tag t-red">Red</span></p>
-      <dl><dt>Owns</dt><dd>Mission board accuracy</dd><dt>Speaks</dt><dd>Robot design questions</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av red"><span>AH</span><img src="avatars/ali.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Ali Hasham</h3>
-      <p class="role">Engineer, coder <span class="tag t-red">Red</span></p>
-      <dl><dt>Owns</dt><dd>Code and weekly screenshots</dd><dt>Speaks</dt><dd>Robot design questions</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av red"><span>MD</span><img src="avatars/mohamed.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Mohamed Dharsi</h3>
-      <p class="role">Engineer, attachment runner <span class="tag t-red">Red</span></p>
-      <dl><dt>Owns</dt><dd>Robot Design board</dd><dt>Speaks</dt><dd>Robot design explanation</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av red"><span>HB</span><img src="avatars/husayn.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Husayn Bhimji</h3>
-      <p class="role">Builder, field checker <span class="tag t-red">Red</span></p>
-      <dl><dt>Owns</dt><dd>Test log</dd><dt>Speaks</dt><dd>Innovation, the solution</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av blue"><span>HF</span><img src="avatars/haider.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Haider Fahar</h3>
-      <p class="role">Team lead, lead technician <span class="tag t-blue">Blue</span></p>
-      <dl><dt>Owns</dt><dd>Who built what grid</dd><dt>Speaks</dt><dd>Robot design, testing</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av blue"><span>EM</span><img src="avatars/elias.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Elias Mouri</h3>
-      <p class="role">Technician <span class="tag t-blue">Blue</span></p>
-      <dl><dt>Owns</dt><dd>Outside feedback sessions</dd><dt>Speaks</dt><dd>Innovation, feedback loop</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av blue"><span>MJ</span><img src="avatars/mahdi.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Mahdi Jessa</h3>
-      <p class="role">Coder, scorekeeper <span class="tag t-blue">Blue</span></p>
-      <dl><dt>Owns</dt><dd>Innovation Project board</dd><dt>Speaks</dt><dd>Innovation, opens and closes</dd></dl>
-    </div>
-    <div class="p">
-      <div class="av blue"><span>AH</span><img src="avatars/ammar.jpg" alt="" onerror="this.remove()"></div>
-      <h3>Ammar Hamza</h3>
-      <p class="role">Speaker, spotter <span class="tag t-blue">Blue</span></p>
-      <dl><dt>Owns</dt><dd>Resource log</dd><dt>Speaks</dt><dd>Welcome hook and research</dd></dl>
-    </div>
+    <div class="p"><div class="av red"><span>AY</span><img src="avatars/abbas.jpg" alt="" onerror="this.remove()"></div><h3>Siraj Abbas Yusufali</h3><p class="role">Team lead, lead technician <span class="tag t-red">Red</span></p><dl><dt>Owns</dt><dd>Mission board accuracy</dd><dt>Speaks</dt><dd>Robot design questions</dd></dl></div>
+    <div class="p"><div class="av red"><span>AH</span><img src="avatars/ali.jpg" alt="" onerror="this.remove()"></div><h3>Ali Hasham</h3><p class="role">Engineer, coder <span class="tag t-red">Red</span></p><dl><dt>Owns</dt><dd>Code and weekly screenshots</dd><dt>Speaks</dt><dd>Robot design questions</dd></dl></div>
+    <div class="p"><div class="av red"><span>MD</span><img src="avatars/mohamed.jpg" alt="" onerror="this.remove()"></div><h3>Mohamed Dharsi</h3><p class="role">Engineer, attachment runner <span class="tag t-red">Red</span></p><dl><dt>Owns</dt><dd>Robot Design board</dd><dt>Speaks</dt><dd>Robot design explanation</dd></dl></div>
+    <div class="p"><div class="av red"><span>HB</span><img src="avatars/husayn.jpg" alt="" onerror="this.remove()"></div><h3>Husayn Bhimji</h3><p class="role">Builder, field checker <span class="tag t-red">Red</span></p><dl><dt>Owns</dt><dd>Test log</dd><dt>Speaks</dt><dd>Innovation, the solution</dd></dl></div>
+    <div class="p"><div class="av blue"><span>HF</span><img src="avatars/haider.jpg" alt="" onerror="this.remove()"></div><h3>Haider Fahar</h3><p class="role">Team lead, lead technician <span class="tag t-blue">Blue</span></p><dl><dt>Owns</dt><dd>Who built what grid</dd><dt>Speaks</dt><dd>Robot design, testing</dd></dl></div>
+    <div class="p"><div class="av blue"><span>EM</span><img src="avatars/elias.jpg" alt="" onerror="this.remove()"></div><h3>Elias Mouri</h3><p class="role">Technician <span class="tag t-blue">Blue</span></p><dl><dt>Owns</dt><dd>Outside feedback sessions</dd><dt>Speaks</dt><dd>Innovation, feedback loop</dd></dl></div>
+    <div class="p"><div class="av blue"><span>MJ</span><img src="avatars/mahdi.jpg" alt="" onerror="this.remove()"></div><h3>Mahdi Jessa</h3><p class="role">Coder, scorekeeper <span class="tag t-blue">Blue</span></p><dl><dt>Owns</dt><dd>Innovation Project board</dd><dt>Speaks</dt><dd>Innovation, opens and closes</dd></dl></div>
+    <div class="p"><div class="av blue"><span>AH</span><img src="avatars/ammar.jpg" alt="" onerror="this.remove()"></div><h3>Ammar Hamza</h3><p class="role">Speaker, spotter <span class="tag t-blue">Blue</span></p><dl><dt>Owns</dt><dd>Resource log</dd><dt>Speaks</dt><dd>Welcome hook and research</dd></dl></div>
   </div>
 </section>
 
+<!-- ===================== LINKS ===================== -->
 <section id="links">
-  <div class="shead"><span>04</span><h2>Links</h2></div>
+  <div class="shead"><span>05</span><h2>Links</h2></div>
   <div class="links">
-    <a href="https://claude.ai/artifact/3McC9jgD8gBL2BNkuFZ3bp">
-      <svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 15.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h4.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
-      Competition playbook</a>
-    <a href="https://docs.google.com/document/d/1ZLoRlz3TTNJrazjVlkmsDj8WmkXwQRFKUd25ErwbSP8/edit">
-      <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
-      Robot Design worksheet</a>
-    <a href="https://docs.google.com/document/d/149YngrU4bE_TaGoyIruTsGdBIst8P9yr-seHrXHwRXI/edit">
-      <svg viewBox="0 0 24 24"><path d="M4 7l2 2 3.5-3.5"/><path d="M4 16l2 2 3.5-3.5"/><path d="M13 7.5h7M13 16.5h7"/></svg>
-      Test log</a>
-    <a href="https://docs.google.com/document/d/1fTUqWW-bQ3TRK-h1cYRO67gMVXMQEez71lJiLBjUzA4/edit">
-      <svg viewBox="0 0 24 24"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4L11 8.5h8.5A1.5 1.5 0 0 1 21 10v7.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>
-      Resource log</a>
-    <a href="https://eventhub.firstinspires.org/scoresheet">
-      <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><path d="M8.5 11.5h0M12 11.5h0M15.5 11.5h0M8.5 15.5h0M12 15.5h0M15.5 15.5h0"/></svg>
-      Score calculator</a>
-    <a href="https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-rubrics-color.pdf">
-      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg>
-      Rubrics</a>
-    <a href="https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-rgr.pdf">
-      <svg viewBox="0 0 24 24"><path d="M6.5 3h11A1.5 1.5 0 0 1 19 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-15A1.5 1.5 0 0 1 6.5 3z"/><path d="M9 3v18"/></svg>
-      Rulebook</a>
-    <a href="https://github.com/omarsyed4/wise-academy-robotics">
-      <svg viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5"/><path d="M15 7l5 5-5 5"/></svg>
-      Repo</a>
+    <a href="https://claude.ai/artifact/3McC9jgD8gBL2BNkuFZ3bp"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 15.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h4.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Competition playbook</a>
+    <a href="https://docs.google.com/document/d/1ZLoRlz3TTNJrazjVlkmsDj8WmkXwQRFKUd25ErwbSP8/edit"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>Robot Design worksheet</a>
+    <a href="https://docs.google.com/document/d/149YngrU4bE_TaGoyIruTsGdBIst8P9yr-seHrXHwRXI/edit"><svg viewBox="0 0 24 24"><path d="M4 7l2 2 3.5-3.5"/><path d="M4 16l2 2 3.5-3.5"/><path d="M13 7.5h7M13 16.5h7"/></svg>Test log</a>
+    <a href="https://docs.google.com/document/d/1fTUqWW-bQ3TRK-h1cYRO67gMVXMQEez71lJiLBjUzA4/edit"><svg viewBox="0 0 24 24"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4L11 8.5h8.5A1.5 1.5 0 0 1 21 10v7.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>Resource log</a>
+    <a href="https://eventhub.firstinspires.org/scoresheet"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><path d="M8.5 11.5h0M12 11.5h0M15.5 11.5h0M8.5 15.5h0M12 15.5h0M15.5 15.5h0"/></svg>Score calculator</a>
+    <a href="https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-rubrics-color.pdf"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg>Rubrics</a>
+    <a href="https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-rgr.pdf"><svg viewBox="0 0 24 24"><path d="M6.5 3h11A1.5 1.5 0 0 1 19 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-15A1.5 1.5 0 0 1 6.5 3z"/><path d="M9 3v18"/></svg>Rulebook</a>
+    <a href="https://github.com/omarsyed4/wise-academy-robotics"><svg viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5"/><path d="M15 7l5 5-5 5"/></svg>Repo</a>
   </div>
 </section>
 
@@ -374,5 +568,33 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
 </footer>
 
 </div>
+
+<script>
+(function(){
+  // Keycap press sequence on load, then a press on hover handled in CSS.
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    var keys = document.querySelectorAll('#keys .key');
+    keys.forEach(function(k, i){
+      setTimeout(function(){
+        k.classList.add('down');
+        setTimeout(function(){ k.classList.remove('down'); }, 130);
+      }, 260 + i * 150);
+    });
+  }
+
+  // Flip cards. Click or keyboard, and links inside a card still work.
+  document.querySelectorAll('.flip').forEach(function(card){
+    function toggle(e){
+      if (e.target.closest('a')) return;
+      card.classList.toggle('on');
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('on'); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
