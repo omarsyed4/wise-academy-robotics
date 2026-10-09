@@ -6,7 +6,7 @@
 <title>Ctrl+Alt+Defeat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,700;112,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,700;112,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap">
 <style>
 :root{
   --bg:#0B1120;
@@ -95,33 +95,71 @@ h2{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.6re
 .bhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
 .bhead h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.22rem;margin:0;letter-spacing:-.015em}
 .bhead em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
-.tri{
-  display:grid;grid-template-columns:1fr 20px 1.16fr 20px 1fr;
-  background:#0E1625;border:1px solid var(--line);border-radius:4px;padding:16px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-}
-.wing{display:flex;flex-direction:column;gap:14px}
-.fold{position:relative}
-.fold::before,.fold::after{
-  content:"";position:absolute;top:-16px;bottom:-16px;width:1px;background:var(--line);
-}
-.fold::before{left:7px}
-.fold::after{right:7px}
-.fold i{
-  position:absolute;top:-16px;bottom:-16px;left:8px;right:8px;display:block;
-  background:linear-gradient(90deg,rgba(0,0,0,.42),rgba(255,255,255,.028),rgba(0,0,0,.42));
-}
-@media (max-width:760px){
-  .tri{grid-template-columns:1fr;gap:14px}
-  .fold{display:none}
-}
+.bnote{font-size:12.5px;color:var(--ink-3);margin:10px 0 0}
+@media (min-width:1080px){.bnote.narrow{display:none}}
 
-.layout{margin-top:12px}
-.layout summary{cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;padding:4px 0}
-.layout summary:hover{color:var(--ink)}
-.layout summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.layout img{display:block;width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px;background:#fff}
-.layout p{font-size:12.5px;color:var(--ink-3);margin:10px 0 0;max-width:72ch}
+/* The board itself is a white physical object on the dark page, in the
+   colours it will be printed in. 48 x 36 in, placed in percentages,
+   type in container units so it scales with the board. */
+.bscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.bd{
+  --b-navy:#14213D;--b-blue:#2F6FDE;--b-green:#1F8A5B;--b-ph:#F1F4F9;--b-line:#9AA5B8;--b-hint:#55657F;
+  position:relative;width:100%;min-width:1000px;aspect-ratio:48/36;background:#fff;border-radius:5px;
+  container-type:inline-size;color:var(--b-navy);font-family:"Open Sans",Arial,sans-serif;overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.bfold{position:absolute;top:0;bottom:0;width:1.8cqw;transform:translateX(-50%);pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(20,33,61,.06) 42%,rgba(20,33,61,.12) 50%,rgba(20,33,61,.03) 58%,transparent)}
+.bfold::after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed rgba(20,33,61,.25)}
+.bbar{position:absolute;display:flex;align-items:center;padding-left:.75cqw;background:var(--b-blue);color:#fff;border-radius:.15cqw;
+  font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:1.65cqw;line-height:1;letter-spacing:.01em}
+.bx{position:absolute;padding:.38cqw .45cqw;overflow:hidden;background:var(--b-ph);border:1px dashed var(--b-line);border-radius:.15cqw}
+.bh{display:flex;align-items:flex-start;justify-content:space-between;gap:.3cqw}
+.bx.narrow .bh{flex-direction:column;gap:.25cqw}
+.bx.narrow .pill{align-self:flex-start}
+.bx.narrow.photo b{font-size:max(7.5px,.78cqw)}
+.bx b{display:block;min-width:0;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:max(8px,.86cqw);line-height:1.18;color:var(--b-navy)}
+.bx b.hl{flex:1 1 0;font-size:max(8px,.82cqw)}
+.bx p{margin:.18cqw 0 0;font-size:max(7.5px,.76cqw);line-height:1.22;color:var(--b-hint)}
+.bx p.real{color:var(--b-navy);font-size:max(7.5px,.8cqw)}
+.bx.photo{background-image:
+  linear-gradient(to top right,transparent calc(50% - .6px),#D3D9E3 50%,transparent calc(50% + .6px)),
+  linear-gradient(to bottom right,transparent calc(50% - .6px),#D3D9E3 50%,transparent calc(50% + .6px))}
+.bx.accent{border:1.5px solid var(--b-green)}
+.bx.accent > b{color:var(--b-green)}
+.bx.done{background:#fff;border-style:solid;border-color:rgba(20,33,61,.3)}
+.bx.accent.done{border-color:var(--b-green)}
+.bx.done.photo{background-image:none}
+.pill{flex:none;padding:.18cqw .42cqw;border-radius:99px;white-space:nowrap;font-style:normal;
+  font-family:"Open Sans",Arial,sans-serif;font-weight:700;font-size:max(7px,.66cqw);line-height:1.1}
+.tick{flex:none;display:grid;place-items:center;width:max(11px,1.05cqw);height:max(11px,1.05cqw);border-radius:50%;background:var(--b-green);color:#fff;font-weight:700;font-size:max(7.5px,.7cqw);line-height:1}
+.pill.today{background:var(--b-blue);color:#fff}
+.pill.done{background:var(--b-green);color:#fff}
+.mlist{display:flex;flex-direction:column;margin-top:.12cqw;font-size:max(7.5px,.76cqw);line-height:1.18}
+.mlist span{display:grid;grid-template-columns:1.1cqw 1fr auto;gap:.4cqw;border-bottom:1px solid #E6EAF0;padding:.05cqw 0}
+.mlist i{font-style:normal;font-weight:700;color:var(--b-blue)}
+.mlist em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.bkey{position:absolute;display:flex;align-items:center;justify-content:center;background:#EEF1F6;border:.2cqw solid var(--b-navy);border-radius:.75cqw;
+  box-shadow:0 .25cqw 0 var(--b-navy);font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:2.6cqw;color:var(--b-navy)}
+.bkey.blue{color:var(--b-blue)}
+.bplus{position:absolute;transform:translate(-50%,-50%);font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:2.2cqw;color:#8A96AD}
+.btitle{position:absolute;display:flex;align-items:center;justify-content:center;white-space:nowrap;
+  font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:3.6cqw;letter-spacing:-.01em;color:var(--b-navy)}
+.binfo{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-size:max(8px,.78cqw)}
+.bsub{position:absolute;display:flex;align-items:flex-end;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:max(8.5px,.85cqw)}
+.barrow{position:absolute;transform:translate(-50%,-50%);font-weight:700;font-size:max(9px,1.1cqw);color:var(--b-hint)}
+.bvline{position:absolute;border-left:1px solid var(--b-line)}
+.tline{position:absolute;height:.12cqw;background:var(--b-navy);transform:translateY(-50%)}
+.tdot{position:absolute;width:.55cqw;height:.55cqw;border-radius:50%;background:var(--b-navy);transform:translate(-50%,-50%)}
+.tdot.on{width:.75cqw;height:.75cqw;background:var(--b-green)}
+.tdate{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-weight:600;font-size:max(7.5px,.62cqw)}
+.tdate.on{color:var(--b-green)}
+.tnote{position:absolute;text-align:center;font-weight:600;font-size:max(7.5px,.62cqw);color:var(--b-green)}
+.blegend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 22px;font-size:12.5px;color:var(--ink-2)}
+.blegend span{display:inline-flex;align-items:center;gap:8px}
+.blegend .pill{font-size:10.5px;padding:3px 8px;background:#2F6FDE;color:#fff}
+.blegend .tick{width:17px;height:17px;font-size:10.5px;background:#1F8A5B;color:#fff}
+.blegend .sw{width:24px;height:15px;background:#F1F4F9;border:1px dashed #9AA5B8;border-radius:2px}
 
 /* ============ today: one card per student ============ */
 .tasks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
@@ -179,23 +217,6 @@ h2{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.6re
 .face.back{transform:rotateY(180deg);background:var(--surface-2);overflow-y:auto}
 .flip.on .face.front{pointer-events:none}
 
-/* panel cards */
-.pcard{height:318px}
-.pcard .in{height:100%}
-.pcard h4{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);margin:0 0 9px;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:center}
-.pcard ul{margin:0;padding-left:16px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
-.pcard li{margin-bottom:3px}
-.pcard li.ok{color:var(--green)}
-.pcard .hint{position:absolute;left:14px;bottom:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink-3);opacity:.75}
-.pcard.part .face.front{border-color:rgba(239,190,61,.45)}
-.pcard.part h4{color:var(--gold)}
-.pcard.empty .face.front{border-style:dashed}
-.item{border:1px solid var(--line);border-radius:3px;background:var(--bg);padding:7px 9px;margin-bottom:6px}
-.item:last-child{margin-bottom:0}
-.item b{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
-.item p{margin:0;font-size:11.5px;color:var(--ink-3);line-height:1.45}
-.item.done{border-color:rgba(84,204,166,.4)}
-.item.done b{color:var(--green)}
 
 /* mission cards */
 .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
@@ -443,173 +464,23 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
 <!-- ===================== TRIFOLDS ===================== -->
 <section id="boards">
   <div class="shead"><span>01</span><h2>Trifold designs</h2></div>
-  <p class="note">Click any panel to flip it and see what goes in each box. Panels follow the judges' own words, because that is the order they tick the rubric in.</p>
-
-  <div class="board">
-    <div class="bhead"><h3>Robot Design</h3><em>Husayn designs it today / Mohamed fills the worksheet</em></div>
-    <div class="tri">
-      <div class="wing">
-        <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
-          <div class="face front">
-            <h4><span>1 / IDENTIFY</span><span class="tag t-gold">2 of 5</span></h4>
-            <ul><li class="ok">Headline</li><li class="ok">Six missions and why</li><li>Missions we skipped</li><li>Resources we used</li><li>Mat photo with route</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item done"><b>Headline</b><p>"We finished seven missions, all of them are easy but they give many points."</p></div>
-            <div class="item done"><b>Six missions and why</b><p>M11 easy. M6 good points, not too hard. M12 close to starting. M1 easy. M3 close to starting. M8 good points. M10 easy.</p></div>
-            <div class="item"><b>Missions we skipped</b><p>Seven of the fifteen are untouched. Naming two or three with a reason shows the choice was deliberate.</p></div>
-            <div class="item"><b>Resources we used</b><p>Comes from Ammar's resource log, which has no entries yet. This is a Core Values row.</p></div>
-            <div class="item"><b>Mat photo with route</b><p>One photo, route drawn on, six missions numbered.</p></div>
-          </div>
-        </div></div>
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 2, Design"><div class="in">
-          <div class="face front">
-            <h4><span>2 / DESIGN</span><span class="tag t-grey">0 of 3</span></h4>
-            <ul><li>Who built or coded what</li><li>How we decide</li><li>Three photos of real work</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Who built or coded what</b><p>All eight names, something real against each. Haider owns the grid. An empty cell here costs a Core Values row.</p></div>
-            <div class="item"><b>How we decide</b><p>One or two sentences on what happens when people disagree. Judges ask this out loud.</p></div>
-            <div class="item"><b>Three photos of real work</b><p>People actually building, not posing.</p></div>
-          </div>
-        </div></div>
-      </div>
-
-      <div class="fold"><i></i></div>
-
-      <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 3, Create" style="height:auto"><div class="in" style="min-height:100%">
-        <div class="face front">
-          <h4><span>3 / CREATE, centre</span><span class="tag t-grey">0 of 5</span></h4>
-          <ul><li>Hero photo of the robot</li><li>Each attachment, two photos</li><li>Sensors and why those</li><li>Two code screenshots</li><li>The one clever thing</li></ul>
-          <div class="hint">click to open</div>
-        </div>
-        <div class="face back">
-          <div class="item"><b>Hero photo of the robot</b><p>The single best shot. This is the middle of the board, so it carries the most weight.</p></div>
-          <div class="item"><b>Each attachment, two photos</b><p>Detached on the table and mounted on the robot. Judges ask to see both.</p></div>
-          <div class="item"><b>Sensors and why those</b><p>Which sensor on which mission, and why that one rather than another.</p></div>
-          <div class="item"><b>Two code screenshots</b><p>With an arrow pointing at the important part. A plain screenshot scores less.</p></div>
-          <div class="item"><b>The one clever thing</b><p>Every team shows code. What did we do that another team would not have thought of.</p></div>
-        </div>
-      </div></div>
-
-      <div class="fold"><i></i></div>
-
-      <div class="wing">
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 4, Iterate"><div class="in">
-          <div class="face front">
-            <h4><span>4 / ITERATE, biggest</span><span class="tag t-grey">0 of 4</span></h4>
-            <ul><li>Total test runs</li><li>Version 1 to 2 to 3</li><li>Three failures and fixes</li><li>A quote, with a name</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Total test runs</b><p>A real number, in large type. Comes from Husayn's test log, which has no rows yet.</p></div>
-            <div class="item"><b>Version 1 to 2 to 3</b><p>One mission shown three ways with what changed between each.</p></div>
-            <div class="item"><b>Three failures and fixes</b><p>Use the real wording from the log, not a cleaned up version.</p></div>
-            <div class="item"><b>A quote, with a name</b><p>Named quotes are evidence that everyone contributed.</p></div>
-          </div>
-        </div></div>
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 5, Communicate"><div class="in">
-          <div class="face front">
-            <h4><span>5 / COMMUNICATE</span><span class="tag t-grey">0 of 3</span></h4>
-            <ul><li>Three things we learned</li><li>What we would do differently</li><li>Closing line</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Three things we learned</b><p>Specific. Not "we learned teamwork." Something nobody knew in September.</p></div>
-            <div class="item"><b>What we would do differently</b><p>Honest beats impressive here.</p></div>
-            <div class="item"><b>Closing line</b><p>The last sentence said to the judges. Both Communicate rows are Core Values rows.</p></div>
-          </div>
-        </div></div>
-      </div>
-    </div>
-    <details class="layout">
-      <summary>Canva layout, to scale · 48 × 36 in</summary>
-      <img src="boards/robot-design.png" alt="Robot Design trifold wireframe. Left wing: IDENTIFY over DESIGN. Centre: the Ctrl Alt Defeat keycaps and ROBOT DESIGN title over CREATE, with the hero photo, four attachment rows, two code screenshots, sensors and the one clever thing. Right wing: a tall ITERATE panel over COMMUNICATE." loading="lazy">
-      <p>ITERATE gets two thirds of the right wing, because it's where most teams lose points. Same fonts, colours and header as the Innovation board, so the pair matches.</p>
-    </details>
+  <p class="note">Both boards drawn to scale, 48 × 36 in, in the fonts and colours they get printed in. The shaded lines are the folds. Hover over any box to read it in full.</p>
+  <div class="blegend">
+    <span><i class="tick">✓</i>Real words already on the board</span>
+    <span><i class="pill today">Name</i>Handed in today by that person</span>
+    <span><i class="sw"></i>Placeholder, filled in later</span>
   </div>
 
   <div class="board">
-    <div class="bhead"><h3>Innovation Project</h3><em>Ammar designs it today / Mahdi writes the words / deforestation</em></div>
-    <div class="tri">
-      <div class="wing">
-        <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
-          <div class="face front">
-            <h4><span>1 / IDENTIFY</span><span class="tag t-gold">2 of 4</span></h4>
-            <ul><li class="ok">Problem chosen</li><li class="ok">Photo of the problem</li><li>Problem statement</li><li>Research, three sources</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item done"><b>Problem chosen</b><p>Deforestation. Picked 25 September.</p></div>
-            <div class="item done"><b>Photo of the problem</b><p>Taken in class.</p></div>
-            <div class="item"><b>Problem statement</b><p>One sentence every student can repeat, naming what is at risk and who it affects.</p></div>
-            <div class="item"><b>Research, three sources</b><p>A variety, not five of the same kind. One named person counts for more than any website. This is a Core Values row.</p></div>
-          </div>
-        </div></div>
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 2, Design"><div class="in">
-          <div class="face front">
-            <h4><span>2 / DESIGN</span><span class="tag t-grey">0 of 2</span></h4>
-            <ul><li>Project plan</li><li>All eight involved</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Project plan</b><p>A dated timeline showing the work actually happened over weeks.</p></div>
-            <div class="item"><b>All eight involved</b><p>Photos and quotes attributed by name. Core Values row.</p></div>
-          </div>
-        </div></div>
-      </div>
+    <div class="bhead"><h3>Robot Design</h3><em>Husayn builds it in Canva today / Mohamed fills the worksheet</em></div>
+    <div class="bscroll"><div class="bd" role="img" aria-label="Robot Design board, drawn to scale"><div class="bfold" style="left:25.000%"></div><div class="bfold" style="left:75.000%"></div><div class="bbar" style="left:1.562%;top:2.083%;width:21.875%;height:3.889%">1 · IDENTIFY</div><div class="bx box done" style="left:1.562%;top:7.083%;width:21.875%;height:4.444%" title="Headline"><div class="bh"><b class="hl">We finished seven missions, all of them are easy but they give many points.</b><span class="tick" aria-label="done">✓</span></div></div><div class="bx box" style="left:1.562%;top:12.361%;width:21.875%;height:15.000%" title="Our missions · Mohamed, today"><div class="bh"><b>Our missions</b><span class="pill today">Mohamed</span></div><p class="real"><span class="mlist"><span><i>1</i>M11 Window to the Past<em>20</em></span><span><i>2</i>M6 Leafcutter Frenzy<em>40</em></span><span><i>3</i>M12 Forest Elder<em>30</em></span><span><i>4</i>M1 Drone Survey<em>30</em></span><span><i>5</i>M3 Flip the Rock<em>30</em></span><span><i>6</i>M8 Tangled<em>30</em></span><span><i>·</i>M10 Fragile Microhabitats<em>20</em></span></span></p></div><div class="bx accent done" style="left:1.562%;top:28.194%;width:21.875%;height:3.333%" title="Going for 270–300 points"><div class="bh"><b>Going for 270–300 points</b><span class="tick" aria-label="done">✓</span></div></div><div class="bx box" style="left:1.562%;top:32.361%;width:10.625%;height:6.667%" title="Why this order · 2–3 sentences · Abbas, today"><div class="bh"><b>Why this order</b><span class="pill today">Abbas</span></div><p>2–3 sentences</p></div><div class="bx box" style="left:12.813%;top:32.361%;width:10.625%;height:6.667%" title="Missions we skipped · And why, 2–3 rows · Abbas, today"><div class="bh"><b>Missions we skipped</b><span class="pill today">Abbas</span></div><p>And why, 2–3 rows</p></div><div class="bx photo" style="left:1.562%;top:39.861%;width:12.500%;height:8.056%" title="Mat photo, route drawn on · Missions numbered in run order"><div class="bh"><b>Mat photo, route drawn on</b></div><p>Missions numbered in run order</p></div><div class="bx box done" style="left:14.688%;top:39.861%;width:8.750%;height:8.056%" title="Resources we used"><div class="bh"><b>Resources we used</b><span class="tick" aria-label="done">✓</span></div><p class="real">Mission video<br>FLL coaches group<br>AI, then rewritten</p></div><div class="bbar" style="left:1.562%;top:50.000%;width:21.875%;height:3.889%">2 · DESIGN</div><div class="bx box" style="left:1.562%;top:55.000%;width:21.875%;height:20.000%" title="Who built, coded and tested what · All eight names: Abbas, Ali, Mohamed, Husayn, Haider, Elias, Mahdi, Ammar. No empty cells, it&#x27;s a Core Values row · Mohamed, today"><div class="bh"><b>Who built, coded and tested what</b><span class="pill today">Mohamed</span></div><p>All eight names: Abbas, Ali, Mohamed, Husayn, Haider, Elias, Mahdi, Ammar. No empty cells, it&#x27;s a Core Values row</p></div><div class="bx box" style="left:1.562%;top:75.833%;width:21.875%;height:5.556%" title="How we make decisions · What we do when we disagree, 1–2 sentences"><div class="bh"><b>How we make decisions</b></div><p>What we do when we disagree, 1–2 sentences</p></div><div class="bx photo narrow" style="left:1.562%;top:82.222%;width:6.875%;height:12.500%" title="Photo 1 · Team working · Elias, today"><div class="bh"><b>Photo 1</b><span class="pill today">Elias</span></div><p>Team working</p></div><div class="bx box" style="left:1.562%;top:95.000%;width:6.875%;height:2.917%" title="Caption"><div class="bh"><b>Caption</b></div></div><div class="bx photo narrow" style="left:9.062%;top:82.222%;width:6.875%;height:12.500%" title="Photo 2 · Team working · Elias, today"><div class="bh"><b>Photo 2</b><span class="pill today">Elias</span></div><p>Team working</p></div><div class="bx box" style="left:9.062%;top:95.000%;width:6.875%;height:2.917%" title="Caption"><div class="bh"><b>Caption</b></div></div><div class="bx photo narrow" style="left:16.562%;top:82.222%;width:6.875%;height:12.500%" title="Photo 3 · Team working · Elias, today"><div class="bh"><b>Photo 3</b><span class="pill today">Elias</span></div><p>Team working</p></div><div class="bx box" style="left:16.562%;top:95.000%;width:6.875%;height:2.917%" title="Caption"><div class="bh"><b>Caption</b></div></div><div class="bkey" style="left:32.708%;top:2.778%;width:8.333%;height:7.222%">Ctrl</div><div class="bkey" style="left:43.958%;top:2.778%;width:7.083%;height:7.222%">Alt</div><div class="bkey blue" style="left:53.958%;top:2.778%;width:13.333%;height:7.222%">Defeat</div><div class="bplus" style="left:42.500%;top:6.389%" aria-hidden="true">+</div><div class="bplus" style="left:52.500%;top:6.389%" aria-hidden="true">+</div><div class="btitle" style="left:26.562%;top:10.417%;width:46.875%;height:5.833%">ROBOT DESIGN</div><div class="binfo" style="left:26.562%;top:16.528%;width:46.875%;height:2.222%">WISE Academy · Orlando, Florida · FIRST LEGO League Challenge · BIOGLOW 2026–27</div><div class="bbar" style="left:26.562%;top:21.528%;width:46.875%;height:3.889%">3 · CREATE</div><div class="bx photo" style="left:26.562%;top:26.528%;width:22.500%;height:25.000%" title="HERO PHOTO: the robot · The single best shot on the board"><div class="bh"><b>HERO PHOTO: the robot</b></div><p>The single best shot on the board</p></div><div class="bx box" style="left:26.562%;top:52.361%;width:22.500%;height:9.722%" title="Robot name + three things that make it good · 1. 2. 3."><div class="bh"><b>Robot name + three things that make it good</b></div><p>1. 2. 3.</p></div><div class="bx photo narrow" style="left:49.896%;top:26.528%;width:6.875%;height:8.333%" title="Detached · Mohamed, today"><div class="bh"><b>Detached</b><span class="pill today">Mohamed</span></div></div><div class="bx photo narrow" style="left:57.188%;top:26.528%;width:6.875%;height:8.333%" title="Mounted · Mohamed, today"><div class="bh"><b>Mounted</b><span class="pill today">Mohamed</span></div></div><div class="bx box narrow" style="left:64.479%;top:26.528%;width:8.958%;height:8.333%" title="Attachment 1 · Missions · what it does · why that shape · Mohamed, today"><div class="bh"><b>Attachment 1</b><span class="pill today">Mohamed</span></div><p>Missions · what it does · why that shape</p></div><div class="bx photo narrow" style="left:49.896%;top:35.139%;width:6.875%;height:8.333%" title="Detached · Mohamed, today"><div class="bh"><b>Detached</b><span class="pill today">Mohamed</span></div></div><div class="bx photo narrow" style="left:57.188%;top:35.139%;width:6.875%;height:8.333%" title="Mounted · Mohamed, today"><div class="bh"><b>Mounted</b><span class="pill today">Mohamed</span></div></div><div class="bx box narrow" style="left:64.479%;top:35.139%;width:8.958%;height:8.333%" title="Attachment 2 · Missions · what it does · why that shape · Mohamed, today"><div class="bh"><b>Attachment 2</b><span class="pill today">Mohamed</span></div><p>Missions · what it does · why that shape</p></div><div class="bx photo narrow" style="left:49.896%;top:43.750%;width:6.875%;height:8.333%" title="Detached · Mohamed, today"><div class="bh"><b>Detached</b><span class="pill today">Mohamed</span></div></div><div class="bx photo narrow" style="left:57.188%;top:43.750%;width:6.875%;height:8.333%" title="Mounted · Mohamed, today"><div class="bh"><b>Mounted</b><span class="pill today">Mohamed</span></div></div><div class="bx box narrow" style="left:64.479%;top:43.750%;width:8.958%;height:8.333%" title="Attachment 3 · Missions · what it does · why that shape · Mohamed, today"><div class="bh"><b>Attachment 3</b><span class="pill today">Mohamed</span></div><p>Missions · what it does · why that shape</p></div><div class="bx photo narrow" style="left:49.896%;top:52.361%;width:6.875%;height:8.333%" title="Detached · Mohamed, today"><div class="bh"><b>Detached</b><span class="pill today">Mohamed</span></div></div><div class="bx photo narrow" style="left:57.188%;top:52.361%;width:6.875%;height:8.333%" title="Mounted · Mohamed, today"><div class="bh"><b>Mounted</b><span class="pill today">Mohamed</span></div></div><div class="bx box narrow" style="left:64.479%;top:52.361%;width:8.958%;height:8.333%" title="Attachment 4 · Missions · what it does · why that shape · Mohamed, today"><div class="bh"><b>Attachment 4</b><span class="pill today">Mohamed</span></div><p>Missions · what it does · why that shape</p></div><div class="bx photo" style="left:26.562%;top:63.194%;width:23.021%;height:19.444%" title="Code screenshot 1 · Arrow on the important part · Ali, today"><div class="bh"><b>Code screenshot 1</b><span class="pill today">Ali</span></div><p>Arrow on the important part</p></div><div class="bx photo" style="left:50.417%;top:63.194%;width:23.021%;height:19.444%" title="Code screenshot 2 · Arrow on the important part · Ali, today"><div class="bh"><b>Code screenshot 2</b><span class="pill today">Ali</span></div><p>Arrow on the important part</p></div><div class="bx box" style="left:26.562%;top:82.917%;width:23.021%;height:2.778%" title="One sentence explaining it · Ali, today"><div class="bh"><b>One sentence explaining it</b><span class="pill today">Ali</span></div></div><div class="bx box" style="left:50.417%;top:82.917%;width:23.021%;height:2.778%" title="One sentence explaining it · Ali, today"><div class="bh"><b>One sentence explaining it</b><span class="pill today">Ali</span></div></div><div class="bx box" style="left:26.562%;top:86.806%;width:23.021%;height:11.111%" title="Sensors · Which sensor, which mission, why that one · Ali, today"><div class="bh"><b>Sensors</b><span class="pill today">Ali</span></div><p>Which sensor, which mission, why that one</p></div><div class="bx accent" style="left:50.417%;top:86.806%;width:23.021%;height:11.111%" title="The one clever thing · What another team would not have thought of · Ali, today"><div class="bh"><b>The one clever thing</b><span class="pill today">Ali</span></div><p>What another team would not have thought of</p></div><div class="bbar" style="left:76.562%;top:2.083%;width:21.875%;height:3.889%">4 · ITERATE</div><div class="bx accent" style="left:76.562%;top:7.083%;width:10.625%;height:7.778%" title="## test runs · Big number, from today&#x27;s run logs · Elias, today"><div class="bh"><b>## test runs</b><span class="pill today">Elias</span></div><p>Big number, from today&#x27;s run logs</p></div><div class="bx accent" style="left:87.812%;top:7.083%;width:10.625%;height:7.778%" title="## code versions · Big number"><div class="bh"><b>## code versions</b></div><p>Big number</p></div><div class="bsub" style="left:76.562%;top:15.417%;width:21.875%;height:1.667%">One mission, three versions</div><div class="bx photo narrow" style="left:76.562%;top:17.222%;width:6.667%;height:12.639%" title="v1 · Screenshot · Haider, today"><div class="bh"><b>v1</b><span class="pill today">Haider</span></div><p>Screenshot</p></div><div class="bx box" style="left:76.562%;top:30.139%;width:6.667%;height:4.444%" title="What changed"><div class="bh"><b>What changed</b></div></div><div class="bx photo narrow" style="left:84.167%;top:17.222%;width:6.667%;height:12.639%" title="v2 · Screenshot · Haider, today"><div class="bh"><b>v2</b><span class="pill today">Haider</span></div><p>Screenshot</p></div><div class="bx box done" style="left:84.167%;top:30.139%;width:6.667%;height:4.444%" title="What changed"><div class="bh"><b class="hl">Slower turn</b><span class="tick" aria-label="done">✓</span></div></div><div class="bx photo narrow" style="left:91.771%;top:17.222%;width:6.667%;height:12.639%" title="v3 · Screenshot · Haider, today"><div class="bh"><b>v3</b><span class="pill today">Haider</span></div><p>Screenshot</p></div><div class="bx box" style="left:91.771%;top:30.139%;width:6.667%;height:4.444%" title="What changed"><div class="bh"><b>What changed</b></div></div><div class="barrow" style="left:83.698%;top:23.472%" aria-hidden="true">→</div><div class="barrow" style="left:91.302%;top:23.472%" aria-hidden="true">→</div><div class="bx accent" style="left:76.562%;top:35.417%;width:21.875%;height:2.778%" title="Works ## out of 10 now · Haider, today"><div class="bh"><b>Works ## out of 10 now</b><span class="pill today">Haider</span></div></div><div class="bx box done" style="left:76.562%;top:39.306%;width:9.583%;height:5.139%" title="What failed #1"><div class="bh"><b>What failed #1</b><span class="tick" aria-label="done">✓</span></div><p class="real">M12 overshot ~3 cm</p></div><div class="bx box done" style="left:87.812%;top:39.306%;width:10.625%;height:5.139%" title="We changed"><div class="bh"><b>We changed</b><span class="tick" aria-label="done">✓</span></div><p class="real">40 → 37 cm · not yet</p></div><div class="barrow" style="left:86.979%;top:41.875%" aria-hidden="true">→</div><div class="bx box narrow" style="left:76.562%;top:45.000%;width:9.583%;height:5.139%" title="What failed #2 · Mohamed, today"><div class="bh"><b>What failed #2</b><span class="pill today">Mohamed</span></div></div><div class="bx box" style="left:87.812%;top:45.000%;width:10.625%;height:5.139%" title="We changed · Mohamed, today"><div class="bh"><b>We changed</b><span class="pill today">Mohamed</span></div></div><div class="barrow" style="left:86.979%;top:47.569%" aria-hidden="true">→</div><div class="bx box narrow" style="left:76.562%;top:50.694%;width:9.583%;height:5.139%" title="What failed #3 · Mohamed, today"><div class="bh"><b>What failed #3</b><span class="pill today">Mohamed</span></div></div><div class="bx box" style="left:87.812%;top:50.694%;width:10.625%;height:5.139%" title="We changed · Mohamed, today"><div class="bh"><b>We changed</b><span class="pill today">Mohamed</span></div></div><div class="barrow" style="left:86.979%;top:53.264%" aria-hidden="true">→</div><div class="bx box" style="left:76.562%;top:56.806%;width:21.875%;height:7.083%" title="A quote from the team · “…” with the person&#x27;s name · Mohamed, today"><div class="bh"><b>A quote from the team</b><span class="pill today">Mohamed</span></div><p>“…” with the person&#x27;s name</p></div><div class="bbar" style="left:76.562%;top:65.972%;width:21.875%;height:3.889%">5 · COMMUNICATE</div><div class="bx box" style="left:76.562%;top:70.972%;width:21.875%;height:11.667%" title="Three things we learned · Specific, not “teamwork” · Mohamed, today"><div class="bh"><b>Three things we learned</b><span class="pill today">Mohamed</span></div><p>Specific, not “teamwork”</p></div><div class="bx box" style="left:76.562%;top:83.472%;width:21.875%;height:6.111%" title="What we would do differently / next"><div class="bh"><b>What we would do differently / next</b></div></div><div class="bx accent" style="left:76.562%;top:90.417%;width:21.875%;height:7.500%" title="Closing line · The last sentence we say to the judges · Mohamed, today"><div class="bh"><b>Closing line</b><span class="pill today">Mohamed</span></div><p>The last sentence we say to the judges</p></div></div></div>
+    <p class="bnote narrow">Scroll the board sideways to see all of it.</p>
+  </div>
 
-      <div class="fold"><i></i></div>
-
-      <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 3, Create" style="height:auto"><div class="in" style="min-height:100%">
-        <div class="face front">
-          <h4><span>3 / CREATE, centre</span><span class="tag t-grey">0 of 3</span></h4>
-          <ul><li>The solution</li><li>Prototype or drawing</li><li>What makes it new</li></ul>
-          <div class="hint">click to open</div>
-        </div>
-        <div class="face back">
-          <div class="item"><b>The solution</b><p>What we are proposing against deforestation, in plain language a stranger understands.</p></div>
-          <div class="item"><b>Prototype or drawing</b><p>Physical build, detailed drawing, or a Tinkercad render. Abbas and Elias both know Tinkercad.</p></div>
-          <div class="item"><b>What makes it new</b><p>What already exists, and how ours differs. Core Values row.</p></div>
-        </div>
-      </div></div>
-
-      <div class="fold"><i></i></div>
-
-      <div class="wing">
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 4, Iterate"><div class="in">
-          <div class="face front">
-            <h4><span>4 / ITERATE</span><span class="tag t-grey">0 of 3</span></h4>
-            <ul><li>Who we showed it to</li><li>What they said</li><li>Before and after</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Who we showed it to</b><p>Aim for three groups outside the team. Elias owns arranging these.</p></div>
-            <div class="item"><b>What they said</b><p>Written down with names, at the time.</p></div>
-            <div class="item"><b>Before and after</b><p>One real change made because of feedback. This is the row teams most often score lowest on.</p></div>
-          </div>
-        </div></div>
-        <div class="flip pcard empty" tabindex="0" role="button" aria-label="Panel 5, Communicate"><div class="in">
-          <div class="face front">
-            <h4><span>5 / COMMUNICATE</span><span class="tag t-grey">0 of 3</span></h4>
-            <ul><li>Who it helps</li><li>Potential impact</li><li>Team photo</li></ul>
-            <div class="hint">click to open</div>
-          </div>
-          <div class="face back">
-            <div class="item"><b>Who it helps</b><p>Name them. Core Values row.</p></div>
-            <div class="item"><b>Potential impact</b><p>What actually changes for those people. Mahdi's closing 45 seconds.</p></div>
-            <div class="item"><b>Team photo</b><p>The one that shows pride. Enthusiasm is literally a scored row on both rubrics.</p></div>
-          </div>
-        </div></div>
-      </div>
-    </div>
-    <details class="layout">
-      <summary>Canva layout, to scale · 48 × 36 in</summary>
-      <img src="boards/innovation.png" alt="Innovation Project trifold wireframe. Left wing: IDENTIFY with the problem statement, photo, three sources and the expert, over DESIGN with a dated timeline and eight named photo frames. Centre: keycaps and INNOVATION PROJECT title over CREATE, with the solution, a large prototype frame, three how-it-works steps and a what-exists comparison. Right wing: ITERATE over COMMUNICATE." loading="lazy">
-      <p>Every grey box is a labelled placeholder. Content drops in over the coming weeks without the layout moving.</p>
-    </details>
+  <div class="board">
+    <div class="bhead"><h3>Innovation Project</h3><em>Ammar builds it in Canva today / Mahdi writes the words / deforestation</em></div>
+    <div class="bscroll"><div class="bd" role="img" aria-label="Innovation Project board, drawn to scale"><div class="bfold" style="left:25.000%"></div><div class="bfold" style="left:75.000%"></div><div class="bbar" style="left:1.562%;top:2.083%;width:21.875%;height:3.889%">1 · IDENTIFY</div><div class="bx accent" style="left:1.562%;top:7.083%;width:21.875%;height:7.778%" title="PROBLEM STATEMENT · One sentence, biggest text on this wing. What is at risk, and who it affects · Mahdi, today"><div class="bh"><b>PROBLEM STATEMENT</b><span class="pill today">Mahdi</span></div><p>One sentence, biggest text on this wing. What is at risk, and who it affects</p></div><div class="bx photo done" style="left:1.562%;top:15.694%;width:10.625%;height:13.889%" title="Photo of the problem"><div class="bh"><b>Photo of the problem</b><span class="tick" aria-label="done">✓</span></div><p class="real">Taken in class, 25 Sep</p></div><div class="bx box" style="left:12.813%;top:15.694%;width:10.625%;height:13.889%" title="Why it matters · How deforestation puts biodiversity at risk, 2–3 short lines · Mahdi, today"><div class="bh"><b>Why it matters</b><span class="pill today">Mahdi</span></div><p>How deforestation puts biodiversity at risk, 2–3 short lines</p></div><div class="bx box narrow" style="left:1.562%;top:30.417%;width:6.875%;height:8.056%" title="Source 1 · Name, and what it told us · Mahdi, today"><div class="bh"><b>Source 1</b><span class="pill today">Mahdi</span></div><p>Name, and what it told us</p></div><div class="bx box narrow" style="left:9.062%;top:30.417%;width:6.875%;height:8.056%" title="Source 2 · Name, and what it told us · Mahdi, today"><div class="bh"><b>Source 2</b><span class="pill today">Mahdi</span></div><p>Name, and what it told us</p></div><div class="bx box narrow" style="left:16.562%;top:30.417%;width:6.875%;height:8.056%" title="Source 3 · Name, and what it told us · Mahdi, today"><div class="bh"><b>Source 3</b><span class="pill today">Mahdi</span></div><p>Name, and what it told us</p></div><div class="bx photo" style="left:1.562%;top:39.306%;width:6.458%;height:8.611%" title="Expert · Photo"><div class="bh"><b>Expert</b></div><p>Photo</p></div><div class="bx box" style="left:8.646%;top:39.306%;width:14.792%;height:8.611%" title="The expert we talked to · Name, job. What they told us"><div class="bh"><b>The expert we talked to</b></div><p>Name, job. What they told us</p></div><div class="bbar" style="left:1.562%;top:50.000%;width:21.875%;height:3.889%">2 · DESIGN</div><div class="bx box" style="left:1.562%;top:55.000%;width:21.875%;height:17.222%" title="Our project plan · Dated timeline"><div class="bh"><b>Our project plan</b></div><p>Dated timeline</p></div><div class="tline" style="left:2.812%;top:65.556%;width:19.375%"></div><div class="tdot" style="left:2.812%;top:65.556%"></div><div class="tdate" style="left:2.812%;top:67.639%">4 Sep</div><div class="tdot" style="left:4.750%;top:65.556%"></div><div class="tdate" style="left:4.750%;top:63.472%">11</div><div class="tdot" style="left:6.688%;top:65.556%"></div><div class="tdate" style="left:6.688%;top:67.639%">18</div><div class="tdot on" style="left:8.625%;top:65.556%"></div><div class="tdate on" style="left:8.625%;top:63.472%">25</div><div class="tdot" style="left:10.563%;top:65.556%"></div><div class="tdate" style="left:10.563%;top:67.639%">2 Oct</div><div class="tdot" style="left:12.500%;top:65.556%"></div><div class="tdate" style="left:12.500%;top:63.472%">9</div><div class="tdot" style="left:14.438%;top:65.556%"></div><div class="tdate" style="left:14.438%;top:67.639%">16</div><div class="tdot" style="left:16.375%;top:65.556%"></div><div class="tdate" style="left:16.375%;top:63.472%">23</div><div class="tdot" style="left:18.312%;top:65.556%"></div><div class="tdate" style="left:18.312%;top:67.639%">30</div><div class="tdot" style="left:20.250%;top:65.556%"></div><div class="tdate" style="left:20.250%;top:63.472%">6 Nov</div><div class="tdot" style="left:22.188%;top:65.556%"></div><div class="tdate" style="left:22.188%;top:67.639%">13</div><div class="tnote" style="left:2.812%;top:69.028%;width:19.375%">25 Sep: picked deforestation, photographed the problem</div><div class="bx photo narrow" style="left:1.562%;top:73.333%;width:5.000%;height:7.222%" title="Abbas · Elias, today"><div class="bh"><b>Abbas</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:1.562%;top:80.833%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:7.188%;top:73.333%;width:5.000%;height:7.222%" title="Ali · Elias, today"><div class="bh"><b>Ali</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:7.188%;top:80.833%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:12.813%;top:73.333%;width:5.000%;height:7.222%" title="Mohamed · Elias, today"><div class="bh"><b>Mohamed</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:12.813%;top:80.833%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:18.438%;top:73.333%;width:5.000%;height:7.222%" title="Husayn · Elias, today"><div class="bh"><b>Husayn</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:18.438%;top:80.833%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:1.562%;top:85.556%;width:5.000%;height:7.222%" title="Haider · Elias, today"><div class="bh"><b>Haider</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:1.562%;top:93.056%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:7.188%;top:85.556%;width:5.000%;height:7.222%" title="Elias · Elias, today"><div class="bh"><b>Elias</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:7.188%;top:93.056%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:12.813%;top:85.556%;width:5.000%;height:7.222%" title="Mahdi · Elias, today"><div class="bh"><b>Mahdi</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:12.813%;top:93.056%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bx photo narrow" style="left:18.438%;top:85.556%;width:5.000%;height:7.222%" title="Ammar · Elias, today"><div class="bh"><b>Ammar</b><span class="pill today">Elias</span></div></div><div class="bx box narrow" style="left:18.438%;top:93.056%;width:5.000%;height:3.056%" title="Quote"><div class="bh"><b>Quote</b></div></div><div class="bkey" style="left:32.708%;top:2.778%;width:8.333%;height:7.222%">Ctrl</div><div class="bkey" style="left:43.958%;top:2.778%;width:7.083%;height:7.222%">Alt</div><div class="bkey blue" style="left:53.958%;top:2.778%;width:13.333%;height:7.222%">Defeat</div><div class="bplus" style="left:42.500%;top:6.389%" aria-hidden="true">+</div><div class="bplus" style="left:52.500%;top:6.389%" aria-hidden="true">+</div><div class="btitle" style="left:26.562%;top:10.417%;width:46.875%;height:5.833%">INNOVATION PROJECT</div><div class="binfo" style="left:26.562%;top:16.528%;width:46.875%;height:2.222%">Our problem: DEFORESTATION · WISE Academy · Orlando, Florida · FIRST LEGO League Challenge · BIOGLOW 2026–27</div><div class="bbar" style="left:26.562%;top:21.528%;width:46.875%;height:3.889%">3 · CREATE</div><div class="bx accent" style="left:26.562%;top:26.528%;width:46.875%;height:11.111%" title="OUR SOLUTION · In plain words a stranger understands. Biggest text in the centre"><div class="bh"><b>OUR SOLUTION</b></div><p>In plain words a stranger understands. Biggest text in the centre</p></div><div class="bx photo" style="left:26.562%;top:38.750%;width:33.333%;height:38.889%" title="Prototype photo or drawing · Labelled, with arrows pointing at the parts. Not decorative"><div class="bh"><b>Prototype photo or drawing</b></div><p>Labelled, with arrows pointing at the parts. Not decorative</p></div><div class="bx box" style="left:60.729%;top:38.750%;width:12.708%;height:11.806%" title="How it works · step 1"><div class="bh"><b>How it works · step 1</b></div></div><div class="bx box" style="left:60.729%;top:51.944%;width:12.708%;height:11.806%" title="How it works · step 2"><div class="bh"><b>How it works · step 2</b></div></div><div class="bx box" style="left:60.729%;top:65.139%;width:12.708%;height:11.806%" title="How it works · step 3"><div class="bh"><b>How it works · step 3</b></div></div><div class="bx box" style="left:26.562%;top:78.750%;width:46.875%;height:19.167%" title="What already exists → What we made, and what is new · Two columns, three rows. A Core Values row, so make it obvious"><div class="bh"><b>What already exists → What we made, and what is new</b></div><p>Two columns, three rows. A Core Values row, so make it obvious</p></div><div class="bvline" style="left:50.000%;top:82.222%;height:14.722%"></div><div class="bbar" style="left:76.562%;top:2.083%;width:21.875%;height:3.889%">4 · ITERATE</div><div class="bx box" style="left:76.562%;top:7.083%;width:6.875%;height:8.889%" title="Shared with #1 · Who. Date"><div class="bh"><b>Shared with #1</b></div><p>Who. Date</p></div><div class="bx box" style="left:84.062%;top:7.083%;width:6.875%;height:8.889%" title="Shared with #2 · Who. Date"><div class="bh"><b>Shared with #2</b></div><p>Who. Date</p></div><div class="bx box" style="left:91.562%;top:7.083%;width:6.875%;height:8.889%" title="Shared with #3 · Who. Date"><div class="bh"><b>Shared with #3</b></div><p>Who. Date</p></div><div class="bx box" style="left:76.562%;top:16.806%;width:21.875%;height:4.028%" title="What they said #1 · “…” with the person&#x27;s name"><div class="bh"><b>What they said #1</b></div><p>“…” with the person&#x27;s name</p></div><div class="bx box" style="left:76.562%;top:21.389%;width:21.875%;height:4.028%" title="What they said #2 · “…” with the person&#x27;s name"><div class="bh"><b>What they said #2</b></div><p>“…” with the person&#x27;s name</p></div><div class="bx box" style="left:76.562%;top:25.972%;width:21.875%;height:4.028%" title="What they said #3 · “…” with the person&#x27;s name"><div class="bh"><b>What they said #3</b></div><p>“…” with the person&#x27;s name</p></div><div class="bx photo" style="left:76.562%;top:31.250%;width:10.000%;height:12.778%" title="BEFORE"><div class="bh"><b>BEFORE</b></div></div><div class="bx photo" style="left:88.438%;top:31.250%;width:10.000%;height:12.778%" title="AFTER"><div class="bh"><b>AFTER</b></div></div><div class="barrow" style="left:87.500%;top:37.639%" aria-hidden="true">→</div><div class="bx box" style="left:76.562%;top:44.444%;width:21.875%;height:3.472%" title="The change we made from feedback"><div class="bh"><b>The change we made from feedback</b></div></div><div class="bbar" style="left:76.562%;top:50.000%;width:21.875%;height:3.889%">5 · COMMUNICATE</div><div class="bx box" style="left:76.562%;top:55.000%;width:21.875%;height:7.778%" title="Who it helps · Name them · Mahdi, today"><div class="bh"><b>Who it helps</b><span class="pill today">Mahdi</span></div><p>Name them</p></div><div class="bx accent" style="left:76.562%;top:63.611%;width:21.875%;height:9.722%" title="What changes for them · Potential impact, one big line · Mahdi, today"><div class="bh"><b>What changes for them</b><span class="pill today">Mahdi</span></div><p>Potential impact, one big line</p></div><div class="bx photo" style="left:76.562%;top:74.444%;width:21.875%;height:23.472%" title="TEAM PHOTO · The one that shows pride"><div class="bh"><b>TEAM PHOTO</b></div><p>The one that shows pride</p></div></div></div>
+    <p class="bnote narrow">Scroll the board sideways to see all of it.</p>
   </div>
 </section>
 
