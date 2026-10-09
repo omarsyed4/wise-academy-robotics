@@ -24,6 +24,7 @@
   --display:"Archivo","Helvetica Neue",Helvetica,sans-serif;
   --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -38,7 +39,7 @@ img{max-width:100%}
 /* ============ keycap hero ============ */
 .hero{display:flex;justify-content:center;align-items:center;padding:74px 0 70px;perspective:900px}
 .keys{display:flex;gap:16px;align-items:flex-end;transform:rotateX(11deg);transform-style:preserve-3d}
-@media (max-width:620px){.keys{gap:9px;transform:rotateX(8deg)}}
+@media (max-width:620px){.keys{gap:6px;transform:rotateX(8deg)}}
 .key{
   position:relative;border-radius:12px;padding:20px 24px 22px;
   background:linear-gradient(180deg,#2C3A58 0%,#1B2439 100%);
@@ -67,6 +68,11 @@ img{max-width:100%}
   box-shadow:0 1px 0 #141C2E,0 2px 0 #0E1524,0 6px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);
 }
 .plus{font-family:var(--display);font-variation-settings:"wght" 700;font-size:clamp(1.3rem,3.6vw,2.1rem);color:var(--ink-3);padding-bottom:26px}
+@media (max-width:620px){
+  .key{padding:12px 10px 14px;border-radius:9px}
+  .key span{font-size:clamp(1.2rem,6vw,1.9rem)}
+  .plus{font-size:1.05rem;padding-bottom:16px}
+}
 
 /* ============ sections ============ */
 section{margin-bottom:62px;scroll-margin-top:16px}
@@ -109,6 +115,33 @@ h2{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.6re
   .tri{grid-template-columns:1fr;gap:14px}
   .fold{display:none}
 }
+
+.layout{margin-top:12px}
+.layout summary{cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;padding:4px 0}
+.layout summary:hover{color:var(--ink)}
+.layout summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.layout img{display:block;width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px;background:#fff}
+.layout p{font-size:12.5px;color:var(--ink-3);margin:10px 0 0;max-width:72ch}
+
+/* ============ today: one card per student ============ */
+.tasks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+@media (max-width:920px){.tasks{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.tasks{grid-template-columns:1fr}}
+.t{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:11px;min-width:0}
+.t.build{border-color:rgba(91,155,245,.5)}
+.t .who{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.t h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.05rem;margin:0;letter-spacing:-.015em}
+.t .job{font-size:13.5px;font-weight:600;color:var(--ink);margin:0;line-height:1.35}
+.t .where{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin:-6px 0 0}
+.t ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:var(--ink-2);line-height:1.45}
+.t li{display:grid;grid-template-columns:12px 1fr;gap:9px}
+.t li::before{content:"";width:10px;height:10px;border:1.5px solid var(--ink-3);border-radius:2px;margin-top:4px}
+.t .to{display:block;font-family:var(--mono);font-size:10px;color:var(--gold);margin-top:1px}
+.t .acts{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.t .open{display:block;text-align:center;text-decoration:none;font-size:13px;font-weight:600;color:var(--bg);background:var(--blue);border-radius:4px;padding:9px 12px}
+.t .open:hover{background:#7DB1F8}
+.t .also{font-size:12px;text-align:center;text-decoration:none;color:var(--ink-2)}
+.t .also:hover{color:var(--ink)}
 
 /* ============ flip cards ============ */
 .flip{perspective:1400px;cursor:pointer;outline:none}
@@ -228,13 +261,138 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
   </div>
 </div>
 
+<!-- ===================== TODAY ===================== -->
+<section id="today">
+  <div class="shead"><span>FRI 9 OCT</span><h2>Today: both boards</h2></div>
+  <p class="note">Husayn and Ammar each build one trifold in Canva, alone, for the whole class. Everyone else's job feeds those two boards. <b>Find your card, open your doc, and hand things in the moment you have them.</b></p>
+
+  <div class="track">
+    <h3>How to hand things in</h3>
+    <div class="meta">Screenshots, photos, sentences, bullet points</div>
+    <div class="seq">
+      <div class="step"><div class="s">1</div><div class="n">Open today's doc</div><div class="d">In your Drive folder, called 2026-10-09</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">2</div><div class="n">Do the task</div><div class="d">Each one says where it goes on a board</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">3</div><div class="n">Put it in the box under it</div><div class="d">Paste a screenshot, Insert → Image → Camera for a photo, or type</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step"><div class="s">4</div><div class="n">It goes on the board</div><div class="d">Mohamed, Husayn and Ammar copy it into Canva</div></div>
+    </div>
+  </div>
+
+  <div class="tasks">
+    <div class="t build">
+      <div class="who"><h3>Husayn</h3><span class="tag t-blue">Board builder</span></div>
+      <p class="job">Builds the Robot Design board</p>
+      <p class="where">Far corner · alone · all class</p>
+      <ol>
+        <li><span>Build the board in Canva, step by step from his brief</span></li>
+        <li><span>At 1:00 and 1:45, copy in what's new from the Robot Design worksheet</span></li>
+        <li><span>Paste the Canva link in his brief</span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1EElvk1-3Yfh-4d_SeIkh8hT2AfmI6VDjKyDWHVJZ9g0/edit">Open today's doc</a><a class="also" href="https://docs.google.com/document/d/1TxnUuVvXvjrf0mpBXHWAwf3zsp_3nxvinkRxiq4Oz64/edit">His brief</a></div>
+    </div>
+
+    <div class="t build">
+      <div class="who"><h3>Ammar</h3><span class="tag t-blue">Board builder</span></div>
+      <p class="job">Builds the Innovation Project board</p>
+      <p class="where">Opposite corner · alone · all class</p>
+      <ol>
+        <li><span>Build the board in Canva, step by step from his brief</span></li>
+        <li><span>At 1:00 and 1:45, copy in Mahdi's words and Elias's photos</span></li>
+        <li><span>Paste the Canva link in his brief</span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1wbcaumSKqJU400eKUtQPIRUhlr5_oBQ54XB2vwcw0RM/edit">Open today's doc</a><a class="also" href="https://docs.google.com/document/d/1G04bHK2nX1loe4jEnNF1Pzdx4sB17l5eb_fnPDjRSyc/edit">His brief</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Mohamed</h3><span class="tag t-red">Red</span></div>
+      <p class="job">Fills the Robot Design worksheet</p>
+      <p class="where">Anywhere except the two corners</p>
+      <ol>
+        <li><span>Who built, coded and tested what, all eight<span class="to">→ Robot Design · Panel 2</span></span></li>
+        <li><span>Every attachment, two photos each<span class="to">→ Robot Design · Panel 3</span></span></li>
+        <li><span>Fix the mission list. M5 is missing<span class="to">→ Robot Design · Panel 1</span></span></li>
+        <li><span>Every 30 minutes, copy what's new from the field docs</span></li>
+        <li><span>Last 20 minutes: what we learned, closing line<span class="to">→ Robot Design · Panel 5</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1QiiSjsA6p4wnJHyEqKoiA_yOVsuXLYnesLlR90ZNfJI/edit">Open today's doc</a><a class="also" href="https://docs.google.com/document/d/1ZLoRlz3TTNJrazjVlkmsDj8WmkXwQRFKUd25ErwbSP8/edit">Robot Design worksheet</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Mahdi</h3><span class="tag t-blue">Blue</span></div>
+      <p class="job">Writes his talking points</p>
+      <p class="where">Quiet spot · own laptop</p>
+      <ol>
+        <li><span>Every word he says in the judging room, timed out loud</span></li>
+        <li><span>Problem statement and why it matters<span class="to">→ Innovation · Panel 1</span></span></li>
+        <li><span>Who it helps and what changes for them<span class="to">→ Innovation · Panel 5</span></span></li>
+        <li><span>Every source, with where it came from<span class="to">→ Innovation · Panel 1</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/17wGx-1cD3xZj-SKHw0w5JPBlT24_S9hSsPsqOQw_tD0/edit">Open today's doc</a><a class="also" href="https://docs.google.com/document/d/1rplhFlAihIRmTJcQqf1YQqWsAzwNYiswJ3m-Fu4lShk/edit">Talking points</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Abbas</h3><span class="tag t-red">Red</span></div>
+      <p class="job">Red run order</p>
+      <p class="where">Field · runs Red</p>
+      <ol>
+        <li><span>Pick the Red order and time each leg twice</span></li>
+        <li><span>One full Red run, timed start to finish</span></li>
+        <li><span>Why this order, 2–3 sentences<span class="to">→ Robot Design · Panel 1</span></span></li>
+        <li><span>Missions we skipped, and why<span class="to">→ Robot Design · Panel 1</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1tYKM_xxnsh31BJfxJ69a7BSeTmoRKOeQkCRQGTBqpqs/edit">Open today's doc</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Ali</h3><span class="tag t-red">Red</span></div>
+      <p class="job">Mission 8 Tangled</p>
+      <p class="where">Field · Red</p>
+      <ol>
+        <li><span>Code M8 until it scores 3 times out of 5, then add it to the Red run</span></li>
+        <li><span>Log every Red run as it happens<span class="to">→ Robot Design · Panel 4</span></span></li>
+        <li><span>Two code screenshots, one sentence each<span class="to">→ Robot Design · Panel 3</span></span></li>
+        <li><span>Sensors, and the one clever thing<span class="to">→ Robot Design · Panel 3</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/15tu3q8EyC8IgTrxwWwz-FDq4_msjJ0YJuSlwYbWctZY/edit">Open today's doc</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Haider</h3><span class="tag t-blue">Blue</span></div>
+      <p class="job">Forest Elder's extra 10</p>
+      <p class="where">Field · runs Blue</p>
+      <ol>
+        <li><span>Get the M12 support tie. It's worth 30, not 20</span></li>
+        <li><span>Three full Blue runs, timed</span></li>
+        <li><span>M12 v1, v2, v3: what was wrong, what changed<span class="to">→ Robot Design · Panel 4</span></span></li>
+        <li><span>How many times out of 10 M12 works<span class="to">→ Robot Design · Panel 4</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1F0O8eUZrfZXas1UJh-ijxwn04w14Av4gua6yzS7a3TI/edit">Open today's doc</a></div>
+    </div>
+
+    <div class="t">
+      <div class="who"><h3>Elias</h3><span class="tag t-blue">Blue</span></div>
+      <p class="job">Blue runs and the team's photos</p>
+      <p class="where">Field · Blue</p>
+      <ol>
+        <li><span>Log every Blue run as it happens<span class="to">→ Robot Design · Panel 4</span></span></li>
+        <li><span>A photo of each of the eight, working<span class="to">→ Innovation · Panel 2</span></span></li>
+        <li><span>Three photos of the team at work<span class="to">→ Robot Design · Panel 2</span></span></li>
+        <li><span>At the bell, count today's runs<span class="to">→ Robot Design · Panel 4</span></span></li>
+      </ol>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1-4C7s7AQDo3j8d6KN9bwaOc__8GwXCr6AyWEbX9NPkA/edit">Open today's doc</a></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== TRIFOLDS ===================== -->
 <section id="boards">
   <div class="shead"><span>01</span><h2>Trifold designs</h2></div>
   <p class="note">Click any panel to flip it and see what goes in each box. Panels follow the judges' own words, because that is the order they tick the rubric in.</p>
 
   <div class="board">
-    <div class="bhead"><h3>Robot Design</h3><em>Mohamed Dharsi / one of five panels started</em></div>
+    <div class="bhead"><h3>Robot Design</h3><em>Husayn designs it today / Mohamed fills the worksheet</em></div>
     <div class="tri">
       <div class="wing">
         <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
@@ -312,10 +470,15 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
         </div></div>
       </div>
     </div>
+    <details class="layout">
+      <summary>Canva layout, to scale · 48 × 36 in</summary>
+      <img src="boards/robot-design.png" alt="Robot Design trifold wireframe. Left wing: IDENTIFY over DESIGN. Centre: the Ctrl Alt Defeat keycaps and ROBOT DESIGN title over CREATE, with the hero photo, four attachment rows, two code screenshots, sensors and the one clever thing. Right wing: a tall ITERATE panel over COMMUNICATE." loading="lazy">
+      <p>ITERATE gets two thirds of the right wing, because it's where most teams lose points. Same fonts, colours and header as the Innovation board, so the pair matches.</p>
+    </details>
   </div>
 
   <div class="board">
-    <div class="bhead"><h3>Innovation Project</h3><em>Mahdi Jessa / deforestation / topic only</em></div>
+    <div class="bhead"><h3>Innovation Project</h3><em>Ammar designs it today / Mahdi writes the words / deforestation</em></div>
     <div class="tri">
       <div class="wing">
         <div class="flip pcard part" tabindex="0" role="button" aria-label="Panel 1, Identify"><div class="in">
@@ -388,6 +551,11 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
         </div></div>
       </div>
     </div>
+    <details class="layout">
+      <summary>Canva layout, to scale · 48 × 36 in</summary>
+      <img src="boards/innovation.png" alt="Innovation Project trifold wireframe. Left wing: IDENTIFY with the problem statement, photo, three sources and the expert, over DESIGN with a dated timeline and eight named photo frames. Centre: keycaps and INNOVATION PROJECT title over CREATE, with the solution, a large prototype frame, three how-it-works steps and a what-exists comparison. Right wing: ITERATE over COMMUNICATE." loading="lazy">
+      <p>Every grey box is a labelled placeholder. Content drops in over the coming weeks without the layout moving.</p>
+    </details>
   </div>
 </section>
 
@@ -431,7 +599,7 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
       <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="step"><div class="s">WHOLE MATCH</div><div class="n">Precision tokens</div><div class="d">50 pts if 5 or 6 left</div></div>
     </div>
-    <div class="gapnote"><b>08 Tangled is still unassigned.</b> 30 points for a single action, and it belongs in one of the two sequences above.</div>
+    <div class="gapnote"><b>08 Tangled goes to Red.</b> 30 points for a single action. Ali is coding it on 9 October, and Abbas fits it into the Red order.</div>
   </div>
 </section>
 
@@ -478,7 +646,7 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
     </div></div>
 
     <div class="flip mcard" tabindex="0" role="button" aria-label="Mission 8"><div class="in">
-      <div class="face front"><div class="mtop"><span class="mnum">08</span><span class="mpts">30</span></div><h4>Tangled</h4><p class="cond">Vine touching the mat. One action.</p><div class="tags"><span class="tag t-gold">No owner</span></div></div>
+      <div class="face front"><div class="mtop"><span class="mnum">08</span><span class="mpts">30</span></div><h4>Tangled</h4><p class="cond">Vine touching the mat. One action.</p><div class="tags"><span class="tag t-red">Red</span><span class="tag t-gold">Ali, 9 Oct</span></div></div>
       <div class="face back"><p><b>Best points per line of code on the whole board</b>, and in neither squad's plan. All eight students independently rated it top tier in September. Elias: "amazing value, do this as early as possible."</p><div class="mlab">CODE</div><div class="shot"><img src="code/m08.png" alt="" onerror="this.parentNode.textContent='Not written yet'"></div></div>
     </div></div>
 
