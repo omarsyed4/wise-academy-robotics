@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>BIOGLOW Field Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F2F5F1;
+  --surface:#FFFFFF;
+  --surface-2:#E8EDE7;
+  --ink:#14211C;
+  --ink-2:#3D4E47;
+  --ink-3:#6C7C74;
+  --line:#CBD5C9;
+  --line-soft:#DDE4DB;
+  --glow:#0B7C6B;
+  --glow-soft:#DCEFEA;
+  --amber:#9A6510;
+  --amber-soft:#F6EBD7;
+  --red:#A93226;
+  --red-soft:#F7E3E0;
+  --blue:#2A5A99;
+  --blue-soft:#DFE8F4;
+  --danger:#8C2F22;
+  --shadow:0 1px 2px rgba(20,33,28,.06), 0 8px 24px -12px rgba(20,33,28,.18);
+  --radius:10px;
+  --display:"Bricolage Grotesque", "Helvetica Neue", Helvetica, sans-serif;
+  --body:"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1714;
+    --surface:#16221E;
+    --surface-2:#1E2C27;
+    --ink:#E8EFEA;
+    --ink-2:#B4C3BC;
+    --ink-3:#7F918A;
+    --line:#2C3D37;
+    --line-soft:#243330;
+    --glow:#3FD3B8;
+    --glow-soft:#12332D;
+    --amber:#E0A94D;
+    --amber-soft:#332812;
+    --red:#EC8578;
+    --red-soft:#3A1E1A;
+    --blue:#83AEE4;
+    --blue-soft:#182838;
+    --danger:#F0958A;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1714;
+  --surface:#16221E;
+  --surface-2:#1E2C27;
+  --ink:#E8EFEA;
+  --ink-2:#B4C3BC;
+  --ink-3:#7F918A;
+  --line:#2C3D37;
+  --line-soft:#243330;
+  --glow:#3FD3B8;
+  --glow-soft:#12332D;
+  --amber:#E0A94D;
+  --amber-soft:#332812;
+  --red:#EC8578;
+  --red-soft:#3A1E1A;
+  --blue:#83AEE4;
+  --blue-soft:#182838;
+  --danger:#F0958A;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+
+/* ---------- masthead ---------- */
+.mast{
+  border-bottom:2px solid var(--ink);
+  padding-block:36px 22px;
+  margin-bottom:0;
+}
+.mast-eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--glow);
+  font-weight:700;
+  margin:0 0 14px;
+}
+.mast h1{
+  font-family:var(--display);
+  font-optical-sizing:auto;
+  font-weight:800;
+  font-size:clamp(2.4rem,7vw,4.4rem);
+  line-height:.95;
+  letter-spacing:-.025em;
+  margin:0 0 16px;
+  text-wrap:balance;
+}
+.mast h1 em{font-style:normal;color:var(--glow)}
+.mast-sub{
+  font-size:1.05rem;
+  color:var(--ink-2);
+  margin:0 0 24px;
+  max-width:62ch;
+}
+.mast-meta{
+  display:flex;flex-wrap:wrap;gap:8px 10px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;
+}
+.mast-meta span{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:4px 11px;
+  color:var(--ink-2);
+  background:var(--surface);
+}
+.mast-meta span b{color:var(--ink);font-weight:700}
+
+/* ---------- layout ---------- */
+.cols{display:grid;grid-template-columns:186px minmax(0,1fr);gap:48px;align-items:start;margin-top:40px}
+@media (max-width:900px){.cols{grid-template-columns:1fr;gap:0}}
+
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);font-size:13.5px}
+@media (max-width:900px){
+  nav.toc{position:static;margin-bottom:36px;border:1px solid var(--line);border-radius:var(--radius);padding:16px;background:var(--surface)}
+}
+nav.toc .toc-h{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin-bottom:12px;
+}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+nav.toc a{
+  display:grid;grid-template-columns:24px 1fr;gap:6px;
+  text-decoration:none;color:var(--ink-2);padding:5px 8px;border-radius:6px;line-height:1.35;
+}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+nav.toc a .n{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:2px}
+nav.toc a:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--glow);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:24px}
+.sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:26px}
+.sec-head .num{
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--glow);
+  letter-spacing:.08em;padding-top:4px;
+}
+.sec-head h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);
+  letter-spacing:-.02em;margin:0;line-height:1.1;text-wrap:balance;
+}
+h3{
+  font-family:var(--display);font-weight:700;font-size:1.16rem;letter-spacing:-.01em;
+  margin:34px 0 12px;line-height:1.25;
+}
+h4{
+  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin:24px 0 8px;
+}
+p{margin:0 0 14px;max-width:72ch}
+.lede{font-size:1.02rem;color:var(--ink-2);max-width:68ch}
+ul,ol{margin:0 0 14px;padding-left:20px;max-width:72ch}
+li{margin-bottom:6px}
+strong{font-weight:700}
+a{color:var(--glow)}
+code{font-family:var(--mono);font-size:.87em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:28px}
+.stat{background:var(--surface);padding:16px 16px 14px}
+.stat .v{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:7px;font-weight:700}
+.stat .d{font-size:12.5px;color:var(--ink-2);margin-top:5px;line-height:1.4}
+.stat.accent .v{color:var(--glow)}
+
+/* ---------- callouts ---------- */
+.note{border-left:3px solid var(--glow);background:var(--glow-soft);padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 20px;max-width:72ch}
+.note p:last-child{margin-bottom:0}
+.note .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--glow);display:block;margin-bottom:6px}
+.warn{border-left-color:var(--danger);background:var(--red-soft)}
+.warn .lbl{color:var(--danger)}
+.gold{border-left-color:var(--amber);background:var(--amber-soft)}
+.gold .lbl{color:var(--amber)}
+
+/* ---------- tables ---------- */
+.tscroll{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th{
+  text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;padding:11px 13px;border-bottom:1px solid var(--line);
+  background:var(--surface-2);white-space:nowrap;
+}
+td{padding:11px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.45}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.mono{font-family:var(--mono);font-size:12.5px}
+.nm{font-weight:600;white-space:nowrap}
+
+/* ---------- chips ---------- */
+.chip{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;padding:2.5px 7px;border-radius:5px;white-space:nowrap;line-height:1.5;
+}
+.chip-red{background:var(--red-soft);color:var(--red)}
+.chip-blue{background:var(--blue-soft);color:var(--blue)}
+.chip-glow{background:var(--glow-soft);color:var(--glow)}
+.chip-amber{background:var(--amber-soft);color:var(--amber)}
+.chip-mute{background:var(--surface-2);color:var(--ink-3)}
+
+/* ---------- timeline ---------- */
+.tl{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--line);margin:0 0 22px;padding-left:0}
+.tl-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:16px;padding:14px 0 14px 20px;border-bottom:1px solid var(--line-soft);position:relative}
+.tl-row:last-child{border-bottom:none}
+.tl-row::before{content:"";position:absolute;left:-5px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--glow)}
+.tl-row.quiet::before{background:var(--line)}
+.tl-t{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--glow);letter-spacing:.02em;padding-top:2px}
+.tl-row.quiet .tl-t{color:var(--ink-3)}
+.tl-b h5{font-family:var(--display);font-weight:700;font-size:1rem;margin:0 0 4px;letter-spacing:-.01em}
+.tl-b p{margin:0 0 6px;font-size:14px;color:var(--ink-2);max-width:66ch}
+.tl-b p:last-child{margin-bottom:0}
+@media (max-width:560px){
+  .tl-row{grid-template-columns:1fr;gap:5px}
+}
+
+/* ---------- cards ---------- */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:var(--surface)}
+.card h5{font-family:var(--display);font-weight:700;font-size:1.02rem;margin:0 0 4px;letter-spacing:-.01em}
+.card .role{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:10px}
+.card p{font-size:14px;color:var(--ink-2);margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.card ul{font-size:14px;color:var(--ink-2);margin-bottom:0;padding-left:18px}
+
+/* ---------- checklist ---------- */
+.check{list-style:none;padding:0;margin:0 0 20px;max-width:72ch;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.check li{margin:0;border-bottom:1px solid var(--line-soft)}
+.check li:last-child{border-bottom:none}
+.check label{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;padding:11px 14px;cursor:pointer;font-size:14.5px;line-height:1.45}
+.check label:hover{background:var(--surface-2)}
+.check input{margin:4px 0 0;width:15px;height:15px;accent-color:var(--glow);cursor:pointer}
+.check input:checked + span{color:var(--ink-3);text-decoration:line-through}
+.check .sub{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px;text-decoration:none !important}
+
+/* ---------- script blocks ---------- */
+.script{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:18px;background:var(--surface)}
+.script-h{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:11px 15px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.script-h .t{font-family:var(--display);font-weight:700;font-size:.98rem}
+.script-h .d{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--glow);letter-spacing:.05em}
+.script-b{padding:14px 15px}
+.beat{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;padding:9px 0;border-bottom:1px dashed var(--line-soft);font-size:14px}
+.beat:last-child{border-bottom:none;padding-bottom:0}
+.beat:first-child{padding-top:0}
+.beat .who{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;padding-top:2px}
+.beat .what{color:var(--ink-2)}
+@media (max-width:560px){.beat{grid-template-columns:1fr;gap:3px}}
+
+/* ---------- trifold svg ---------- */
+.fold{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:var(--surface);margin-bottom:18px}
+.fold svg{display:block;width:100%;height:auto;max-width:100%}
+.fold svg text{font-family:var(--body);fill:var(--ink-2)}
+.fold svg text.lbl-glow{font-family:var(--mono);font-weight:700;fill:var(--glow)}
+.fold svg text.lbl-mute{font-family:var(--mono);font-weight:700;fill:var(--ink-3)}
+.fold svg text.lbl-amber{font-family:var(--mono);font-weight:700;fill:var(--amber)}
+.fold svg text.dim{fill:var(--ink-3)}
+.fold svg rect.p-glow{fill:var(--glow-soft)}
+.fold svg rect.p-mute{fill:var(--surface-2)}
+.fold svg rect.p-amber{fill:var(--amber-soft)}
+.fold svg rect.frame{fill:none;stroke:var(--line)}
+.fold svg line{stroke:var(--line)}
+.fold svg line.soft{stroke:var(--line-soft)}
+.fold-cap{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:12px;text-align:center}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);margin-top:20px;padding-top:22px;font-size:13px;color:var(--ink-3)}
+footer p{max-width:72ch;margin-bottom:8px}
+
+@media print{
+  nav.toc{display:none}
+  .cols{grid-template-columns:1fr}
+  body{background:#fff;color:#000;font-size:11pt}
+  section{break-inside:auto;margin-bottom:28px}
+  .sec-head,h3,h4{break-after:avoid}
+  .tscroll,.card,.script,.fold,.check{break-inside:avoid}
+  .mast{padding-block:0 14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="mast-eyebrow">WISE Academy Robotics · FIRST LEGO League Challenge</p>
+  <h1>BIOGLOW<br><em>Field Playbook</em></h1>
+  <p class="mast-sub">Everything the team does on competition day, written down so we can rehearse it until nobody has to think. Robot game choreography, the 30-minute judging session, both trifolds, and prompts for students to explain their own work.</p>
+  <div class="mast-meta">
+    <span><b>Season</b> BIOGLOW 2026–27</span>
+    <span><b>Division</b> Founders Edition, Grades 4–8</span>
+    <span><b>Roster</b> 8 students</span>
+    <span><b>Coaches</b> Omar Syed · Shazia Yusufali · Aamir</span>
+    <span><b>Team</b> Ctrl+Alt+Defeat</span>
+    <span><b>Event</b> not registered</span>
+  </div>
+</header>
+
+<div class="cols">
+
+<nav class="toc">
+  <div class="toc-h">Contents</div>
+  <ol>
+    <li><a href="#s1"><span class="n">01</span><span>Where we stand</span></a></li>
+    <li><a href="#s3"><span class="n">03</span><span>Mission plan</span></a></li>
+    <li><a href="#s5"><span class="n">05</span><span>Robot game procedure</span></a></li>
+    <li><a href="#s6"><span class="n">06</span><span>Judging session</span></a></li>
+    <li><a href="#s7"><span class="n">07</span><span>The two trifolds</span></a></li>
+    <li><a href="#s8"><span class="n">08</span><span>Rubric evidence map</span></a></li>
+    <li><a href="#s9"><span class="n">09</span><span>Core Values</span></a></li>
+    <li><a href="#s13"><span class="n">13</span><span>Packing list</span></a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ 01 ============ -->
+<div class="note"><span class="lbl">Evidence and guidance dates</span><p>Team evidence last recorded 9 October 2026; coach-call review 15 October. This is a rehearsal guide, not a claim that the team has completed every item. <a href="index.html">Back to season hub</a>. Current event packet and official Challenge Updates take precedence over older notes.</p></div>
+<section id="s1">
+  <div class="sec-head"><span class="num">01</span><h2>Where we stand</h2></div>
+
+  <div class="stats">
+    <div class="stat accent"><div class="v">70</div><div class="k">Procedural ceiling</div><div class="d">Conditional: inspection before launch plus precision tokens retained through the match.</div></div>
+    <div class="stat"><div class="v">200</div><div class="k">Committed missions</div><div class="d">Seven active missions: M1, M3, M5, M8, M6, M11, M12. Full scoring is unverified.</div></div>
+    <div class="stat"><div class="v">7</div><div class="k">Missions coded</div><div class="d">Recorded as coded by 9 Oct; coded does not mean reliable or full points achieved.</div></div>
+    <div class="stat"><div class="v">530</div><div class="k">Theoretical max</div><div class="d">Every mission, every bonus, all six tokens. Nobody scores this.</div></div>
+  </div>
+
+  <p class="lede">Three matches of 2.5 minutes each. <strong>Only the single best score counts</strong> toward awards and advancement — ties break on second and third best. That changes how we play: match one is a bank, not a rehearsal.</p>
+
+  <div class="note gold">
+    <span class="lbl">The 70 procedural points to protect</span>
+    <p><strong>20 points</strong> if the robot and every attachment fit inside <em>one</em> launch area under 12 in. (305 mm) at inspection. <strong>50 points</strong> for keeping five or six precision tokens. Both are procedural. Both are worth more than any single mission on the board. We drill the pack-down and the token discipline like they are missions, because they are.</p>
+  </div>
+
+  <div class="note warn">
+    <span class="lbl">Innovation Project — unblocked, 25 Sep</span>
+    <p>The team picked <strong>deforestation</strong> as their problem and have a photo of it. That clears the blocker. What is still missing is everything after Identify: research from a variety of sources, a prototype, and feedback from people outside the team. Those are three of the five Innovation Project Core Values rows, and none of them can be produced by a board builder — see the current season status.</p>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+
+
+<!-- ============ 03 ============ -->
+<section id="s3">
+  <div class="sec-head"><span class="num">03</span><h2>Mission plan</h2></div>
+
+  <p class="lede">All fifteen missions with their real point values, our status, and who owns each one. Print this and put it on the wall beside the mat.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr>
+        <th>#</th><th>Mission</th><th class="num">Max</th><th>How it scores</th><th>Status</th><th>Owner</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="mono">—</td><td class="nm">Equipment inspection</td><td class="num">20</td><td>Robot + all equipment fit in <em>one</em> launch area, under 12 in.</td><td><span class="chip chip-amber">Drill it</span></td><td>Abbas + Haider</td></tr>
+        <tr><td class="mono">—</td><td class="nm">Precision tokens</td><td class="num">50</td><td>6 or 5 left = 50 · 4 = 35 · 3 = 25 · 2 = 15 · 1 = 10</td><td><span class="chip chip-amber">Drill it</span></td><td>All technicians</td></tr>
+
+        <tr><td class="mono">01</td><td class="nm">Drone Survey</td><td class="num">30</td><td>Drone off the mat 20 · LiDAR map flipped, scan marker in survey area +10</td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-red">Red</span></td></tr>
+        <tr><td class="mono">06</td><td class="nm">Leafcutter Frenzy</td><td class="num">40</td><td>Ant touching nest <em>and</em> 10 per leaf fragment in the nest (4 max)</td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-blue">Blue</span></td></tr>
+        <tr><td class="mono">11</td><td class="nm">Window to the Past</td><td class="num">20</td><td>Root cover down, touching the mat</td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-blue">Blue</span></td></tr>
+        <tr><td class="mono">12</td><td class="nm">Forest Elder</td><td class="num">30</td><td>Cane fully raised touching tree 20 · support tie around post 10 · <em>7–8 s measured</em></td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-blue">Blue</span></td></tr>
+
+        <tr><td class="mono">10</td><td class="nm">Fragile Microhabitats</td><td class="num">20</td><td>Spider habitat 10 · snail habitat 10 — both for staying in their <em>starting</em> position</td><td><span class="chip chip-glow">Free</span></td><td>Everyone: do not hit them</td></tr>
+
+        <tr><td class="mono">08</td><td class="nm">Tangled</td><td class="num">30</td><td>Vine touching the mat — one action</td><td><span class="chip chip-glow">Coded 9 Oct · testing</span></td><td>Red · Ali</td></tr>
+        <tr><td class="mono">09</td><td class="nm">Research Platform</td><td class="num">30</td><td>Platform raised 10 · camera trap deployed 10 · seed off tree 10</td><td><span class="chip chip-mute">Next up</span></td><td>unassigned</td></tr>
+        <tr><td class="mono">03</td><td class="nm">Flip the Rock</td><td class="num">30</td><td>Research flag down 20 · rock returned to start +10 · <em>4–5 s measured</em></td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-red">Red</span></td></tr>
+
+        <tr><td class="mono">02</td><td class="nm">Exploding Seeds</td><td class="num">30</td><td>10 per seed no longer touching the stalk (3)</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+        <tr><td class="mono">04</td><td class="nm">Lucky Leaves</td><td class="num">30</td><td>1st leaf off nest 10 · 2nd leaf off with katydid in start position +20</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+        <tr><td class="mono">05</td><td class="nm">Reaching Roots</td><td class="num">20</td><td>Partially extended 10 <em>or</em> completely 20 — never both</td><td><span class="chip chip-glow">Coded</span></td><td><span class="chip chip-red">Red</span></td></tr>
+        <tr><td class="mono">07</td><td class="nm">Humongous Fungus</td><td class="num">40</td><td>Mycelium fully extended 20 · +10 per connection with the opposing team's fully extended root (2 possible)</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+        <tr><td class="mono">13</td><td class="nm">Keystone Species</td><td class="num">30</td><td>Our built keystone species on the restoration platform <em>and</em> young trees raised</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+        <tr><td class="mono">14</td><td class="nm">Seeds of Renewal</td><td class="num">40</td><td>5 per seed in the replantation station (4) · +5 each if also touching the mat</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+        <tr><td class="mono">15</td><td class="nm">Biocentric Architecture</td><td class="num">40</td><td>Canopy raised 10 · skylight in 10 · compost hatch open 10 · +10 matching-dock bonus</td><td><span class="chip chip-mute">Not yet</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Run order and the arithmetic — evidence through 9 October</h3>
+  <p><strong>Blue:</strong> M11 → M6 → M12, up to 90. <strong>Red:</strong> M1 → M3 → M5 → M8, up to 110. M8 was coded and added to Red on 9 October; two of four recorded attempts worked. M15 was explored by Blue but is outside the committed order.</p>
+  <p>200 active mission points + 20 untouched M10 + 20 inspection + 50 precision = <strong>290 conditional points</strong>. This is a ceiling if every condition is met, not an achieved or guaranteed score. Both squads share one 2:30 match; individual mission timings do not prove the combined sequence fits. The M12 support tie still needs verification.</p>
+  <p>Seven attempts were logged on 9 October (Ali four, Elias three), not seven complete match runs. M9 remains a possible future addition. Keep proposed routes separate from verified results.</p>
+  <div class="note warn">
+    <span class="lbl">Errors in the notebooks — fix before anyone memorises them</span>
+    <p><strong>Window to the Past is Mission 11, not Mission 7.</strong> Ali and Elias both have it as 7 in their reflections; Mission 7 is Humongous Fungus.</p>
+    <p><strong>Fragile Microhabitats is 20 points, not 30.</strong> Elias, Ali and Husayn all wrote 30. It is 10 for the spider habitat plus 10 for the snail habitat.</p>
+    <p><strong>Biocentric Architecture is 40, not 60.</strong> Mohamed and Ammar both wrote 60.</p>
+    <p><strong>Forest Elder&apos;s support tie is not a bonus.</strong> Elias and Ali both call it one and say skip it. It is an independent 10-point line: cane 20 + tie 10 = 30.</p>
+    <p><strong>Forest Elder is 30, not 20.</strong> The Blue game plan records it as &ldquo;Frenzy Elder 20 points&rdquo; &mdash; wrong name and wrong score. Cane raised 20 plus support tie 10. They are leaving 10 points on the table by writing it down wrong.</p>
+    <p><strong>Reaching Roots has no bonus.</strong> The Red game plan has &ldquo;10+10 bonus = 20&rdquo;. The total is right but the reasoning is not: it scores 10 for partially extended <em>or</em> 20 for completely extended, never both. If they aim for &ldquo;10 then the bonus&rdquo; they will build the wrong attachment.</p>
+    <p><strong>Smaller ones:</strong> Lucky Leaves is 30 not 20 (Mohamed, Ammar) and is Mission 4 not 6 (Mahdi); Exploding Seeds is Mission 2 not 3 (Mahdi); Reaching Roots is 20 if fully extended, not 10 (Ali); Seeds of Renewal is 40 not 30 (Mohamed, Ammar); Humongous Fungus is 20 guaranteed plus up to 20 that depends on the opposing team — Mahdi has it as a flat 30.</p>
+    <p>Abbas&apos;s notebook has M1–M9 correct throughout. Use his numbers as the reference and have him lead the correction.</p>
+  </div>
+
+  <h3>Mission 04 has a trap</h3>
+  <p>Lucky Leaves is the one mission that can score <strong>zero</strong> after you have done the work. Per the 2 September Challenge Update: the leaves are randomised before the match and we are <em>not</em> told where the katydid starts. If the katydid is completely outside the leaf habitat at any point, the bonus is gone; if it is completely outside at the end of the match, <strong>the whole mission scores zero</strong>. Treat it as a late-season mission, not an early one.</p>
+</section>
+
+<!-- ============ 04 ============ -->
+
+
+<!-- ============ 05 ============ -->
+<section id="s5">
+  <div class="sec-head"><span class="num">05</span><h2>Robot game procedure</h2></div>
+
+  <p class="lede">This is the choreography. Rehearse it as a sequence, on a timer, with the same four people in the same four positions, until it runs without anybody speaking.</p>
+
+  <h3>Step 1 · Pre-match inspection <span class="chip chip-amber">20 points</span></h3>
+  <p>The referee checks that the robot and <em>every</em> piece of equipment fit inside the two launch areas under a 12 in. (305 mm) height limit. If it all fits in <strong>one</strong> launch area, we get 20 points. Abbas and Haider run the pack-down together; it should take under thirty seconds and be identical every time.</p>
+  <ul class="check" data-ck="insp">
+    <li><label><input type="checkbox"><span>Robot, all attachments and the keystone species model fit one launch area<span class="sub">Practise the exact stacking arrangement. It is worth the same as Mission 11.</span></span></label></li>
+    <li><label><input type="checkbox"><span>Nothing exceeds 12 in. / 305 mm tall</span></label></li>
+    <li><label><input type="checkbox"><span>One controller, four motors max, only touch/force, colour, distance and gyro sensors</span></label></li>
+    <li><label><input type="checkbox"><span>One sheet of notebook paper per home area for program notes<span class="sub">Allowed, and does not count as equipment. Use it — write the launch order on it.</span></span></label></li>
+    <li><label><input type="checkbox"><span>Keystone species model identified to the referee<span class="sub">They will ask which model it is during inspection.</span></span></label></li>
+  </ul>
+
+  <h3>Step 2 · Setup — a couple of minutes</h3>
+  <ol>
+    <li>Distribute the loose mission models provided in home, and our equipment, between the two home areas.</li>
+    <li>Place the robot in the launch area we are starting from.</li>
+    <li>Calibrate sensors using any part of the mat — <strong>do this every match</strong>, venue lighting varies.</li>
+    <li>Husayn checks the M13–15 model/dock choices and asks the referee to correct any mismatch before the start. The call described a queue sheet; confirm our event procedure. Check the M8/M9 tree with and without stabilization tape in practice.</li>
+    <li>Everyone not a technician steps behind the line, coach included. No adult prompts during the run; computers and tablets stay in the pit. Only students handle the robot and programming.</li>
+  </ol>
+
+  <h3>Step 3 · Positions</h3>
+  <div class="grid2">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h5>Red home <span class="chip chip-red">left</span></h5>
+      <p><strong>At the table:</strong> Abbas (lead) and Ali.<br><strong>Behind the line, same side:</strong> Mohamed, Husayn.</p>
+      <p>Mohamed may swap in for either technician at any time — but only on the red side.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h5>Blue home <span class="chip chip-blue">right</span></h5>
+      <p><strong>At the table:</strong> Haider (lead) and Elias.<br><strong>Behind the line, same side:</strong> Mahdi, Ammar.</p>
+      <p>Mahdi may swap in for either technician at any time — but only on the blue side.</p>
+    </div>
+  </div>
+
+  <h3>Step 4 · The launch loop</h3>
+  <div class="script">
+    <div class="script-h"><span class="t">Repeat for every run</span><span class="d">2:30 total</span></div>
+    <div class="script-b">
+      <div class="beat"><div class="who">Runner</div><div class="what">Places the next attachment. Robot and anything it is about to move must fit <strong>completely inside the launch area</strong>.</div></div>
+      <div class="beat"><div class="who">Technician</div><div class="what">Launches. Hands off the moment it moves — no guiding, no nudging.</div></div>
+      <div class="beat"><div class="who">Both</div><div class="what">Watch, hands visibly back. Let the robot come <strong>completely home</strong> before touching it.</div></div>
+      <div class="beat"><div class="who">Spotter</div><div class="what">Calls the clock: 2:00, 1:00, 0:30, 0:10.</div></div>
+      <div class="beat"><div class="who">Scorekeeper</div><div class="what">Marks what scored on the printed scoresheet as it happens.</div></div>
+    </div>
+  </div>
+
+  <h3>Step 5 · Precision tokens — the discipline that wins matches</h3>
+  <p>We start with six tokens worth 50 points. A referee removes one every time we interrupt the robot while it, or anything touching it, is outside home.</p>
+
+  <div class="tscroll">
+    <table style="min-width:420px">
+      <thead><tr><th>Tokens left</th><th class="num">Points</th><th class="num">Cost of that interruption</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">6</td><td class="num">50</td><td class="num">—</td></tr>
+        <tr><td class="mono">5</td><td class="num">50</td><td class="num" style="color:var(--glow);font-weight:700">0</td></tr>
+        <tr><td class="mono">4</td><td class="num">35</td><td class="num">−15</td></tr>
+        <tr><td class="mono">3</td><td class="num">25</td><td class="num">−10</td></tr>
+        <tr><td class="mono">2</td><td class="num">15</td><td class="num">−10</td></tr>
+        <tr><td class="mono">1</td><td class="num">10</td><td class="num">−5</td></tr>
+        <tr><td class="mono">0</td><td class="num">0</td><td class="num">−10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note gold">
+    <span class="lbl">Teach the team this one line</span>
+    <p><strong>The first interruption outside home still costs a token, but five tokens retain the same 50-point score. The second one costs fifteen points — a substantial loss against a 20-point mission.</strong> So: never grab the robot out of impatience on the second one. Wait the extra two seconds for it to come home.</p>
+  </div>
+
+  <h4>If we do have to interrupt</h4>
+  <ul>
+    <li><strong>Partly outside home</strong> — the robot and anything it touched go back to <em>that same</em> home area.</li>
+    <li><strong>Completely outside home</strong> — we may place them in <em>either</em> home area.</li>
+    <li>We keep the robot and anything we originally launched with. <strong>Anything picked up outside home after the last launch goes to the referee</strong> for the rest of the match.</li>
+    <li><strong>Exception worth knowing:</strong> if we are not going to launch again, we may stop the robot in place and lose <em>no</em> token. Leave it exactly where it stopped.</li>
+  </ul>
+
+  <h4>Things that void points</h4>
+  <ul>
+    <li>Handing or carrying anything from one home area to the other during the match. Rule 15(b) separately permits a completely-outside-home interruption recovery to either home; this is not permission to carry equipment between homes.</li>
+    <li>Touching or hand-resetting field mission models outside our own home during the match. After a failed attempt, leave the field as it is; only the robot can make another attempt. Follow the rulebook for permitted interruption and stranded-object handling.</li>
+    <li>Interrupting the robot in a way that earns us points.</li>
+    <li>Separating the Dual Lock, taking a model apart, or breaking a model.</li>
+    <li>Touching the opposing team's field, robot or equipment. Points we cost them score automatically for them.</li>
+  </ul>
+
+  <h3>Step 6 · The buzzer and the scoresheet</h3>
+  <ol>
+    <li>At 2:30 the match ends. <strong>Stop the robot and touch nothing else.</strong> Scoring starts at that instant, and everything must be visibly true at that moment.</li>
+    <li>The referee walks the results with us. Mahdi compares against his live sheet.</li>
+    <li><strong>Once we agree, it is official.</strong> If something looks wrong, say so politely and specifically before agreeing — after that only the head referee can change it.</li>
+    <li>Thank the referee and the opposing team. Every match starts at Gracious Professionalism 3; above-and-beyond sportsmanship earns a 4, and those points go into our Core Values total.</li>
+  </ol>
+</section>
+
+<!-- ============ 06 ============ -->
+<section id="s6">
+  <div class="sec-head"><span class="num">06</span><h2>Judging session</h2></div>
+
+  <p class="lede">Thirty minutes, one shot, and from the moment the team walks through the door the coaches are spectators. We sit down and say nothing. Use the timing as a rehearsal scaffold. Judges want authentic explanations and can ask about unfinished work.</p>
+
+  <div class="note warn">
+    <span class="lbl">Coaches are hands off</span>
+    <p>The call described seats for two coaches behind the team. Confirm observer limits with the event; admitted coaches sit behind the students and stay silent. Parents may observe only when the team and event allow it, and remain silent too. No prompting, no answering, no fixing the board. If the team freezes, they recover on their own — so rehearse the recovery too.</p>
+  </div>
+
+  <div class="tl">
+    <div class="tl-row"><div class="tl-t">2 min</div><div class="tl-b"><h5>Team welcome</h5><p>Introductory conversation while the team sets up the boards and laptop. Our hook goes here.</p></div></div>
+    <div class="tl-row"><div class="tl-t">5 min</div><div class="tl-b"><h5>Innovation Project presentation</h5><p>Live, by the students. Board A or a clear drawing. Optional digital evidence must not be required.</p></div></div>
+    <div class="tl-row"><div class="tl-t">5 min</div><div class="tl-b"><h5>Innovation Project Q&amp;A</h5><p>Judges dig into research, feedback and impact.</p></div></div>
+    <div class="tl-row"><div class="tl-t">5 min</div><div class="tl-b"><h5>Robot design explanation</h5><p>Board B, the robot and printed code screenshots; a charged offline device is an optional aid.</p></div></div>
+    <div class="tl-row"><div class="tl-t">5 min</div><div class="tl-b"><h5>Robot design Q&amp;A</h5><p>Strategy, attachments, sensors, what failed.</p></div></div>
+    <div class="tl-row quiet"><div class="tl-t">≤ 8 min</div><div class="tl-b"><h5>Final share &amp; feedback</h5><p>We may share final thoughts. Judges give verbal feedback — <strong>somebody writes it down.</strong></p></div></div>
+  </div>
+
+  <h3>The two-minute welcome</h3>
+  <p>This is free ground and most teams waste it. A short, rehearsed hook — a skit, a chant, a one-line-each round robin — sets the tone for the whole session. Everyone speaks at least one sentence here, which is the cheapest possible evidence that all eight members contribute.</p>
+  <div class="script">
+    <div class="script-h"><span class="t">Welcome</span><span class="d">2:00</span></div>
+    <div class="script-b">
+      <div class="beat"><div class="who">Mahdi</div><div class="what">Opens. Team name, school, one sentence on who we are.</div></div>
+      <div class="beat"><div class="who">All eight</div><div class="what">Round robin: name, role, one thing they built or coded. Ten seconds each, no more.</div></div>
+      <div class="beat"><div class="who">Mahdi</div><div class="what">Hands over: "We'll start with our innovation project." Boards are already up by now.</div></div>
+    </div>
+  </div>
+
+  <h3>Innovation Project — 5 minutes</h3>
+  <p>The structure below maps one-to-one onto the five rubric rows. Judges are literally ticking Identify, Design, Create, Iterate, Communicate as you speak, so say those things in that order.</p>
+  <div class="script">
+    <div class="script-h"><span class="t">Innovation Project presentation</span><span class="d">5:00</span></div>
+    <div class="script-b">
+      <div class="beat"><div class="who">Mahdi<br><span style="color:var(--ink-3);font-weight:400">0:45</span></div><div class="what"><strong>Identify.</strong> The problem, stated in one clear sentence, and why it puts biodiversity at risk.</div></div>
+      <div class="beat"><div class="who">Ammar<br><span style="color:var(--ink-3);font-weight:400">1:00</span></div><div class="what"><strong>Identify + Design.</strong> Our research: the sources we used, and the expert we spoke to — name them. Then the plan we made and how everyone worked on it.</div></div>
+      <div class="beat"><div class="who">Husayn<br><span style="color:var(--ink-3);font-weight:400">1:15</span></div><div class="what"><strong>Create.</strong> The solution, and the prototype or drawing held up while he explains it. What is new about it.</div></div>
+      <div class="beat"><div class="who">Elias<br><span style="color:var(--ink-3);font-weight:400">1:15</span></div><div class="what"><strong>Iterate.</strong> Who we shared it with, what they said, and the specific change we made because of it. Before and after.</div></div>
+      <div class="beat"><div class="who">Mahdi<br><span style="color:var(--ink-3);font-weight:400">0:45</span></div><div class="what"><strong>Communicate.</strong> Who this helps and what changes for them. Close with pride, not a trailing "yeah, that's it."</div></div>
+    </div>
+  </div>
+
+  <h4>Questions to have answers for</h4>
+  <ul>
+    <li>Why did you pick this problem?  <span class="chip chip-mute">Mahdi</span></li>
+    <li>Who did you talk to outside your team, and what did they tell you?  <span class="chip chip-mute">Ammar</span></li>
+    <li>What already exists, and how is yours different?  <span class="chip chip-mute">Husayn</span></li>
+    <li>What did you change after feedback?  <span class="chip chip-mute">Elias</span></li>
+    <li>Who would actually use this?  <span class="chip chip-mute">Mahdi</span></li>
+    <li>What was the hardest part, and what would you do next?  <span class="chip chip-mute">anyone</span></li>
+  </ul>
+  <p>Mahdi fields and routes: he repeats the question, names who answers, and that person answers. It keeps four people from talking at once and it looks deliberate rather than chaotic.</p>
+
+  <h3>Robot design — 5 minutes</h3>
+  <div class="script">
+    <div class="script-h"><span class="t">Robot design explanation</span><span class="d">5:00</span></div>
+    <div class="script-b">
+      <div class="beat"><div class="who">Abbas<br><span style="color:var(--ink-3);font-weight:400">1:00</span></div><div class="what"><strong>Identify.</strong> Mission strategy: which missions are in the latest plan, why those, and why in that order. Point at the board. Mention the resources we used — the mission video, the Facebook coaches' group, AI as a starting point we then rewrote.</div></div>
+      <div class="beat"><div class="who">Mohamed<br><span style="color:var(--ink-3);font-weight:400">1:15</span></div><div class="what"><strong>Design + Create.</strong> Holds up each attachment, detached and then mounted, and says what it does and why it is shaped that way.</div></div>
+      <div class="beat"><div class="who">Ali<br><span style="color:var(--ink-3);font-weight:400">1:15</span></div><div class="what"><strong>Create.</strong> Explain an annotated printed code screenshot; use a screen only if ready. Which sensors, why that sensor, and one genuinely clever thing we did.</div></div>
+      <div class="beat"><div class="who">Haider<br><span style="color:var(--ink-3);font-weight:400">1:00</span></div><div class="what"><strong>Iterate.</strong> Version 1 versus version 3, side by side from the board. How many times we tested and what the failures taught us.</div></div>
+      <div class="beat"><div class="who">Abbas<br><span style="color:var(--ink-3);font-weight:400">0:30</span></div><div class="what"><strong>Communicate.</strong> Lessons learned, who contributed what, and close.</div></div>
+    </div>
+  </div>
+
+  <h4>Questions to have answers for</h4>
+  <ul>
+    <li>Why those missions and not others?  <span class="chip chip-mute">Abbas</span></li>
+    <li>Show me an attachment and tell me why it is built that way.  <span class="chip chip-mute">Mohamed</span></li>
+    <li>Which sensors do you use and why that one?  <span class="chip chip-mute">Ali</span></li>
+    <li>What broke, and what did you change?  <span class="chip chip-mute">Haider</span></li>
+    <li>How many times did you test this run?  <span class="chip chip-mute">Haider</span></li>
+    <li>Who wrote this part of the code?  <span class="chip chip-mute">answer honestly, name the person</span></li>
+    <li>What would you do with two more weeks?  <span class="chip chip-mute">Abbas</span></li>
+  </ul>
+
+  <div class="note">
+    <span class="lbl">Rehearse the failure case</span>
+    <p>Practise a judge asking something nobody prepared for. The correct answer is "We haven't figured that out yet, but here's how we'd approach it" — said confidently. Guessing and bluffing scores worse than an honest gap.</p>
+  </div>
+
+  <h3>Final share and feedback — up to 8 minutes</h3>
+  <p>The team may offer closing thoughts. Then the judges give verbal feedback, and this is the most valuable eight minutes of the scrimmage: it tells us exactly what to fix before the qualifier. <strong>Elias writes it down</strong> — on paper, in the room, while they are speaking. We use the feedback to decide which work and board content need revision; no automatic full rebuild.</p>
+</section>
+
+<!-- ============ 07 ============ -->
+<section id="s7">
+  <div class="sec-head"><span class="num">07</span><h2>The two trifolds</h2></div>
+
+  <p class="lede">Two boards, one per judged area, each laid out in the rubric's own order so a judge can follow left to right and tick as they go. Panels are specified below; build them to this and nothing is missing.</p>
+
+  <div class="note">
+    <span class="lbl">Why boards and not a slideshow</span>
+    <p>We cannot count on a screen at the venue. Use readable printed boards, sketches and code pages. The call confirmed that a venue TV and even power may be unavailable. Bring our own charged device only as an optional aid; practise the complete explanation without it. Confirm space and material limits with the event. Photos do a lot of the work here: last year's strongest boards were mostly photographs.</p>
+  </div>
+
+  <h3>Board A · Innovation Project</h3>
+  <div class="fold">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Six-panel layout for the innovation project trifold">
+      <rect x="1" y="1" width="718" height="298" rx="6" class="frame" stroke-width="2"/>
+      <line x1="240" y1="1" x2="240" y2="299" stroke-width="2" stroke-dasharray="5 5"/>
+      <line x1="480" y1="1" x2="480" y2="299" stroke-width="2" stroke-dasharray="5 5"/>
+      <line x1="1" y1="150" x2="719" y2="150" class="soft" stroke-width="1"/>
+
+      <rect x="16" y="16" width="208" height="118" rx="4" class="p-glow"/>
+      <text x="30" y="42" class="lbl-glow" font-size="11">IDENTIFY</text>
+      <text x="30" y="64" font-size="12">Problem statement,</text>
+      <text x="30" y="82" font-size="12">one sentence, big type</text>
+      <text x="30" y="106" font-size="12">Research: sources cited,</text>
+      <text x="30" y="124" font-size="12">expert named + photo</text>
+
+      <rect x="16" y="166" width="208" height="118" rx="4" class="p-mute"/>
+      <text x="30" y="192" class="lbl-mute" font-size="11">DESIGN</text>
+      <text x="30" y="214" font-size="12">Project plan / timeline</text>
+      <text x="30" y="238" font-size="12">Photos of all 8 working,</text>
+      <text x="30" y="256" font-size="12">each quote attributed</text>
+      <text x="30" y="274" font-size="12">by name</text>
+
+      <rect x="256" y="16" width="208" height="268" rx="4" class="p-glow"/>
+      <text x="270" y="42" class="lbl-glow" font-size="11">CREATE — CENTRE</text>
+      <text x="270" y="68" font-size="12">Team name + logo</text>
+      <text x="270" y="92" font-size="12">The solution, explained</text>
+      <text x="270" y="110" font-size="12">in plain language</text>
+      <text x="270" y="140" font-size="12">Prototype photo or</text>
+      <text x="270" y="158" font-size="12">detailed drawing —</text>
+      <text x="270" y="176" font-size="12">labelled, not decorative</text>
+      <text x="270" y="206" font-size="12">What makes it different</text>
+      <text x="270" y="224" font-size="12">from what exists</text>
+      <text x="270" y="256" class="dim" font-size="12">Bring the physical</text>
+      <text x="270" y="272" class="dim" font-size="12">prototype too</text>
+
+      <rect x="496" y="16" width="208" height="118" rx="4" class="p-mute"/>
+      <text x="510" y="42" class="lbl-mute" font-size="11">ITERATE</text>
+      <text x="510" y="64" font-size="12">Who we shared it with</text>
+      <text x="510" y="86" font-size="12">What they said</text>
+      <text x="510" y="112" font-size="12">Before → after of the</text>
+      <text x="510" y="128" font-size="12">change we made</text>
+
+      <rect x="496" y="166" width="208" height="118" rx="4" class="p-glow"/>
+      <text x="510" y="192" class="lbl-glow" font-size="11">COMMUNICATE</text>
+      <text x="510" y="214" font-size="12">Who it helps and how</text>
+      <text x="510" y="238" font-size="12">Potential impact</text>
+      <text x="510" y="262" font-size="12">Team photo — the one</text>
+      <text x="510" y="278" font-size="12">that shows pride</text>
+    </svg>
+    <div class="fold-cap">Left panel · Centre panel · Right panel — read in rubric order</div>
+  </div>
+
+  <h3>Board B · Robot Design</h3>
+  <div class="fold">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Six-panel layout for the robot design trifold">
+      <rect x="1" y="1" width="718" height="298" rx="6" class="frame" stroke-width="2"/>
+      <line x1="240" y1="1" x2="240" y2="299" stroke-width="2" stroke-dasharray="5 5"/>
+      <line x1="480" y1="1" x2="480" y2="299" stroke-width="2" stroke-dasharray="5 5"/>
+
+      <rect x="16" y="16" width="208" height="118" rx="4" class="p-amber"/>
+      <text x="30" y="42" class="lbl-amber" font-size="11">IDENTIFY</text>
+      <text x="30" y="64" font-size="12">Mission strategy: which</text>
+      <text x="30" y="82" font-size="12">four, why, in what order</text>
+      <text x="30" y="106" font-size="12">Annotated mat photo</text>
+      <text x="30" y="124" font-size="12">with the route drawn on</text>
+
+      <rect x="16" y="166" width="208" height="118" rx="4" class="p-mute"/>
+      <text x="30" y="192" class="lbl-mute" font-size="11">DESIGN</text>
+      <text x="30" y="214" font-size="12">Who built and coded</text>
+      <text x="30" y="232" font-size="12">what — all 8 named</text>
+      <text x="30" y="258" font-size="12">Photos of the team</text>
+      <text x="30" y="276" font-size="12">actually working</text>
+
+      <rect x="256" y="16" width="208" height="268" rx="4" class="p-amber"/>
+      <text x="270" y="42" class="lbl-amber" font-size="11">CREATE — CENTRE</text>
+      <text x="270" y="68" font-size="12">Hero photo of the robot</text>
+      <text x="270" y="98" font-size="12">Each attachment,</text>
+      <text x="270" y="116" font-size="12">photographed twice:</text>
+      <text x="270" y="134" font-size="12">detached, then mounted</text>
+      <text x="270" y="164" font-size="12">What each one does</text>
+      <text x="270" y="182" font-size="12">and why it is shaped</text>
+      <text x="270" y="200" font-size="12">that way</text>
+      <text x="270" y="230" font-size="12">Code screenshots —</text>
+      <text x="270" y="248" font-size="12">sensors circled and</text>
+      <text x="270" y="266" font-size="12">annotated</text>
+
+      <rect x="496" y="16" width="208" height="148" rx="4" class="p-glow"/>
+      <text x="510" y="42" class="lbl-glow" font-size="11">ITERATE — THE BIG ONE</text>
+      <text x="510" y="66" font-size="12">v1 → v2 → v3 code,</text>
+      <text x="510" y="84" font-size="12">side by side</text>
+      <text x="510" y="108" font-size="12">What failed each time</text>
+      <text x="510" y="132" font-size="12">Number of test runs</text>
+      <text x="510" y="154" font-size="12">Alignment fixes</text>
+
+      <rect x="496" y="196" width="208" height="88" rx="4" class="p-mute"/>
+      <text x="510" y="222" class="lbl-mute" font-size="11">COMMUNICATE</text>
+      <text x="510" y="244" font-size="12">Lessons learned</text>
+      <text x="510" y="268" font-size="12">What we would do next</text>
+    </svg>
+    <div class="fold-cap">The Iterate panel is deliberately the largest — it is where most teams lose points</div>
+  </div>
+
+  <div class="note gold">
+    <span class="lbl">Start collecting the evidence now</span>
+    <p>Board B cannot be built retroactively. From this week: every student screenshots their code at the end of every session, drops it in their Drive folder, and writes two sentences in their reflections about what they changed and why. Photograph the robot and the team every single session. By November we will either have a hundred photos or we will have nothing, and there is no way to catch up.</p>
+  </div>
+</section>
+
+<!-- ============ 08 ============ -->
+<section id="s8">
+  <div class="sec-head"><span class="num">08</span><h2>Rubric evidence map</h2></div>
+
+  <p class="lede">Twenty rows, ten per rubric. Judges tick Beginning, Developing, Accomplished or Exceeds on every one. Below is what <em>Accomplished</em> requires and the specific artefact that proves it. Rows marked <span class="chip chip-glow">CV</span> also count toward Core Values, which is 25% of the Champion's score.</p>
+
+  <h3>Innovation Project</h3>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Criterion</th><th>Accomplished means</th><th>Our evidence</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">Identify — problem</td><td>Clear definition of the problem</td><td>One-sentence problem statement, top-left of Board A</td></tr>
+        <tr><td class="nm">Identify — research <span class="chip chip-glow">CV</span></td><td>Clear, detailed research from a <em>variety</em> of sources</td><td>Three or more cited sources plus one named expert conversation</td></tr>
+        <tr><td class="nm">Design — plan</td><td>Clear evidence of an effective project plan</td><td>Dated timeline panel, pulled from engineering notebooks</td></tr>
+        <tr><td class="nm">Design — everyone <span class="chip chip-glow">CV</span></td><td>Clear evidence all members were involved</td><td>Photos of all eight, quotes attributed by name</td></tr>
+        <tr><td class="nm">Create — innovation <span class="chip chip-glow">CV</span></td><td>Detailed explanation of what is innovative</td><td>Explicit "what exists vs. what we made" comparison</td></tr>
+        <tr><td class="nm">Create — model</td><td>Detailed model or drawing of the solution</td><td>Physical prototype, or Tinkercad render — Abbas and Elias know Tinkercad</td></tr>
+        <tr><td class="nm">Iterate — sharing</td><td>Solution shared with <em>multiple</em> people or groups</td><td>Log of who we showed it to and when. Aim for three, not one</td></tr>
+        <tr><td class="nm">Iterate — improvement</td><td>Clear evidence of improvements based on feedback</td><td>Before and after panel, with the feedback quoted</td></tr>
+        <tr><td class="nm">Communicate — impact <span class="chip chip-glow">CV</span></td><td>Clear explanation of the solution and its potential impact</td><td>Mahdi's closing 45 seconds</td></tr>
+        <tr><td class="nm">Communicate — pride <span class="chip chip-glow">CV</span></td><td>Presentation clearly shows pride and enthusiasm</td><td>Energy. This is a rehearsal outcome, not a board item</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Robot Design</h3>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Criterion</th><th>Accomplished means</th><th>Our evidence</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">Identify — strategy</td><td>Clear evidence of mission strategy</td><td>Annotated mat photo with the route and the four missions marked</td></tr>
+        <tr><td class="nm">Identify — resources <span class="chip chip-glow">CV</span></td><td>Clear use of building or coding resources to support strategy</td><td>Name them out loud: mission video, FLL coaches' group, AI used as a starting point we then rewrote</td></tr>
+        <tr><td class="nm">Design — contributions <span class="chip chip-glow">CV</span></td><td>Clear evidence all members contributed ideas</td><td>"Who built what" panel, all eight named</td></tr>
+        <tr><td class="nm">Design — skills</td><td>Clear evidence of building and coding skills in <em>all</em> members</td><td>Per-student engineering notebooks. This is the row Husayn and Ammar are at risk on</td></tr>
+        <tr><td class="nm">Create — attachments</td><td>Clear explanation of innovative attachments and purpose</td><td>Each attachment photographed detached and mounted, with its purpose</td></tr>
+        <tr><td class="nm">Create — code</td><td>Clear explanation of innovative code and/or sensor use</td><td>Annotated screenshots with sensors circled</td></tr>
+        <tr><td class="nm">Iterate — testing</td><td>Clear evidence of <em>repeated</em> testing</td><td>Test log with run counts. Start counting now</td></tr>
+        <tr><td class="nm">Iterate — improvement <span class="chip chip-glow">CV</span></td><td>Clear evidence of improvements based on testing</td><td>v1 → v2 → v3 code comparison</td></tr>
+        <tr><td class="nm">Communicate — process <span class="chip chip-glow">CV</span></td><td>Detailed explanation of process and lessons learned</td><td>Abbas's closing 30 seconds</td></tr>
+        <tr><td class="nm">Communicate — pride <span class="chip chip-glow">CV</span></td><td>Team clearly shows pride and enthusiasm</td><td>Rehearsal outcome</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lbl">How the scores become a rank</span>
+    <p>Innovation Project score = all ten Innovation rows added. Robot Design score = all ten Robot Design rows. <strong>Core Values score = the five marked rows from each rubric, plus three Gracious Professionalism scores from the matches.</strong> Those three scores plus Robot Game become four area ranks, weighted equally; add the four ranks and the <em>lowest</em> total is first in the Champion's rank.</p>
+    <p>Practical consequence: a strong robot with a weak project cannot win Champion's. All four have to be respectable.</p>
+  </div>
+</section>
+
+<!-- ============ 09 ============ -->
+<section id="s9">
+  <div class="sec-head"><span class="num">09</span><h2>Core Values</h2></div>
+
+  <p class="lede">Twenty-five per cent of the Champion's score, and the only one that is judged everywhere — in the room, at the table, in the stands, in the hallway. Core Values are demonstrated throughout the work and event. Students should also know all six names and explain a real example of each; the call highlighted this as a common gap.</p>
+
+  <div class="grid2">
+    <div class="card"><h5>Discovery</h5><p>We explore new skills and ideas.</p><p style="color:var(--ink);font-weight:500">Say what we learned that we did not know in September. Name a specific skill.</p></div>
+    <div class="card"><h5>Innovation</h5><p>We use creativity and persistence to solve problems.</p><p style="color:var(--ink);font-weight:500">Tell the story of something that failed repeatedly before it worked.</p></div>
+    <div class="card"><h5>Impact</h5><p>We apply what we learn to improve our world.</p><p style="color:var(--ink);font-weight:500">The innovation project carries this. Who is actually better off?</p></div>
+    <div class="card"><h5>Inclusion</h5><p>We respect each other and embrace our differences.</p><p style="color:var(--ink);font-weight:500">Every member speaks in the judging room. Every member is named on the boards.</p></div>
+    <div class="card"><h5>Teamwork</h5><p>We are stronger when we work together.</p><p style="color:var(--ink);font-weight:500">Have an answer ready for "how do you decide when you disagree?"</p></div>
+    <div class="card"><h5>Fun</h5><p>We enjoy and celebrate what we do.</p><p style="color:var(--ink);font-weight:500">Cheer for other teams by name. Judges notice, every time.</p></div>
+  </div>
+
+  <h3>Who owns which of the ten rows</h3>
+  <p>Practise naming the six Core Values and connecting each to an honest example from the team, alongside the rubric evidence below. It is exactly ten rubric rows plus three Gracious Professionalism scores — maximum 52 points. Every row has a name against it.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Type</th><th>Row</th><th>From</th><th>Owner</th><th>What makes it Accomplished</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="5"><span class="chip chip-glow">Delivery</span></td><td class="nm">Explanation of innovation in solution</td><td>IP</td><td>Mahdi</td><td>Say explicitly what exists already and what is new about ours</td></tr>
+        <tr><td class="nm">Solution and its potential impact on others</td><td>IP</td><td>Mahdi</td><td>Name who is better off and how. This is his closing 45 seconds</td></tr>
+        <tr><td class="nm">Presentation shows pride or enthusiasm</td><td>IP</td><td>Mahdi</td><td>Full stops, not trailing off. Everyone visibly engaged, including non-speakers</td></tr>
+        <tr><td class="nm">Explanation of process and lessons learned</td><td>RD</td><td>Mohamed</td><td>What we tried, what failed, what it taught us. His closing 30 seconds</td></tr>
+        <tr><td class="nm">Team shows pride or enthusiasm</td><td>RD</td><td>Mohamed</td><td>Same standard. Pure rehearsal — the cheapest two rows on the sheet</td></tr>
+
+        <tr><td rowspan="3"><span class="chip chip-amber">Evidence</span></td><td class="nm">Improvements based on testing</td><td>RD</td><td>Husayn</td><td>A test log with run counts and what changed after each one</td></tr>
+        <tr><td class="nm">Use of building or coding resources</td><td>RD</td><td>Ammar</td><td>Name the sources out loud: mission video, coaches&apos; group, AI we then rewrote</td></tr>
+        <tr><td class="nm">Research from a variety of sources</td><td>IP</td><td>Ammar + Elias</td><td>Our evidence goal: source findings and relevant outside advice. A fixed source count or expert interview is not a universal rubric requirement.</td></tr>
+
+        <tr><td rowspan="2"><span class="chip chip-red">Participation</span></td><td class="nm">Development process involved all team members</td><td>IP</td><td>Haider</td><td>Attribution grid: all 8 names, what each one did, on the board</td></tr>
+        <tr><td class="nm">All team members contributed ideas</td><td>RD</td><td>Haider</td><td>Same grid. Speakers name other students out loud during the session</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note gold">
+    <span class="lbl">The two rows almost everybody throws away</span>
+    <p><strong>&ldquo;Pride or enthusiasm&rdquo; appears on both rubrics.</strong> Two of the ten Core Values rows — twenty per cent of the score — for visibly caring about your own work. It requires no research, no code and no board space. It is lost by mumbling, by trailing off into &ldquo;yeah, that&apos;s it,&rdquo; and by the five students who are not speaking staring at the floor.</p>
+    <p>Rehearse the room, not just the script: where each person stands, what they do with their hands, who reacts when a board is pointed at.</p>
+  </div>
+
+  <div class="note">
+    <span class="lbl">Gracious Professionalism is scored three times</span>
+    <p>Every match starts at <strong>Accomplished (3)</strong>. A referee moves it to <strong>Exceeds (4)</strong> for above-and-beyond sportsmanship, or down to <strong>Developing (2)</strong> for less. Those three scores go straight into our Core Values total. Offer help where volunteers permit it and thank the referee. Respect the field boundaries; no action guarantees a higher score.</p>
+  </div>
+
+  <h3>One inclusion idea worth stealing</h3>
+  <p>A team Shazia knows made small cards with their team info, attached a sweet to each one, and hand-delivered them to every other team at the event. Other teams loved it, judges saw it, and it cost almost nothing. If we do something like this it has to be genuinely ours and genuinely warm — students designing and handing them out, not a coach's errand.</p>
+</section>
+
+<!-- ============ 10 ============ -->
+
+
+<!-- ============ 11 ============ -->
+
+
+<!-- ============ 12 ============ -->
+
+
+<!-- ============ 13 ============ -->
+<section id="s13">
+  <div class="sec-head"><span class="num">13</span><h2>Packing list</h2></div>
+
+  <div class="grid2">
+    <div>
+      <h4>Robot and field</h4>
+      <ul class="check" data-ck="pack1">
+        <li><label><input type="checkbox"><span>Robot, fully charged</span></label></li>
+        <li><label><input type="checkbox"><span>Spare battery pack or six AA batteries</span></label></li>
+        <li><label><input type="checkbox"><span>Every attachment, in a labelled box in run order</span></label></li>
+        <li><label><input type="checkbox"><span>Keystone species model (Mission 13)</span></label></li>
+        <li><label><input type="checkbox"><span>Spare LEGO pieces for the attachments most likely to break</span></label></li>
+        <li><label><input type="checkbox"><span>microSD card if we use one</span></label></li>
+        <li><label><input type="checkbox"><span>Program notes — one sheet of notebook paper per home area</span></label></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Judging and pit</h4>
+      <ul class="check" data-ck="pack2">
+        <li><label><input type="checkbox"><span>Board A — Innovation Project</span></label></li>
+        <li><label><input type="checkbox"><span>Board B — Robot Design</span></label></li>
+        <li><label><input type="checkbox"><span>Physical prototype of the project solution</span></label></li>
+        <li><label><input type="checkbox"><span>Optional laptop for judging/pit, charged, offline files ready; no assumed outlet and no computer/tablet at the robot-game table</span></label></li>
+        <li><label><input type="checkbox"><span>Printed scoresheet for the scorekeeper</span></label></li>
+        <li><label><input type="checkbox"><span>Printed rulebook and printed rubrics</span></label></li>
+        <li><label><input type="checkbox"><span>Notebook and pen for judge feedback</span></label></li>
+        <li><label><input type="checkbox"><span>Printed evidence pack: notebook excerpts, code screenshots, source findings, sketch and feedback/change records; keep digital backups too</span></label></li>
+        <li><label><input type="checkbox"><span>Coach / mentor nomination form, completed</span></label></li>
+        <li><label><input type="checkbox"><span>Team cards for other teams, if we do them</span></label></li>
+        <li><label><input type="checkbox"><span>Tape, scissors, sticky notes, spare card</span></label></li>
+        <li><label><input type="checkbox"><span>Water and snacks — it is a long day</span></label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Sources.</strong> The original rule, point-value and rubric map was based on the official BIOGLOW Founders Edition materials for Grades 4–8, downloaded to the project folder: Robot Game Rulebook, Judging Session Flowchart, Rubrics, Awards and Allocation, Team Meeting Guide, Engineering Notebook, and Challenge Updates originally dated 2 September 2026. Reviewed alongside the supplied Coach Connect transcript and official 14 October 2026 Challenge Updates; the updates supersede older guidance. New guidance includes taped/untaped M8/M9 tree practice and permitted autonomous built-in dock-latch release. Roster, roles and mission selections come from the team's own Game Plan document and student reflections in Drive.</p>
+  <p><strong>Not yet confirmed.</strong> Event registration, venue, match times and judging slot. Specific Innovation solution, completed expert feedback and verified match results. Team name and deforestation topic are confirmed in the dated notes. The run-of-show in section 04 is the standard shape of a qualifier, not our published schedule.</p>
+  <p>WISE Academy Robotics · BIOGLOW 2026–27 · guidance revised 15 October 2026 · team evidence through 9 October</p>
+</footer>
+
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+  // Per-viewer checkbox memory. Convenience only - never relied upon.
+  var KEY = 'bioglow-playbook-checks-v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  var lists = document.querySelectorAll('.check[data-ck]');
+  lists.forEach(function(list){
+    var group = list.getAttribute('data-ck');
+    var boxes = list.querySelectorAll('input[type="checkbox"]');
+    boxes.forEach(function(box, i){
+      var id = group + '-' + i;
+      box.id = 'ck-' + id;
+      if (state[id]) box.checked = true;
+      box.addEventListener('change', function(){
+        state[id] = box.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private mode - fine */ }
+      });
+    });
+  });
+})();
+</script>
+
+
+</html>
