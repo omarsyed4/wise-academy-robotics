@@ -321,6 +321,47 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 @media (max-width:620px){.scrim .sides{grid-template-columns:1fr}}
 .scrim ul.plain,.scrim ol.plain{margin:16px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--ink-2);max-width:70ch}
 .scrim ul.plain b,.scrim ol.plain b{color:var(--ink);font-weight:600}
+.scrim .sched{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}
+.scrim .sched div{border-top:2px solid var(--line);padding-top:8px;min-width:0}
+.scrim .sched b{display:block;font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums}
+.scrim .sched span{font-size:13.5px;color:var(--ink-2)}
+@media (max-width:620px){.scrim .sched{grid-template-columns:1fr;gap:0}.scrim .sched div{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--line);padding:8px 0}.scrim .sched b{width:52px;flex:none}}
+.scrim .tablewrap{overflow-x:auto;margin-top:16px}
+.scrim table.runs{width:100%;border-collapse:collapse;font-size:14.5px}
+@media (max-width:520px){.scrim table.runs{font-size:13.5px}.scrim .runs th,.scrim .runs td{padding:10px 6px}}
+.scrim .runs th,.scrim .runs td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.scrim .runs thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--ink-3)}
+.scrim .runs thead th.b{color:var(--blue)}
+.scrim .runs thead th.r{color:var(--red)}
+.scrim .runs tbody th{font-family:var(--display);font-variation-settings:"wght" 700;white-space:nowrap;color:var(--ink-2)}
+.scrim .runs td{font-weight:600}
+.scrim .runs small{display:block;font-weight:400;color:var(--ink-3);font-size:12px;margin-top:2px}
+.scrim .aligns{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:900px){.scrim .aligns{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.scrim .aligns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.scrim .aligns figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.scrim .aligns a{display:block;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface-2)}
+.scrim .aligns a:hover{border-color:var(--blue)}
+.scrim .aligns img{display:block;width:100%;max-width:100%;aspect-ratio:3/4;object-fit:contain}
+.scrim .aligns figcaption{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.scrim .aligns figcaption b{font-family:var(--mono);color:var(--ink);font-weight:600;margin-right:6px}
+.scrim .kids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px;align-items:start}
+@media (max-width:920px){.scrim .kids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.scrim .kids{grid-template-columns:1fr}}
+.scrim details.kid{border:1px solid var(--line);border-radius:5px;background:var(--surface);min-width:0}
+.scrim details.kid[open]{border-color:var(--surface-3)}
+.scrim .kid summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:1fr auto auto;gap:3px 10px;align-items:center}
+.scrim .kid summary::-webkit-details-marker{display:none}
+.scrim .kid summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:5px}
+.scrim .kid .nm{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.08rem;letter-spacing:-.01em}
+.scrim .kid .chev{font-family:var(--mono);font-size:16px;line-height:1;color:var(--ink-3);width:12px;text-align:center}
+.scrim .kid .chev::before{content:"+"}
+.scrim .kid[open] .chev::before{content:"\2212"}
+.scrim .kid .sum{grid-column:1/-1;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.scrim .kid dl{margin:0;padding:2px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.scrim .kid dt{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.scrim .kid dd{margin:3px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.scrim .kid dd.win{color:var(--green)}
 .scrim .pack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .scrim .pack span{font-size:13.5px;padding:7px 11px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
 </style>
@@ -347,38 +388,110 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 <div id="scrimmage" class="scrim" role="tabpanel" aria-labelledby="tab-scrimmage">
 <section>
   <div class="shead"><span>SAT 24 OCT · MONTVERDE ACADEMY</span><h2>Scrimmage day</h2></div>
-  <p class="note">Arrive by <b>8:15</b>. It starts at 8:30 and ends about 12:00. We play three matches, and only the best one counts. Judging and match times come at check-in.</p>
-
-  <h3 class="sub">Before your first slot</h3>
-  <div class="tasks">
-    <div class="t"><h3>Haider &amp; Elias</h3><p>Run the first half together twice with Coach Aamir.</p></div>
-    <div class="t"><h3>Abbas &amp; Ali</h3><p>Check that both robots are charged and every program is on the hub.</p></div>
-    <div class="t"><h3>Mahdi &amp; Ammar</h3><p>Add our solution and a sketch of it to the Innovation slides, with Sakina.</p></div>
-    <div class="t"><h3>Mohamed &amp; Husayn</h3><p>Go through the Robot Design slides with Coach Omar until you can say each one in your own words.</p></div>
+  <p class="note">17235 7th St, Montverde. Park in the Eagle's Nest lot and check in at the side entrance by the cafeteria. There's a practice round, then three official rounds, and only the best official round counts. Our judging and match times come at check-in.</p>
+  <div class="sched">
+    <div><b>8:00</b><span>Check-in, pits open</span></div>
+    <div><b>8:30</b><span>Coaches meeting</span></div>
+    <div><b>8:45</b><span>Practice round</span></div>
+    <div><b>9:00</b><span>Judging starts</span></div>
+    <div><b>12:00</b><span>Done, cleanup</span></div>
   </div>
 
-  <h3 class="sub">At the table</h3>
-  <div class="sides">
-    <div class="t"><div class="who"><h3>Start side</h3><span class="tag t-blue">First half</span></div><dl><dt>Table</dt><dd>Haider, Elias</dd><dt>Behind</dt><dd>Mahdi, Ammar</dd></dl><p>Run the first half. Then the robot drives itself to the other side.</p></div>
-    <div class="t"><div class="who"><h3>Finish side</h3><span class="tag t-red">Second half</span></div><dl><dt>Table</dt><dd>Abbas, Ali</dd><dt>Behind</dt><dd>Mohamed, Husayn</dd></dl><p>Run the second half.</p></div>
+  <h3 class="sub">Your job today</h3>
+  <p class="note" style="margin:8px 0 0">Tap your name. Everyone also says a one-sentence welcome in judging, with your Core Value.</p>
+  <div class="kids">
+    <details class="kid">
+      <summary><span class="nm">Abbas</span><span class="tag t-red">Red</span><span class="chev" aria-hidden="true"></span><span class="sum">Rounds 1 and 3 · technician</span></summary>
+      <dl><div><dt>Your job</dt><dd>Red technician in Rounds 1 and 3, with Mohamed and then Ali. Before your first round, check with Ali that both robots are charged, every program is on the hub and Bluetooth is off.</dd></div><div><dt>Main focus</dt><dd>The Red half, launched the same way every time. You're one of the two people who know the whole run, so help whoever is next to you.</dd></div><div><dt>A win today</dt><dd class="win">The Red half runs in both your rounds, and in judging you can explain why we picked our missions.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Ali</span><span class="tag t-red">Red</span><span class="chev" aria-hidden="true"></span><span class="sum">Rounds 2 and 3 · code</span></summary>
+      <dl><div><dt>Your job</dt><dd>Red technician in Rounds 2 and 3, with Husayn and then Abbas. You know the code best, so you fix programs in the pit between rounds.</dd></div><div><dt>Main focus</dt><dd>The code. Every program loads over the USB cable and runs.</dd></div><div><dt>A win today</dt><dd class="win">No round is lost to a program problem, and you explain one piece of our code to the judges in your own words.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Mohamed</span><span class="tag t-red">Red</span><span class="chev" aria-hidden="true"></span><span class="sum">Round 1 · Robot Design presenter</span></summary>
+      <dl><div><dt>Your job</dt><dd>Robot Design presenter: our missions and why, one thing that failed and how we fixed it, and the closing line. You may open judging with “Salaam Alaykum.” Red technician with Abbas in Round 1.</dd></div><div><dt>Main focus</dt><dd>The Robot Design slides. Go through them with Coach Omar before judging.</dd></div><div><dt>A win today</dt><dd class="win">You can say every slide in your own words. Anything you can't explain comes out.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Husayn</span><span class="tag t-red">Red</span><span class="chev" aria-hidden="true"></span><span class="sum">Round 2 · Robot Design presenter</span></summary>
+      <dl><div><dt>Your job</dt><dd>Robot Design presenter: who did what, then the robot, one attachment and one sensor. Red technician with Ali in Round 2.</dd></div><div><dt>Main focus</dt><dd>Showing the robot. Hold it up and point at the parts while you talk.</dd></div><div><dt>A win today</dt><dd class="win">You explain one attachment and one sensor without reading.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Haider</span><span class="tag t-blue">Blue</span><span class="chev" aria-hidden="true"></span><span class="sum">Rounds 1 and 3 · the transition</span></summary>
+      <dl><div><dt>Your job</dt><dd>Blue technician in Rounds 1 and 3, with Ammar and then Elias, and maybe Round 2 too. You coded the transition, so you own it. Run the 8:45 practice round with Elias.</dd></div><div><dt>Main focus</dt><dd>The Blue half, and the transition that carries the robot to the Red side.</dd></div><div><dt>A win today</dt><dd class="win">The transition lands the robot on the Red side every round, and Elias feels ready by Round 2.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Elias</span><span class="tag t-blue">Blue</span><span class="chev" aria-hidden="true"></span><span class="sum">Rounds 2 and 3 · technician</span></summary>
+      <dl><div><dt>Your job</dt><dd>Blue technician in Rounds 2 and 3, with Mahdi and then Haider. Run the Blue half with Haider in the 8:45 practice round.</dd></div><div><dt>Main focus</dt><dd>Learning your launches in the practice round. Ask Haider anything.</dd></div><div><dt>A win today</dt><dd class="win">You run your half in the practice round and in at least one official round.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Mahdi</span><span class="tag t-blue">Blue</span><span class="chev" aria-hidden="true"></span><span class="sum">Round 2 · Innovation presenter</span></summary>
+      <dl><div><dt>Your job</dt><dd>Innovation Project presenter. You open and close it, and you may open judging with “Salaam Alaykum.” Blue technician with Elias in Round 2.</dd></div><div><dt>Main focus</dt><dd>Before judging, add our solution and a sketch of it to the slides, with Ammar and Sakina.</dd></div><div><dt>A win today</dt><dd class="win">The judges hear the problem and our solution in your words, inside five minutes, and you pass questions to teammates.</dd></div></dl>
+    </details>
+    <details class="kid">
+      <summary><span class="nm">Ammar</span><span class="tag t-blue">Blue</span><span class="chev" aria-hidden="true"></span><span class="sum">Round 1 · Innovation presenter</span></summary>
+      <dl><div><dt>Your job</dt><dd>Innovation Project presenter: the research and what our expert told us. Blue technician with Haider in Round 1.</dd></div><div><dt>Main focus</dt><dd>The research slide. Know where each fact came from.</dd></div><div><dt>A win today</dt><dd class="win">You explain one source and the expert's advice without reading.</dd></div></dl>
+    </details>
+  </div>
+
+  <h3 class="sub">Robot game</h3>
+  <p class="note" style="margin:8px 0 0">Blue starts. Haider's transition drives the robot across to the Red side, and Red finishes. Two people stand at each side.</p>
+  <div class="tablewrap">
+    <table class="runs">
+      <thead><tr><th>Round</th><th class="b">Blue · starts</th><th class="r">Red · finishes</th></tr></thead>
+      <tbody>
+        <tr><th>1</th><td>Haider, Ammar</td><td>Abbas, Mohamed</td></tr>
+        <tr><th>2</th><td>Elias, Mahdi<small>Haider may take Elias's place</small></td><td>Ali, Husayn</td></tr>
+        <tr><th>3</th><td>Haider, Elias</td><td>Ali, Abbas</td></tr>
+      </tbody>
+    </table>
   </div>
   <ul class="plain">
+    <li>Be at the table 10 minutes before each round.</li>
     <li>Stay on your side for the whole match.</li>
     <li>Nothing can be passed between the two sides, so each side packs its own attachments.</li>
     <li>Don't touch the robot when it's outside home, because it costs us a token.</li>
-    <li><b>Match 1 is the safe run.</b></li>
+    <li><b>Bluetooth off.</b> Load programs with the USB cable. Bluetooth on in the competition area can get us disqualified.</li>
+    <li>If a round clashes with judging, tell the queuer and go to judging. We run the round afterwards.</li>
+    <li><b>Round 1 is the safe run.</b></li>
   </ul>
 
-  <h3 class="sub">In the judging room</h3>
+  <h3 class="sub">Launch positions</h3>
+  <p class="note" style="margin:8px 0 0">Shazia's photos from practice. Line the robot up exactly like this before each launch. Tap a photo to see it full size.</p>
+  <div class="aligns">
+    <figure><a href="scrimmage/align-1.jpg"><img src="scrimmage/align-1.jpg" alt="Robot in a home area, wheel on the mat's edge line, crossbar on the red arc" loading="lazy"></a><figcaption><b>1</b>Wheel on the mat's edge line, crossbar on the red arc</figcaption></figure>
+    <figure><a href="scrimmage/align-2.jpg"><img src="scrimmage/align-2.jpg" alt="Robot with its back against the wall, crossbar on the red arc" loading="lazy"></a><figcaption><b>2</b>Back against the wall, crossbar on the red arc</figcaption></figure>
+    <figure><a href="scrimmage/align-3.jpg"><img src="scrimmage/align-3.jpg" alt="Robot with its back against the side wall, crossbar on the red arc" loading="lazy"></a><figcaption><b>3</b>Back against the side wall, crossbar on the red arc</figcaption></figure>
+    <figure><a href="scrimmage/align-4.jpg"><img src="scrimmage/align-4.jpg" alt="Robot beside the wall, partly off the mat" loading="lazy"></a><figcaption><b>4</b>Wheel side by the wall, partly off the mat</figcaption></figure>
+    <figure><a href="scrimmage/align-5.jpg"><img src="scrimmage/align-5.jpg" alt="Robot facing the red arc with the arm tip on the line, no crossbar" loading="lazy"></a><figcaption><b>5</b>Arm tip on the red arc, no crossbar</figcaption></figure>
+  </div>
+
+  <h3 class="sub">Judging · 20 minutes</h3>
   <ol class="plain">
-    <li><b>Innovation Project, 5 minutes.</b> Mahdi opens and closes. Ammar covers the research and our expert.</li>
-    <li><b>Robot Design, 5 minutes.</b> Mohamed: our missions and why. Husayn: who did what, then the robot, one attachment and one sensor. Mohamed: one thing that failed and how we fixed it, then the closing line.</li>
-    <li><b>Questions.</b> Code questions go to Ali. Questions about runs go to Abbas or Haider.</li>
+    <li><b>Welcome, about a minute.</b> Mahdi or Mohamed: “Salaam Alaykum, which means peace be upon you.” Then each of the eight says one sentence: name, role, and one Core Value that helped. For example: “I'm Abbas, one of our technicians. My Core Value is Inclusion: we each bring something different, and we built one robot together.”</li>
+    <li><b>Innovation Project, 5 minutes.</b> Mahdi and Ammar present the slides, notes and pictures. Then the judges ask questions, and anyone can answer.</li>
+    <li><b>Robot Design, 5 minutes.</b> Mohamed and Husayn present the slides, the code and photos of the robot. Then the judges ask questions, and anyone can answer. Code questions suit Ali, and questions about runs suit Abbas or Haider.</li>
   </ol>
-  <p class="note" style="margin-top:14px">Everyone goes in. Coaches sit behind you and don't speak. Say everything in your own words.</p>
+  <p class="note" style="margin-top:14px">Everyone goes in. Up to five adults can watch, coaches included, and you decide whether parents come in. Adults stay silent, nobody stands behind the judges, phones are off and there's no filming. Be ready to talk without the slides in case there's no screen.</p>
+
+  <h3 class="sub">Where things go</h3>
+  <div class="sides">
+    <div class="t"><h3>Pit</h3><p>Coaches and team only. The robot, attachments and laptop stay here. There's a charging station, so leave power strips at home.</p></div>
+    <div class="t"><h3>Tailgating area</h3><p>The picnic area outside Lindor Hall. Parents, food and drink, and presentation practice. No robot or robot laptop out here, and no food or drink in the gym. Parents can watch the robot game from the stands.</p></div>
+  </div>
+
+  <h3 class="sub">Coaches</h3>
+  <ul class="plain">
+    <li>Upload the team roster before check-in.</li>
+    <li>One coach goes to the 8:30 meeting while the other sets up the pit. Ask whether slides on a screen are allowed in judging, because the packet says no presentations.</li>
+    <li>At the table, stand behind the line with the team and don't direct the run.</li>
+    <li>Don't handle the robot, attachments or laptop. If something breaks, tell an official first.</li>
+    <li>Collect the judges' feedback sheets before you leave.</li>
+  </ul>
 
   <h3 class="sub">Pack</h3>
-  <div class="pack"><span>Both robots, charged</span><span>Charging cables</span><span>Laptop and charger</span><span>Screen and cable</span><span>Attachments, one bag per side</span><span>Core Values name tags</span><span>Team T-shirts</span></div>
+  <div class="pack"><span>Both robots, charged</span><span>Charging cables</span><span>USB cable</span><span>Laptop and charger</span><span>Copies of our code</span><span>Attachments, one bag per side</span><span>A box to carry the robot</span><span>Screen and cable</span><span>Core Values name tags</span><span>Team T-shirts</span><span>Water and snacks</span><span>A game for downtime</span></div>
+  <p class="note" style="margin-top:12px">Lunch orders closed on 20 October. The concession stand is open.</p>
 </section>
 </div>
 
