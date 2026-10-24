@@ -302,6 +302,27 @@ footer code{font-family:var(--mono);color:var(--ink-2)}
 .t > p{color:var(--ink-2);overflow-wrap:anywhere}.t > p.flag{color:var(--gold)}
 nav.links{margin-bottom:36px}.mlist{font-size:max(7px,.68cqw);line-height:1.08}
 nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){nav.links{grid-template-columns:repeat(2,minmax(0,1fr))}nav.links a{padding:10px;font-size:12px}}
+
+/* ============ tabs ============ */
+[hidden]{display:none!important}
+.tabs{display:flex;gap:4px;margin:0 0 30px;border-bottom:1px solid var(--line)}
+.tabs button{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.05rem;letter-spacing:-.01em;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--ink-3);padding:10px 14px;cursor:pointer}
+.tabs button:hover{color:var(--ink-2)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--blue)}
+.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ============ scrimmage tab ============ */
+.scrim .shead{flex-direction:column;align-items:flex-start;gap:4px}
+.scrim h3.sub{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.15rem;letter-spacing:-.015em;margin:38px 0 0}
+.scrim .t dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.scrim .t dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.scrim .t dd{margin:0;font-weight:600}
+.scrim .sides{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+@media (max-width:620px){.scrim .sides{grid-template-columns:1fr}}
+.scrim ul.plain,.scrim ol.plain{margin:16px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--ink-2);max-width:70ch}
+.scrim ul.plain b,.scrim ol.plain b{color:var(--ink);font-weight:600}
+.scrim .pack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.scrim .pack span{font-size:13.5px;padding:7px 11px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
 </style>
 </head>
 <body>
@@ -317,6 +338,51 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   </div>
 </div>
 
+<div class="tabs" role="tablist" aria-label="Views">
+  <button type="button" role="tab" id="tab-scrimmage" aria-controls="scrimmage" aria-selected="true">Scrimmage</button>
+  <button type="button" role="tab" id="tab-season" aria-controls="season" aria-selected="false">Season hub</button>
+</div>
+
+<!-- ===================== SCRIMMAGE ===================== -->
+<div id="scrimmage" class="scrim" role="tabpanel" aria-labelledby="tab-scrimmage">
+<section>
+  <div class="shead"><span>SAT 24 OCT · MONTVERDE ACADEMY</span><h2>Scrimmage day</h2></div>
+  <p class="note">Arrive by <b>8:15</b>. It starts at 8:30 and ends about 12:00. We play three matches, and only the best one counts. Judging and match times come at check-in.</p>
+
+  <h3 class="sub">Before your first slot</h3>
+  <div class="tasks">
+    <div class="t"><h3>Haider &amp; Elias</h3><p>Run the first half together twice with Coach Aamir.</p></div>
+    <div class="t"><h3>Abbas &amp; Ali</h3><p>Check that both robots are charged and every program is on the hub.</p></div>
+    <div class="t"><h3>Mahdi &amp; Ammar</h3><p>Add our solution and a sketch of it to the Innovation slides, with Sakina.</p></div>
+    <div class="t"><h3>Mohamed &amp; Husayn</h3><p>Go through the Robot Design slides with Coach Omar until you can say each one in your own words.</p></div>
+  </div>
+
+  <h3 class="sub">At the table</h3>
+  <div class="sides">
+    <div class="t"><div class="who"><h3>Start side</h3><span class="tag t-blue">First half</span></div><dl><dt>Table</dt><dd>Haider, Elias</dd><dt>Behind</dt><dd>Mahdi, Ammar</dd></dl><p>Run the first half. Then the robot drives itself to the other side.</p></div>
+    <div class="t"><div class="who"><h3>Finish side</h3><span class="tag t-red">Second half</span></div><dl><dt>Table</dt><dd>Abbas, Ali</dd><dt>Behind</dt><dd>Mohamed, Husayn</dd></dl><p>Run the second half.</p></div>
+  </div>
+  <ul class="plain">
+    <li>Stay on your side for the whole match.</li>
+    <li>Nothing can be passed between the two sides, so each side packs its own attachments.</li>
+    <li>Don't touch the robot when it's outside home, because it costs us a token.</li>
+    <li><b>Match 1 is the safe run.</b></li>
+  </ul>
+
+  <h3 class="sub">In the judging room</h3>
+  <ol class="plain">
+    <li><b>Innovation Project, 5 minutes.</b> Mahdi opens and closes. Ammar covers the research and our expert.</li>
+    <li><b>Robot Design, 5 minutes.</b> Mohamed: our missions and why. Husayn: who did what, then the robot, one attachment and one sensor. Mohamed: one thing that failed and how we fixed it, then the closing line.</li>
+    <li><b>Questions.</b> Code questions go to Ali. Questions about runs go to Abbas or Haider.</li>
+  </ol>
+  <p class="note" style="margin-top:14px">Everyone goes in. Coaches sit behind you and don't speak. Say everything in your own words.</p>
+
+  <h3 class="sub">Pack</h3>
+  <div class="pack"><span>Both robots, charged</span><span>Charging cables</span><span>Laptop and charger</span><span>Screen and cable</span><span>Attachments, one bag per side</span><span>Core Values name tags</span><span>Team T-shirts</span></div>
+</section>
+</div>
+
+<div id="season" role="tabpanel" aria-labelledby="tab-season" hidden>
 <!-- ===================== CURRENT STATUS ===================== -->
 <nav class="links" aria-label="Page sections"><a href="#status">Current status</a><a href="#readiness">Judging &amp; event prep</a><a href="#boards">Board drafts</a><a href="#order">Run order</a><a href="#missions">Missions</a><a href="#team">Team roles</a><a href="#lesson-plan">Lesson plan</a><a href="#links">Resources</a></nav>
 <section id="status">
@@ -328,7 +394,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     <div class="t"><h3>Robot game</h3><p>Seven active missions across Red and Blue; both orders are written down. <b>290 points is the conditional plan ceiling, not a verified match score.</b></p><p class="flag">A combined 2:30 run, exchanges and mission reliability still need evidence.</p></div>
     <div class="t"><h3>Innovation Project</h3><p>Deforestation chosen. Problem framing, beneficiaries and three source links recorded.</p><p class="flag">Specific solution, explanatory drawing and a completed feedback → improvement cycle remain unverified.</p></div>
     <div class="t"><h3>Boards &amp; evidence</h3><p>Innovation export recorded; Robot Design content and editable link still need confirmation. Seven logged attempts are available as iteration evidence.</p><p class="flag">A submitted draft is not a verified result. Keep the original work and explain changes.</p></div>
-    <div class="t"><h3>Event readiness</h3><p>Registration, venue and slots are not confirmed in our notes. Scrimmages welcome work in progress.</p><p class="flag">Confirm the event packet; prepare for student-led judging and a presentation that works without AV or power.</p></div>
+    <div class="t"><h3>Event readiness</h3><p>First scrimmage: Saturday 24 October at Montverde Academy. See the Scrimmage tab.</p><p class="flag">Confirm the event packet; prepare for student-led judging and a presentation that works without AV or power.</p></div>
   </div>
   <h3>Evidence by contributor</h3>
   <p class="note">These are continuing responsibilities and the latest recorded evidence, rather than assignments for a particular lesson. Everyone should understand the work and be able to answer in their own words.</p>
@@ -576,6 +642,8 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   </div>
 </section>
 
+</div>
+
 <footer>
   <p>Ctrl+Alt+Defeat, WISE Academy, Orlando. FIRST LEGO League BIOGLOW 2026/27.</p>
   <p>Team evidence: 9 October 2026 · guidance reviewed: 15 October 2026.</p><p>Edit <code>docs/index.html</code> and push to update. Mission code screenshots go in <code>docs/code/</code>, team photos in <code>docs/avatars/</code>.</p>
@@ -608,6 +676,37 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('on'); }
     });
   });
+
+  // Tabs. #season, or a link to any section inside it, opens the season hub.
+  var tabs = { scrimmage: document.getElementById('tab-scrimmage'), season: document.getElementById('tab-season') };
+  function show(name){
+    Object.keys(tabs).forEach(function(k){
+      var on = k === name;
+      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[k].tabIndex = on ? 0 : -1;
+      document.getElementById(k).hidden = !on;
+    });
+  }
+  function fromHash(){
+    var id = location.hash.slice(1);
+    var el = id && document.getElementById(id);
+    var inSeason = el && (id === 'season' || el.closest('#season'));
+    show(inSeason ? 'season' : 'scrimmage');
+    if (inSeason && id !== 'season') el.scrollIntoView();
+  }
+  Object.keys(tabs).forEach(function(k){
+    tabs[k].addEventListener('click', function(){
+      show(k);
+      if (history.replaceState) history.replaceState(null, '', '#' + k);
+    });
+  });
+  document.querySelector('.tabs').addEventListener('keydown', function(e){
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var next = tabs.scrimmage.getAttribute('aria-selected') === 'true' ? 'season' : 'scrimmage';
+    show(next); tabs[next].focus();
+  });
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 })();
 </script>
 </body>
