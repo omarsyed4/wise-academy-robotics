@@ -62,8 +62,8 @@ Google Docs cannot be version-controlled, so these stay in Drive:
 
 `docs/index.html` is the team website, live at https://omarsyed4.github.io/wise-academy-robotics/.
 Its tabs: **This week** (the current Friday's lesson plan and what's coming), **Students** (one
-section each: this Friday's job, partner and focus), **Quizzes** (Core Values and "What would you
-do?"), **Scrimmage** (score sheets and the day's plan), **Season hub** (status, boards, missions,
+section each: this Friday's job, partner and focus), **Presentations** (the answer framework, how the team is doing, and the mock interview log),
+**Quizzes** (Core Values and "What would you do?"), **Scrimmage** (score sheets and the day's plan), **Season hub** (status, boards, missions,
 roles) and **Coaches** (password-locked).
 
 GitHub Pages sites are public on the open internet. This page names eight students and their
@@ -87,6 +87,7 @@ link-shared Claude Artifact, same content, not indexed and not public.
 - Update the status summaries and contributor evidence in `docs/index.html` only after checking the work. Change the **team evidence date** to match the records checked, not merely the day you edit the site.
 - Keep submitted, accessible and verified work distinct. Mission values are conditional; log actual full-match results separately.
 - The lesson plan lives in the **This week** tab (`#week`). Usually on Thursday night, replace it with the next Friday and update each student's section in **Students** to match. Older plans stay in Git history; keep season status independent of the plan.
+- After a mock interview, log it in the **Presentations** tab (`#presentations`): newest session first, one entry per student with each question marked ✓, ~, ✗ or –, what they said and a *Next time* line. Point the student's "My interview notes" link in **Students** at their newest entry. Then update the mark totals at the top of the tab and the *What we do well* / *What we need to fix* lists. The page is public, so transcripts and candid notes stay in `admin/`.
 - Board assembly on 9 October was Husayn (Robot Design) and Ammar (Innovation); this did not permanently reassign Mohamed/Mahdi's content roles or Husayn/Ammar's evidence responsibilities.
 - The call review does not update Google Docs, Canva or the separate Claude artifact. Confirm completion in those tools before changing status.
 

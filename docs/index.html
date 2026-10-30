@@ -491,6 +491,54 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .six .got span{font-size:13.5px;padding:7px 11px;border:1px dashed var(--ink-3);border-radius:4px;color:var(--ink-3)}
 .six .got span.on{border:1px solid var(--green);color:var(--ink);background:rgba(84,204,166,.12)}
 
+/* ============ presentations ============ */
+.marks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:13px;color:var(--ink-3)}
+.marks span{display:inline-flex;align-items:center;gap:7px}
+.mk{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:4px;font-family:var(--mono);font-size:13px;font-weight:600;line-height:1}
+.mk.y{background:rgba(84,204,166,.15);color:var(--green)}
+.mk.h{background:rgba(239,190,61,.15);color:var(--gold)}
+.mk.n{background:rgba(238,127,104,.15);color:var(--red)}
+.mk.x{background:var(--surface-2);color:var(--ink-3)}
+.ivs{display:flex;flex-direction:column;gap:12px;margin-top:18px;max-width:880px}
+.scrim .iv{scroll-margin-top:16px}
+.scrim .iv summary .tags{display:flex;gap:5px}
+.iv .verdict{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:2px 16px 0}
+@media (max-width:620px){.iv .verdict{grid-template-columns:1fr}}
+.iv .verdict p{margin:0;font-size:13.5px;color:var(--ink-2);border-left:2px solid var(--green);padding-left:10px}
+.iv .verdict p.fix{border-left-color:var(--gold)}
+.iv .verdict b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin-bottom:2px}
+.iv ol{list-style:none;margin:14px 0 0;padding:0 16px 4px}
+.iv ol li{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+.iv .ask{margin:1px 0 0;font-weight:600;color:var(--ink);font-size:14px}
+.iv .heard{margin:4px 0 0;font-size:13px;color:var(--ink-3)}
+.iv .try{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.iv .heard b,.iv .try b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin-right:6px}
+.iv .try q{color:var(--ink)}
+.iv .fill{color:var(--gold);border-bottom:1px dashed var(--gold)}
+.ivday{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin:22px 0 0}
+.ex{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+@media (max-width:760px){.ex{grid-template-columns:1fr}}
+.scrim .ex .t p{margin:0;font-size:13.5px}
+.scrim .ex .t .d{font-family:var(--mono);font-size:11px;color:var(--gold)}
+.ex .was{color:var(--ink-3)}
+.ex .was b,.ex .beat b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin-bottom:2px}
+.ex .beat{border-left:2px solid var(--blue);padding-left:10px;font-size:13.5px;color:var(--ink)}
+.ex .beat b{color:var(--blue)}
+.ex .fill{color:var(--gold);border-bottom:1px dashed var(--gold)}
+.next .t p b{color:var(--ink);font-weight:600}
+.gb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.gb{grid-template-columns:1fr}}
+.gb .good{border-top:2px solid var(--green)}
+.gb .fix{border-top:2px solid var(--gold)}
+.scrim .gb ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.scrim .gb li{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.scrim .gb li::before{display:none}
+.gb li b{color:var(--ink);font-weight:600}
+.ivnote{max-width:880px;margin-top:18px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:5px;background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.ivnote h4{margin:0;font-size:14.5px;color:var(--ink)}
+.ivnote p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.ivnote q{color:var(--ink)}
+
 /* ============ coaches ============ */
 .lock{max-width:420px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:18px;display:flex;flex-direction:column;gap:10px;margin-top:18px}
 .lock label{font-size:13px;color:var(--ink-2)}
@@ -519,6 +567,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 <div class="tabs" role="tablist" aria-label="Views">
   <button type="button" role="tab" id="tab-week" aria-controls="week" aria-selected="true">This week</button>
   <button type="button" role="tab" id="tab-students" aria-controls="students" aria-selected="false">Students</button>
+  <button type="button" role="tab" id="tab-presentations" aria-controls="presentations" aria-selected="false">Presentations</button>
   <button type="button" role="tab" id="tab-quiz" aria-controls="quiz" aria-selected="false">Quizzes</button>
   <button type="button" role="tab" id="tab-scratch" aria-controls="scratch" aria-selected="false">Scratch</button>
   <button type="button" role="tab" id="tab-scrimmage" aria-controls="scrimmage" aria-selected="false">Scrimmage</button>
@@ -715,7 +764,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
         <div><dt>Your focus</dt><dd class="focus">Get as confident as Mohamed. You built the Robot Design board, so you should be able to explain every part of it without reading it.</dd></div>
         <div><dt>Done by 11:00</dt><dd>Robot Design board words ready to print, and everyone's “What I learned” line written down at 10:50.</dd></div>
       </dl>
-      <div class="acts"><a class="open" href="https://docs.google.com/document/d/128HKWgn9jfCBPE5nqenrrT2Ogdqq-IFdqY85M_gIdgQ/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1Ze78p62z238QSeDCDmnq7O5kR_UxQTTO">Upload</a></div>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/128HKWgn9jfCBPE5nqenrrT2Ogdqq-IFdqY85M_gIdgQ/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1Ze78p62z238QSeDCDmnq7O5kR_UxQTTO">Upload</a><a class="also" href="#p-husayn-30oct">My interview notes</a></div>
     </article>
     <article class="t stud" id="s-haider">
       <div class="top"><div class="av blue"><span>HF</span><img src="avatars/haider.jpg" alt="" onerror="this.remove()"></div><div><h3>Haider Fahar</h3><p class="role">Team lead, lead technician <span class="tag t-blue">Blue</span></p></div></div>
@@ -742,7 +791,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
         <div><dt>Your focus</dt><dd class="focus">The judges understood our problem but didn't hear a clear solution. Write it in two sentences you can say without notes: what it is, and how it helps.</dd></div>
         <div><dt>Done by 11:00</dt><dd>Innovation board words ready to print: the problem, the solution, three sources, the expert and the survey.</dd></div>
       </dl>
-      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1XSZDEBDRHXf9jfCYWPCoID_TCdP0r_qhWjnIK0FHMWE/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1XyJhvxuB4iu1GD-NZbWOZv7qnHkOIhnJ">Upload</a></div>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1XSZDEBDRHXf9jfCYWPCoID_TCdP0r_qhWjnIK0FHMWE/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1XyJhvxuB4iu1GD-NZbWOZv7qnHkOIhnJ">Upload</a><a class="also" href="#p-mahdi-30oct">My interview notes</a></div>
     </article>
     <article class="t stud" id="s-ammar">
       <div class="top"><div class="av blue"><span>AH</span><img src="avatars/ammar.jpg" alt="" onerror="this.remove()"></div><div><h3>Ammar Hamza</h3><p class="role">Speaker, Innovation presenter <span class="tag t-blue">Blue</span></p></div></div>
@@ -751,10 +800,193 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
         <div><dt>Your focus</dt><dd class="focus">Sources. Every fact needs one, and the judges want more than one source. Whenever you say a fact, say where it came from: “We found this on…”.</dd></div>
         <div><dt>Done by 11:00</dt><dd>A sources slide with at least three, the expert and survey slides, and two interviews each way.</dd></div>
       </dl>
-      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1slp2pqW3GPvyAtA6u7eKwWFSNTW1BRYi2_MjC4t87h4/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1I34ITvZsYGcbDpuTvboV30E-frNyTPk8">Upload</a></div>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1slp2pqW3GPvyAtA6u7eKwWFSNTW1BRYi2_MjC4t87h4/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1I34ITvZsYGcbDpuTvboV30E-frNyTPk8">Upload</a><a class="also" href="#p-ammar-30oct">My interview notes</a></div>
     </article>
   </div>
   <p class="note" style="margin-top:16px"><b>Next Friday, 6 November:</b> everyone learns the six Core Values word for word. <b>Friday 13 November</b> is quiz day. Start practising on the Quizzes tab.</p>
+</section>
+</div>
+
+<!-- ===================== PRESENTATIONS ===================== -->
+<!-- MOCK INTERVIEW LOG: newest session first, one <details> per student. Give each an id of p-<name>-<date>
+     and point that student's "My interview notes" link in Students at their newest one. -->
+<div id="presentations" class="scrim" role="tabpanel" aria-labelledby="tab-presentations" hidden>
+<section>
+  <div class="shead"><span>JUDGING INTERVIEWS</span><h2>Presentations</h2></div>
+  <p class="note">How to answer the judges, what we already do well, and what we keep missing. Every practice interview is logged at the bottom: find your name, read what you said, then say the <b>Next time</b> line out loud until you don't need to read it. Use your own words. The judges want the facts, not a script.</p>
+  <div class="scores">
+    <div class="best"><b>8</b><span>Answers said clearly</span></div>
+    <div><b>21</b><span>Got there with help</span></div>
+    <div><b>3</b><span>Couldn't answer yet</span></div>
+    <div class="goal"><b>All ✓</b><span>The goal at the full mock judging, 13 November</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">From three practice interviews on 30 October: Husayn on Robot Design, Ammar and Mahdi on the Innovation Project.</p>
+
+  <h3 class="sub">The framework: picture it, say it, prove it</h3>
+  <p class="note" style="margin-top:6px">Use it for any question, from either room. Three short steps, about thirty seconds.</p>
+  <div class="next">
+    <div class="t">
+      <p class="d">STEP 1</p>
+      <h3>Picture it</h3>
+      <p>Before you speak, think of one real moment that answers the question: a round, a test, a conversation. A real moment beats a general answer, and it stops you hunting for perfect words.</p>
+      <p><b>Ask yourself:</b> when did this actually happen?</p>
+    </div>
+    <div class="t">
+      <p class="d">STEP 2</p>
+      <h3>Say it</h3>
+      <p>Say what happened or what we did, plainly and with names. Not “some people” or “our coders”, but Haider, Ali, Mohamed. Start straight away with a name or a mission.</p>
+      <p><b>Ask yourself:</b> who did what?</p>
+    </div>
+    <div class="t">
+      <p class="d">STEP 3</p>
+      <h3>Prove it</h3>
+      <p>End with proof the judges can write down. In Robot Design that's a number from the test log or a score. In the Innovation Project it's a source, the expert or the survey.</p>
+      <p><b>Ask yourself:</b> how do we know?</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="t">
+      <p class="d">ROBOT DESIGN</p>
+      <h3>What would you improve with more time?</h3>
+      <p class="was"><b>Before</b>“Our presentation, our code and our attachments.”</p>
+      <div class="beat"><b>Picture it</b><span>“At the scrimmage, Red finished a round with 30 seconds left and nothing to run.”</span></div>
+      <div class="beat"><b>Say it</b><span>“So Ali and Abbas are building one more mission to fill that time.”</span></div>
+      <div class="beat"><b>Prove it</b><span>“And Forest Elder is 30 points we haven't scored yet. It got zero in all three rounds.”</span></div>
+    </div>
+    <div class="t">
+      <p class="d">INNOVATION PROJECT</p>
+      <h3>Why does deforestation matter?</h3>
+      <p class="was"><b>Before</b>“It's bad because a bear could end up on your car.”</p>
+      <div class="beat"><b>Picture it</b><span>“Think of a farm next to a forest. The tree roots hold the soil in place.”</span></div>
+      <div class="beat"><b>Say it</b><span>“Cut the trees down and rain washes the soil away, so the farmer's crops can't grow. Less soil means less food.”</span></div>
+      <div class="beat"><b>Prove it</b><span>“We read this on <span class="fill">which of our sources</span>.” Know which one. It's the part we keep missing.</span></div>
+    </div>
+  </div>
+
+  <h3 class="sub">Rules for every answer</h3>
+  <ol class="plain">
+    <li><b>Start straight away.</b> Open with a name, a mission or a number: “Leafcutter Frenzy is…”, “Our expert, Mr. Hussain…”. You know this, and the rest follows.</li>
+    <li><b>Intro: name, role, team. Once.</b> “My name is ___, and I'm a ___ on the ___ team.” Then stop.</li>
+    <li><b>Say it once.</b> No “as I said before”, and no saying the same thing twice.</li>
+    <li><b>Name who did it.</b> Judges can't give credit to “some people”.</li>
+    <li><b>Introduce people before you name them.</b> The judges don't know Mr. Hussain, so it's always “our expert, Mr. Hussain”.</li>
+    <li><b>Say the same words as your partner.</b> The solution, the mission list and the sources should sound the same from everyone.</li>
+  </ol>
+
+  <h3 class="sub">How we're doing</h3>
+  <div class="gb">
+    <div class="t good">
+      <h3>What we do well</h3>
+      <ul>
+        <li><b>We know our stuff.</b> Every answer had the right idea in it, even when the words came out wrong. Given a structure, everyone filled it with real facts.</li>
+        <li><b>We have real stories.</b> The robot pulling left until Mahdi and Mohamed rebuilt it. The halfway idea that changed after a teammate's objection and the expert's advice. Judges want exactly this: what we tried, what happened, what we changed.</li>
+        <li><b>Our problem comes across.</b> Deforestation and why it matters came out clearly in both Innovation interviews: animals lose their homes, farmers lose their soil and crops. The scrimmage judges said the same.</li>
+        <li><b>Some answers are already judge-ready.</b> Husayn on the mission order. Mahdi on soil, and on what the expert changed. Ammar on who did what.</li>
+        <li><b>We fix things fast.</b> Every intro was right by the second or third try, and the expert answers were much better the second time round.</li>
+      </ul>
+    </div>
+    <div class="t fix">
+      <h3>What we need to fix</h3>
+      <ul>
+        <li><b>We don't prove it.</b> Across three interviews we gave no test numbers, and only one of our three websites got named. That's why step 3 of the framework is “prove it”.</li>
+        <li><b>Intros take more than one try.</b> All three needed help. Name, role, team, once.</li>
+        <li><b>We give credit away.</b> “Some people on our team”, “our coders”, “one person”. Say who.</li>
+        <li><b>The expert sounds like a stranger.</b> Just a name, then “he's into nature”. Say “our expert, Mr. Hussain”, how we found him, and what he does.</li>
+        <li><b>Two presenters, two stories.</b> Our solution came out differently from Mahdi and from Ammar. Everyone says the same two sentences: see <a href="#one-story">the note in the log</a>.</li>
+        <li><b>We undersell the robot.</b> “We just use code” sounds like we have no sensors. Our motors measure every distance we drive, so say so.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub">Interview log</h3>
+  <div class="marks" aria-label="What the marks mean">
+    <span><span class="mk y">✓</span>Said it clearly</span>
+    <span><span class="mk h">~</span>Got there with help</span>
+    <span><span class="mk n">✗</span>Couldn't answer yet</span>
+    <span><span class="mk x">–</span>Not asked yet</span>
+  </div>
+
+  <h4 class="ivday">Friday 30 October · Coach Omar asked</h4>
+  <div class="ivnote" id="one-story">
+    <h4>Mahdi and Ammar: you each told half of the solution story</h4>
+    <p><b>Ammar:</b> our first idea was cutting trees only halfway. A teammate said a half-cut tree dies, so we changed it to planting two for every tree cut, before the cutting. <b>Mahdi:</b> we told our expert about cutting whole trees and planting more, and he said that if you cut a tree halfway, animals can live in what's left.</p>
+    <p>Put together, that's one story: <q>First we wanted to cut trees only halfway. A teammate said a half-cut tree dies, so we switched to planting two for every tree cut. Then our expert, Mr. Hussain, told us the half that's left still matters, because animals can live in it. So we kept both.</q></p>
+    <p>And the solution in two sentences: <q>When a tree has to come down, plant two new trees for every one, before the cutting starts. Where you can, cut it only halfway and leave the trunk standing, so animals still have a home while the new trees grow.</q> Check together that this is what really happened, then both say it the same way, and put the two sentences on the board.</p>
+  </div>
+  <div class="ivs">
+
+    <details class="kid iv" id="p-husayn-30oct">
+      <summary><span class="nm">Husayn</span><span class="tags"><span class="tag t-red">Red</span><span class="tag t-grey">Robot Design</span></span><span class="chev" aria-hidden="true"></span><span class="sum">1 ✓ · 6 ~ · 2 ✗ · 4 not asked yet</span></summary>
+      <div class="verdict">
+        <p><b>Best part</b>You got the order right first time, and your story about the robot drifting left really happened to us. You know this stuff.</p>
+        <p class="fix"><b>Fix first</b>Names and numbers. You keep the test log, so every answer can end with a number. Start with a mission name instead of “um, like”.</p>
+      </div>
+      <ol>
+        <li><span class="mk h">~</span><div><p class="ask">Introduce yourself.</p><p class="heard"><b>You said</b>A presenter on the Blue team, after a few tries.</p><p class="try"><b>Next time</b><q>My name is Husayn, and I'm a presenter on the Red team.</q> You're on Red. Say it once, then stop.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">1. Which missions did you choose, and why those?</p><p class="heard"><b>You said</b>Forest Elder, Drone Survey and Leafcutter Frenzy, because they were easy points, good points, or close to the others. You needed the paper.</p><p class="try"><b>Next time</b><q>In September we each rated the missions for points and how hard they are, and we started with the easy, high-point ones. Leafcutter Frenzy is our biggest: 40 points, and we got all 40 in every scrimmage round.</q> Then know Red's four by heart: Drone Survey, Flip the Rock, Reaching Roots, Tangled.</p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">2. Which missions did you skip, and why?</p><p class="heard"><b>You said</b>We went through it together instead.</p><p class="try"><b>Next time</b><q>We skipped Lucky Leaves because the leaves go in random spots, so you can do all the work and still get zero. Half of Humongous Fungus depends on the other team. We started early on the easy missions, so now we have time for harder ones like Forest Elder.</q> Check with Abbas, who's writing the skipped missions on the board, so you both say the same thing.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">3. How did you decide the order?</p><p class="heard"><b>You said</b>The ones on the way and closest to the robot go first.</p><p class="try"><b>Next time</b>That's right. Add one thing: Blue goes easiest to hardest. Window to the Past is the easiest, so it's first. Forest Elder is the hardest, so it's last. If the hard one goes wrong, the points are already in.</p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">4. Show me one attachment. What does it do, and who built it?</p><p class="try"><b>Next time</b>Pick one you built. Hold it up and point while you talk: which mission, what it does, why it's that shape, and who built it.</p></div></li>
+        <li><span class="mk n">✗</span><div><p class="ask">5. How does the robot know where it is? Do you use any sensors?</p><p class="heard"><b>You said</b>We just use code. The robot doesn't know where it's going.</p><p class="try"><b>Next time</b>That tells a judge we have no sensors, and we do. <q>Every move in our code is a distance, like ‘drive 37 centimetres’. The motors have rotation sensors that count how far the wheels turn, so the robot stops right there.</q> Ask Ali whether our turns use the gyro sensor in the hub. If they do, say that too.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">6. Tell me about something that failed. What did you change?</p><p class="heard"><b>You said</b>The robot started drifting to the left, so our code didn't match any more.</p><p class="try"><b>Next time</b>Great start. Finish it: what we changed, and what happened after. Mahdi says he and Mohamed took the robot apart and rebuilt it, and that fixed the drift, so check with them and end your story there. Or use Tangled:<q>It kept going too far right. Ali moved it a little left, then more, and it worked. Then it scored 30 in all three scrimmage rounds.</q></p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">7. How many times have you tested your best mission? How often does it work?</p><p class="try"><b>Next time</b>This one's yours, because you keep the test log. <q>Leafcutter Frenzy got all 40 points in all three scrimmage rounds. Tangled worked 2 out of 4 times in practice, then 3 out of 3 at the scrimmage.</q></p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">8. How do you line the robot up the same way every time?</p><p class="heard"><b>You said</b>Some people on our team are very good at that.</p><p class="try"><b>Next time</b>Say how, not who. <q>Every launch has its own spot, and we have a photo of each one. For one, the back goes against the wall and the crossbar sits on the red arc. Whoever launches lines it up exactly like the photo.</q> The photos are on the <a href="#scrimmage">Scrimmage</a> tab.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">9. How does the robot get from the Blue side to the Red side?</p><p class="heard"><b>You said</b>Our coders send it over to the other side.</p><p class="try"><b>Next time</b>Say who, and why. <q>Haider wrote a program just for that. After Blue's last mission, the robot drives itself to Red home, because you can't carry it between the two sides. Then Red finishes.</q></p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">10. Who did what on the robot?</p><p class="try"><b>Next time</b>Everyone answers for themselves, so have yours ready: <q>I'm a builder, I keep our test log, and I put the Robot Design board together.</q></p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">11. What would you improve with more time?</p><p class="heard"><b>You said</b>Our presentation, our code and our attachments. Some attachments take a few tries.</p><p class="try"><b>Next time</b>Picture a real moment first. <q>At the scrimmage, Red finished a round with 30 seconds left and nothing to run, so we'd add a mission there. Ali and Abbas are building it now. And Forest Elder: it's worth 30 points and it scored zero in all three rounds.</q></p></div></li>
+        <li><span class="mk n">✗</span><div><p class="ask">12. What did you learn from building this robot?</p><p class="heard"><b>You said</b>There are lots of robot designs. Some fail and some succeed.</p><p class="try"><b>Next time</b>Make it about something that really happened. <q>I didn't think a few centimetres mattered. Forest Elder went about 3 centimetres too far, and it scored zero at the scrimmage. And one extra touch outside home cost us 15 points in one round.</q></p></div></li>
+      </ol>
+    </details>
+
+    <details class="kid iv" id="p-ammar-30oct">
+      <summary><span class="nm">Ammar</span><span class="tags"><span class="tag t-blue">Blue</span><span class="tag t-grey">Innovation</span></span><span class="chev" aria-hidden="true"></span><span class="sum">2 ✓ · 8 ~ · 2 not asked yet</span></summary>
+      <div class="verdict">
+        <p><b>Best part</b>You talk easily and you never froze. Your best answer is the story of how the idea changed, from cutting trees halfway to planting two for every one. Tell it every time.</p>
+        <p class="fix"><b>Fix first</b>Sources. Name the three websites, not just the expert. Always say “our expert, Mr. Hussain”, never his name on its own. And say things once.</p>
+      </div>
+      <ol>
+        <li><span class="mk h">~</span><div><p class="ask">Introduce yourself.</p><p class="heard"><b>You said</b>A lot of extra words and the Blue team twice, then on the third try: “My name's Ammar, and I'm the spokesperson for the Blue team.”</p><p class="try"><b>Next time</b>That third one was perfect. Say exactly that, then stop.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">1. What problem did you pick, and why does it matter?</p><p class="heard"><b>You said</b>Deforestation, because it hurts people, farmers and animals. A bear could end up in your house.</p><p class="try"><b>Next time</b>Keep the bear, it makes people listen. Say the problem in one line first: <q>We picked deforestation, which means cutting down forests.</q> Then the reasons in the next answer.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">2. Who is hurt by deforestation, and why is it so bad?</p><p class="heard"><b>You said</b>Animals lose their homes and die. Bears come into our neighbourhoods. Farmers lose their crops, so there's less food.</p><p class="try"><b>Next time</b>Animals and crops were good. Add the planet: <q>Animals lose their homes. Farmers lose the soil and the bees their crops need, so there's less food. And trees take in carbon dioxide and give us oxygen, so cutting them down makes climate change worse.</q></p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">3. Where did you get your information? Name a source.</p><p class="heard"><b>You said</b>Mainly from Mr. Hussain. You said it twice and didn't name a website.</p><p class="try"><b>Next time</b>The expert counts, but judges want more than one source. <q>We used National Geographic, WWF and the World Health Organization, and we talked to our expert, Mr. Hussain.</q> Then give one fact and where it came from: “On WWF we found…”. Pick that fact from the sources slide before the next practice.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">4. What do people already do about it?</p><p class="heard"><b>You said</b>People ask them to cut down only half the tree, but they don't listen.</p><p class="try"><b>Next time</b>Name real things people do: some places cut only some of the trees and leave the rest, some plant new trees after cutting, and some forests are protected by law. <q>But replanting usually happens after the trees are gone, and a new tree takes years to grow.</q> That leads straight into our solution. Find which of our sources says it, so you can name it.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">5. What is your solution, and how does it work?</p><p class="heard"><b>You said</b>First, cut trees halfway. Then, with help: for every tree cut down, plant two, and start planting before the cutting.</p><p class="try"><b>Next time</b>Say only the final version, in two sentences: <q>For every tree that's cut down, plant two, and plant them before the cutting starts. Trees take years to grow, so the animals have a new forest to move into instead of our neighbourhoods.</q> Mahdi's version also leaves half the trunk standing for animals, so agree the two sentences together: see <a href="#one-story">the note at the top</a>.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">6. Is your idea new, or does it build on something that exists?</p><p class="heard"><b>You said</b>It's new. Then the story: someone suggested cutting trees halfway, a teammate said a half-cut tree is already dead, so we changed it to planting two.</p><p class="try"><b>Next time</b>Replanting already exists, so say it builds on it: <q>What's new is two for one, planted before the cutting, so the new forest is ready in time.</q> Then tell the halfway story, all of it, including what our expert said (<a href="#one-story">the note at the top</a>). It shows we changed our idea when it didn't work.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">7. Who did you share your idea with? What did they say?</p><p class="heard"><b>You said</b>First the Red team. On the second try, our expert, with his picture.</p><p class="try"><b>Next time</b>Introduce him before you name him: <q>We shared it with a few people, and the one who helped most was our expert, Mr. Hussain. He's <span class="fill">his job</span>, and he knows about forests because <span class="fill">why</span>.</q> Hold up his picture. <q>He said it was a good idea, because the animals would have somewhere to go instead of coming into the city.</q> Judges usually ask what he does, so know his real job.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">8. What did your expert tell you, and what did you change because of it?</p><p class="heard"><b>You said</b>Forests are being cut down to build new roads, homes, malls and supermarkets.</p><p class="try"><b>Next time</b>Good fact. Put his name on it: <q>Our expert, Mr. Hussain, told us forests are cut down for roads, homes, malls and supermarkets.</q> Judges always ask the second half too: what did we change because of him? Mahdi has the answer: we told him about cutting whole trees and planting more, and he said that if you cut a tree halfway, animals can live in what's left.</p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">9. What did your survey show?</p><p class="try"><b>Next time</b>Know two numbers from the survey slide: how many people answered, and what most of them said.</p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">10. How would someone actually build and use your solution?</p><p class="try"><b>Next time</b>Say who does it, where and when. For example: a company that wants to build plants two young trees nearby for every tree it will cut, and only then cuts. Decide with Mahdi who plants them and who checks.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">11. How did the whole team work on this?</p><p class="heard"><b>You said</b>One person found the information, you made the slides and the board, and Mohamed helped too.</p><p class="try"><b>Next time</b>Good: you named people and their parts. Name everyone that way, including who found the information.</p></div></li>
+      </ol>
+    </details>
+
+    <details class="kid iv" id="p-mahdi-30oct">
+      <summary><span class="nm">Mahdi</span><span class="tags"><span class="tag t-blue">Blue</span><span class="tag t-grey">Innovation</span></span><span class="chev" aria-hidden="true"></span><span class="sum">5 ✓ · 7 ~ · 1 ✗ · 1 not asked yet</span></summary>
+      <div class="verdict">
+        <p><b>Best part</b>Your answer about soil was specific and clear, and it explains exactly why farmers get hurt. And you said what changed because of the expert, which is the question judges always ask.</p>
+        <p class="fix"><b>Fix first</b>Know the three sources by heart. You found them, so they should come out without thinking. Then agree the solution with Ammar: see <a href="#one-story">the note at the top</a>.</p>
+      </div>
+      <ol>
+        <li><span class="mk h">~</span><div><p class="ask">Introduce yourself.</p><p class="heard"><b>You said</b>Your name and the Blue team, but no role. On the second try: “My name is Mahdi Jessa. I'm part of the Blue team, and I'm a presenter for the Innovation Project.”</p><p class="try"><b>Next time</b>That second one was right. Say it every time.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">1. What problem did you pick, and why does it matter?</p><p class="heard"><b>You said</b>Deforestation, one of the biggest problems right now. There's less oxygen and animals lose their homes. Would you like a bear on your car? I don't think we should cut down trees.</p><p class="try"><b>Next time</b>Good. Drop the last line, because our solution says people can cut trees as long as they plant more. Say oxygen the way Ammar does: <q>Trees take in carbon dioxide and give us oxygen.</q></p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">2. Who is hurt by deforestation, and why is it so bad?</p><p class="heard"><b>You said</b>Tree roots hold the soil. Without trees, rain washes the soil away, so farmers' crops can't grow.</p><p class="try"><b>Next time</b>Really good. Say where you learned it, like “On National Geographic we read…”, if that's where it came from. Then finish with people: no soil, no crops, less food.</p></div></li>
+        <li><span class="mk n">✗</span><div><p class="ask">3. Where did you get your information? Name a source.</p><p class="heard"><b>You said</b>“I don't know”, then National Geographic.</p><p class="try"><b>Next time</b>You found our sources, so know them cold: <q>We read National Geographic, WWF and the World Health Organization, and we talked to our expert, Mr. Hussain.</q> Your idea of a sources slide with each one highlighted is a good one. Ammar is making it.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">Tell me about your expert.</p><p class="heard"><b>You said</b>His full name, and that he's very into nature. You asked him how and why deforestation happens: wood for building, for cooking, and to make houses.</p><p class="try"><b>Next time</b>Start with how you found him, then say what he does, not what he likes. LeBron isn't “into basketball”: basketball is what he does. <q>We asked around, and the expert we went with is Mr. Hussain. He <span class="fill">the work he does</span>.</q> Then what he told you.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">4. What do people already do about it?</p><p class="heard"><b>You said</b>Not much. People protest and ask builders to stop. We want to do something hands-on: if you cut a tree, plant some back.</p><p class="try"><b>Next time</b>People will always need homes, so stopping all building won't work. <q>Some people protest or ask builders to stop, but people still need homes. So instead of stopping building, we want to make it less harmful: if you cut a tree, you plant more.</q> Don't say “not much”: name what you found in your research, like replanting and protected forests.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">5. What is your solution, and how does it work?</p><p class="heard"><b>You said</b>Cut the tree but plant more back, so animals can live near the trees. If we have to, cut only half the tree so animals can use the other half.</p><p class="try"><b>Next time</b>Say why half straight away: the trunk that's left is still a home for animals. Then use the two sentences you and Ammar agree on (<a href="#one-story">the note at the top</a>).</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">6. Is your idea new, or does it build on something that exists?</p><p class="heard"><b>You said</b>Cutting half is a new idea our whole team discussed. Other people have planted trees back, but we want to make it really big.</p><p class="try"><b>Next time</b>Say you did research: <q>In our research we didn't find anyone cutting trees halfway, so that part is our team's idea. We did find people planting new trees, and we liked it, so we built on it.</q> If a judge says it already exists, that's good news: it means it works.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">7. Who did you share your idea with? What did they say?</p><p class="heard"><b>You said</b>First, only that the teams shared ideas. On the second try, the teams and our expert, who told us how to plant properly and to cut at a height animals can use.</p><p class="try"><b>Next time</b>Team first, then the expert, every time: <q>We shared it with the Red team, and with our expert, Mr. Hussain.</q> Then what he said.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">8. What did your expert tell you, and what did you change because of it?</p><p class="heard"><b>You said</b>We first told him about cutting the whole tree and planting more. He said that if you cut a tree halfway, animals can use what's left as a home.</p><p class="try"><b>Next time</b>That's exactly what judges want: what he said and what we changed. Start with “Our expert, Mr. Hussain”. Ammar needs this answer too.</p></div></li>
+        <li><span class="mk x">–</span><div><p class="ask">9. What did your survey show?</p><p class="try"><b>Next time</b>Know two numbers from the survey slide: how many people answered, and what most of them said.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">10. How would someone actually build and use your solution?</p><p class="heard"><b>You said</b>Companies that cut trees for wood and houses carry seeds, and plant new ones every time they cut, so animals don't lose their homes.</p><p class="try"><b>Next time</b>Good and practical. Add the numbers you and Ammar agree on, like two trees for every one cut.</p></div></li>
+        <li><span class="mk h">~</span><div><p class="ask">11. How did the whole team work on this? What did you do with feedback?</p><p class="heard"><b>You said</b>Innovation was you and Ammar, Robot Design was Husayn and Mohamed, and everyone ran Blue or Red missions. We shared ideas with the other team and used their feedback to make it better.</p><p class="try"><b>Next time</b>“We made it better” needs an example: who gave feedback, what they said, and what you changed.</p></div></li>
+        <li><span class="mk y">✓</span><div><p class="ask">Tell me about a time something failed. How did you fix it?</p><p class="heard"><b>You said</b>The robot kept pulling to the left. You and Mohamed took it apart, rebuilt it, and it was fixed.</p><p class="try"><b>Next time</b>Good story, with names in it. Add how you knew it was fixed: it drove straight, or a mission started working again. Husayn tells the start of this story, so tell him how it ended.</p></div></li>
+      </ol>
+    </details>
+
+  </div>
+  <p class="note" style="margin-top:16px"><b>Next:</b> on Friday 13 November everyone does a full mock judging session with the boards, start to finish.</p>
 </section>
 </div>
 
@@ -1429,7 +1661,7 @@ end</pre>
   });
 
   // Tabs. A tab's id, or a link to any element inside its panel, opens that tab.
-  var names = ['week', 'students', 'quiz', 'scratch', 'scrimmage', 'season', 'coaches'];
+  var names = ['week', 'students', 'presentations', 'quiz', 'scratch', 'scrimmage', 'season', 'coaches'];
   var tabs = {};
   names.forEach(function(k){ tabs[k] = document.getElementById('tab-' + k); });
   function show(name){
