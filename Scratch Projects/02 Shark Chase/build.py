@@ -67,7 +67,7 @@ Click the green flag after each mission to test it.
 
 MISSION 6: COUNTDOWN
 1. Go to Variables, click Make a Variable, and name it Time.
-2. Build this here, on the Stage:
+2. Build this here, on the Stage. The set and change blocks start out showing Score: click the little arrow on each one and pick Time.
 
 when green flag clicked
    set Time to {SECONDS}
