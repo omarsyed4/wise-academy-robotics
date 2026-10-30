@@ -21,3 +21,8 @@ FIRST LEGO League (BIOGLOW)/00 Correspondence/
 
 # Local preview server config
 /.claude/
+
+# Coach-only material. Plaintext never goes to git: the repo is public.
+# scripts/build-coaches.mjs encrypts admin/coaches.html into docs/index.html.
+/admin/
+/voice memos/

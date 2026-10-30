@@ -364,6 +364,113 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .scrim .kid dd.win{color:var(--green)}
 .scrim .pack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .scrim .pack span{font-size:13.5px;padding:7px 11px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+
+/* ============ more tabs ============ */
+.tabs{overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;white-space:nowrap}
+.tabs svg{width:13px;height:13px;margin-left:6px;vertical-align:-1px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:620px){.tabs button{font-size:.95rem;padding:10px 10px}}
+
+/* ============ this week ============ */
+.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:620px){.scores{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.scores div{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:14px 16px;min-width:0}
+.scores b{display:block;font-family:var(--display);font-variation-settings:"wdth" 112,"wght" 800;font-size:2rem;line-height:1.05;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.scores span{font-size:12.5px;color:var(--ink-3)}
+.scores .best b{color:var(--green)}
+.scores .goal b{color:var(--gold)}
+.checks{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;max-width:80ch}
+.checks li{display:grid;grid-template-columns:14px 1fr;gap:11px;color:var(--ink-2);font-size:14.5px}
+.checks li::before{content:"";width:12px;height:12px;border:1.5px solid var(--ink-3);border-radius:2px;margin-top:5px}
+.checks .by{font-family:var(--mono);font-size:11px;color:var(--gold);white-space:nowrap}
+.pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.pairs{grid-template-columns:1fr}}
+.pairs .t ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink-2);font-size:13.5px}
+.pairs .t ul b{color:var(--ink);font-weight:600}
+.pairs .t ul li{display:list-item}
+.pairs .t ul li::before{display:none}
+.pairs .when{font-family:var(--mono);font-size:11px;color:var(--gold);margin:0}
+.pairs .t > p{margin:0}
+.scrim .sched.day{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.scrim .sched.day{grid-template-columns:1fr;gap:0}.scrim .sched.day div{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--line);padding:8px 0}.scrim .sched.day b{width:52px;flex:none}}
+.scrim .qbank{margin-top:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+@media (max-width:760px){.scrim .qbank{grid-template-columns:1fr}}
+.scrim .qbank ol{margin:0;padding:2px 16px 16px 36px;display:flex;flex-direction:column;gap:7px;font-size:13.5px;color:var(--ink-2)}
+.scrim .next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.scrim .next{grid-template-columns:1fr}}
+.scrim .next .t p{margin:0;font-size:13.5px}
+.scrim .next .t .d{font-family:var(--mono);font-size:11px;color:var(--gold)}
+
+/* ============ score sheets ============ */
+.scrim .sheets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.scrim .sheets{grid-template-columns:1fr}}
+.scrim .sheets figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.scrim .sheets a{display:block;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#fff}
+.scrim .sheets a:hover{border-color:var(--blue)}
+.scrim .sheets img{display:block;width:100%;aspect-ratio:1800/1398;object-fit:cover}
+.scrim .sheets figcaption{font-size:12.5px;color:var(--ink-2)}
+.scrim .sheets figcaption b{font-family:var(--mono);color:var(--ink);font-weight:600;margin-right:6px}
+.scrim .runs td.n,.scrim .runs th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scrim .runs td.zero{color:var(--red)}
+.scrim .runs td.full{color:var(--green)}
+.scrim .runs tfoot td,.scrim .runs tfoot th{border-bottom:0;font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.05rem;color:var(--ink)}
+
+/* ============ students ============ */
+.roster-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.roster-nav a{font-size:13px;text-decoration:none;color:var(--ink-2);border:1px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--surface)}
+.roster-nav a:hover{border-color:var(--blue);color:var(--ink)}
+.studs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.studs{grid-template-columns:1fr}}
+.stud{scroll-margin-top:16px;padding:18px;gap:14px}
+.stud .top{display:flex;gap:14px;align-items:center}
+.stud .av{margin:0;flex:none}
+.stud .role{font-size:12.5px;color:var(--ink-3);margin:3px 0 0}
+.scrim .stud dl{margin:0;display:flex;flex-direction:column;gap:12px}
+.scrim .stud dt{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:0}
+.scrim .stud dd{margin:3px 0 0;font-size:14px;font-weight:400;color:var(--ink-2);line-height:1.5}
+.scrim .stud dd b{color:var(--ink);font-weight:600}
+.scrim .stud dd.focus{color:var(--ink);border-left:2px solid var(--gold);padding-left:10px}
+
+/* ============ quizzes ============ */
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px 14px;flex-wrap:wrap;margin-top:38px}
+.qhead h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.15rem;letter-spacing:-.015em;margin:0}
+.qscore{font-family:var(--mono);font-size:13px;color:var(--gold)}
+.btn{font:inherit;font-size:13.5px;font-weight:600;border-radius:4px;padding:9px 14px;cursor:pointer;color:var(--bg);background:var(--blue);border:1px solid var(--blue)}
+.btn:hover{background:#7DB1F8}
+.btn.ghost{color:var(--blue);background:none;border-color:rgba(91,155,245,.55);padding:6px 10px;font-size:12.5px}
+.btn.ghost:hover{background:rgba(91,155,245,.12)}
+.quiz{margin-top:14px;display:flex;flex-direction:column;gap:12px;max-width:820px}
+.q{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:16px}
+.q .n{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.q .ask{margin:0 0 12px;font-weight:600;color:var(--ink);font-size:15px}
+.q .opts{display:grid;gap:8px}
+.q .opt{text-align:left;font:inherit;font-size:14px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer}
+.q .opt:hover:not(:disabled){border-color:var(--blue);color:var(--ink)}
+.q .opt:disabled{cursor:default}
+.q .opt.right{border-color:var(--green);color:var(--ink);background:rgba(84,204,166,.12)}
+.q .opt.wrong{border-color:var(--red);background:rgba(238,127,104,.1)}
+.q .why{margin:12px 0 0;font-size:13.5px;color:var(--ink-2)}
+.q .why b{font-weight:600}
+.q .why .yes{color:var(--green)}
+.q .why .no{color:var(--red)}
+.six form{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;max-width:820px}
+.six input{flex:1 1 240px;min-width:0;font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
+.six input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.six .got{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.six .got span{font-size:13.5px;padding:7px 11px;border:1px dashed var(--ink-3);border-radius:4px;color:var(--ink-3)}
+.six .got span.on{border:1px solid var(--green);color:var(--ink);background:rgba(84,204,166,.12)}
+
+/* ============ coaches ============ */
+.lock{max-width:420px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:18px;display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.lock label{font-size:13px;color:var(--ink-2)}
+.lock input[type=password]{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
+.lock input[type=password]:focus{outline:2px solid var(--blue);outline-offset:1px}
+.lock .rem{display:flex;gap:8px;align-items:center}
+.lock .err{color:var(--red);margin:0;font-size:13px}
+.coach-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.scrim .kid .said{padding:2px 16px 16px;display:flex;flex-direction:column;gap:10px;max-width:75ch}
+.scrim .kid .said p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.55}
 </style>
 </head>
 <body>
@@ -380,14 +487,313 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <div class="tabs" role="tablist" aria-label="Views">
-  <button type="button" role="tab" id="tab-scrimmage" aria-controls="scrimmage" aria-selected="true">Scrimmage</button>
+  <button type="button" role="tab" id="tab-week" aria-controls="week" aria-selected="true">This week</button>
+  <button type="button" role="tab" id="tab-students" aria-controls="students" aria-selected="false">Students</button>
+  <button type="button" role="tab" id="tab-quiz" aria-controls="quiz" aria-selected="false">Quizzes</button>
+  <button type="button" role="tab" id="tab-scrimmage" aria-controls="scrimmage" aria-selected="false">Scrimmage</button>
   <button type="button" role="tab" id="tab-season" aria-controls="season" aria-selected="false">Season hub</button>
+  <button type="button" role="tab" id="tab-coaches" aria-controls="coaches" aria-selected="false">Coaches<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+</div>
+
+<!-- ===================== THIS WEEK ===================== -->
+<!-- LESSON PLAN: the current Friday lives here. Replace it each week; older plans stay in Git history. -->
+<div id="week" class="scrim" role="tabpanel" aria-labelledby="tab-week">
+<section>
+  <div class="shead"><span>FRI 30 OCT · 9:00 TO 11:00</span><h2>From 250 to 300</h2></div>
+  <p class="note">Our best scrimmage round scored 250. Another 80 points are sitting in missions we already run, and one round finished with 30 seconds to spare. Today two pairs make the robot score more, and two pairs practise talking until the answers come without notes.</p>
+  <div class="scores">
+    <div class="best"><b>250</b><span>Best round at Montverde</span></div>
+    <div><b>240 · 215</b><span>The other two rounds</span></div>
+    <div class="goal"><b>300+</b><span>Where we're going</span></div>
+    <div><b>5 · 5 · 4</b><span>Tokens left. Every round lost at least one</span></div>
+  </div>
+
+  <h3 class="sub">Done by 11:00</h3>
+  <ul class="checks">
+    <li><span>The new mission tried at least five times, every try written down as worked or failed, and timed inside the spare 30 seconds. <span class="by">Ali, Abbas</span></span></li>
+    <li><span>Forest Elder (M12) and the garden skylight (M15) tried and logged. Elias launched every Blue run. <span class="by">Haider, Elias</span></span></li>
+    <li><span>Every word for both trifolds written and ready to print, with nothing left to make up. <span class="by">Mahdi, Husayn</span></span></li>
+    <li><span>Both slide decks updated: why these missions, our solution, where our facts came from. <span class="by">Mohamed, Ammar</span></span></li>
+    <li><span>Each talking pair has run two full mock interviews each way, and every question you couldn't answer is written down and fixed. <span class="by">all four</span></span></li>
+    <li><span>Two full timed matches at 10:30, tokens counted and scored on a sheet. <span class="by">field pairs</span></span></li>
+    <li><span>Everyone has said their 5-second intro and one thing they learned. <span class="by">everyone</span></span></li>
+  </ul>
+
+  <h3 class="sub">The day</h3>
+  <div class="sched day">
+    <div><b>9:00</b><span>Everyone: the scores, then a 5-second intro each. Name, role, one thing you did.</span></div>
+    <div><b>9:10</b><span>Pairs start. The two field pairs share the table and swap every 15 minutes.</span></div>
+    <div><b>10:00</b><span>Talking pairs stop building and start interviewing each other.</span></div>
+    <div><b>10:30</b><span>Field pairs: two full matches, Blue then Red, timed and scored.</span></div>
+    <div><b>10:40</b><span>Interview swap: Mahdi interviews Mohamed, Husayn interviews Ammar.</span></div>
+    <div><b>10:50</b><span>Everyone: one sentence each, “One thing I learned.” Husayn writes them down for the board.</span></div>
+    <div><b>11:00</b><span>Done. Tables back, robots charging.</span></div>
+  </div>
+
+  <h3 class="sub">The four pairs</h3>
+  <div class="pairs">
+    <div class="t">
+      <div class="who"><h3>Ali and Abbas</h3><span class="tag t-red">Red</span></div>
+      <p class="job">Finish the new mission</p>
+      <p class="when">9:10 to 10:30 · then the full match</p>
+      <ul>
+        <li>Ali's idea: Red finished a round with <b>30 seconds left</b>. Spend them on one more mission.</li>
+        <li>Write down every try: <b>“worked 4 out of 6.”</b> The judges loved a number like that at the scrimmage.</li>
+        <li>It must not touch the spider or snail habitats (M10). That's 20 points we score every round.</li>
+        <li>When it works, go after the Red bonuses we've never scored: flip the LiDAR map (M01, +10), put the rock back (M03, +10) and push the roots all the way (M05, +10 more).</li>
+      </ul>
+    </div>
+    <div class="t">
+      <div class="who"><h3>Haider and Elias</h3><span class="tag t-blue">Blue</span></div>
+      <p class="job">The Blue half, and Elias drives</p>
+      <p class="when">9:10 to 10:30 · then the full match</p>
+      <ul>
+        <li><b>Forest Elder (M12) scored 0 in all three rounds.</b> It's worth 30.</li>
+        <li>The garden skylight (M15) never went in. Our model sits on the City dock, so the skylight also earns the 10-point bonus. That's <b>20 points</b>.</li>
+        <li><b>Elias launches every Blue run today.</b> Haider stands beside him, tells him what to change, and keeps his hands off.</li>
+        <li>Log every try the same way as Red: worked or failed.</li>
+      </ul>
+    </div>
+    <div class="t">
+      <div class="who"><h3>Mahdi and Husayn</h3><span class="tags"><span class="tag t-blue">Blue</span> <span class="tag t-red">Red</span></span></div>
+      <p class="job">Trifold, then interviews</p>
+      <p class="when">9:10 to 10:00 trifold · 10:00 to 11:00 interviews</p>
+      <ul>
+        <li>Goal: every word on both boards ready to print, so Coach Shazia and Sakina can help put them together next Friday.</li>
+        <li><b>Husayn, Robot Design:</b> a diagram of the missions we picked and why. A success count for each one. Swap the quote box for “What I learned”, one line per student. Where we use sensors.</li>
+        <li><b>Mahdi, Innovation:</b> the problem in one sentence. Then the solution: what people do about deforestation today, then <b>our</b> idea and how it works, with a drawing. At least three sources, what our expert told us, and what the survey showed.</li>
+        <li>At 10:00, Mahdi interviews Husayn on Robot Design, then swap. Questions are below.</li>
+      </ul>
+    </div>
+    <div class="t">
+      <div class="who"><h3>Mohamed and Ammar</h3><span class="tags"><span class="tag t-red">Red</span> <span class="tag t-blue">Blue</span></span></div>
+      <p class="job">Slides, then interviews</p>
+      <p class="when">9:10 to 10:00 slides · 10:00 to 11:00 interviews</p>
+      <ul>
+        <li><b>Mohamed, Robot Design deck:</b> a “why these missions” slide, success counts, one slide on sensors, and one on what we learned. Plan where you'll point on the real robot: gears, lever, attachments.</li>
+        <li><b>Ammar, Innovation deck:</b> a solution slide that uses Mahdi's exact words, a sources slide, an expert slide and a survey slide. Say each source out loud: “We found this on…”.</li>
+        <li>Both decks: each student introduces themselves. Nobody introduces anyone else.</li>
+        <li>At 10:00, Mohamed interviews Ammar on Innovation, then swap.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note" style="margin-top:14px"><b>Mahdi and Ammar:</b> agree on the solution's two sentences at 9:10, before you split up, so the board and the slides say the same thing. If you're stuck, Sakina has suggested one idea: an EV3 robot with a motion sensor guards a tree, and when a Lego person walks up, it raises a sign and says “Stop.” You can use it, build on it, or beat it.</p>
+
+  <h3 class="sub">How the mock interview works</h3>
+  <ul class="plain">
+    <li>The interviewer reads a question. The answerer gets one minute, with no notes and no slides.</li>
+    <li>Mark every answer: <b>✓</b> said it clearly, <b>~</b> got there with help, <b>✗</b> couldn't answer.</li>
+    <li>The interviewer always asks one follow-up, “Why?” or “Can you show me?”, because judges always do.</li>
+    <li>Swap roles every 10 minutes. Every ✗ gets fixed on the board or the slides, then asked again before 10:50.</li>
+  </ul>
+  <div class="qbank">
+    <details class="kid" open>
+      <summary><span class="nm">Robot Design questions</span><span class="chev" aria-hidden="true"></span><span class="sum">Mahdi and Ammar ask these</span></summary>
+      <ol>
+        <li>Which missions did you choose, and why those?</li>
+        <li>Which missions did you skip, and why?</li>
+        <li>How did you decide the order?</li>
+        <li>Show me one attachment. What does it do, and who built it?</li>
+        <li>How does the robot know where it is? Do you use any sensors?</li>
+        <li>Tell me about something that failed. What did you change?</li>
+        <li>How many times have you tested your best mission? How often does it work?</li>
+        <li>How do you line the robot up the same way every time?</li>
+        <li>How does the robot get from the Blue side to the Red side?</li>
+        <li>Who did what on the robot? Everyone answers for themselves.</li>
+        <li>What would you improve with more time?</li>
+        <li>What did you learn from building this robot?</li>
+      </ol>
+    </details>
+    <details class="kid" open>
+      <summary><span class="nm">Innovation Project questions</span><span class="chev" aria-hidden="true"></span><span class="sum">Husayn and Mohamed ask these</span></summary>
+      <ol>
+        <li>What problem did you pick, and why does it matter?</li>
+        <li>Who is hurt by deforestation?</li>
+        <li>Where did you get your information? Name a source.</li>
+        <li>What do people already do about it?</li>
+        <li>What is your solution, and how does it work?</li>
+        <li>Is your idea new, or does it build on something that exists?</li>
+        <li>Who did you share your idea with? What did they say?</li>
+        <li>What did your expert tell you, and what did you change because of it?</li>
+        <li>What did your survey show?</li>
+        <li>How would someone actually build and use your solution?</li>
+        <li>How did the whole team work on this?</li>
+      </ol>
+    </details>
+  </div>
+
+  <h3 class="sub">Coming up</h3>
+  <div class="next">
+    <div class="t">
+      <p class="d">FRI 6 NOV · COACH OMAR AWAY</p>
+      <h3>Trifolds and Core Values</h3>
+      <p>Coach Shazia, Coach Aamir and Sakina run the class. Both trifolds get printed and put together from today's words. Everyone learns the six Core Values word for word, with a real example of each from our team. Practise on the Quizzes tab. The field pairs keep going.</p>
+    </div>
+    <div class="t">
+      <p class="d">FRI 13 NOV · COACH OMAR BACK</p>
+      <h3>Quiz day</h3>
+      <p>The Core Values quiz and “What would you do?” situations, then a full mock judging session with the boards, start to finish.</p>
+    </div>
+    <div class="t">
+      <p class="d">SAT 5 DEC · LAKE COUNTY</p>
+      <h3>Qualifier</h3>
+      <p>The date and place are still being confirmed. Coach Shazia will let everyone know.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== STUDENTS ===================== -->
+<div id="students" class="scrim" role="tabpanel" aria-labelledby="tab-students" hidden>
+<section>
+  <div class="shead"><span>ONE SECTION EACH</span><h2>The students</h2></div>
+  <p class="note">Find your name. Your section says what you're doing this Friday, who you're with, and the one thing to get better at. Every class, everyone also does a 5-second intro: <b>“I'm Elias, a Blue technician. I launch the Blue half.”</b></p>
+  <nav class="roster-nav" aria-label="Students"><a href="#s-abbas">Abbas</a><a href="#s-ali">Ali</a><a href="#s-mohamed">Mohamed</a><a href="#s-husayn">Husayn</a><a href="#s-haider">Haider</a><a href="#s-elias">Elias</a><a href="#s-mahdi">Mahdi</a><a href="#s-ammar">Ammar</a></nav>
+  <div class="studs">
+    <article class="t stud" id="s-abbas">
+      <div class="top"><div class="av red"><span>AY</span><img src="avatars/abbas.jpg" alt="" onerror="this.remove()"></div><div><h3>Siraj Abbas Yusufali</h3><p class="role">Team lead, lead technician <span class="tag t-red">Red</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The new mission, with <b>Ali</b>, then the 10:30 full match.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">The Red half has never scored its bonuses: the LiDAR map flip (M01), putting the rock back (M03) and the roots all the way out (M05). That's 30 points. Once the new mission works, pick one and get it to 3 out of 5.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>Every try of the new mission written down, and one full Red half timed with it in.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1wNB7QGJ421HalNFvfNpxJvHfl7U-P5PjkHWa59cnJ0Y/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/15S9Y-OqmM3PO8rPyv8liapqtztO2SBXR">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-ali">
+      <div class="top"><div class="av red"><span>AH</span><img src="avatars/ali.jpg" alt="" onerror="this.remove()"></div><div><h3>Ali Hasham</h3><p class="role">Engineer, coder <span class="tag t-red">Red</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The new mission, which was your idea, with <b>Abbas</b>. Then the 10:30 full match.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Finish it. The spare 30 seconds only count if the mission works every time, so test it until you have a number. And be ready to explain one sensor to the judges, because sensor use is on the Robot Design rubric.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>“Worked __ out of __” written down, the program on the hub, and a screenshot of the code uploaded.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1dOHIQcvvS8RL03KMW9oMOk5aP2qYFpJACmeoQvZ5UJE/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/119UiXuSIzXI2zqTuJ93zR3P_FG8pXARC">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-mohamed">
+      <div class="top"><div class="av red"><span>MD</span><img src="avatars/mohamed.jpg" alt="" onerror="this.remove()"></div><div><h3>Mohamed Dharsi</h3><p class="role">Engineer, Robot Design presenter <span class="tag t-red">Red</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The Robot Design slides with <b>Ammar</b> until 10:00, then you interview each other.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Coach Shazia called your presentation phenomenal. Now make room for everyone else. Judges check that every student played a part, so each teammate introduces themselves, not you for them. When a question fits someone else, hand it to them.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>The deck has a why-these-missions slide, success counts, sensors and what we learned. You've done two interviews each way.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1Qrx47G4PMOvFXabgZqdT8BgaKI568sVsZK2QaBLNcSQ/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1TvVgDIzde74_E3-GiwYNNpdaECpswJ3N">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-husayn">
+      <div class="top"><div class="av red"><span>HB</span><img src="avatars/husayn.jpg" alt="" onerror="this.remove()"></div><div><h3>Husayn Bhimji</h3><p class="role">Builder, Robot Design board <span class="tag t-red">Red</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The trifold with <b>Mahdi</b> until 10:00, then you interview each other.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Get as confident as Mohamed. You built the Robot Design board, so you should be able to explain every part of it without reading it.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>Robot Design board words ready to print, and everyone's “What I learned” line written down at 10:50.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/128HKWgn9jfCBPE5nqenrrT2Ogdqq-IFdqY85M_gIdgQ/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1Ze78p62z238QSeDCDmnq7O5kR_UxQTTO">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-haider">
+      <div class="top"><div class="av blue"><span>HF</span><img src="avatars/haider.jpg" alt="" onerror="this.remove()"></div><div><h3>Haider Fahar</h3><p class="role">Team lead, lead technician <span class="tag t-blue">Blue</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The Blue half with <b>Elias</b>, then the 10:30 full match.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Forest Elder (M12) scored 0 in all three rounds, and it's worth 30. And today you coach: Elias launches every run, and you tell him what to change. The team needs two people who can run Blue.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>M12 and the M15 skylight tries written down, and Elias has run the Blue half without your hands on the robot.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1pViHQS0R96cX_e4O74BXVxSFkApSnrAbwsu4sqTxdPQ/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1CIN_gJNWX3CxPITc7BAoVelCrUcMf0nU">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-elias">
+      <div class="top"><div class="av blue"><span>EM</span><img src="avatars/elias.jpg" alt="" onerror="this.remove()"></div><div><h3>Elias Mouri</h3><p class="role">Technician <span class="tag t-blue">Blue</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The Blue half with <b>Haider</b>. You launch every Blue run.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Confidence at the table. Every launch today is yours. Ask Haider what to change, then do it yourself. By 11:00 you can run the Blue half on your own.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>You launched the Blue half in both 10:30 matches.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/11o4U4CrC-saaHKzqRL53kt1spOIg3AX22SVpYvffgNY/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1mfGqUSYGB4YpnxjQCSXCFSK3ZSc4j1RT">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-mahdi">
+      <div class="top"><div class="av blue"><span>MJ</span><img src="avatars/mahdi.jpg" alt="" onerror="this.remove()"></div><div><h3>Mahdi Jessa</h3><p class="role">Coder, Innovation presenter <span class="tag t-blue">Blue</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The trifold with <b>Husayn</b> until 10:00, then you interview each other.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">The judges understood our problem but didn't hear a clear solution. Write it in two sentences you can say without notes: what it is, and how it helps.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>Innovation board words ready to print: the problem, the solution, three sources, the expert and the survey.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1XSZDEBDRHXf9jfCYWPCoID_TCdP0r_qhWjnIK0FHMWE/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1XyJhvxuB4iu1GD-NZbWOZv7qnHkOIhnJ">Upload</a></div>
+    </article>
+    <article class="t stud" id="s-ammar">
+      <div class="top"><div class="av blue"><span>AH</span><img src="avatars/ammar.jpg" alt="" onerror="this.remove()"></div><div><h3>Ammar Hamza</h3><p class="role">Speaker, Innovation presenter <span class="tag t-blue">Blue</span></p></div></div>
+      <dl>
+        <div><dt>This Friday</dt><dd>The Innovation slides with <b>Mohamed</b> until 10:00, then you interview each other.</dd></div>
+        <div><dt>Your focus</dt><dd class="focus">Sources. Every fact needs one, and the judges want more than one source. Whenever you say a fact, say where it came from: “We found this on…”.</dd></div>
+        <div><dt>Done by 11:00</dt><dd>A sources slide with at least three, the expert and survey slides, and two interviews each way.</dd></div>
+      </dl>
+      <div class="acts"><a class="open" href="https://docs.google.com/document/d/1slp2pqW3GPvyAtA6u7eKwWFSNTW1BRYi2_MjC4t87h4/edit">My doc</a><a class="upl" href="https://drive.google.com/drive/folders/1I34ITvZsYGcbDpuTvboV30E-frNyTPk8">Upload</a></div>
+    </article>
+  </div>
+  <p class="note" style="margin-top:16px"><b>Next Friday, 6 November:</b> everyone learns the six Core Values word for word. <b>Friday 13 November</b> is quiz day. Start practising on the Quizzes tab.</p>
+</section>
+</div>
+
+<!-- ===================== QUIZZES ===================== -->
+<div id="quiz" class="scrim" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+<section>
+  <div class="shead"><span>FOR FRI 13 NOV · PRACTISE ANY TIME</span><h2>Quizzes</h2></div>
+  <p class="note">Three rounds. Nothing you answer is saved or sent anywhere, so try as often as you like.</p>
+
+  <div class="six">
+    <div class="qhead"><h3>1 · Name all six</h3></div>
+    <p class="note" style="margin:6px 0 0">Type the six FIRST Core Values from memory, in any order.</p>
+    <form id="six-form" autocomplete="off"><input id="six-in" type="text" aria-label="The six Core Values" placeholder="Discovery, …"><button class="btn" type="submit">Check</button></form>
+    <div class="got" id="six-got" aria-live="polite"></div>
+  </div>
+
+  <div class="qhead"><h3>2 · Core Values</h3><span><span class="qscore" id="cv-score" aria-live="polite"></span> <button class="btn ghost" type="button" data-reset="cv">Start over</button></span></div>
+  <div class="quiz" id="cv"></div>
+
+  <div class="qhead"><h3>3 · What would you do?</h3><span><span class="qscore" id="wwyd-score" aria-live="polite"></span> <button class="btn ghost" type="button" data-reset="wwyd">Start over</button></span></div>
+  <p class="note" style="margin:6px 0 0">Real situations from robot game, judging and the pits. Pick what you'd actually do.</p>
+  <div class="quiz" id="wwyd"></div>
+</section>
 </div>
 
 <!-- ===================== SCRIMMAGE ===================== -->
-<div id="scrimmage" class="scrim" role="tabpanel" aria-labelledby="tab-scrimmage">
+<div id="scrimmage" class="scrim" role="tabpanel" aria-labelledby="tab-scrimmage" hidden>
 <section>
-  <div class="shead"><span>SAT 24 OCT · MONTVERDE ACADEMY</span><h2>Scrimmage day</h2></div>
+  <div class="shead"><span>SAT 24 OCT · MONTVERDE ACADEMY</span><h2>How we scored</h2></div>
+  <p class="note">Three official rounds, and only the best one counts, so our scrimmage score is <b>250</b>. The sheets don't say which round was which, so they're shown in the order they were scanned. Tap a sheet to see it full size.</p>
+  <div class="sheets">
+    <figure><a href="scrimmage/sheet-1.jpg"><img src="scrimmage/sheet-1.jpg" alt="Score sheet from table 18: 240 points" loading="lazy"></a><figcaption><b>240</b>Table 18 · 5 tokens left</figcaption></figure>
+    <figure><a href="scrimmage/sheet-2.jpg"><img src="scrimmage/sheet-2.jpg" alt="Score sheet from table 2B: 250 points" loading="lazy"></a><figcaption><b>250</b>Table 2B · 5 tokens left · our best</figcaption></figure>
+    <figure><a href="scrimmage/sheet-3.jpg"><img src="scrimmage/sheet-3.jpg" alt="Score sheet from table 1A: 215 points" loading="lazy"></a><figcaption><b>215</b>Table 1A · 4 tokens left</figcaption></figure>
+  </div>
+
+  <h3 class="sub">Mission by mission</h3>
+  <div class="tablewrap">
+    <table class="runs">
+      <thead><tr><th>Mission</th><th class="n">240</th><th class="n">250</th><th class="n">215</th><th class="n">Possible</th></tr></thead>
+      <tbody>
+        <tr><th>Equipment inspection</th><td class="n full">20</td><td class="n full">20</td><td class="n full">20</td><td class="n">20</td></tr>
+        <tr><th>Precision tokens<small>5, 5 and 4 left</small></th><td class="n full">50</td><td class="n full">50</td><td class="n">35</td><td class="n">50</td></tr>
+        <tr><th>01 Drone Survey<small>Drone up every time, LiDAR bonus never</small></th><td class="n">20</td><td class="n">20</td><td class="n">20</td><td class="n">30</td></tr>
+        <tr><th>03 Flip the Rock<small>Flag down every time, rock never put back</small></th><td class="n">20</td><td class="n">20</td><td class="n">20</td><td class="n">30</td></tr>
+        <tr><th>05 Reaching Roots<small>Partly out once</small></th><td class="n zero">0</td><td class="n">10</td><td class="n zero">0</td><td class="n">20</td></tr>
+        <tr><th>06 Leafcutter Frenzy<small>All four fragments, every round</small></th><td class="n full">40</td><td class="n full">40</td><td class="n full">40</td><td class="n">40</td></tr>
+        <tr><th>08 Tangled</th><td class="n full">30</td><td class="n full">30</td><td class="n full">30</td><td class="n">30</td></tr>
+        <tr><th>10 Fragile Microhabitats</th><td class="n full">20</td><td class="n full">20</td><td class="n full">20</td><td class="n">20</td></tr>
+        <tr><th>11 Window to the Past</th><td class="n full">20</td><td class="n full">20</td><td class="n full">20</td><td class="n">20</td></tr>
+        <tr><th>12 Forest Elder<small>Never scored</small></th><td class="n zero">0</td><td class="n zero">0</td><td class="n zero">0</td><td class="n">30</td></tr>
+        <tr><th>15 Biocentric Architecture<small>Canopy every time, compost hatch twice, skylight never. City dock</small></th><td class="n">20</td><td class="n">20</td><td class="n">10</td><td class="n">40</td></tr>
+      </tbody>
+      <tfoot><tr><th>Total</th><td class="n">240</td><td class="n">250</td><td class="n">215</td><td class="n">330</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="note" style="margin-top:12px">Gracious Professionalism at the table: 4, 3 and 4 out of 4. Missions 02, 04, 07, 09, 13 and 14 weren't attempted.</p>
+
+  <h3 class="sub">Where the next 80 points are</h3>
+  <ul class="plain">
+    <li><b>Forest Elder, 30.</b> Zero in every round.</li>
+    <li><b>The garden skylight, 20.</b> It's 10 on its own, plus the 10-point bonus, because our model sits on the City dock.</li>
+    <li><b>Three Red bonuses, 30.</b> Flip the LiDAR map, put the rock back, push the roots all the way out.</li>
+    <li><b>Tokens.</b> The first touch outside home is free. The second costs 15, which is what happened in the 215 round. Wait the extra two seconds for the robot to come home.</li>
+    <li>Then the new mission, in the 30 seconds we have left over.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="shead"><span>WHAT WE PLANNED</span><h2>Scrimmage day</h2></div>
   <p class="note">17235 7th St, Montverde. Park in the Eagle's Nest lot and check in at the side entrance by the cafeteria. There's a practice round, then three official rounds, and only the best official round counts. Our judging and match times come at check-in.</p>
   <div class="sched">
     <div><b>8:00</b><span>Check-in, pits open</span></div>
@@ -501,13 +907,13 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 <section id="status">
   <span id="today" aria-hidden="true"></span>
   <div class="shead"><span>SEASON HUB</span><h2>Where we stand</h2></div>
-  <p class="note">Our working status, evidence and next steps. <b>Team evidence last recorded: 9 October 2026.</b> Coach-call alignment reviewed: 15 October. Open items mean no later completion is recorded here.</p>
+  <p class="note">Our working status, evidence and next steps. <b>Team evidence last recorded: 24 October 2026</b> (scrimmage score sheets). Coach feedback: 29 October. Coach-call alignment reviewed: 15 October. Open items mean no later completion is recorded here.</p>
   <!-- STATUS SUMMARY: update dated evidence here as the season progresses. -->
   <div class="tasks">
-    <div class="t"><h3>Robot game</h3><p>Seven active missions across Red and Blue; both orders are written down. <b>290 points is the conditional plan ceiling, not a verified match score.</b></p><p class="flag">A combined 2:30 run, exchanges and mission reliability still need evidence.</p></div>
-    <div class="t"><h3>Innovation Project</h3><p>Deforestation chosen. Problem framing, beneficiaries and three source links recorded.</p><p class="flag">Specific solution, explanatory drawing and a completed feedback → improvement cycle remain unverified.</p></div>
-    <div class="t"><h3>Boards &amp; evidence</h3><p>Innovation export recorded; Robot Design content and editable link still need confirmation. Seven logged attempts are available as iteration evidence.</p><p class="flag">A submitted draft is not a verified result. Keep the original work and explain changes.</p></div>
-    <div class="t"><h3>Event readiness</h3><p>First scrimmage: Saturday 24 October at Montverde Academy. See the Scrimmage tab.</p><p class="flag">Confirm the event packet; prepare for student-led judging and a presentation that works without AV or power.</p></div>
+    <div class="t"><h3>Robot game</h3><p>Scrimmage rounds: 240, 250 and 215. <b>Best official score: 250.</b> M06, M08, M10 and M11 scored in every round, and M15 scored in part.</p><p class="flag">M12 never scored. The M01, M03 and M15 bonuses were missed every round, and one round ended 30 seconds early with nothing left to run.</p></div>
+    <div class="t"><h3>Innovation Project</h3><p>Deforestation. At the scrimmage the problem came across clearly.</p><p class="flag">The solution didn't. It needs a specific idea with a drawing or prototype, several cited sources, and what the expert and the survey changed.</p></div>
+    <div class="t"><h3>Boards &amp; evidence</h3><p>Robot Design presented well. Judges asked mostly about process, and liked “worked 7 out of 9”.</p><p class="flag">Show why we picked each mission, a success count per mission, sensor use and what each student learned. Words for both boards are due 30 October; printing is 6 November.</p></div>
+    <div class="t"><h3>Event readiness</h3><p>Scrimmage done, 24 October at Montverde. Qualifier: Saturday 5 December, Lake County, still being confirmed.</p><p class="flag">Every student introduces themselves and their role in judging. Core Values learned by 6 November and quizzed on 13 November.</p></div>
   </div>
   <h3>Evidence by contributor</h3>
   <p class="note">These are continuing responsibilities and the latest recorded evidence, rather than assignments for a particular lesson. Everyone should understand the work and be able to answer in their own words.</p>
@@ -556,9 +962,9 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </section>
 
 <section id="lesson-plan">
-  <div class="shead"><span>OPTIONAL</span><h2>Next session</h2></div>
-  <!-- LESSON PLAN: replace this paragraph with a dated plan/link when ready, usually Thursday night. Remove or archive it after the session. Never change the status evidence date merely because a plan is posted. -->
-  <p class="note">No lesson plan is posted right now. When the next plan is ready, Coach Omar will add it here, usually on Thursday night. The season status above remains available between sessions.</p>
+  <div class="shead"><span>LESSON PLAN</span><h2>Next session</h2></div>
+  <!-- The plan itself lives in the This week tab (#week). Keep this pointer; never change the status evidence date merely because a plan is posted. -->
+  <p class="note">The plan for Friday 30 October, and what's coming on 6 and 13 November, is in the <a href="#week">This week</a> tab. Each student's own part is in <a href="#students">Students</a>.</p>
 </section>
 
 <section id="boards">
@@ -757,9 +1163,30 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 
 </div>
 
+<!-- ===================== COACHES ===================== -->
+<!-- The notes are encrypted. Edit admin/coaches.html (on Omar's Mac only, never in git), then run node scripts/build-coaches.mjs -->
+<div id="coaches" class="scrim" role="tabpanel" aria-labelledby="tab-coaches" hidden>
+<section>
+  <div class="shead"><span>COACH OMAR · COACH SHAZIA · COACH AAMIR</span><h2>Coaches only</h2></div>
+  <form class="lock" id="unlock">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <label class="rem"><input type="checkbox" id="remember"> Stay signed in on this device</label>
+    <button class="btn" type="submit">Open</button>
+    <p class="err" id="pw-err" role="alert" hidden>That's not the password.</p>
+  </form>
+  <p class="note" id="lock-note" style="margin-top:14px">These notes are encrypted. Without the password, this page holds only scrambled text.</p>
+  <div id="coaches-body" hidden>
+    <div class="coach-bar"><p class="note" style="margin:0">Only for Coach Omar, Coach Shazia and Coach Aamir. Please don't share the password.</p><button class="btn ghost" type="button" id="relock">Sign out</button></div>
+    <div id="coaches-notes"></div>
+  </div>
+</section>
+<!-- COACHES:BEGIN --><script type="application/json" id="coaches-blob">{"salt":"CTFrSZ786iDMMIgY4ZmC4g==","iv":"/Vrl1XOrBTCawyqO","iter":310000,"data":"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"}</script><!-- COACHES:END -->
+</div>
+
 <footer>
   <p>Ctrl+Alt+Defeat, WISE Academy, Orlando. FIRST LEGO League BIOGLOW 2026/27.</p>
-  <p>Team evidence: 9 October 2026 · guidance reviewed: 15 October 2026.</p><p>Edit <code>docs/index.html</code> and push to update. Mission code screenshots go in <code>docs/code/</code>, team photos in <code>docs/avatars/</code>.</p>
+  <p>Team evidence: 24 October 2026 · coach feedback: 29 October 2026 · guidance reviewed: 15 October 2026.</p><p>Edit <code>docs/index.html</code> and push to update. Mission code screenshots go in <code>docs/code/</code>, team photos in <code>docs/avatars/</code>.</p>
 </footer>
 
 </div>
@@ -790,10 +1217,12 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     });
   });
 
-  // Tabs. #season, or a link to any section inside it, opens the season hub.
-  var tabs = { scrimmage: document.getElementById('tab-scrimmage'), season: document.getElementById('tab-season') };
+  // Tabs. A tab's id, or a link to any element inside its panel, opens that tab.
+  var names = ['week', 'students', 'quiz', 'scrimmage', 'season', 'coaches'];
+  var tabs = {};
+  names.forEach(function(k){ tabs[k] = document.getElementById('tab-' + k); });
   function show(name){
-    Object.keys(tabs).forEach(function(k){
+    names.forEach(function(k){
       var on = k === name;
       tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
       tabs[k].tabIndex = on ? 0 : -1;
@@ -803,11 +1232,11 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   function fromHash(){
     var id = location.hash.slice(1);
     var el = id && document.getElementById(id);
-    var inSeason = el && (id === 'season' || el.closest('#season'));
-    show(inSeason ? 'season' : 'scrimmage');
-    if (inSeason && id !== 'season') el.scrollIntoView();
+    var panel = el && (names.indexOf(id) >= 0 ? el : el.closest('[role="tabpanel"]'));
+    show(panel ? panel.id : 'week');
+    if (panel && el !== panel) el.scrollIntoView();
   }
-  Object.keys(tabs).forEach(function(k){
+  names.forEach(function(k){
     tabs[k].addEventListener('click', function(){
       show(k);
       if (history.replaceState) history.replaceState(null, '', '#' + k);
@@ -815,11 +1244,142 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   });
   document.querySelector('.tabs').addEventListener('keydown', function(e){
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    var next = tabs.scrimmage.getAttribute('aria-selected') === 'true' ? 'season' : 'scrimmage';
+    var at = names.filter(function(k){ return tabs[k].getAttribute('aria-selected') === 'true'; })[0];
+    var i = names.indexOf(at) + (e.key === 'ArrowRight' ? 1 : -1);
+    var next = names[(i + names.length) % names.length];
     show(next); tabs[next].focus();
   });
   window.addEventListener('hashchange', fromHash);
   fromHash();
+
+  // Quizzes. Each question: the ask, the options, the index of the best one, and why.
+  var quizzes = {
+    cv: [
+      ['“We explore new skills and ideas.” Which Core Value is this?', ['Discovery', 'Innovation', 'Impact', 'Fun'], 0, 'Discovery is about trying things you haven\'t done before.'],
+      ['“We use creativity and persistence to solve problems.”', ['Teamwork', 'Innovation', 'Discovery', 'Impact'], 1, 'Innovation. Persistence counts: testing again and again until it works.'],
+      ['“We apply what we learn to improve our world.”', ['Inclusion', 'Innovation', 'Impact', 'Teamwork'], 2, 'Impact. Our Innovation Project on deforestation is our impact story.'],
+      ['“We respect each other and embrace our differences.”', ['Teamwork', 'Fun', 'Discovery', 'Inclusion'], 3, 'Inclusion. Everyone brings something different, and everyone gets a real job.'],
+      ['“We are stronger when we work together.”', ['Teamwork', 'Inclusion', 'Impact', 'Fun'], 0, 'Teamwork. One robot, eight people.'],
+      ['“We enjoy and celebrate what we do!”', ['Discovery', 'Impact', 'Fun', 'Innovation'], 2, 'Fun. Judges notice a team that enjoys itself.'],
+      ['Which of these is NOT a FIRST Core Value?', ['Inclusion', 'Winning', 'Discovery', 'Impact'], 1, 'There are six: Discovery, Innovation, Impact, Inclusion, Teamwork and Fun. Winning isn\'t one of them.'],
+      ['How much of the Champion\'s Award score comes from Core Values?', ['10%', '25%', '50%', 'None. It\'s a separate award'], 1, 'A quarter. Core Values, Innovation Project, Robot Design and Robot Game count equally.'],
+      ['When are judges and referees watching our Core Values?', ['Only in the judging room', 'Only at the robot table', 'All day: judging, the robot table and the pits', 'Only at the awards'], 2, 'All day. The robot game score sheet even has a Gracious Professionalism box for the referee.'],
+      ['At the scrimmage, referees scored our Gracious Professionalism out of 4 in each round. What did we get?', ['2, 2, 3', '3, 3, 3', '4, 3, 4', '4, 4, 4'], 2, 'Two “Exceeds” and one “Accomplished”. Let\'s make it 4 every round.'],
+      ['Ali tested Tangled again and again until it worked. Which Core Value is that, most of all?', ['Fun', 'Innovation', 'Inclusion', 'Impact'], 1, 'Innovation means creativity and persistence. Not giving up on a mission is persistence.'],
+      ['A new teammate has never coded. You show him how, and give him a real job on the robot. Which Core Value?', ['Inclusion', 'Discovery', 'Impact', 'Fun'], 0, 'Inclusion: respecting differences and making room for everyone.']
+    ],
+    wwyd: [
+      ['The robot stalls outside home with 40 seconds left. We\'ve already lost one token this match. Your teammate reaches for it.', ['Grab it fast and relaunch', 'Leave it, unless relaunching wins more than 15 points', 'Ask the referee to pause the match', 'Tell the other side to grab it'], 1, 'The first touch is free, because 5 tokens still pays 50. The second costs 15. Only touch the robot if the relaunch is worth more than that.', 'Robot game'],
+      ['A judge asks how a piece of our code works. You don\'t know, but Ali wrote it and he\'s standing next to you.', ['Make up an answer', 'Say “Ali wrote that part. Ali?” and let him answer', 'Say “We don\'t know”', 'Point at the slide'], 1, 'Judges want to see every student\'s part. Handing a question to the person who did the work is teamwork.', 'Teamwork'],
+      ['Another team\'s robot breaks in the pit, and they need a part we have a spare of.', ['Keep it, we might need it', 'Lend it, and ask if they need help', 'Tell them to ask the referee', 'Tell them we\'re busy'], 1, 'Helping another team is Gracious Professionalism, and people notice it.', 'Gracious Professionalism'],
+      ['A teammate freezes halfway through his part of the presentation.', ['Take over the rest of his part', 'Give him a quick prompt, like “Tell them about the expert”, so he can carry on', 'Wait in silence until he remembers', 'Tell the judges he\'s nervous'], 1, 'A small prompt keeps it his part. Taking over would hide what he knows.', 'Teamwork'],
+      ['The referee marks a mission “No”, but you\'re sure it scored.', ['Argue until they change it', 'Before you initial the sheet, politely ask them to look again, then accept the call', 'Initial it anyway and complain later', 'Ask a coach to argue for you'], 1, 'You can ask before you sign. When a call is unclear, the rules give the team the benefit of the doubt. Stay polite either way.', 'Gracious Professionalism'],
+      ['Your program has a bug and you\'re at the competition table. The fastest fix is to send it over Bluetooth.', ['Send it over Bluetooth', 'Go back to the pit and load it with the USB cable', 'Ask another team to load it for you', 'Skip that mission for good'], 1, 'Bluetooth on in the competition area can get us disqualified. USB only.', 'Rules'],
+      ['A teammate wants to try an attachment idea you\'re sure won\'t work.', ['Tell him no', 'Let him test it, and look at the results together', 'Build yours instead without telling him', 'Make the coach decide'], 1, 'Testing settles it. Either it works and we gain an idea, or we learn why not. That\'s Discovery and Inclusion.', 'Inclusion'],
+      ['All your missions are done, and there are 30 seconds left on the clock.', ['Stand and wait', 'Run the extra mission, if it can\'t knock anything we\'ve already scored', 'Launch anything, quickly', 'Start packing up the attachments'], 1, 'That\'s Ali\'s idea: spare time is free points. Just don\'t knock over the spider or snail habitats.', 'Innovation'],
+      ['A judge asks, “What did you learn this season?” Your mind goes blank.', ['Say “A lot”', 'Give one real example: something that failed, and how you fixed it', 'Let our best speaker answer for everyone', 'Read it off the trifold'], 1, 'One true story beats a big general answer. The rubric asks what each of us learned.', 'Communicate'],
+      ['At lunch, you see a kid from another team sitting alone and looking nervous.', ['Ignore it, he\'s not on our team', 'Go and say hi, introduce yourself, and give him one of our cards', 'Tell a coach', 'Take a photo'], 1, 'Introducing ourselves to other teams is part of Core Values, and it\'s the kind thing to do.', 'Inclusion'],
+      ['We have a bad round, and your teammate is upset about it.', ['Tell him it was his fault', 'Remind him only the best round counts, and plan the next one together', 'Leave him alone', 'Complain to the referee'], 1, 'Only our best round counts, so one bad round doesn\'t cost us. Keep it fun and fix it together.', 'Fun']
+    ]
+  };
+  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function renderQuiz(id){
+    var box = document.getElementById(id), qs = quizzes[id], right = 0, done = 0;
+    var score = document.getElementById(id + '-score');
+    function tally(){ score.textContent = done ? right + ' / ' + done + ' right' : qs.length + ' questions'; }
+    box.innerHTML = qs.map(function(q, i){
+      return '<div class="q"><span class="n">' + (i + 1) + (q[4] ? ' · ' + esc(q[4]) : '') + '</span>' +
+        '<p class="ask">' + esc(q[0]) + '</p><div class="opts">' +
+        q[1].map(function(o, j){ return '<button type="button" class="opt" data-q="' + i + '" data-o="' + j + '">' + esc(o) + '</button>'; }).join('') +
+        '</div><p class="why" hidden></p></div>';
+    }).join('');
+    box.onclick = function(e){
+      var b = e.target.closest('.opt');
+      if (!b || b.disabled) return;
+      var q = qs[+b.dataset.q], pick = +b.dataset.o, card = b.closest('.q');
+      card.querySelectorAll('.opt').forEach(function(o, j){
+        o.disabled = true;
+        if (j === q[2]) o.classList.add('right');
+        else if (j === pick) o.classList.add('wrong');
+      });
+      var ok = pick === q[2];
+      done++; if (ok) right++;
+      var why = card.querySelector('.why');
+      why.innerHTML = '<b class="' + (ok ? 'yes">Right. ' : 'no">Not quite. ') + '</b>' + esc(q[3]);
+      why.hidden = false;
+      tally();
+    };
+    tally();
+  }
+  Object.keys(quizzes).forEach(renderQuiz);
+  document.querySelectorAll('[data-reset]').forEach(function(b){
+    b.addEventListener('click', function(){ renderQuiz(b.dataset.reset); });
+  });
+
+  // Name all six.
+  var six = ['Discovery', 'Innovation', 'Impact', 'Inclusion', 'Teamwork', 'Fun'];
+  var got = document.getElementById('six-got');
+  function drawSix(found){
+    got.innerHTML = six.map(function(v){
+      var on = found && found.indexOf(v) >= 0;
+      return '<span class="' + (on ? 'on' : '') + '">' + (on ? v : '?') + '</span>';
+    }).join('');
+  }
+  document.getElementById('six-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var text = ' ' + document.getElementById('six-in').value.toLowerCase().replace(/[^a-z]+/g, ' ').replace(/team work/g, 'teamwork') + ' ';
+    var found = six.filter(function(v){ return text.indexOf(' ' + v.toLowerCase() + ' ') >= 0; });
+    drawSix(found);
+    if (found.length === 6) got.insertAdjacentHTML('beforeend', '<span class="on">All six!</span>');
+  });
+  drawSix();
+
+  // Coaches tab. The notes are AES-GCM encrypted with a key derived from the password (PBKDF2).
+  var blob = JSON.parse(document.getElementById('coaches-blob').textContent || '{}');
+  var form = document.getElementById('unlock'), err = document.getElementById('pw-err');
+  var body = document.getElementById('coaches-body'), notes = document.getElementById('coaches-notes');
+  var STORE = 'cad-coaches-key';
+  function bytes(b64){ return Uint8Array.from(atob(b64), function(c){ return c.charCodeAt(0); }); }
+  function b64(buf){ return btoa(String.fromCharCode.apply(null, new Uint8Array(buf))); }
+  function keyFrom(pw){
+    return crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']).then(function(base){
+      return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: bytes(blob.salt), iterations: blob.iter, hash: 'SHA-256' },
+        base, { name: 'AES-GCM', length: 256 }, true, ['decrypt']);
+    });
+  }
+  function openWith(key){
+    return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(blob.iv) }, key, bytes(blob.data)).then(function(plain){
+      notes.innerHTML = new TextDecoder().decode(plain);
+      form.hidden = true; document.getElementById('lock-note').hidden = true; body.hidden = false;
+      return key;
+    });
+  }
+  function forget(){ try { localStorage.removeItem(STORE); } catch (e) {} }
+  if (blob.data && window.crypto && crypto.subtle) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      err.hidden = true;
+      keyFrom(document.getElementById('pw').value).then(openWith).then(function(key){
+        document.getElementById('pw').value = '';
+        if (!document.getElementById('remember').checked) return;
+        return crypto.subtle.exportKey('raw', key).then(function(raw){
+          try { localStorage.setItem(STORE, JSON.stringify({ salt: blob.salt, key: b64(raw) })); } catch (e) {}
+        });
+      }).catch(function(){ err.hidden = false; });
+    });
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(STORE)); } catch (e) {}
+    if (saved && saved.salt === blob.salt) {
+      crypto.subtle.importKey('raw', bytes(saved.key), 'AES-GCM', false, ['decrypt']).then(openWith).catch(forget);
+    } else if (saved) forget();
+    document.getElementById('relock').addEventListener('click', function(){
+      forget(); notes.innerHTML = '';
+      body.hidden = true; form.hidden = false; document.getElementById('lock-note').hidden = false;
+    });
+  } else {
+    form.hidden = true;
+    document.getElementById('lock-note').textContent = 'The coaches\' notes need a newer browser, served over https.';
+  }
 })();
 </script>
 </body>
