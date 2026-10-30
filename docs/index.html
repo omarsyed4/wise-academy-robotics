@@ -402,6 +402,16 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .scrim .next .t p{margin:0;font-size:13.5px}
 .scrim .next .t .d{font-family:var(--mono);font-size:11px;color:var(--gold)}
 
+/* ============ scratch ============ */
+.sx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.sx{grid-template-columns:1fr}}
+.sx .sxpic{display:block;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--surface-2)}
+.sx .sxpic:hover{border-color:var(--blue)}
+.sx .sxpic img{display:block;width:100%;height:auto}
+.sx .t > p{margin:0;font-size:13.5px}
+.sx .t > p.learn{font-family:var(--mono);font-size:11px;color:var(--gold);line-height:1.5}
+.sx .open{margin-top:auto}
+
 /* ============ score sheets ============ */
 .scrim .sheets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
 @media (max-width:760px){.scrim .sheets{grid-template-columns:1fr}}
@@ -490,6 +500,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   <button type="button" role="tab" id="tab-week" aria-controls="week" aria-selected="true">This week</button>
   <button type="button" role="tab" id="tab-students" aria-controls="students" aria-selected="false">Students</button>
   <button type="button" role="tab" id="tab-quiz" aria-controls="quiz" aria-selected="false">Quizzes</button>
+  <button type="button" role="tab" id="tab-scratch" aria-controls="scratch" aria-selected="false">Scratch</button>
   <button type="button" role="tab" id="tab-scrimmage" aria-controls="scrimmage" aria-selected="false">Scrimmage</button>
   <button type="button" role="tab" id="tab-season" aria-controls="season" aria-selected="false">Season hub</button>
   <button type="button" role="tab" id="tab-coaches" aria-controls="coaches" aria-selected="false">Coaches<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
@@ -746,6 +757,42 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   <div class="qhead"><h3>3 · What would you do?</h3><span><span class="qscore" id="wwyd-score" aria-live="polite"></span> <button class="btn ghost" type="button" data-reset="wwyd">Start over</button></span></div>
   <p class="note" style="margin:6px 0 0">Real situations from robot game, judging and the pits. Pick what you'd actually do.</p>
   <div class="quiz" id="wwyd"></div>
+</section>
+</div>
+
+<!-- ===================== SCRATCH ===================== -->
+<!-- One card per weekly project, newest first. The .sb3 files in docs/scratch/ are copied there by each week's build.py in "Scratch Projects/". -->
+<div id="scratch" class="scrim" role="tabpanel" aria-labelledby="tab-scratch" hidden>
+<section>
+  <div class="shead"><span>ONE PROJECT A WEEK</span><h2>Scratch projects</h2></div>
+  <p class="note">Download the project, open it in Scratch, and follow the yellow notes. The art and sounds are already in it. You add the code.</p>
+
+  <div class="sx">
+    <article class="t" id="deep-sea-maze">
+      <a class="sxpic" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3" tabindex="-1"><img src="scratch/deep-sea-maze.jpg" width="640" height="480" alt="The Deep Sea Maze stage: an orange anglerfish at the top left of a teal cave maze, a pink jellyfish in the middle tunnel, and a pearl in a clam at the bottom right."></a>
+      <div class="who"><h3>Week 2 · Deep Sea Maze</h3><span class="tag t-green">New</span></div>
+      <p class="job">Steer an anglerfish through an underwater cave to the pearl. The walls and a jellyfish send you back to the start.</p>
+      <p class="learn">5 missions · arrow keys in a forever loop, touching a color, glide, a stopwatch on the Stage</p>
+      <a class="open" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3">Download Deep Sea Maze</a>
+    </article>
+    <article class="t" id="firefly-catcher">
+      <a class="sxpic" href="scratch/firefly-catcher.sb3" download="Firefly Catcher.sb3" tabindex="-1"><img src="scratch/firefly-catcher.jpg" width="640" height="480" alt="The Firefly Catcher stage: a glowing firefly above an empty glass jar in a night forest under the moon." loading="lazy"></a>
+      <div class="who"><h3>Week 1 · Firefly Catcher</h3></div>
+      <p class="job">Move a jar left and right to catch the fireflies falling from the sky.</p>
+      <p class="learn">4 missions · when key pressed, forever, if touching, pick random, a Score variable</p>
+      <a class="open" href="scratch/firefly-catcher.sb3" download="Firefly Catcher.sb3">Download Firefly Catcher</a>
+    </article>
+  </div>
+
+  <h3 class="sub">How to open it</h3>
+  <ol class="plain">
+    <li>Click <b>Download</b>. The file goes to your Downloads folder.</li>
+    <li>Go to <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">scratch.mit.edu</a> and click <b>Create</b>.</li>
+    <li>Click <b>File</b>, then <b>Load from your computer</b>, and pick the file you downloaded.</li>
+    <li>Read the yellow notes. The Stage has the list of missions, and each sprite has its own. Click a sprite under the stage to see its note.</li>
+    <li>Click the green flag after every mission to test it.</li>
+    <li>Before you leave: <b>File</b>, then <b>Save to your computer</b>.</li>
+  </ol>
 </section>
 </div>
 
@@ -1218,7 +1265,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   });
 
   // Tabs. A tab's id, or a link to any element inside its panel, opens that tab.
-  var names = ['week', 'students', 'quiz', 'scrimmage', 'season', 'coaches'];
+  var names = ['week', 'students', 'quiz', 'scratch', 'scrimmage', 'season', 'coaches'];
   var tabs = {};
   names.forEach(function(k){ tabs[k] = document.getElementById('tab-' + k); });
   function show(name){
