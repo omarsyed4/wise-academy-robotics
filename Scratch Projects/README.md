@@ -13,7 +13,7 @@ Students download the Starters from the **Scratch** tab on the team website (htt
 
 - **`<Title> - Starter.sb3`** is what students open. It has the art, sounds and sprites, plus one example script. Each sprite has a yellow note with its missions written out block by block, and the Stage's note lists the order to do them in. "Done? Try these" ideas go at the bottom of the last note.
 - **`<Title> - Solution.sb3`** is the answer key: the finished game, including the try-these ideas.
-- **`build.py`** generates both files, and copies the Starter to `docs/scratch/<title>.sb3` for the website. Change it and rerun it instead of editing the `.sb3` files by hand. Rebuilds are byte-identical, so Git only shows real changes.
+- **`build.py`** generates both files. For the website it also copies the Starter to `docs/scratch/<slug>.sb3`, and splits it into `docs/scratch/<slug>/backdrop.svg` and one `.sprite3` per sprite, for students who start from a blank project and use Upload Backdrop and Upload Sprite. Change it and rerun it instead of editing the `.sb3` files by hand. Rebuilds are byte-identical, so Git only shows real changes.
 - **`art.py`**, when there is one, holds that week's pictures and sounds.
 
 ```bash
@@ -22,7 +22,7 @@ python3 "Scratch Projects/01 Firefly Catcher/build.py"
 
 `scratchkit.py` holds what every week shares: the block helpers (named after the Scratch palette), sound synthesis, notes that size themselves to their text, sprites and packaging.
 
-To add a new week to the website: run its `build.py`, save a 640×480 picture of the stage as `docs/scratch/<title>.jpg`, and add a card at the top of the Scratch tab in `docs/index.html`. Only the Starter goes on the website. The Solution stays here, but the repo is public, so a determined student could find it.
+To add a new week to the website: run its `build.py`, save a 640×480 picture of the stage as `docs/scratch/<slug>.jpg`, and add a card at the top of the Scratch tab in `docs/index.html`. Then write that week's missions under "the code" as `<pre class="blocks">` text in [scratchblocks syntax](https://scratchblocks.github.io/), which the page draws as real Scratch blocks. Move the previous week's code into a collapsed `<details>`, like Firefly Catcher's. Only the Starter goes on the website. The Solution stays here, but the repo is public, so a determined student could find it.
 
 Week 1 also has a `Full version/` folder with a harder game built from the same art. It has a 30-second timer, a bat to dodge and a TIME'S UP banner, and takes students about an hour. Use it as a follow-up week if the class is ready.
 
@@ -38,4 +38,6 @@ Week 1 also has a `Full version/` folder with a harder game built from the same 
 - `touching color` only works if the walls are one flat color: no outlines, gradients or decorations on them. The maze is drawn as flat rock with water tunnels cut into it, and the thick border gives students a big target for the eyedropper.
 - Put a win check that says something for 2 seconds inside the moving sprite's own forever loop. Then the sprite freezes while it celebrates. When the check sat on the Pearl, the fish could keep swimming, hit a wall and jump back to the start in the middle of "You made it!".
 - The fish is about 31 × 21 in tunnels 50 wide. A scripted run at 4 steps per frame got through the whole maze without touching a wall, and the jellyfish crossing leaves about a second to get through.
+- Sprites with no `go to` in their scripts can land somewhere else when uploaded into a blank project, so every sprite that matters to the game gets a `go to x: y:` under its green flag (the Pearl does).
+- Scratch's color menu has no hex box. The website gives the wall color as slider values (Color 49, Saturation 84, Brightness 56), which match the wall closely enough for `touching color`.
 - To test a game in the browser pane, package it with `@turbowarp/packager`, serve it on localhost, and press keys with `scaffolding.vm.postIOData('keyboard', {key: 'ArrowRight', isDown: true})`.

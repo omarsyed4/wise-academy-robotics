@@ -27,6 +27,7 @@ JELLY_TOP = stage_xy(3, 0)  # 0, 116
 JELLY_BOTTOM = stage_xy(3, 4)
 JELLY2 = (stage_xy(2, 4), stage_xy(0, 4))  # solution only: guards the bottom-left tunnel
 SPEED = 4
+WALL_SLIDERS = (49, 84, 56)  # Color, Saturation, Brightness in Scratch's color menu: close enough to ROCK to match
 
 
 # ---------------------------------------------------------------- missions
@@ -101,20 +102,21 @@ Inside the forever, under the four ifs, add:
       start sound Bonk
       go to x: {START[0]} y: {START[1]}
 
-To set the color: click the color circle in the touching block, click the eyedropper at the bottom of the menu, then click the thick teal border on the stage.
+To set the color: click the color circle in the touching block, click the eyedropper at the bottom of the menu, then click the thick teal border on the stage. Or set the sliders to Color {WALL_SLIDERS[0]}, Saturation {WALL_SLIDERS[1]}, Brightness {WALL_SLIDERS[2]}.
 
 Test it: bump a wall. The fish should jump back to the start.
 
 Next: click the Pearl for Mission 3.
 """
 
-PEARL_TASK = """
+PEARL_TASK = f"""
 PEARL: MISSION 3
 
 MISSION 3: HOME!
 Part A: make the pearl sparkle. The Pearl has two costumes, shine and plain.
 
 when green flag clicked
+   go to x: {PEARL[0]} y: {PEARL[1]}
    forever
       next costume
       wait 0.3 seconds
@@ -221,7 +223,7 @@ def build(with_code):
         ),
     ], x=20, y=140)
 
-    emit(pearl_s["blocks"], [when_flag(), forever(next_costume(), wait(0.3))], x=20, y=140)
+    emit(pearl_s["blocks"], [when_flag(), go_to_xy(*PEARL), forever(next_costume(), wait(0.3))], x=20, y=140)
     emit(jelly["blocks"], [when_flag(), forever(change_effect("COLOR", 25), wait(0.5))], x=520, y=140)
 
     def patrol(sprite, here, there, secs):

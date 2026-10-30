@@ -408,9 +408,28 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .sx .sxpic{display:block;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--surface-2)}
 .sx .sxpic:hover{border-color:var(--blue)}
 .sx .sxpic img{display:block;width:100%;height:auto}
-.sx .t > p{margin:0;font-size:13.5px}
+.sx .t > p,.sxm .t > p{margin:0;font-size:13.5px}
 .sx .t > p.learn{font-family:var(--mono);font-size:11px;color:var(--gold);line-height:1.5}
-.sx .open{margin-top:auto}
+.sx .t .more{grid-column:1/-1;margin:2px 0 0;font-size:12.5px;text-align:center;color:var(--ink-3)}
+.sx .t .more a{color:var(--blue);text-decoration:none;font-weight:600}
+.sx .t .more a:hover{text-decoration:underline}
+.sxways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.sxways{grid-template-columns:1fr}}
+.sxways .t ol{font-size:13.5px}
+.sxways .t b{color:var(--ink);font-weight:600}
+.sxm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px;align-items:start}
+@media (max-width:760px){.sxm{grid-template-columns:1fr}}
+.sxm .t b{color:var(--ink);font-weight:600}
+.sxm .t > p.part{display:flex;align-items:baseline;gap:8px;color:var(--ink-3);font-size:12.5px;margin-top:4px}
+.sxm .t > p.tip{font-size:12.5px;border-left:2px solid var(--gold);padding-left:9px}
+.sxm pre.blocks{margin:0;font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--ink-2);white-space:pre;overflow-x:auto}
+.sxm .scratchblocks{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.sxm .scratchblocks svg{display:block;max-width:100%;height:auto}  /* wide scripts shrink to fit a phone */
+.sxm ul.tries{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px;color:var(--ink-2)}
+.sxm ul.tries li{display:list-item}
+.sxm ul.tries li::before{display:none}
+.scrim details.sxold{margin-top:38px}
+.scrim details.sxold .sxm{margin:0;padding:0 16px 16px}
 
 /* ============ score sheets ============ */
 .scrim .sheets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
@@ -761,11 +780,11 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <!-- ===================== SCRATCH ===================== -->
-<!-- One card per weekly project, newest first. The .sb3 files in docs/scratch/ are copied there by each week's build.py in "Scratch Projects/". -->
+<!-- One card per weekly project, newest first. Each week's build.py in "Scratch Projects/" copies the Starter to docs/scratch/<slug>.sb3 and its backdrop and sprites to docs/scratch/<slug>/. The blocks under "the code" are scratchblocks text, drawn by scratch/scratchblocks-3.7.1.min.js. -->
 <div id="scratch" class="scrim" role="tabpanel" aria-labelledby="tab-scratch" hidden>
 <section>
   <div class="shead"><span>ONE PROJECT A WEEK</span><h2>Scratch projects</h2></div>
-  <p class="note">Download the project, open it in Scratch, and follow the yellow notes. The art and sounds are already in it. You add the code.</p>
+  <p class="note">Get the project, open it in Scratch, and build the code. The blocks for every mission are further down this page.</p>
 
   <div class="sx">
     <article class="t" id="deep-sea-maze">
@@ -773,26 +792,176 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
       <div class="who"><h3>Week 2 · Deep Sea Maze</h3><span class="tag t-green">New</span></div>
       <p class="job">Steer an anglerfish through an underwater cave to the pearl. The walls and a jellyfish send you back to the start.</p>
       <p class="learn">5 missions · arrow keys in a forever loop, touching a color, glide, a stopwatch on the Stage</p>
-      <a class="open" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3">Download Deep Sea Maze</a>
+      <div class="acts">
+        <a class="open" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3">Whole project</a>
+        <a class="upl" href="scratch/deep-sea-maze/backdrop.svg" download="Deep Sea Maze backdrop.svg">Backdrop</a>
+        <p class="more">Sprites: <a href="scratch/deep-sea-maze/Fish.sprite3" download="Fish.sprite3">Fish</a> · <a href="scratch/deep-sea-maze/Pearl.sprite3" download="Pearl.sprite3">Pearl</a> · <a href="scratch/deep-sea-maze/Jellyfish.sprite3" download="Jellyfish.sprite3">Jellyfish</a> · <a href="#code-deep-sea-maze">See the code</a></p>
+      </div>
     </article>
     <article class="t" id="firefly-catcher">
       <a class="sxpic" href="scratch/firefly-catcher.sb3" download="Firefly Catcher.sb3" tabindex="-1"><img src="scratch/firefly-catcher.jpg" width="640" height="480" alt="The Firefly Catcher stage: a glowing firefly above an empty glass jar in a night forest under the moon." loading="lazy"></a>
       <div class="who"><h3>Week 1 · Firefly Catcher</h3></div>
       <p class="job">Move a jar left and right to catch the fireflies falling from the sky.</p>
       <p class="learn">4 missions · when key pressed, forever, if touching, pick random, a Score variable</p>
-      <a class="open" href="scratch/firefly-catcher.sb3" download="Firefly Catcher.sb3">Download Firefly Catcher</a>
+      <div class="acts">
+        <a class="open" href="scratch/firefly-catcher.sb3" download="Firefly Catcher.sb3">Whole project</a>
+        <a class="upl" href="scratch/firefly-catcher/backdrop.svg" download="Firefly Catcher backdrop.svg">Backdrop</a>
+        <p class="more">Sprites: <a href="scratch/firefly-catcher/Firefly.sprite3" download="Firefly.sprite3">Firefly</a> · <a href="scratch/firefly-catcher/Jar.sprite3" download="Jar.sprite3">Jar</a> · <a href="#code-firefly-catcher">See the code</a></p>
+      </div>
     </article>
   </div>
 
-  <h3 class="sub">How to open it</h3>
-  <ol class="plain">
-    <li>Click <b>Download</b>. The file goes to your Downloads folder.</li>
-    <li>Go to <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">scratch.mit.edu</a> and click <b>Create</b>.</li>
-    <li>Click <b>File</b>, then <b>Load from your computer</b>, and pick the file you downloaded.</li>
-    <li>Read the yellow notes. The Stage has the list of missions, and each sprite has its own. Click a sprite under the stage to see its note.</li>
-    <li>Click the green flag after every mission to test it.</li>
-    <li>Before you leave: <b>File</b>, then <b>Save to your computer</b>.</li>
-  </ol>
+  <h3 class="sub">Open it in Scratch</h3>
+  <div class="sxways">
+    <div class="t">
+      <div class="who"><h3>The whole project</h3><span class="tag t-green">Easiest</span></div>
+      <ol>
+        <li><span>Click <b>Whole project</b>. The file goes to your Downloads folder.</span></li>
+        <li><span>Go to <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">scratch.mit.edu</a> and click <b>Create</b>.</span></li>
+        <li><span>Click <b>File</b>, then <b>Load from your computer</b>, and pick the file.</span></li>
+        <li><span>The backdrop, sprites and sounds are all there, with yellow notes that explain each mission.</span></li>
+      </ol>
+    </div>
+    <div class="t">
+      <div class="who"><h3>Or start from a blank project</h3></div>
+      <ol>
+        <li><span>Click <b>Backdrop</b>, then each sprite under it.</span></li>
+        <li><span>In Scratch, click <b>Create</b>. Point at the <b>Choose a Backdrop</b> button (bottom right), click <b>Upload Backdrop</b>, and pick the backdrop file.</span></li>
+        <li><span>Point at <b>Choose a Sprite</b>, click <b>Upload Sprite</b>, and pick a sprite file. Do this once for each sprite. Its sounds come with it.</span></li>
+        <li><span>Delete the cat: right-click it under the stage and choose <b>delete</b>.</span></li>
+      </ol>
+    </div>
+  </div>
+  <p class="note" style="margin-top:14px">Before you leave, click <b>File</b>, then <b>Save to your computer</b>.</p>
+
+  <h3 class="sub" id="code-deep-sea-maze">Deep Sea Maze: the code</h3>
+  <p class="note" style="margin:6px 0 0">Click the sprite under the stage first, then build its blocks. Click the green flag after every mission to test it.</p>
+  <div class="sxm">
+    <article class="t">
+      <div class="who"><h3>1 · Swim</h3><span class="tag t-gold">Fish</span></div>
+      <p>The right arrow comes already built. Right-click its <b>if</b> block, choose <b>Duplicate</b>, and make one for each arrow. Up and down use <b>change y</b> and don't need <b>point in direction</b>.</p>
+<pre class="blocks">when green flag clicked
+go to x: (-192) y: (116)
+forever
+  if &lt;key (right arrow v) pressed?&gt; then
+    point in direction (90)
+    change x by (4)
+  end
+  if &lt;key (left arrow v) pressed?&gt; then
+    point in direction (-90)
+    change x by (-4)
+  end
+  if &lt;key (up arrow v) pressed?&gt; then
+    change y by (4)
+  end
+  if &lt;key (down arrow v) pressed?&gt; then
+    change y by (-4)
+  end
+end</pre>
+    </article>
+    <article class="t">
+      <div class="who"><h3>2 · Walls</h3><span class="tag t-gold">Fish</span></div>
+      <p>Put this inside the <b>forever</b>, under the four ifs.</p>
+<pre class="blocks">if &lt;touching color [#178f8a]?&gt; then
+  start sound (Bonk v)
+  go to x: (-192) y: (116)
+end</pre>
+      <p class="tip"><b>Setting the color:</b> click the color circle in the block, click the eyedropper at the bottom, then click the teal wall on the stage. Or set the sliders to <b>Color 49</b>, <b>Saturation 84</b>, <b>Brightness 56</b>.</p>
+    </article>
+    <article class="t">
+      <div class="who"><h3>3 · Home!</h3><span class="tags"><span class="tag t-blue">Pearl</span> <span class="tag t-gold">Fish</span></span></div>
+      <p class="part"><span class="tag t-blue">Pearl</span><span>A new script. The pearl sparkles by switching between its two costumes.</span></p>
+<pre class="blocks">when green flag clicked
+go to x: (192) y: (-140)
+forever
+  next costume
+  wait (0.3) seconds
+end</pre>
+      <p class="part"><span class="tag t-gold">Fish</span><span>Inside the Fish's <b>forever</b>.</span></p>
+<pre class="blocks">if &lt;touching (Pearl v)?&gt; then
+  start sound (Win v)
+  say [I made it home!] for (2) seconds
+  stop [all v]
+end</pre>
+    </article>
+    <article class="t">
+      <div class="who"><h3>4 · Sting!</h3><span class="tags"><span class="tag t-red">Jellyfish</span> <span class="tag t-gold">Fish</span></span></div>
+      <p class="part"><span class="tag t-red">Jellyfish</span><span>A new script. It floats up and down the middle tunnel.</span></p>
+<pre class="blocks">when green flag clicked
+go to x: (0) y: (116)
+forever
+  glide (2) secs to x: (0) y: (-140)
+  glide (2) secs to x: (0) y: (116)
+end</pre>
+      <p class="part"><span class="tag t-gold">Fish</span><span>Inside the Fish's <b>forever</b>.</span></p>
+<pre class="blocks">if &lt;touching (Jellyfish v)?&gt; then
+  start sound (Zap v)
+  go to x: (-192) y: (116)
+end</pre>
+    </article>
+    <article class="t">
+      <div class="who"><h3>5 · Stopwatch</h3><span class="tag t-green">Stage</span></div>
+      <p>First go to <b>Variables</b>, click <b>Make a Variable</b>, and name it <b>Seconds</b>. Then click the Stage (bottom right) and build this.</p>
+<pre class="blocks">when green flag clicked
+set [Seconds v] to (0)
+forever
+  wait (1) seconds
+  change [Seconds v] by (1)
+end</pre>
+      <p>How fast can you get home? Write down your best time, then try to beat it.</p>
+    </article>
+    <article class="t">
+      <div class="who"><h3>Done? Try these</h3></div>
+      <ul class="tries">
+        <li>Make the jellyfish glow. Give it a second green flag script: <b>forever</b>, <b>change color effect by 25</b>, <b>wait 0.5 seconds</b>.</li>
+        <li>Count bumps with a <b>Bumps</b> variable. Set it to 0 at the start, and add 1 every time the fish hits a wall.</li>
+        <li>Add a second jellyfish: right-click the Jellyfish and choose <b>duplicate</b>. Move it to another tunnel and change its glides. The Fish needs a <b>touching Jellyfish2</b> check too.</li>
+        <li>Too easy? Glide the jellyfish in 1 second, or make the fish slower.</li>
+        <li>Draw your own maze on a new backdrop. Use the same teal for the walls: the paint editor's color menu has an eyedropper too.</li>
+      </ul>
+    </article>
+  </div>
+
+  <details class="kid sxold" id="code-firefly-catcher">
+    <summary><span class="nm">Firefly Catcher: the code</span><span class="chev" aria-hidden="true"></span><span class="sum">Week 1 · 4 missions</span></summary>
+    <div class="sxm">
+      <article class="t">
+        <div class="who"><h3>1 · Move the jar</h3><span class="tag t-blue">Jar</span></div>
+        <p>The right arrow comes already built. Right-click it, choose <b>Duplicate</b>, and change it to the left arrow and -20.</p>
+<pre class="blocks">when [right arrow v] key pressed
+change x by (20)
+
+when [left arrow v] key pressed
+change x by (-20)</pre>
+      </article>
+      <article class="t">
+        <div class="who"><h3>2 · Fall</h3><span class="tag t-gold">Firefly</span></div>
+        <p>The firefly starts somewhere random at the top and falls. Test it: it gets stuck at the bottom.</p>
+<pre class="blocks">when green flag clicked
+go to x: (pick random (-200) to (200)) y: (150)
+forever
+  change y by (-4)
+end</pre>
+      </article>
+      <article class="t">
+        <div class="who"><h3>3 · Start over</h3><span class="tag t-gold">Firefly</span></div>
+        <p>Put this inside the <b>forever</b>.</p>
+<pre class="blocks">if &lt;touching (edge v)?&gt; then
+  go to x: (pick random (-200) to (200)) y: (150)
+end</pre>
+      </article>
+      <article class="t">
+        <div class="who"><h3>4 · Score</h3><span class="tag t-gold">Firefly</span></div>
+        <p>Make a variable called <b>Score</b>. Put <b>set Score to 0</b> right under the green flag block, and the <b>if</b> inside the <b>forever</b>.</p>
+<pre class="blocks">set [Score v] to (0)</pre>
+<pre class="blocks">if &lt;touching (Jar v)?&gt; then
+  change [Score v] by (1)
+  start sound (Chime v)
+  go to x: (pick random (-200) to (200)) y: (150)
+end</pre>
+      </article>
+    </div>
+  </details>
 </section>
 </div>
 
@@ -1428,6 +1597,20 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     document.getElementById('lock-note').textContent = 'The coaches\' notes need a newer browser, served over https.';
   }
 })();
+</script>
+<script src="scratch/scratchblocks-3.7.1.min.js" defer></script>
+<script>
+  // Draws the Scratch tab's code as real Scratch blocks. Without the script, the text version stays readable.
+  document.addEventListener('DOMContentLoaded', function(){
+    if (window.scratchblocks) scratchblocks.renderMatching('pre.blocks', {style: 'scratch3', languages: ['en'], scale: 0.675});
+  });
+  // "See the code" for an older week links to a collapsed section, so open it.
+  function openLinked(){
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  window.addEventListener('hashchange', openLinked);
+  openLinked();
 </script>
 </body>
 </html>

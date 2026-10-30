@@ -362,25 +362,47 @@ def monitor(var, x, y):
             "sliderMin": 0, "sliderMax": 100, "isDiscrete": True}
 
 
-def package(targets, assets, monitors):
-    project = {"targets": targets, "monitors": monitors, "extensions": [],
-               "meta": {"semver": "3.0.0", "vm": "0.2.0", "agent": "WISE Academy scratchkit"}}
+def _zip(files):
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        files = [("project.json", json.dumps(project, separators=(",", ":")).encode())] + sorted(assets.files.items())
         for name, data in files:
             # A fixed date keeps rebuilds byte-identical, so Git only sees real changes.
             z.writestr(zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0)), data, zipfile.ZIP_DEFLATED)
     return buf.getvalue()
 
 
+def package(targets, assets, monitors):
+    project = {"targets": targets, "monitors": monitors, "extensions": [],
+               "meta": {"semver": "3.0.0", "vm": "0.2.0", "agent": "WISE Academy scratchkit"}}
+    return _zip([("project.json", json.dumps(project, separators=(",", ":")).encode())] + sorted(assets.files.items()))
+
+
+def export_pieces(sb3, folder):
+    """Splits a project into files students can add to a blank project: backdrop.svg for
+    Upload Backdrop, and <Sprite>.sprite3 (costumes, sounds, notes and any code) for Upload Sprite."""
+    folder.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(io.BytesIO(sb3)) as z:
+        project = json.loads(z.read("project.json"))
+        for t in project["targets"]:
+            if t["isStage"]:
+                (folder / "backdrop.svg").write_bytes(z.read(t["costumes"][t["currentCostume"]]["md5ext"]))
+                continue
+            used = sorted({a["md5ext"] for a in t["costumes"] + t["sounds"]})
+            sprite = dict(t, variables={}, lists={}, broadcasts={})
+            (folder / f"{t['name']}.sprite3").write_bytes(
+                _zip([("sprite.json", json.dumps(sprite, separators=(",", ":")).encode())]
+                     + [(name, z.read(name)) for name in used]))
+
+
 def write_pair(folder, title, build):
-    """build(with_code) returns sb3 bytes. Writes '<title> - Starter.sb3' and '<title> - Solution.sb3',
-    and copies the Starter to docs/scratch/<title-in-kebab-case>.sb3 for the website to link to."""
+    """build(with_code) returns sb3 bytes. Writes '<title> - Starter.sb3' and '<title> - Solution.sb3'.
+    For the website, copies the Starter to docs/scratch/<slug>.sb3 and its pieces to docs/scratch/<slug>/."""
     for label, with_code in (("Starter", False), ("Solution", True)):
         out = folder / f"{title} - {label}.sb3"
         out.write_bytes(build(with_code))
         print(f"wrote {out.name}  ({out.stat().st_size // 1024} KB)")
-    site = WEBSITE / (title.lower().replace(" ", "-") + ".sb3")
-    site.write_bytes((folder / f"{title} - Starter.sb3").read_bytes())
-    print(f"copied the Starter to docs/scratch/{site.name}")
+    slug = title.lower().replace(" ", "-")
+    starter = (folder / f"{title} - Starter.sb3").read_bytes()
+    (WEBSITE / f"{slug}.sb3").write_bytes(starter)
+    export_pieces(starter, WEBSITE / slug)
+    print(f"copied the Starter to docs/scratch/{slug}.sb3, and its backdrop and sprites to docs/scratch/{slug}/")
