@@ -791,8 +791,8 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     <article class="t" id="shark-chase">
       <a class="sxpic" href="#code-shark-chase" tabindex="-1"><img src="scratch/shark-chase.jpg" width="640" height="480" alt="The Shark Chase stage: a clownfish on the left, a shark at the top right, and a pink starfish on an underwater reef."></a>
       <div class="who"><h3>Week 2 · Shark Chase</h3><span class="tag t-green">New</span></div>
-      <p class="job">Swim the fish to collect starfish, and don't let the shark catch you.</p>
-      <p class="learn">4 missions · arrow keys in a forever loop, point towards, go to random position, a Score variable</p>
+      <p class="job">Swim the fish to collect starfish, and don't let the shark catch you. Every starfish makes the shark faster, and you have 30 seconds.</p>
+      <p class="learn">6 short missions · arrow keys in a forever loop, point towards, go to random position, a Score variable, a countdown on the Stage</p>
       <div class="acts">
         <a class="open" href="#code-shark-chase">See the code</a>
         <a class="upl" href="scratch/shark-chase.sb3" download="Shark Chase.sb3">Starter file</a>
@@ -878,10 +878,28 @@ end</pre>
 end</pre>
     </article>
     <article class="t">
+      <div class="who"><h3>5 · Faster</h3><span class="tag t-blue">Shark</span></div>
+      <p>Go to <b>Variables</b> and drag the orange <b>Score</b> block into the <b>2</b> of <b>move 2 steps</b>.</p>
+<pre class="blocks">move (Score) steps</pre>
+      <p>Every starfish makes the shark 1 step faster. It waits for you to grab the first one.</p>
+    </article>
+    <article class="t">
+      <div class="who"><h3>6 · Countdown</h3><span class="tag t-green">Stage</span></div>
+      <p>Make a variable called <b>Time</b>. Then click the Stage (bottom right) and build this.</p>
+<pre class="blocks">when green flag clicked
+set [Time v] to (30)
+repeat (30)
+  wait (1) seconds
+  change [Time v] by (-1)
+end
+stop [all v]</pre>
+      <p>How many starfish can you get before time runs out?</p>
+    </article>
+    <article class="t">
       <div class="who"><h3>Done? Try these</h3></div>
       <ul class="tries">
         <li>Add sounds. Put <b>start sound Collect</b> inside the Starfish's <b>if</b>, and <b>play sound Chomp until done</b> just above the Shark's <b>stop all</b>.</li>
-        <li>Make the shark faster: change <b>move 2 steps</b> to 3.</li>
+        <li>Give yourself more time: change both 30s in the countdown to 60.</li>
         <li>Add a second shark. Right-click the Shark, choose <b>duplicate</b>, and change where it starts.</li>
         <li>Change your fish. The Fish has four costumes. Add <b>when space key pressed</b>, <b>next costume</b>.</li>
         <li>Pick a different backdrop, or paint your own.</li>

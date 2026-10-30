@@ -9,7 +9,7 @@ Students follow the **Scratch** tab on the team website (https://omarsyed4.githu
 | Week | Project | What it teaches |
 |---|---|---|
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
-| 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a Score variable. All library sprites (Fish, Shark, Starfish) |
+| 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a variable as a block's number (`move (Score) steps`), a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
 
 ## What's in each week's folder
 
@@ -37,7 +37,7 @@ Week 1 also has a `Full version/` folder with a harder game built from the same 
 
 ## Things learned building week 2
 
-- The first cut had five missions, a countdown, sounds, and `set size` and `set rotation style` blocks in every script. Omar said "way too complex". The final version is four missions of five to seven blocks each, and the extras are try-these ideas in words, not block pictures.
+- The first cut had five missions, a countdown, sounds, and `set size` and `set rotation style` blocks in every script. Omar said "way too complex". The simpler version was four missions of five to seven blocks each, with the extras as try-these ideas in words, not block pictures. Omar then asked for the timer back and "the most minimal" way to speed the shark up, which became Missions 5 and 6: drop Score into `move 2 steps`, and the Stage countdown. The shark sits still until the first starfish, which reads as a feature. On a restart it takes one step at the old score before the Starfish resets it, too small to notice.
 - Library sprites are big (the Shark is 290 wide). Set up has students type 50 in each sprite's Size box instead of adding a `set size` block. On the website, say which library sprite to pick by its exact name: **Shark**, not Shark 2.
 - Library sprites rotate all around by default, so a shark that points towards something on its left swims upside down. The fix is a tip on the website (Direction box → Left/Right), not a block. `build.py` sets it on the sprite for the Starter and Solution.
 - Put a game-over check inside the moving sprite's own forever loop. If a sound goes before `stop all`, it has to be `play sound until done`, because `stop all` cuts sounds off.

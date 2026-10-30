@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 """Week 2: Shark Chase.
 
-Three sprites from Scratch's own library (Fish, Shark, Starfish) and four missions.
-Swim the fish to collect starfish while the shark chases you. The backdrop is only
-decoration, so students can build the whole thing in a blank project without
-downloading anything. New since week 1: if key pressed inside a forever, point
-towards, and go to random position.
+Three sprites from Scratch's own library (Fish, Shark, Starfish) and six short missions.
+Swim the fish to collect starfish while the shark chases you, for 30 seconds. Every
+starfish makes the shark faster. The backdrop is only decoration, so students can build
+the whole thing in a blank project without downloading anything. New since week 1: if
+key pressed inside a forever, point towards, go to random position, a variable used as
+a number (move Score steps), and a countdown on the Stage.
 
-The first cut also had a countdown, sounds, set size and set rotation style blocks,
-and a shark that sped up with an Operators sum. Omar found that "way too complex",
-so sizes are set in the sprite pane and the rest are Try These ideas.
+The first cut also had sounds, set size and set rotation style blocks, and a shark that
+sped up with an Operators sum. Omar found that "way too complex", so sizes are set in
+the sprite pane, the speed-up is just Score dropped into the move block, and the rest
+are Try These ideas.
 
     python3 build.py
 
 writes  Shark Chase - Starter.sb3   the library sprites and backdrop, notes, one example script
-        Shark Chase - Solution.sb3  the finished game: the four missions and nothing else
+        Shark Chase - Solution.sb3  the finished game: the six missions and nothing else
 """
 
 import sys
@@ -27,7 +29,7 @@ from scratchkit import *  # noqa: E402,F403  the block helpers read like the Scr
 
 FISH_START = (-150, 0)
 SHARK_START = (180, 120)
-SPEED, SHARK_SPEED, SIZE = 5, 2, 50
+SPEED, SHARK_SPEED, SECONDS, SIZE = 5, 2, 30, 50
 
 # Straight from Scratch's library (sprites.json and backdrops.json in scratch-gui), so the
 # files match what students get from Choose a Sprite and Choose a Backdrop.
@@ -45,10 +47,10 @@ BACKDROP = ("Underwater 1", "d3344650f594bcecdf46aa4a9441badd.svg")
 
 # ---------------------------------------------------------------- missions
 
-OVERVIEW = """
+OVERVIEW = f"""
 SHARK CHASE
 
-Swim the fish around to collect starfish, and don't let the shark catch you.
+Swim the fish around to collect starfish, and don't let the shark catch you. You have {SECONDS} seconds.
 
 Everything here comes from Scratch's library: the Fish, Shark and Starfish sprites, and the Underwater 1 backdrop. Any backdrop works.
 
@@ -57,13 +59,29 @@ Click a sprite under the stage to see its missions:
 2. Starfish: score a point when the fish touches it
 3. Shark: chase the fish
 4. Shark: chomp! The game ends when it catches you
+5. Shark: get faster with every starfish
+6. Stage: a {SECONDS}-second countdown (it's at the bottom of this note)
 
 Click the green flag after each mission to test it.
 
 
+MISSION 6: COUNTDOWN
+1. Go to Variables, click Make a Variable, and name it Time.
+2. Build this here, on the Stage:
+
+when green flag clicked
+   set Time to {SECONDS}
+   repeat {SECONDS}
+      wait 1 seconds
+      change Time by -1
+   stop all
+
+How many starfish can you get before time runs out?
+
+
 DONE? TRY THESE
 - Add sounds. Put "start sound Collect" inside the Starfish's if, and "play sound Chomp until done" just above the Shark's "stop all".
-- Make the shark faster: change "move 2 steps" to 3.
+- Give yourself more time: change both {SECONDS}s in the countdown to 60.
 - Add a second shark. Right-click the Shark and choose duplicate, then change where it starts.
 - Change your fish. The Fish has four costumes: add "when space key pressed, next costume".
 - Pick a different backdrop. The game works with any of them.
@@ -114,7 +132,7 @@ Next: click the Shark for Missions 3 and 4.
 """
 
 SHARK_TASK = f"""
-SHARK: MISSIONS 3 AND 4
+SHARK: MISSIONS 3, 4 AND 5
 
 MISSION 3: CHASE
 when green flag clicked
@@ -132,20 +150,28 @@ Inside the forever, under "move {SHARK_SPEED} steps", add:
    if <touching Fish?> then
       stop all
 
-That's the whole game. Done early? Click the Stage and try the ideas at the bottom of its note.
+
+MISSION 5: FASTER
+Go to Variables and drag the orange Score block into the "2" of "move {SHARK_SPEED} steps", so it says:
+
+   move Score steps
+
+Now every starfish makes the shark 1 step faster. It waits for you to grab the first one.
+
+Next: click the Stage for Mission 6.
 """
 
 SOLUTION_NOTES = {
-    "Stage": "SOLUTION. The Stage has no code this week.",
+    "Stage": "SOLUTION. Mission 6.",
     "Fish": "SOLUTION. Mission 1.",
     "Starfish": "SOLUTION. Mission 2.",
-    "Shark": "SOLUTION. Missions 3 and 4.",
+    "Shark": "SOLUTION. Missions 3, 4 and 5.",
 }
 
 
 def build(with_code):
     a = Assets()
-    score = Var("Score")
+    score, time_left = Var("Score"), Var("Time")
 
     stage = new_stage([a.library_costume(BACKDROP[0], BACKDROP[1], 240, 180)])
     fish = new_sprite("Fish", [a.library_costume(n, m, 63, 45) for n, m in FISH_COSTUMES],
@@ -174,9 +200,16 @@ def build(with_code):
              x=20, y=fish["comments"]["note"]["height"] + 50)
         return package(targets, a, monitors=[])
 
-    stage["variables"] = {score.id: [score.name, 0]}
+    stage["variables"] = {score.id: [score.name, 0], time_left.id: [time_left.name, SECONDS]}
     for t in targets:
         t["comments"]["note"] = note(SOLUTION_NOTES[t["name"]], 20, 20)
+
+    emit(stage["blocks"], [
+        when_flag(),
+        set_var(time_left, SECONDS),
+        repeat(SECONDS, wait(1), change_var(time_left, -1)),
+        stop_all(),
+    ], x=20, y=140)
 
     emit(fish["blocks"], [
         *fish_setup,
@@ -199,12 +232,12 @@ def build(with_code):
         go_to_xy(*SHARK_START),
         forever(
             point_towards("Fish"),
-            move_steps(SHARK_SPEED),
+            move_steps(score),  # Mission 5: one step faster per starfish
             if_(touching("Fish"), stop_all()),
         ),
     ], x=20, y=140)
 
-    return package(targets, a, monitors=[monitor(score, 5, 5)])
+    return package(targets, a, monitors=[monitor(score, 5, 5), monitor(time_left, 100, 5)])
 
 
 if __name__ == "__main__":
