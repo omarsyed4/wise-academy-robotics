@@ -791,8 +791,8 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     <article class="t" id="shark-chase">
       <a class="sxpic" href="#code-shark-chase" tabindex="-1"><img src="scratch/shark-chase.jpg" width="640" height="480" alt="The Shark Chase stage: a clownfish on the left, a shark at the top right, and a pink starfish on an underwater reef."></a>
       <div class="who"><h3>Week 2 · Shark Chase</h3><span class="tag t-green">New</span></div>
-      <p class="job">Swim the fish to collect starfish while a shark chases you. You have 30 seconds to get as many as you can.</p>
-      <p class="learn">5 missions · arrow keys in a forever loop, point towards, go to random position, repeat, a countdown on the Stage</p>
+      <p class="job">Swim the fish to collect starfish, and don't let the shark catch you.</p>
+      <p class="learn">4 missions · arrow keys in a forever loop, point towards, go to random position, a Score variable</p>
       <div class="acts">
         <a class="open" href="#code-shark-chase">See the code</a>
         <a class="upl" href="scratch/shark-chase.sb3" download="Shark Chase.sb3">Starter file</a>
@@ -822,23 +822,20 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
         <li><span>Delete the cat: right-click it under the stage and choose <b>delete</b>.</span></li>
         <li><span>Click <b>Choose a Sprite</b> (the cat button, bottom right). Search for <b>Fish</b> and click it. Do the same for <b>Shark</b> and <b>Starfish</b>.</span></li>
         <li><span>Click <b>Choose a Backdrop</b> (far bottom right) and pick <b>Underwater 1</b>. Any backdrop works, so choose one you like.</span></li>
+        <li><span>Make the sprites smaller: click each one under the stage and type <b>50</b> in its <b>Size</b> box.</span></li>
       </ol>
-      <p class="tip">Pick the sprite called <b>Shark</b>, not Shark 2, so its sound is called Chomp.</p>
+      <p class="tip">Pick the sprite called <b>Shark</b>, not Shark 2.</p>
     </article>
     <article class="t">
       <div class="who"><h3>1 · Swim</h3><span class="tag t-gold">Fish</span></div>
-      <p>Build the top part and the right-arrow <b>if</b> first, and test it. Then right-click the <b>if</b>, choose <b>Duplicate</b>, and make one for each arrow. Up and down use <b>change y</b> and don't need <b>point in direction</b>.</p>
+      <p>Build it with just the right arrow first, and test it. Then right-click the <b>if</b>, choose <b>Duplicate</b>, and make one for each arrow.</p>
 <pre class="blocks">when green flag clicked
-set size to (50) %
-set rotation style [left-right v]
 go to x: (-150) y: (0)
 forever
   if &lt;key (right arrow v) pressed?&gt; then
-    point in direction (90)
     change x by (5)
   end
   if &lt;key (left arrow v) pressed?&gt; then
-    point in direction (-90)
     change x by (-5)
   end
   if &lt;key (up arrow v) pressed?&gt; then
@@ -848,18 +845,14 @@ forever
     change y by (-5)
   end
 end</pre>
-      <p class="tip"><b>set rotation style</b> stops the fish swimming upside down when it turns left.</p>
     </article>
     <article class="t">
       <div class="who"><h3>2 · Collect</h3><span class="tag t-red">Starfish</span></div>
       <p>First go to <b>Variables</b>, click <b>Make a Variable</b>, and name it <b>Score</b>. Then click the Starfish and build this.</p>
 <pre class="blocks">when green flag clicked
-set size to (50) %
 set [Score v] to (0)
-go to (random position v)
 forever
   if &lt;touching (Fish v)?&gt; then
-    start sound (Collect v)
     change [Score v] by (1)
     go to (random position v)
   end
@@ -870,44 +863,27 @@ end</pre>
       <div class="who"><h3>3 · Chase</h3><span class="tag t-blue">Shark</span></div>
       <p>The shark turns toward the fish and moves a little closer, over and over.</p>
 <pre class="blocks">when green flag clicked
-set size to (50) %
-set rotation style [left-right v]
 go to x: (180) y: (120)
 forever
   point towards (Fish v)
   move (2) steps
 end</pre>
+      <p class="tip">Shark upside down? Click the Shark, click its <b>Direction</b> box, and choose <b>Left/Right</b>.</p>
     </article>
     <article class="t">
       <div class="who"><h3>4 · Chomp!</h3><span class="tag t-blue">Shark</span></div>
       <p>Put this inside the Shark's <b>forever</b>, under <b>move 2 steps</b>. The game ends when the shark catches the fish.</p>
 <pre class="blocks">if &lt;touching (Fish v)?&gt; then
-  play sound (Chomp v) until done
   stop [all v]
 end</pre>
     </article>
     <article class="t">
-      <div class="who"><h3>5 · Countdown</h3><span class="tag t-green">Stage</span></div>
-      <p>Make a variable called <b>Time</b>. Then click the Stage (bottom right) and build this.</p>
-<pre class="blocks">when green flag clicked
-set [Time v] to (30)
-repeat (30)
-  wait (1) seconds
-  change [Time v] by (-1)
-end
-stop [all v]</pre>
-      <p>How many starfish can you get before time runs out?</p>
-    </article>
-    <article class="t">
       <div class="who"><h3>Done? Try these</h3></div>
       <ul class="tries">
-        <li>Make the shark bite. Give the Shark a second green flag script: <b>forever</b>, <b>next costume</b>, <b>wait 0.3 seconds</b>.</li>
-        <li>Make the shark speed up as you score. Swap <b>move 2 steps</b> for this:</li>
-      </ul>
-<pre class="blocks">move (((Score) / (5)) + (2)) steps</pre>
-      <ul class="tries">
-        <li>Change your fish. The Fish has four costumes. Add <b>when space key pressed</b>, <b>next costume</b>.</li>
+        <li>Add sounds. Put <b>start sound Collect</b> inside the Starfish's <b>if</b>, and <b>play sound Chomp until done</b> just above the Shark's <b>stop all</b>.</li>
+        <li>Make the shark faster: change <b>move 2 steps</b> to 3.</li>
         <li>Add a second shark. Right-click the Shark, choose <b>duplicate</b>, and change where it starts.</li>
+        <li>Change your fish. The Fish has four costumes. Add <b>when space key pressed</b>, <b>next costume</b>.</li>
         <li>Pick a different backdrop, or paint your own.</li>
       </ul>
     </article>

@@ -9,12 +9,12 @@ Students follow the **Scratch** tab on the team website (https://omarsyed4.githu
 | Week | Project | What it teaches |
 |---|---|---|
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
-| 02 | Shark Chase | if key pressed inside a forever, set size, set rotation style, point towards, go to random position, repeat, a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
+| 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a Score variable. All library sprites (Fish, Shark, Starfish) |
 
 ## What's in each week's folder
 
 - **`<Title> - Starter.sb3`** is what students open. It has the art, sounds and sprites, plus one example script. Each sprite has a yellow note with its missions written out block by block, and the Stage's note lists the order to do them in. "Done? Try these" ideas go at the bottom of the last note.
-- **`<Title> - Solution.sb3`** is the answer key: the finished game, including the try-these ideas.
+- **`<Title> - Solution.sb3`** is the answer key: the finished game with the missions only. Leave the try-these ideas out. Week 2's first Solution had them built in (a second script, an Operators sum), and Omar found it "way too complex".
 - **`build.py`** generates both files. For the website it also copies the Starter to `docs/scratch/<slug>.sb3`. A week with its own art (`pieces=True`, like week 1) is also split into `docs/scratch/<slug>/backdrop.svg` and one `.sprite3` per sprite, so students can use Upload Backdrop and Upload Sprite. Change it and rerun it instead of editing the `.sb3` files by hand. Rebuilds are byte-identical, so Git only shows real changes.
 - **`art.py`**, when there is one, holds that week's own pictures and sounds. Library sprites don't need one. `Assets.library_costume()` and `library_sound()` take the file names from Scratch's library (scratch-gui's `sprites.json` and `backdrops.json`), download them once into `.library/` (not in Git), and pack them into the `.sb3`.
 
@@ -37,8 +37,9 @@ Week 1 also has a `Full version/` folder with a harder game built from the same 
 
 ## Things learned building week 2
 
-- Library sprites are big (the Shark is 290 wide), so each sprite's script starts with `set size to 50 %`. On the website, say which library sprite to pick by its exact name: **Shark**, not Shark 2, so the sound is called Chomp.
-- Library sprites rotate all around by default. Anything that turns left needs `set rotation style [left-right]` or it swims upside down.
-- Put a game-over check inside the moving sprite's own forever loop, and use `play sound until done` before `stop all`, because `stop all` cuts sounds off.
+- The first cut had five missions, a countdown, sounds, and `set size` and `set rotation style` blocks in every script. Omar said "way too complex". The final version is four missions of five to seven blocks each, and the extras are try-these ideas in words, not block pictures.
+- Library sprites are big (the Shark is 290 wide). Set up has students type 50 in each sprite's Size box instead of adding a `set size` block. On the website, say which library sprite to pick by its exact name: **Shark**, not Shark 2.
+- Library sprites rotate all around by default, so a shark that points towards something on its left swims upside down. The fix is a tip on the website (Direction box → Left/Right), not a block. `build.py` sets it on the sprite for the Starter and Solution.
+- Put a game-over check inside the moving sprite's own forever loop. If a sound goes before `stop all`, it has to be `play sound until done`, because `stop all` cuts sounds off.
 - Sprites with no `go to` in their scripts can land somewhere else when uploaded into a blank project, so every sprite that matters to the game gets a starting position under its green flag.
 - To test a game in the browser pane, package it with `@turbowarp/packager`, serve it on localhost, and press keys with `scaffolding.vm.postIOData('keyboard', {key: 'ArrowRight', isDown: true})`. Headless `scratch-vm` runs loops much faster than real time, because nothing is drawing frames.
