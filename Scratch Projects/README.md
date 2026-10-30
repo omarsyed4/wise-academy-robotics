@@ -2,19 +2,21 @@
 
 One project a week, kept simple: two or three sprites, about four missions, and one example script students can copy from.
 
-Students download the Starters from the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch).
+**Build from Scratch's own library.** Use sprites, sounds and backdrops students can pick with Choose a Sprite and Choose a Backdrop, and don't make the game depend on the backdrop. Students should be able to build it in a blank project with nothing downloaded. Week 2's first version, Deep Sea Maze, was a maze whose walls were a custom backdrop, and Omar turned it down for exactly that reason. It's in Git history (commit f9d4eb8) if it's ever wanted.
+
+Students follow the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch). Each week has a Set up step, every mission drawn as Scratch blocks, and an optional Starter file.
 
 | Week | Project | What it teaches |
 |---|---|---|
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
-| 02 | Deep Sea Maze | if key pressed inside a forever, touching color (with the eyedropper), glide, a script on the Stage, a stopwatch |
+| 02 | Shark Chase | if key pressed inside a forever, set size, set rotation style, point towards, go to random position, repeat, a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
 
 ## What's in each week's folder
 
 - **`<Title> - Starter.sb3`** is what students open. It has the art, sounds and sprites, plus one example script. Each sprite has a yellow note with its missions written out block by block, and the Stage's note lists the order to do them in. "Done? Try these" ideas go at the bottom of the last note.
 - **`<Title> - Solution.sb3`** is the answer key: the finished game, including the try-these ideas.
-- **`build.py`** generates both files. For the website it also copies the Starter to `docs/scratch/<slug>.sb3`, and splits it into `docs/scratch/<slug>/backdrop.svg` and one `.sprite3` per sprite, for students who start from a blank project and use Upload Backdrop and Upload Sprite. Change it and rerun it instead of editing the `.sb3` files by hand. Rebuilds are byte-identical, so Git only shows real changes.
-- **`art.py`**, when there is one, holds that week's pictures and sounds.
+- **`build.py`** generates both files. For the website it also copies the Starter to `docs/scratch/<slug>.sb3`. A week with its own art (`pieces=True`, like week 1) is also split into `docs/scratch/<slug>/backdrop.svg` and one `.sprite3` per sprite, so students can use Upload Backdrop and Upload Sprite. Change it and rerun it instead of editing the `.sb3` files by hand. Rebuilds are byte-identical, so Git only shows real changes.
+- **`art.py`**, when there is one, holds that week's own pictures and sounds. Library sprites don't need one. `Assets.library_costume()` and `library_sound()` take the file names from Scratch's library (scratch-gui's `sprites.json` and `backdrops.json`), download them once into `.library/` (not in Git), and pack them into the `.sb3`.
 
 ```bash
 python3 "Scratch Projects/01 Firefly Catcher/build.py"
@@ -35,9 +37,8 @@ Week 1 also has a `Full version/` folder with a harder game built from the same 
 
 ## Things learned building week 2
 
-- `touching color` only works if the walls are one flat color: no outlines, gradients or decorations on them. The maze is drawn as flat rock with water tunnels cut into it, and the thick border gives students a big target for the eyedropper.
-- Put a win check that says something for 2 seconds inside the moving sprite's own forever loop. Then the sprite freezes while it celebrates. When the check sat on the Pearl, the fish could keep swimming, hit a wall and jump back to the start in the middle of "You made it!".
-- The fish is about 31 × 21 in tunnels 50 wide. A scripted run at 4 steps per frame got through the whole maze without touching a wall, and the jellyfish crossing leaves about a second to get through.
-- Sprites with no `go to` in their scripts can land somewhere else when uploaded into a blank project, so every sprite that matters to the game gets a `go to x: y:` under its green flag (the Pearl does).
-- Scratch's color menu has no hex box. The website gives the wall color as slider values (Color 49, Saturation 84, Brightness 56), which match the wall closely enough for `touching color`.
-- To test a game in the browser pane, package it with `@turbowarp/packager`, serve it on localhost, and press keys with `scaffolding.vm.postIOData('keyboard', {key: 'ArrowRight', isDown: true})`.
+- Library sprites are big (the Shark is 290 wide), so each sprite's script starts with `set size to 50 %`. On the website, say which library sprite to pick by its exact name: **Shark**, not Shark 2, so the sound is called Chomp.
+- Library sprites rotate all around by default. Anything that turns left needs `set rotation style [left-right]` or it swims upside down.
+- Put a game-over check inside the moving sprite's own forever loop, and use `play sound until done` before `stop all`, because `stop all` cuts sounds off.
+- Sprites with no `go to` in their scripts can land somewhere else when uploaded into a blank project, so every sprite that matters to the game gets a starting position under its green flag.
+- To test a game in the browser pane, package it with `@turbowarp/packager`, serve it on localhost, and press keys with `scaffolding.vm.postIOData('keyboard', {key: 'ArrowRight', isDown: true})`. Headless `scratch-vm` runs loops much faster than real time, because nothing is drawing frames.

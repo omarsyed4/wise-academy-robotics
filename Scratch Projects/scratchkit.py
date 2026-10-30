@@ -10,12 +10,14 @@ import io
 import json
 import math
 import struct
+import urllib.request
 import wave
 import zipfile
 from pathlib import Path
 
 RATE = 22050
 WEBSITE = Path(__file__).resolve().parent.parent / "docs" / "scratch"  # the website's Scratch tab links here
+LIBRARY = Path(__file__).resolve().parent / ".library"  # Scratch's own library files, downloaded once (not in Git)
 
 
 # ---------------------------------------------------------------- art
@@ -61,6 +63,16 @@ def wav(samples):
 
 # ---------------------------------------------------------------- assets
 
+def library_file(md5ext):
+    """A picture or sound from Scratch's built-in library, fetched from Scratch's asset server the first time."""
+    path = LIBRARY / md5ext
+    if not path.exists():
+        LIBRARY.mkdir(exist_ok=True)
+        url = f"https://cdn.assets.scratch.mit.edu/internalapi/asset/{md5ext}/get/"
+        path.write_bytes(urllib.request.urlopen(url, timeout=30).read())
+    return path.read_bytes()
+
+
 class Assets:
     def __init__(self):
         self.files = {}
@@ -74,6 +86,18 @@ class Assets:
         md5 = self._store(svg_text.encode(), "svg")
         return {"name": name, "bitmapResolution": 1, "dataFormat": "svg", "assetId": md5,
                 "md5ext": f"{md5}.svg", "rotationCenterX": cx, "rotationCenterY": cy}
+
+    def library_costume(self, name, md5ext, cx, cy):
+        """A costume students can also pick from Scratch's own library, so nothing has to be downloaded."""
+        self.files[md5ext] = library_file(md5ext)
+        md5, ext = md5ext.split(".")
+        return {"name": name, "bitmapResolution": 1, "dataFormat": ext, "assetId": md5, "md5ext": md5ext,
+                "rotationCenterX": cx, "rotationCenterY": cy}
+
+    def library_sound(self, name, md5ext, rate, count):
+        self.files[md5ext] = library_file(md5ext)
+        return {"name": name, "assetId": md5ext.split(".")[0], "dataFormat": "wav", "format": "", "rate": rate,
+                "sampleCount": count, "md5ext": md5ext}
 
     def sound(self, name, made):
         data, count = made
@@ -111,7 +135,7 @@ class B:
         self.mutation = mutation
 
 
-NUMBER_KINDS = {"math_number": 4, "math_positive_number": 5, "math_angle": 8, "color": 9, "text": 10}
+NUMBER_KINDS = {"math_number": 4, "math_positive_number": 5, "math_whole_number": 6, "math_angle": 8, "color": 9, "text": 10}
 
 
 def emit(target_blocks, stack, parent=None, x=None, y=None):
@@ -191,6 +215,10 @@ def repeat_until(cond, *stack):
     return B("control_repeat_until", {"CONDITION": ("bool", cond), "SUBSTACK": list(stack)})
 
 
+def repeat(times, *stack):
+    return B("control_repeat", {"TIMES": ("math_whole_number", times), "SUBSTACK": list(stack)})
+
+
 def wait(secs):
     return B("control_wait", {"DURATION": ("math_positive_number", secs)})
 
@@ -207,6 +235,23 @@ def stop_other_scripts():
 
 def go_to_xy(x, y):
     return B("motion_gotoxy", {"X": x, "Y": y})
+
+
+def go_to_random():
+    return B("motion_goto", {"TO": B("motion_goto_menu", fields={"TO": ["_random_", None]})})
+
+
+def move_steps(steps):
+    return B("motion_movesteps", {"STEPS": steps})
+
+
+def point_towards(sprite):
+    return B("motion_pointtowards", {"TOWARDS": B("motion_pointtowards_menu", fields={"TOWARDS": [sprite, None]})})
+
+
+def set_rotation_style(style):
+    """style is "left-right", "don't rotate" or "all around"."""
+    return B("motion_setrotationstyle", fields={"STYLE": [style, None]})
 
 
 def change_x(dx):
@@ -247,6 +292,10 @@ def next_costume():
 
 def switch_costume(name):
     return B("looks_switchcostumeto", {"COSTUME": B("looks_costume", fields={"COSTUME": [name, None]})})
+
+
+def set_size(percent):
+    return B("looks_setsizeto", {"SIZE": percent})
 
 
 def change_effect(effect, by):
@@ -394,9 +443,10 @@ def export_pieces(sb3, folder):
                      + [(name, z.read(name)) for name in used]))
 
 
-def write_pair(folder, title, build):
+def write_pair(folder, title, build, pieces=True):
     """build(with_code) returns sb3 bytes. Writes '<title> - Starter.sb3' and '<title> - Solution.sb3'.
-    For the website, copies the Starter to docs/scratch/<slug>.sb3 and its pieces to docs/scratch/<slug>/."""
+    For the website, copies the Starter to docs/scratch/<slug>.sb3, and with pieces=True its backdrop
+    and sprites to docs/scratch/<slug>/. A project built from Scratch's library doesn't need the pieces."""
     for label, with_code in (("Starter", False), ("Solution", True)):
         out = folder / f"{title} - {label}.sb3"
         out.write_bytes(build(with_code))
@@ -404,5 +454,7 @@ def write_pair(folder, title, build):
     slug = title.lower().replace(" ", "-")
     starter = (folder / f"{title} - Starter.sb3").read_bytes()
     (WEBSITE / f"{slug}.sb3").write_bytes(starter)
-    export_pieces(starter, WEBSITE / slug)
-    print(f"copied the Starter to docs/scratch/{slug}.sb3, and its backdrop and sprites to docs/scratch/{slug}/")
+    print(f"copied the Starter to docs/scratch/{slug}.sb3")
+    if pieces:
+        export_pieces(starter, WEBSITE / slug)
+        print(f"and its backdrop and sprites to docs/scratch/{slug}/")

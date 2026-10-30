@@ -428,6 +428,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .sxm ul.tries{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px;color:var(--ink-2)}
 .sxm ul.tries li{display:list-item}
 .sxm ul.tries li::before{display:none}
+.sxm .t ol{font-size:13.5px}
 .scrim details.sxold{margin-top:38px}
 .scrim details.sxold .sxm{margin:0;padding:0 16px 16px}
 
@@ -780,22 +781,22 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <!-- ===================== SCRATCH ===================== -->
-<!-- One card per weekly project, newest first. Each week's build.py in "Scratch Projects/" copies the Starter to docs/scratch/<slug>.sb3 and its backdrop and sprites to docs/scratch/<slug>/. The blocks under "the code" are scratchblocks text, drawn by scratch/scratchblocks-3.7.1.min.js. -->
+<!-- One card per weekly project, newest first. Each week's build.py in "Scratch Projects/" copies its Starter to docs/scratch/<slug>.sb3 (and, for projects with custom art, the backdrop and sprites to docs/scratch/<slug>/). The blocks under "the code" are scratchblocks text, drawn by scratch/scratchblocks-3.7.1.min.js. -->
 <div id="scratch" class="scrim" role="tabpanel" aria-labelledby="tab-scratch" hidden>
 <section>
   <div class="shead"><span>ONE PROJECT A WEEK</span><h2>Scratch projects</h2></div>
-  <p class="note">Get the project, open it in Scratch, and build the code. The blocks for every mission are further down this page.</p>
+  <p class="note">Build each game in Scratch with the blocks on this page. Start at Set up, then do the missions in order.</p>
 
   <div class="sx">
-    <article class="t" id="deep-sea-maze">
-      <a class="sxpic" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3" tabindex="-1"><img src="scratch/deep-sea-maze.jpg" width="640" height="480" alt="The Deep Sea Maze stage: an orange anglerfish at the top left of a teal cave maze, a pink jellyfish in the middle tunnel, and a pearl in a clam at the bottom right."></a>
-      <div class="who"><h3>Week 2 · Deep Sea Maze</h3><span class="tag t-green">New</span></div>
-      <p class="job">Steer an anglerfish through an underwater cave to the pearl. The walls and a jellyfish send you back to the start.</p>
-      <p class="learn">5 missions · arrow keys in a forever loop, touching a color, glide, a stopwatch on the Stage</p>
+    <article class="t" id="shark-chase">
+      <a class="sxpic" href="#code-shark-chase" tabindex="-1"><img src="scratch/shark-chase.jpg" width="640" height="480" alt="The Shark Chase stage: a clownfish on the left, a shark at the top right, and a pink starfish on an underwater reef."></a>
+      <div class="who"><h3>Week 2 · Shark Chase</h3><span class="tag t-green">New</span></div>
+      <p class="job">Swim the fish to collect starfish while a shark chases you. You have 30 seconds to get as many as you can.</p>
+      <p class="learn">5 missions · arrow keys in a forever loop, point towards, go to random position, repeat, a countdown on the Stage</p>
       <div class="acts">
-        <a class="open" href="scratch/deep-sea-maze.sb3" download="Deep Sea Maze.sb3">Whole project</a>
-        <a class="upl" href="scratch/deep-sea-maze/backdrop.svg" download="Deep Sea Maze backdrop.svg">Backdrop</a>
-        <p class="more">Sprites: <a href="scratch/deep-sea-maze/Fish.sprite3" download="Fish.sprite3">Fish</a> · <a href="scratch/deep-sea-maze/Pearl.sprite3" download="Pearl.sprite3">Pearl</a> · <a href="scratch/deep-sea-maze/Jellyfish.sprite3" download="Jellyfish.sprite3">Jellyfish</a> · <a href="#code-deep-sea-maze">See the code</a></p>
+        <a class="open" href="#code-shark-chase">See the code</a>
+        <a class="upl" href="scratch/shark-chase.sb3" download="Shark Chase.sb3">Starter file</a>
+        <p class="more">Everything comes from Scratch's library, so there's nothing to download.</p>
       </div>
     </article>
     <article class="t" id="firefly-catcher">
@@ -811,120 +812,118 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     </article>
   </div>
 
-  <h3 class="sub">Open it in Scratch</h3>
-  <div class="sxways">
-    <div class="t">
-      <div class="who"><h3>The whole project</h3><span class="tag t-green">Easiest</span></div>
-      <ol>
-        <li><span>Click <b>Whole project</b>. The file goes to your Downloads folder.</span></li>
-        <li><span>Go to <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">scratch.mit.edu</a> and click <b>Create</b>.</span></li>
-        <li><span>Click <b>File</b>, then <b>Load from your computer</b>, and pick the file.</span></li>
-        <li><span>The backdrop, sprites and sounds are all there, with yellow notes that explain each mission.</span></li>
-      </ol>
-    </div>
-    <div class="t">
-      <div class="who"><h3>Or start from a blank project</h3></div>
-      <ol>
-        <li><span>Click <b>Backdrop</b>, then each sprite under it.</span></li>
-        <li><span>In Scratch, click <b>Create</b>. Point at the <b>Choose a Backdrop</b> button (bottom right), click <b>Upload Backdrop</b>, and pick the backdrop file.</span></li>
-        <li><span>Point at <b>Choose a Sprite</b>, click <b>Upload Sprite</b>, and pick a sprite file. Do this once for each sprite. Its sounds come with it.</span></li>
-        <li><span>Delete the cat: right-click it under the stage and choose <b>delete</b>.</span></li>
-      </ol>
-    </div>
-  </div>
-  <p class="note" style="margin-top:14px">Before you leave, click <b>File</b>, then <b>Save to your computer</b>.</p>
-
-  <h3 class="sub" id="code-deep-sea-maze">Deep Sea Maze: the code</h3>
+  <h3 class="sub" id="code-shark-chase">Shark Chase: the code</h3>
   <p class="note" style="margin:6px 0 0">Click the sprite under the stage first, then build its blocks. Click the green flag after every mission to test it.</p>
   <div class="sxm">
     <article class="t">
+      <div class="who"><h3>Set up</h3><span class="tag t-green">Library</span></div>
+      <ol>
+        <li><span>Go to <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">scratch.mit.edu</a> and click <b>Create</b>.</span></li>
+        <li><span>Delete the cat: right-click it under the stage and choose <b>delete</b>.</span></li>
+        <li><span>Click <b>Choose a Sprite</b> (the cat button, bottom right). Search for <b>Fish</b> and click it. Do the same for <b>Shark</b> and <b>Starfish</b>.</span></li>
+        <li><span>Click <b>Choose a Backdrop</b> (far bottom right) and pick <b>Underwater 1</b>. Any backdrop works, so choose one you like.</span></li>
+      </ol>
+      <p class="tip">Pick the sprite called <b>Shark</b>, not Shark 2, so its sound is called Chomp.</p>
+    </article>
+    <article class="t">
       <div class="who"><h3>1 · Swim</h3><span class="tag t-gold">Fish</span></div>
-      <p>The right arrow comes already built. Right-click its <b>if</b> block, choose <b>Duplicate</b>, and make one for each arrow. Up and down use <b>change y</b> and don't need <b>point in direction</b>.</p>
+      <p>Build the top part and the right-arrow <b>if</b> first, and test it. Then right-click the <b>if</b>, choose <b>Duplicate</b>, and make one for each arrow. Up and down use <b>change y</b> and don't need <b>point in direction</b>.</p>
 <pre class="blocks">when green flag clicked
-go to x: (-192) y: (116)
+set size to (50) %
+set rotation style [left-right v]
+go to x: (-150) y: (0)
 forever
   if &lt;key (right arrow v) pressed?&gt; then
     point in direction (90)
-    change x by (4)
+    change x by (5)
   end
   if &lt;key (left arrow v) pressed?&gt; then
     point in direction (-90)
-    change x by (-4)
+    change x by (-5)
   end
   if &lt;key (up arrow v) pressed?&gt; then
-    change y by (4)
+    change y by (5)
   end
   if &lt;key (down arrow v) pressed?&gt; then
-    change y by (-4)
+    change y by (-5)
   end
 end</pre>
+      <p class="tip"><b>set rotation style</b> stops the fish swimming upside down when it turns left.</p>
     </article>
     <article class="t">
-      <div class="who"><h3>2 · Walls</h3><span class="tag t-gold">Fish</span></div>
-      <p>Put this inside the <b>forever</b>, under the four ifs.</p>
-<pre class="blocks">if &lt;touching color [#178f8a]?&gt; then
-  start sound (Bonk v)
-  go to x: (-192) y: (116)
-end</pre>
-      <p class="tip"><b>Setting the color:</b> click the color circle in the block, click the eyedropper at the bottom, then click the teal wall on the stage. Or set the sliders to <b>Color 49</b>, <b>Saturation 84</b>, <b>Brightness 56</b>.</p>
-    </article>
-    <article class="t">
-      <div class="who"><h3>3 · Home!</h3><span class="tags"><span class="tag t-blue">Pearl</span> <span class="tag t-gold">Fish</span></span></div>
-      <p class="part"><span class="tag t-blue">Pearl</span><span>A new script. The pearl sparkles by switching between its two costumes.</span></p>
+      <div class="who"><h3>2 · Collect</h3><span class="tag t-red">Starfish</span></div>
+      <p>First go to <b>Variables</b>, click <b>Make a Variable</b>, and name it <b>Score</b>. Then click the Starfish and build this.</p>
 <pre class="blocks">when green flag clicked
-go to x: (192) y: (-140)
+set size to (50) %
+set [Score v] to (0)
+go to (random position v)
 forever
-  next costume
-  wait (0.3) seconds
+  if &lt;touching (Fish v)?&gt; then
+    start sound (Collect v)
+    change [Score v] by (1)
+    go to (random position v)
+  end
 end</pre>
-      <p class="part"><span class="tag t-gold">Fish</span><span>Inside the Fish's <b>forever</b>.</span></p>
-<pre class="blocks">if &lt;touching (Pearl v)?&gt; then
-  start sound (Win v)
-  say [I made it home!] for (2) seconds
+      <p>Test it: swim to the starfish. It should jump somewhere new.</p>
+    </article>
+    <article class="t">
+      <div class="who"><h3>3 · Chase</h3><span class="tag t-blue">Shark</span></div>
+      <p>The shark turns toward the fish and moves a little closer, over and over.</p>
+<pre class="blocks">when green flag clicked
+set size to (50) %
+set rotation style [left-right v]
+go to x: (180) y: (120)
+forever
+  point towards (Fish v)
+  move (2) steps
+end</pre>
+    </article>
+    <article class="t">
+      <div class="who"><h3>4 · Chomp!</h3><span class="tag t-blue">Shark</span></div>
+      <p>Put this inside the Shark's <b>forever</b>, under <b>move 2 steps</b>. The game ends when the shark catches the fish.</p>
+<pre class="blocks">if &lt;touching (Fish v)?&gt; then
+  play sound (Chomp v) until done
   stop [all v]
 end</pre>
     </article>
     <article class="t">
-      <div class="who"><h3>4 · Sting!</h3><span class="tags"><span class="tag t-red">Jellyfish</span> <span class="tag t-gold">Fish</span></span></div>
-      <p class="part"><span class="tag t-red">Jellyfish</span><span>A new script. It floats up and down the middle tunnel.</span></p>
+      <div class="who"><h3>5 · Countdown</h3><span class="tag t-green">Stage</span></div>
+      <p>Make a variable called <b>Time</b>. Then click the Stage (bottom right) and build this.</p>
 <pre class="blocks">when green flag clicked
-go to x: (0) y: (116)
-forever
-  glide (2) secs to x: (0) y: (-140)
-  glide (2) secs to x: (0) y: (116)
-end</pre>
-      <p class="part"><span class="tag t-gold">Fish</span><span>Inside the Fish's <b>forever</b>.</span></p>
-<pre class="blocks">if &lt;touching (Jellyfish v)?&gt; then
-  start sound (Zap v)
-  go to x: (-192) y: (116)
-end</pre>
-    </article>
-    <article class="t">
-      <div class="who"><h3>5 · Stopwatch</h3><span class="tag t-green">Stage</span></div>
-      <p>First go to <b>Variables</b>, click <b>Make a Variable</b>, and name it <b>Seconds</b>. Then click the Stage (bottom right) and build this.</p>
-<pre class="blocks">when green flag clicked
-set [Seconds v] to (0)
-forever
+set [Time v] to (30)
+repeat (30)
   wait (1) seconds
-  change [Seconds v] by (1)
-end</pre>
-      <p>How fast can you get home? Write down your best time, then try to beat it.</p>
+  change [Time v] by (-1)
+end
+stop [all v]</pre>
+      <p>How many starfish can you get before time runs out?</p>
     </article>
     <article class="t">
       <div class="who"><h3>Done? Try these</h3></div>
       <ul class="tries">
-        <li>Make the jellyfish glow. Give it a second green flag script: <b>forever</b>, <b>change color effect by 25</b>, <b>wait 0.5 seconds</b>.</li>
-        <li>Count bumps with a <b>Bumps</b> variable. Set it to 0 at the start, and add 1 every time the fish hits a wall.</li>
-        <li>Add a second jellyfish: right-click the Jellyfish and choose <b>duplicate</b>. Move it to another tunnel and change its glides. The Fish needs a <b>touching Jellyfish2</b> check too.</li>
-        <li>Too easy? Glide the jellyfish in 1 second, or make the fish slower.</li>
-        <li>Draw your own maze on a new backdrop. Use the same teal for the walls: the paint editor's color menu has an eyedropper too.</li>
+        <li>Make the shark bite. Give the Shark a second green flag script: <b>forever</b>, <b>next costume</b>, <b>wait 0.3 seconds</b>.</li>
+        <li>Make the shark speed up as you score. Swap <b>move 2 steps</b> for this:</li>
+      </ul>
+<pre class="blocks">move (((Score) / (5)) + (2)) steps</pre>
+      <ul class="tries">
+        <li>Change your fish. The Fish has four costumes. Add <b>when space key pressed</b>, <b>next costume</b>.</li>
+        <li>Add a second shark. Right-click the Shark, choose <b>duplicate</b>, and change where it starts.</li>
+        <li>Pick a different backdrop, or paint your own.</li>
       </ul>
     </article>
   </div>
+  <p class="note" style="margin-top:14px">Before you leave, click <b>File</b>, then <b>Save to your computer</b>.</p>
 
   <details class="kid sxold" id="code-firefly-catcher">
-    <summary><span class="nm">Firefly Catcher: the code</span><span class="chev" aria-hidden="true"></span><span class="sum">Week 1 · 4 missions</span></summary>
+    <summary><span class="nm">Firefly Catcher: the code</span><span class="chev" aria-hidden="true"></span><span class="sum">Week 1 · 4 missions · uses its own backdrop and sprites</span></summary>
     <div class="sxm">
+      <article class="t">
+        <div class="who"><h3>Get the files</h3></div>
+        <ol>
+          <li><span><b>Whole project:</b> in Scratch, click <b>File</b>, then <b>Load from your computer</b>, and pick the file.</span></li>
+          <li><span><b>Or the pieces:</b> point at <b>Choose a Backdrop</b> and click <b>Upload Backdrop</b>. Point at <b>Choose a Sprite</b> and click <b>Upload Sprite</b>, once for each sprite.</span></li>
+        </ol>
+      </article>
       <article class="t">
         <div class="who"><h3>1 · Move the jar</h3><span class="tag t-blue">Jar</span></div>
         <p>The right arrow comes already built. Right-click it, choose <b>Duplicate</b>, and change it to the left arrow and -20.</p>

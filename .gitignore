@@ -26,3 +26,6 @@ FIRST LEGO League (BIOGLOW)/00 Correspondence/
 # scripts/build-coaches.mjs encrypts admin/coaches.html into docs/index.html.
 /admin/
 /voice memos/
+
+# Scratch library pictures and sounds, re-downloaded by scratchkit.library_file()
+/Scratch Projects/.library/
