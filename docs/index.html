@@ -515,6 +515,25 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .iv .heard b,.iv .try b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin-right:6px}
 .iv .try q{color:var(--ink)}
 .iv .fill{color:var(--gold);border-bottom:1px dashed var(--gold)}
+.ivday{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin:22px 0 0}
+.ex{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+@media (max-width:760px){.ex{grid-template-columns:1fr}}
+.scrim .ex .t p{margin:0;font-size:13.5px}
+.scrim .ex .t .d{font-family:var(--mono);font-size:11px;color:var(--gold)}
+.ex .was{color:var(--ink-3)}
+.ex .was b,.ex .beat b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-3);margin-bottom:2px}
+.ex .beat{border-left:2px solid var(--blue);padding-left:10px;font-size:13.5px;color:var(--ink)}
+.ex .beat b{color:var(--blue)}
+.ex .fill{color:var(--gold);border-bottom:1px dashed var(--gold)}
+.next .t p b{color:var(--ink);font-weight:600}
+.gb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:760px){.gb{grid-template-columns:1fr}}
+.gb .good{border-top:2px solid var(--green)}
+.gb .fix{border-top:2px solid var(--gold)}
+.scrim .gb ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.scrim .gb li{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.scrim .gb li::before{display:none}
+.gb li b{color:var(--ink);font-weight:600}
 .ivnote{max-width:880px;margin-top:18px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:5px;background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
 .ivnote h4{margin:0;font-size:14.5px;color:var(--ink)}
 .ivnote p{margin:0;font-size:13.5px;color:var(--ink-2)}
@@ -793,17 +812,94 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
      and point that student's "My interview notes" link in Students at their newest one. -->
 <div id="presentations" class="scrim" role="tabpanel" aria-labelledby="tab-presentations" hidden>
 <section>
-  <div class="shead"><span>MOCK INTERVIEWS · LOGGED AFTER EACH ONE</span><h2>Presentations</h2></div>
-  <p class="note">After every practice interview, the notes go here so you can study them. Find your name, read what you said, then say the <b>Next time</b> line out loud until you don't need to read it. Put it in your own words. The judges want the facts, not a script.</p>
+  <div class="shead"><span>JUDGING INTERVIEWS</span><h2>Presentations</h2></div>
+  <p class="note">How to answer the judges, what we already do well, and what we keep missing. Every practice interview is logged at the bottom: find your name, read what you said, then say the <b>Next time</b> line out loud until you don't need to read it. Use your own words. The judges want the facts, not a script.</p>
+  <div class="scores">
+    <div class="best"><b>8</b><span>Answers said clearly</span></div>
+    <div><b>21</b><span>Got there with help</span></div>
+    <div><b>3</b><span>Couldn't answer yet</span></div>
+    <div class="goal"><b>All ✓</b><span>The goal at the full mock judging, 13 November</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">From three practice interviews on 30 October: Husayn on Robot Design, Ammar and Mahdi on the Innovation Project.</p>
 
-  <h3 class="sub">How to answer any question</h3>
+  <h3 class="sub">The framework: picture it, say it, prove it</h3>
+  <p class="note" style="margin-top:6px">Use it for any question, from either room. Three short steps, about thirty seconds.</p>
+  <div class="next">
+    <div class="t">
+      <p class="d">STEP 1</p>
+      <h3>Picture it</h3>
+      <p>Before you speak, think of one real moment that answers the question: a round, a test, a conversation. A real moment beats a general answer, and it stops you hunting for perfect words.</p>
+      <p><b>Ask yourself:</b> when did this actually happen?</p>
+    </div>
+    <div class="t">
+      <p class="d">STEP 2</p>
+      <h3>Say it</h3>
+      <p>Say what happened or what we did, plainly and with names. Not “some people” or “our coders”, but Haider, Ali, Mohamed. Start straight away with a name or a mission.</p>
+      <p><b>Ask yourself:</b> who did what?</p>
+    </div>
+    <div class="t">
+      <p class="d">STEP 3</p>
+      <h3>Prove it</h3>
+      <p>End with proof the judges can write down. In Robot Design that's a number from the test log or a score. In the Innovation Project it's a source, the expert or the survey.</p>
+      <p><b>Ask yourself:</b> how do we know?</p>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="t">
+      <p class="d">ROBOT DESIGN</p>
+      <h3>What would you improve with more time?</h3>
+      <p class="was"><b>Before</b>“Our presentation, our code and our attachments.”</p>
+      <div class="beat"><b>Picture it</b><span>“At the scrimmage, Red finished a round with 30 seconds left and nothing to run.”</span></div>
+      <div class="beat"><b>Say it</b><span>“So Ali and Abbas are building one more mission to fill that time.”</span></div>
+      <div class="beat"><b>Prove it</b><span>“And Forest Elder is 30 points we haven't scored yet. It got zero in all three rounds.”</span></div>
+    </div>
+    <div class="t">
+      <p class="d">INNOVATION PROJECT</p>
+      <h3>Why does deforestation matter?</h3>
+      <p class="was"><b>Before</b>“It's bad because a bear could end up on your car.”</p>
+      <div class="beat"><b>Picture it</b><span>“Think of a farm next to a forest. The tree roots hold the soil in place.”</span></div>
+      <div class="beat"><b>Say it</b><span>“Cut the trees down and rain washes the soil away, so the farmer's crops can't grow. Less soil means less food.”</span></div>
+      <div class="beat"><b>Prove it</b><span>“We read this on <span class="fill">which of our sources</span>.” Know which one. It's the part we keep missing.</span></div>
+    </div>
+  </div>
+
+  <h3 class="sub">Rules for every answer</h3>
   <ol class="plain">
-    <li><b>Just start.</b> You know this. Open with a name or a number, like “Leafcutter Frenzy is…” or “Our expert, Mr. Hussain…”, and the rest follows.</li>
-    <li><b>Picture what really happened.</b> Asked what you'd do with more time? Think of the round that finished with 30 seconds left. A real moment beats a general answer.</li>
-    <li><b>End with what it changed.</b> What we did, and what happened because of it. A number if you have one: “40 points in all three rounds.”</li>
-    <li><b>Say it once.</b> No “as I said before”, and no saying your team twice.</li>
-    <li><b>Introduce people before you name them.</b> The judges don't know Mr. Hussain. Say “our expert” first.</li>
+    <li><b>Start straight away.</b> Open with a name, a mission or a number: “Leafcutter Frenzy is…”, “Our expert, Mr. Hussain…”. You know this, and the rest follows.</li>
+    <li><b>Intro: name, role, team. Once.</b> “My name is ___, and I'm a ___ on the ___ team.” Then stop.</li>
+    <li><b>Say it once.</b> No “as I said before”, and no saying the same thing twice.</li>
+    <li><b>Name who did it.</b> Judges can't give credit to “some people”.</li>
+    <li><b>Introduce people before you name them.</b> The judges don't know Mr. Hussain, so it's always “our expert, Mr. Hussain”.</li>
+    <li><b>Say the same words as your partner.</b> The solution, the mission list and the sources should sound the same from everyone.</li>
   </ol>
+
+  <h3 class="sub">How we're doing</h3>
+  <div class="gb">
+    <div class="t good">
+      <h3>What we do well</h3>
+      <ul>
+        <li><b>We know our stuff.</b> Every answer had the right idea in it, even when the words came out wrong. Given a structure, everyone filled it with real facts.</li>
+        <li><b>We have real stories.</b> The robot pulling left until Mahdi and Mohamed rebuilt it. The halfway idea that changed after a teammate's objection and the expert's advice. Judges want exactly this: what we tried, what happened, what we changed.</li>
+        <li><b>Our problem comes across.</b> Deforestation and why it matters came out clearly in both Innovation interviews: animals lose their homes, farmers lose their soil and crops. The scrimmage judges said the same.</li>
+        <li><b>Some answers are already judge-ready.</b> Husayn on the mission order. Mahdi on soil, and on what the expert changed. Ammar on who did what.</li>
+        <li><b>We fix things fast.</b> Every intro was right by the second or third try, and the expert answers were much better the second time round.</li>
+      </ul>
+    </div>
+    <div class="t fix">
+      <h3>What we need to fix</h3>
+      <ul>
+        <li><b>We don't prove it.</b> Across three interviews we gave no test numbers, and only one of our three websites got named. That's why step 3 of the framework is “prove it”.</li>
+        <li><b>Intros take more than one try.</b> All three needed help. Name, role, team, once.</li>
+        <li><b>We give credit away.</b> “Some people on our team”, “our coders”, “one person”. Say who.</li>
+        <li><b>The expert sounds like a stranger.</b> Just a name, then “he's into nature”. Say “our expert, Mr. Hussain”, how we found him, and what he does.</li>
+        <li><b>Two presenters, two stories.</b> Our solution came out differently from Mahdi and from Ammar. Everyone says the same two sentences: see <a href="#one-story">the note in the log</a>.</li>
+        <li><b>We undersell the robot.</b> “We just use code” sounds like we have no sensors. Our motors measure every distance we drive, so say so.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub">Interview log</h3>
   <div class="marks" aria-label="What the marks mean">
     <span><span class="mk y">✓</span>Said it clearly</span>
     <span><span class="mk h">~</span>Got there with help</span>
@@ -811,7 +907,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
     <span><span class="mk x">–</span>Not asked yet</span>
   </div>
 
-  <h3 class="sub">Friday 30 October · Coach Omar asked</h3>
+  <h4 class="ivday">Friday 30 October · Coach Omar asked</h4>
   <div class="ivnote" id="one-story">
     <h4>Mahdi and Ammar: you each told half of the solution story</h4>
     <p><b>Ammar:</b> our first idea was cutting trees only halfway. A teammate said a half-cut tree dies, so we changed it to planting two for every tree cut, before the cutting. <b>Mahdi:</b> we told our expert about cutting whole trees and planting more, and he said that if you cut a tree halfway, animals can live in what's left.</p>
