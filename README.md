@@ -61,10 +61,17 @@ Google Docs cannot be version-controlled, so these stay in Drive:
 ## The season tracker
 
 `docs/index.html` is the team website, live at https://omarsyed4.github.io/wise-academy-robotics/.
-Its tabs: **This week** (the current Friday's lesson plan and what's coming), **Students** (one
-section each: this Friday's job, partner and focus), **Presentations** (the answer framework, how the team is doing, and the mock interview log),
-**Quizzes** (Core Values and "What would you do?"), **Scrimmage** (score sheets and the day's plan), **Season hub** (status, boards, missions,
-roles) and **Coaches** (password-locked).
+Its tabs: **This week** (the current Friday's lesson plan, written so a substitute can run the class
+from it), **Students** (two lines each: this Friday, and what to work on), **Presentations** (how to
+answer the judges, and the mock-interview log), **Quizzes** (Core Values and "What would you do?"),
+**Scratch** (the current week only), **Scrimmage**, **Season hub** (status, boards, missions, roles)
+and **Coaches** (password-locked).
+
+Quizzes: students pick their name first. Each finished round is sent to the Google Form
+"Ctrl+Alt+Defeat quiz results" in Omar's Drive, which feeds the Sheet "Ctrl+Alt+Defeat quiz results
+(Responses)". The form's entry IDs are at the top of the quiz script in `docs/index.html`.
+
+The printable tracking sheet for a Friday goes in `docs/print/` and is linked from This week.
 
 GitHub Pages sites are public on the open internet. This page names eight students and their
 school, so keep anything sensitive in the Coaches tab.

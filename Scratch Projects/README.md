@@ -4,12 +4,13 @@ One project a week, kept simple: two or three sprites, about four missions, and 
 
 **Build from Scratch's own library.** Use sprites, sounds and backdrops students can pick with Choose a Sprite and Choose a Backdrop, and don't make the game depend on the backdrop. Students should be able to build it in a blank project with nothing downloaded. Week 2's first version, Deep Sea Maze, was a maze whose walls were a custom backdrop, and Omar turned it down for exactly that reason. It's in Git history (commit f9d4eb8) if it's ever wanted.
 
-Students follow the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch). Each week has a Set up step, every mission drawn as Scratch blocks, and an optional Starter file.
+Students follow the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch). Since week 3 it shows **only the current week**: the finished game to play, the Set up steps, and what each sprite does. **Students never see the code.** The code for each sprite goes in the password-locked Coaches tab (`admin/coaches.html`), for whoever teaches. The slides for the TV are linked from the tab.
 
 | Week | Project | What it teaches |
 |---|---|---|
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
 | 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a variable as a block's number (`move (Score) steps`), a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
+| 03 | Space Dodge | A test: build it alone in an hour from a picture of the game. Reuses weeks 1 and 2, plus one new block, `if on edge, bounce`. Library sprites Rocketship, Star, Planet2 and the Stars backdrop. Its build script is in `admin/Sub plan - Fri 6 Nov/src/` (gitignored), so the solution isn't in the public repo |
 
 ## What's in each week's folder
 
@@ -24,7 +25,7 @@ python3 "Scratch Projects/01 Firefly Catcher/build.py"
 
 `scratchkit.py` holds what every week shares: the block helpers (named after the Scratch palette), sound synthesis, notes that size themselves to their text, sprites and packaging.
 
-To add a new week to the website: run its `build.py`, save a 640×480 picture of the stage as `docs/scratch/<slug>.jpg`, and add a card at the top of the Scratch tab in `docs/index.html`. Then write that week's missions under "the code" as `<pre class="blocks">` text in [scratchblocks syntax](https://scratchblocks.github.io/), which the page draws as real Scratch blocks. Move the previous week's code into a collapsed `<details>`, like Firefly Catcher's. Only the Starter goes on the website. The Solution stays here, but the repo is public, so a determined student could find it.
+To add a new week to the website: run its `build.py`, then package the Solution as a playable page with `@turbowarp/packager` and save it as `docs/scratch/<slug>/play.html`. Replace the Scratch tab in `docs/index.html` with the new week (older weeks stay in Git history). Put the code for each sprite, as `<pre class="blocks">` scratchblocks text, in `admin/coaches.html`, then run `node scripts/build-coaches.mjs`. The Coaches tab draws the blocks after it unlocks.
 
 Week 1 also has a `Full version/` folder with a harder game built from the same art. It has a 30-second timer, a bat to dodge and a TIME'S UP banner, and takes students about an hour. Use it as a follow-up week if the class is ready.
 
