@@ -266,6 +266,10 @@ def y_position():
     return B("motion_yposition")
 
 
+def set_x(x):
+    return B("motion_setx", {"X": x})
+
+
 def point_in_direction(degrees):
     return B("motion_pointindirection", {"DIRECTION": ("math_angle", degrees)})
 
@@ -329,12 +333,36 @@ def touching_color(hex_color):
     return B("sensing_touchingcolor", {"COLOR": ("color", hex_color)})
 
 
+def ask_and_wait(question):
+    return B("sensing_askandwait", {"QUESTION": ("text", question)})
+
+
+def answer():
+    return B("sensing_answer")
+
+
 def random(lo, hi):
     return B("operator_random", {"FROM": lo, "TO": hi})
 
 
+def plus(a, b):
+    return B("operator_add", {"NUM1": a, "NUM2": b})
+
+
 def minus(a, b):
     return B("operator_subtract", {"NUM1": a, "NUM2": b})
+
+
+def times(a, b):
+    return B("operator_multiply", {"NUM1": a, "NUM2": b})
+
+
+def join(a, b):
+    return B("operator_join", {"STRING1": ("text", a), "STRING2": ("text", b)})
+
+
+def not_(cond):
+    return B("operator_not", {"OPERAND": ("bool", cond)})
 
 
 def less_than(a, b):

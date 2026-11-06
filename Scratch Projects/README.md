@@ -4,13 +4,13 @@ One project a week, kept simple: two or three sprites, about four missions, and 
 
 **Build from Scratch's own library.** Use sprites, sounds and backdrops students can pick with Choose a Sprite and Choose a Backdrop, and don't make the game depend on the backdrop. Students should be able to build it in a blank project with nothing downloaded. Week 2's first version, Deep Sea Maze, was a maze whose walls were a custom backdrop, and Omar turned it down for exactly that reason. It's in Git history (commit f9d4eb8) if it's ever wanted.
 
-Students follow the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch). Since week 3 it shows **only the current week**: the finished game to play, the Set up steps, and what each sprite does. **Students never see the code.** The code for each sprite goes in the password-locked Coaches tab (`admin/coaches.html`), for whoever teaches. The slides for the TV are linked from the tab.
+Students follow the **Scratch** tab on the team website (https://omarsyed4.github.io/wise-academy-robotics/#scratch). Since week 3 it shows **only the current week**: the finished game to play, the Set up steps, and what each sprite does. Students don't see the code while they build. The slides for the TV are linked from the tab, and since Math Cat **the last slides are the finished code**: the whole game on one slide, then each part up close, big enough for the back of the room. The teacher puts them on the TV for the last 10 minutes and goes through them with the class.
 
 | Week | Project | What it teaches |
 |---|---|---|
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
 | 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a variable as a block's number (`move (Score) steps`), a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
-| 03 | Space Dodge | A test: build it alone in an hour from a picture of the game. Reuses weeks 1 and 2, plus one new block, `if on edge, bounce`. Library sprites Rocketship, Star, Planet2 and the Stars backdrop. Its build script is in `admin/Sub plan - Fri 6 Nov/src/` (gitignored), so the solution isn't in the public repo |
+| 03 | Math Cat | A test of the **Operators** blocks, built alone in an hour from Create. The cat asks sums: pick random, join inside a join, + and =, not, * inside -, and >. New from Sensing: ask and wait, answer. Only the cat every new project starts with, and three variables (Score, A, B) |
 
 ## What's in each week's folder
 
@@ -28,6 +28,15 @@ python3 "Scratch Projects/01 Firefly Catcher/build.py"
 To add a new week to the website: run its `build.py`, then package the Solution as a playable page with `@turbowarp/packager` and save it as `docs/scratch/<slug>/play.html`. Replace the Scratch tab in `docs/index.html` with the new week (older weeks stay in Git history). Put the code for each sprite, as `<pre class="blocks">` scratchblocks text, in `admin/coaches.html`, then run `node scripts/build-coaches.mjs`. The Coaches tab draws the blocks after it unlocks.
 
 Week 1 also has a `Full version/` folder with a harder game built from the same art. It has a 30-second timer, a bat to dodge and a TIME'S UP banner, and takes students about an hour. Use it as a follow-up week if the class is ready.
+
+## Week 3: Math Cat
+
+Week 3 was first **Space Dodge** (fly a rocket, grab stars, dodge a bouncing planet, 30-second countdown). Omar turned it down the night before: it was the same lesson as Shark Chase. He asked for a new test of the Operators section instead, and kept the format: the game to play, Set up, what each part does, and slides for the TV. Space Dodge's files are in Git history (commit e82a01b).
+
+- `build.py` writes `Math Cat - Solution.sb3` and copies it to `docs/scratch/math-cat/math-cat.sb3`, the "finished game" download for the teacher. There's no Starter: it's a test, built from Create.
+- `slides.html` is the TV deck. `node "Scratch Projects/03 Math Cat/render.js"` prints it to `docs/scratch/math-cat/slides.pdf` (Playwright). Slides 3 to 5 are the missions with the blocks each one needs, slides 6 to 9 are the finished code, and the code slide sizes the script to fill its box.
+- `game.png` is the title slide's picture, taken from the packaged game.
+- The tracking sheet for the class is page 2 of `docs/print/2026-11-06-tracking.pdf`.
 
 ## Things learned building week 1
 

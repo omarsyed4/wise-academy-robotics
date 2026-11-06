@@ -64,14 +64,18 @@ Google Docs cannot be version-controlled, so these stay in Drive:
 Its tabs: **This week** (the current Friday's lesson plan, written so a substitute can run the class
 from it), **Students** (two lines each: this Friday, and what to work on), **Presentations** (how to
 answer the judges, and the mock-interview log), **Quizzes** (Core Values and "What would you do?"),
-**Scratch** (the current week only), **Scrimmage**, **Season hub** (status, boards, missions, roles)
+**Scratch** (the current week only, with slides whose last pages are the finished code), **Scrimmage**, **Season hub** (status, boards, missions, roles)
 and **Coaches** (password-locked).
 
 Quizzes: students pick their name first. Each finished round is sent to the Google Form
 "Ctrl+Alt+Defeat quiz results" in Omar's Drive, which feeds the Sheet "Ctrl+Alt+Defeat quiz results
 (Responses)". The form's entry IDs are at the top of the quiz script in `docs/index.html`.
 
-The printable tracking sheet for a Friday goes in `docs/print/` and is linked from This week.
+The printable tracking sheet for a Friday goes in `docs/print/` and is linked from This week. Its source HTML sits beside
+the PDF; print it to US Letter with Playwright (`page.pdf({format: 'Letter', printBackground: true})`).
+
+The two trifold designs (Robot Design and Innovation Project, drawn to scale) are in the **This week** tab, under the
+three groups, at `#boards`. The Season hub's "Trifold designs" link goes there.
 
 GitHub Pages sites are public on the open internet. This page names eight students and their
 school, so keep anything sensitive in the Coaches tab.

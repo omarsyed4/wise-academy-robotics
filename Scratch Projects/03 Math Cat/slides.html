@@ -1,0 +1,390 @@
+<!doctype html>
+<!-- Math Cat slides for the TV. Render to docs/scratch/math-cat/slides.pdf with
+     node "Scratch Projects/03 Math Cat/render.js" (needs Playwright). Slides 6 to 9 are the
+     finished code, for the last 10 minutes of class: the whole game, then each part up close. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Math Cat · TV</title>
+<script src="../../docs/scratch/scratchblocks-3.7.1.min.js"></script>
+<style>
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0d1733}
+body{font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;padding:44px 56px 40px;
+  background:radial-gradient(1200px 700px at 85% -10%,#22346e 0%,rgba(34,52,110,0) 60%),linear-gradient(180deg,#121d40,#0b1430);
+  page-break-after:always;break-after:page;display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.kick{font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f7c948;margin:0}
+.num{position:absolute;top:40px;right:56px;font-size:14px;color:#8a97bd}
+h1{font-size:96px;line-height:.98;margin:14px 0 26px;font-weight:800;letter-spacing:-.03em}
+h2{font-size:52px;margin:12px 0 22px;font-weight:800;letter-spacing:-.02em}
+.title{display:grid;grid-template-columns:1fr 600px;gap:44px;align-items:center;flex:1}
+.title ul{margin:0;padding-left:28px;font-size:27px;line-height:1.55}
+.title li{margin:2px 0}
+.callout{margin-top:26px;background:rgba(255,255,255,.07);border-left:5px solid #f7c948;border-radius:6px;padding:14px 18px;font-size:21px;line-height:1.4;color:#e6ebf7}
+.shot{width:600px;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5);background:#fff}
+.shot img{display:block;width:100%}
+.steps{margin:0;padding-left:34px;font-size:28px;line-height:1.5;max-width:1080px}
+.steps li{margin:0 0 12px;padding-left:6px}
+.steps b{color:#fff}
+.hint{margin-top:auto;font-size:21px;color:#c9d2ea;background:rgba(255,255,255,.07);border-radius:8px;padding:14px 18px;border-left:5px solid #f7c948}
+.hint b{color:#f7c948}
+
+.cards{display:grid;gap:22px;flex:1;min-height:0;margin-top:18px}
+.cards.two{grid-template-columns:1fr 1fr}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px 24px;display:flex;flex-direction:column;min-height:0}
+.pill{align-self:flex-start;font-size:15px;font-weight:700;border-radius:999px;padding:5px 14px;background:#ffab19;color:#3b2300}
+.card h3{font-size:34px;margin:12px 0 8px;font-weight:800}
+.card p.do{font-size:20px;line-height:1.45;margin:0 0 12px;color:#e6ebf7}
+.card p.do b{color:#fff}
+.need{font-size:13px;font-weight:700;letter-spacing:.1em;color:#8fb2ff;margin:2px 0 8px}
+.pieces{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.pieces .p{display:flex;align-items:center;gap:6px}
+.pieces .x{font-weight:800;color:#f7c948;font-size:19px}
+.pieces .new{font-size:11px;font-weight:800;background:#f7c948;color:#2a2000;border-radius:4px;padding:2px 6px;letter-spacing:.04em}
+.test{margin-top:auto;padding-top:12px;font-size:20px;font-weight:700;color:#f7c948}
+.foot{margin-top:16px;font-size:18px;color:#c9d2ea}
+.foot b{color:#f7c948}
+.try{margin-top:16px;font-size:18px;color:#e6ebf7;background:rgba(255,255,255,.07);border-radius:8px;padding:12px 16px}
+.try b{color:#f7c948}
+
+.code{display:grid;grid-template-columns:auto 1fr;gap:40px;flex:1;min-height:0;align-items:start}
+.code .script{background:#f9f9f9;border-radius:14px;padding:22px 26px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+h2.small{font-size:40px;margin:8px 0 16px}
+.code .script.fit{height:572px;display:flex;align-items:flex-start}
+.teach.side-teach{margin:0 0 18px;background:rgba(255,255,255,.07);border-left:5px solid #f7c948;border-radius:6px;padding:12px 16px;font-size:18px;line-height:1.45}
+.code.over{grid-template-columns:auto 1fr}
+.code.close{grid-template-columns:auto 1fr;gap:44px}
+.code .side ul + h3{margin-top:22px}
+.tag5{margin:0 0 10px;font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8fb2ff}
+.code .side h3{font-size:24px;margin:4px 0 12px;color:#f7c948}
+.code .side ul{list-style:none;margin:0;padding:0}
+.code .side li{font-size:19px;line-height:1.4;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);color:#e6ebf7}
+.code .side li b{color:#fff}
+.code .side li .op{display:inline-block;min-width:96px;font-weight:800;color:#59c059}
+.teach{font-size:19px;color:#c9d2ea;margin:-8px 0 16px;max-width:1100px}
+.teach b{color:#fff}
+table.xs{border-collapse:collapse;margin:6px 0 18px;font-size:19px}
+table.xs th,table.xs td{border-bottom:1px solid rgba(255,255,255,.14);padding:8px 16px 8px 0;text-align:left}
+table.xs th{color:#8fb2ff;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.save ol{font-size:32px;line-height:1.6;padding-left:40px;margin:10px 0 0}
+pre.blocks{margin:0}
+.scratchblocks svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide">
+  <span class="num">1</span>
+  <p class="kick">Scratch · Today's test</p>
+  <div class="title">
+    <div>
+      <h1>Math Cat</h1>
+      <ul>
+        <li>The cat asks you a <b>sum</b>.</li>
+        <li>Type the answer and press <b>Enter</b>.</li>
+        <li>Every right answer, the cat <b>walks</b> across.</li>
+        <li>Get <b>10 right</b> to win.</li>
+      </ul>
+      <div class="callout">Build it yourself in one hour. Every mission needs a green <b>Operators</b> block.</div>
+    </div>
+    <div class="shot"><img src="game.png" alt=""></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <span class="num">2</span>
+  <p class="kick">Math Cat · Everyone together</p>
+  <h2>Set up</h2>
+  <ol class="steps">
+    <li>Go to <b>scratch.mit.edu</b> and click <b>Create</b>.</li>
+    <li><b>Keep the cat.</b> Everything today goes on the cat (Sprite1).</li>
+    <li>Click <b>Variables</b>, then <b>Make a Variable</b>. Name it <b>Score</b> and click OK.</li>
+    <li>Make two more the same way: <b>A</b> and <b>B</b>.</li>
+    <li>Click the green <b>Operators</b> section and look at the blocks. Every mission uses one.</li>
+  </ol>
+  <p class="hint">Capital letters: <b>Score</b>, <b>A</b> and <b>B</b>. In each orange block, click the little arrow to pick the right variable.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <span class="num">3</span>
+  <p class="kick">Math Cat · Missions 1 and 2</p>
+  <div class="cards two">
+    <div class="card">
+      <span class="pill">Cat</span>
+      <h3>1 · Pick</h3>
+      <p class="do">When the green flag is clicked: set Score to 0. Then, forever: set <b>A</b> to <b>pick random 1 to 10</b>, and set <b>B</b> to pick random 1 to 10.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">when flag clicked</pre></div>
+        <div class="p"><pre class="blocks">set [Score v] to (0)</pre></div>
+        <div class="p"><pre class="blocks">forever
+end</pre></div>
+        <div class="p"><pre class="blocks">set [A v] to (0)</pre><span class="x">×2</span></div>
+        <div class="p"><pre class="blocks">(pick random (1) to (10))</pre><span class="x">×2</span></div>
+      </div>
+      <p class="test">Test it: click the green flag. A and B change super fast on the stage.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Cat</span>
+      <h3>2 · Ask</h3>
+      <p class="do">Inside the forever, under the two sets: <b>ask</b> the sum and wait. Put a <b>join inside a join</b>: A, then <b>“ + ”</b> (a space each side), then B.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">ask [ ] and wait</pre><span class="new">NEW</span></div>
+        <div class="p"><pre class="blocks">(join [ ] [ ])</pre><span class="x">×2</span></div>
+        <div class="p"><pre class="blocks">(A)</pre></div>
+        <div class="p"><pre class="blocks">(B)</pre></div>
+      </div>
+      <p class="test">Test it: the cat asks a sum, like 7 + 5. Type anything and press Enter.</p>
+    </div>
+  </div>
+  <p class="foot">Click the green flag after every mission. Stuck? Try for <b>3 minutes</b>, then raise your hand.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <span class="num">4</span>
+  <p class="kick">Math Cat · Missions 3 and 4</p>
+  <div class="cards two">
+    <div class="card">
+      <span class="pill">Cat</span>
+      <h3>3 · Right!</h3>
+      <p class="do">Under the ask: if the <b>answer = A + B</b>, change Score by 1 and say Correct! for 1 second.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">if &lt;&gt; then
+end</pre></div>
+        <div class="p"><pre class="blocks">&lt;[ ] = [ ]&gt;</pre></div>
+        <div class="p"><pre class="blocks">(answer)</pre><span class="new">NEW</span></div>
+        <div class="p"><pre class="blocks">(( ) + ( ))</pre></div>
+        <div class="p"><pre class="blocks">change [Score v] by (1)</pre></div>
+        <div class="p"><pre class="blocks">say [Correct!] for (1) seconds</pre></div>
+      </div>
+      <p class="test">Test it: answer right. Score goes up by 1.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Cat</span>
+      <h3>4 · Wrong</h3>
+      <p class="do">Under that if, a second if: if <b>not</b> (answer = A + B), say <b>join</b> “It was ” and A + B, for 1 second.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">if &lt;&gt; then
+end</pre></div>
+        <div class="p"><pre class="blocks">&lt;not &lt;&gt;&gt;</pre></div>
+        <div class="p"><pre class="blocks">&lt;[ ] = [ ]&gt;</pre></div>
+        <div class="p"><pre class="blocks">(answer)</pre></div>
+        <div class="p"><pre class="blocks">(( ) + ( ))</pre><span class="x">×2</span></div>
+        <div class="p"><pre class="blocks">say [ ] for (1) seconds</pre></div>
+        <div class="p"><pre class="blocks">(join [It was ] [ ])</pre></div>
+      </div>
+      <p class="test">Test it: answer wrong. The cat tells you the right answer.</p>
+    </div>
+  </div>
+  <p class="foot">Click the green flag after every mission. Stuck? Try for <b>3 minutes</b>, then raise your hand.</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <span class="num">5</span>
+  <p class="kick">Math Cat · Missions 5 and 6</p>
+  <div class="cards two">
+    <div class="card">
+      <span class="pill">Cat · a new script</span>
+      <h3>5 · Walk</h3>
+      <p class="do">A second script on the cat. When the green flag is clicked, forever: set x to <b>(Score * 30) - 150</b>. Put the <b>*</b> block inside the <b>-</b> block.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">when flag clicked</pre></div>
+        <div class="p"><pre class="blocks">forever
+end</pre></div>
+        <div class="p"><pre class="blocks">set x to (0)</pre></div>
+        <div class="p"><pre class="blocks">(( ) - (150))</pre></div>
+        <div class="p"><pre class="blocks">(( ) * (30))</pre></div>
+        <div class="p"><pre class="blocks">(Score)</pre></div>
+      </div>
+      <p class="test">Test it: every right answer, the cat walks 30 steps right.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Cat · the first script</span>
+      <h3>6 · Win</h3>
+      <p class="do">At the bottom of the first script's forever: if <b>Score &gt; 9</b>, say You win! for 2 seconds, then stop all.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">if &lt;&gt; then
+end</pre></div>
+        <div class="p"><pre class="blocks">&lt;( ) &gt; (9)&gt;</pre></div>
+        <div class="p"><pre class="blocks">say [You win!] for (2) seconds</pre></div>
+        <div class="p"><pre class="blocks">stop [all v]</pre></div>
+      </div>
+      <p class="test">Test it: get 10 right. The cat wins and everything stops.</p>
+    </div>
+  </div>
+  <p class="try"><b>All six work? Try these:</b> pick random 1 to 20 · make it times: * instead of + in all three places, and “ x ” in the join · start sound Meow when you're right · a 60-second countdown on the Stage, like Shark Chase</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <span class="num">6</span>
+  <p class="kick">Math Cat · The code · Last 10 minutes</p>
+  <h2 class="small">The finished code</h2>
+  <div class="code over">
+    <div class="script fit"><pre class="blocks" data-fit="1">when flag clicked
+set [Score v] to (0)
+forever
+  set [A v] to (pick random (1) to (10)) // Mission 1 · Pick
+  set [B v] to (pick random (1) to (10))
+  ask (join (A) (join [ + ] (B))) and wait // Mission 2 · Ask
+  if &lt;(answer) = ((A) + (B))&gt; then // Mission 3 · Right!
+    change [Score v] by (1)
+    say [Correct!] for (1) seconds
+  end
+  if &lt;not &lt;(answer) = ((A) + (B))&gt;&gt; then // Mission 4 · Wrong
+    say (join [It was ] ((A) + (B))) for (1) seconds
+  end
+  if &lt;(Score) &gt; (9)&gt; then // Mission 6 · Win
+    say [You win!] for (2) seconds
+    stop [all v]
+  end
+end</pre></div>
+    <div class="side">
+      <div class="script"><pre class="blocks" data-scale="0.72">when flag clicked
+forever
+  set x to (((Score) * (30)) - (150)) // Mission 5 · Walk
+end</pre></div>
+      <p class="teach side-teach" style="margin-top:22px"><b>For the teacher:</b> this is the whole game. Both scripts go on the cat (Sprite1), and each starts with its own green flag. The next three slides show each part up close: go through them one at a time, and ask the class what each green block does. Then everyone fixes their own game.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <span class="num">7</span>
+  <p class="kick">Math Cat · The code up close</p>
+  <h2 class="small">Missions 1 and 2: pick and ask</h2>
+  <div class="code close">
+    <div class="script"><pre class="blocks" data-scale="1">when flag clicked
+set [Score v] to (0)
+forever
+  set [A v] to (pick random (1) to (10))
+  set [B v] to (pick random (1) to (10))
+  ask (join (A) (join [ + ] (B))) and wait
+end</pre></div>
+    <div class="side">
+      <ul>
+        <li><span class="op">pick random</span> a new number from 1 to 10, every time round the loop. A and B are different every question.</li>
+        <li><span class="op">join</span> glues two things into one. The inside join makes <b>“ + 5”</b>. The outside one puts A in front: <b>“7 + 5”</b>.</li>
+      </ul>
+      <h3>If it doesn't work</h3>
+      <ul>
+        <li><b>The question reads 75:</b> type <b>“ + ”</b> into the inside join, with a space each side.</li>
+        <li><b>A and B never change:</b> the two sets go <b>inside</b> the forever.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <span class="num">8</span>
+  <p class="kick">Math Cat · The code up close</p>
+  <h2 class="small">Missions 3 and 4: right or wrong</h2>
+  <p class="teach">These two ifs go inside the forever, right under the ask.</p>
+  <div class="code close">
+    <div class="script"><pre class="blocks" data-scale="0.95">if &lt;(answer) = ((A) + (B))&gt; then
+  change [Score v] by (1)
+  say [Correct!] for (1) seconds
+end
+if &lt;not &lt;(answer) = ((A) + (B))&gt;&gt; then
+  say (join [It was ] ((A) + (B))) for (1) seconds
+end</pre></div>
+    <div class="side">
+      <ul>
+        <li><span class="op">+</span> adds A and B. That's the right answer.</li>
+        <li><span class="op">=</span> asks: is what you typed the same as A + B?</li>
+        <li><span class="op">not</span> flips it: <b>not</b> the same means the answer was wrong.</li>
+        <li><span class="op">join</span> again: “It was ” and the right answer.</li>
+      </ul>
+      <h3>If it doesn't work</h3>
+      <ul>
+        <li><b>Every answer is wrong:</b> the + block needs <b>A</b> and <b>B</b> dropped in.</li>
+        <li><b>Wrong answers say Correct!:</b> the second if needs the <b>not</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <span class="num">9</span>
+  <p class="kick">Math Cat · The code up close</p>
+  <h2 class="small">Missions 5 and 6: walk and win</h2>
+  <div class="code close">
+    <div>
+      <p class="tag5">Mission 5 · a second script on the cat</p>
+      <div class="script"><pre class="blocks" data-scale="0.9">when flag clicked
+forever
+  set x to (((Score) * (30)) - (150))
+end</pre></div>
+      <p class="tag5" style="margin-top:22px">Mission 6 · at the bottom of the first script's forever</p>
+      <div class="script"><pre class="blocks" data-scale="0.9">if &lt;(Score) &gt; (9)&gt; then
+  say [You win!] for (2) seconds
+  stop [all v]
+end</pre></div>
+    </div>
+    <div class="side">
+      <table class="xs">
+        <tr><th>Score</th><th>Score * 30</th><th>- 150</th><th>The cat is</th></tr>
+        <tr><td>0</td><td>0</td><td>-150</td><td>on the left</td></tr>
+        <tr><td>5</td><td>150</td><td>0</td><td>in the middle</td></tr>
+        <tr><td>10</td><td>300</td><td>150</td><td>on the right</td></tr>
+      </table>
+      <ul>
+        <li><span class="op">*</span> times: 30 steps for every point.</li>
+        <li><span class="op">-</span> take away 150, so the cat starts on the left.</li>
+        <li><span class="op">&gt;</span> more than 9 means 10 right: you win.</li>
+      </ul>
+      <h3>If it doesn't work</h3>
+      <ul>
+        <li><b>The cat doesn't walk:</b> put Score inside the *, and the * <b>inside</b> the -.</li>
+        <li><b>It never ends:</b> the win check goes inside the forever, after the other two ifs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide save">
+  <span class="num">10</span>
+  <p class="kick">Math Cat · Time's up</p>
+  <h2>Save your game</h2>
+  <ol>
+    <li>Click <b>File</b>, then <b>Save to your computer</b>.</li>
+    <li>Name it <b>Math Cat</b> and your name.</li>
+    <li>Close the Scratch tab.</li>
+  </ol>
+  <p class="hint" style="font-size:24px">Please don't show the next group your game. They're taking the same test.</p>
+</section>
+
+<script>
+// Each script at its own size: the pieces small, the finished code big enough for the back row.
+document.querySelectorAll('pre.blocks').forEach(function(pre){
+  var o = {style: 'scratch3', languages: ['en'], inline: false, scale: parseFloat(pre.dataset.scale || '0.75')};
+  var code = scratchblocks.read(pre, o);
+  if (pre.dataset.fit) {  // as big as the box allows
+    var box = pre.parentNode, room = box.clientHeight - 44;
+    var probe = scratchblocks.render(scratchblocks.parse(code, Object.assign({}, o, {scale: 1})), Object.assign({}, o, {scale: 1}));
+    o.scale = Math.min(1, room / parseFloat(probe.getAttribute('height')));
+  }
+  var doc = scratchblocks.parse(code, o);
+  scratchblocks.replace(pre, scratchblocks.render(doc, o), doc, o);
+});
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>
