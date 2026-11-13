@@ -1,0 +1,356 @@
+<!doctype html>
+<!-- Asking and Operators: a short lesson for the TV, taught before Math Cat. The class can already move
+     sprites; what they don't get is ask and wait, answer, and the green Operators blocks. Eleven slides,
+     about 15 minutes with the two Try its. Render with node "Scratch Projects/03 Math Cat/render.js",
+     which writes docs/scratch/math-cat/lesson.pdf next to the Math Cat slides. cat.svg is the cat from
+     Scratch's library, the one every new project starts with. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Asking and Operators · TV</title>
+<script src="../../docs/scratch/scratchblocks-3.7.1.min.js"></script>
+<style>
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0d1733}
+body{font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;padding:44px 56px 40px;
+  background:radial-gradient(1200px 700px at 85% -10%,#22346e 0%,rgba(34,52,110,0) 60%),linear-gradient(180deg,#121d40,#0b1430);
+  page-break-after:always;break-after:page;display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.kick{font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f7c948;margin:0}
+.kick.sense{color:#7cc8e8}.kick.ops{color:#7ad67a}
+.num{position:absolute;top:40px;right:56px;font-size:14px;color:#8a97bd}
+h1{font-size:88px;line-height:.98;margin:14px 0 26px;font-weight:800;letter-spacing:-.03em}
+h2{font-size:52px;margin:12px 0 24px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+h2 .sense{color:#7cc8e8}h2 .ops{color:#7ad67a}
+b{color:#fff}
+.hint{margin-top:auto;font-size:22px;line-height:1.4;color:#c9d2ea;background:rgba(255,255,255,.07);border-radius:8px;padding:14px 18px;border-left:5px solid #f7c948}
+.hint b{color:#f7c948}
+
+/* two columns: words and blocks on the left, the stage on the right */
+.split{display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:center;flex:1;min-height:0}
+.big{margin:0;padding-left:34px;font-size:28px;line-height:1.5}
+.big li{margin:0 0 10px;padding-left:6px}
+.plain{list-style:none;margin:0;padding:0;font-size:28px;line-height:1.5}
+.plain li{margin:0 0 10px}
+.lede{font-size:28px;line-height:1.45;margin:0 0 22px;color:#e6ebf7}
+.blockbox{display:inline-block;background:#f9f9f9;border-radius:14px;padding:18px 22px;box-shadow:0 18px 44px rgba(0,0,0,.45);margin:0 0 26px}
+.blockbox.flat{padding:14px 18px}
+
+/* the Scratch stage, drawn */
+.stage{position:relative;width:480px;height:360px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.stage .cat{position:absolute;left:70px;bottom:92px;width:140px}
+.stage.noask .cat{bottom:60px}
+.bubble{position:absolute;left:190px;top:46px;background:#fff;border:2px solid #c3c9d4;border-radius:18px;padding:10px 18px;font-size:26px;font-weight:600;color:#575e75;white-space:nowrap}
+.bubble.long{left:150px}
+.bubble::after{content:"";position:absolute;left:18px;bottom:-15px;width:22px;height:22px;background:#fff;border-right:2px solid #c3c9d4;border-bottom:2px solid #c3c9d4;transform:skewX(30deg) rotate(30deg);border-bottom-right-radius:4px}
+.askbox{position:absolute;left:10px;right:10px;bottom:10px;border:2px solid #d9dee8;border-radius:10px;padding:8px;background:#fff}
+.field{position:relative;height:44px;border:2px solid #4c97ff;border-radius:22px;padding:0 54px 0 16px;font-size:24px;line-height:40px;color:#575e75;font-weight:600}
+.field .caret{display:inline-block;width:2px;height:26px;background:#575e75;vertical-align:-5px;margin-left:2px}
+.field .ok{position:absolute;right:3px;top:3px;width:34px;height:34px;border-radius:50%;background:#855cd6;color:#fff;font-size:20px;line-height:34px;text-align:center;font-weight:800}
+.typing{position:absolute;right:16px;bottom:72px;font-size:16px;font-weight:700;color:#855cd6;background:#f0eafc;border-radius:6px;padding:4px 10px}
+.stagecap{margin:12px 0 0;font-size:18px;color:#c9d2ea;text-align:center}
+
+/* what a block gives you: Scratch shows it in a little bubble when you click the block */
+.gives{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.arrow{font-size:34px;font-weight:800;color:#f7c948}
+.out{display:inline-block;background:#fff;color:#575e75;border:2px solid #c3c9d4;border-radius:14px;padding:6px 18px;font-size:30px;font-weight:800;white-space:nowrap}
+.out.t{color:#2f9e44}.out.f{color:#d9480f}
+.why{font-size:20px;color:#c9d2ea}
+
+.cards{display:grid;gap:22px;flex:1;min-height:0}
+.cards.two{grid-template-columns:1fr 1fr}
+.cards.four{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;min-height:0}
+.card h3{font-size:32px;margin:0;font-weight:800}
+.card p{font-size:22px;line-height:1.45;margin:0;color:#e6ebf7}
+.card .blockbox{margin:0;align-self:flex-start}
+.card .gives .blockbox{align-self:auto}
+.card.mid{justify-content:center}
+.card.round{border-top:6px solid #59c059}.card.pointy{border-top:6px solid #59c059}
+.shape{font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7ad67a}
+.pieces{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.mathcard{justify-content:center}
+.mathcard .gives{gap:18px}
+.mathcard .note{font-size:20px;color:#f7c948;font-weight:700;margin:0}
+
+table.check{border-collapse:collapse;width:100%;margin-top:4px}
+table.check td{padding:12px 18px 12px 0;border-bottom:1px solid rgba(255,255,255,.12);vertical-align:middle}
+table.check td.b{width:430px}
+table.check td.b .blockbox{margin:0}
+table.check td.w{font-size:22px;color:#e6ebf7;line-height:1.35}
+
+.try{flex:1;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start;min-height:0}
+.steps{margin:0;padding-left:34px;font-size:28px;line-height:1.5}
+.steps li{margin:0 0 12px;padding-left:6px}
+.test{font-size:24px;font-weight:700;color:#f7c948;margin:18px 0 0;line-height:1.4}
+.badge{align-self:flex-start;display:inline-block;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#f7c948;color:#2a2000;border-radius:999px;padding:6px 16px;margin-bottom:6px}
+
+.compare{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;flex:1;min-height:0;align-content:start}
+.compare > div{padding:16px 20px 16px 0;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center}
+.compare .h{font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fb2ff;padding-top:0}
+.compare .r{font-size:22px;font-weight:700;color:#f7c948}
+.compare .blockbox{margin:0}
+
+pre.blocks{margin:0}
+.scratchblocks svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide">
+  <span class="num">1</span>
+  <p class="kick">Scratch · Before Math Cat</p>
+  <div class="split">
+    <div>
+      <h1>Asking and Operators</h1>
+      <ul class="big">
+        <li><b>ask</b> a question, and wait for the answer.</li>
+        <li><b>answer</b> is what the player typed.</li>
+        <li><b>Operators</b> are the green blocks. They do math and check answers.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="stage">
+        <img class="cat" src="cat.svg" alt="">
+        <div class="bubble">What is 3 + 4?</div>
+        <div class="askbox"><div class="field">7<span class="caret"></span><span class="ok">✓</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <span class="num">2</span>
+  <p class="kick sense">Sensing · the light blue blocks</p>
+  <h2><span class="sense">ask</span> and wait</h2>
+  <div class="split">
+    <div>
+      <div class="blockbox"><pre class="blocks" data-scale="1.5">ask [What's your name?] and wait</pre></div>
+      <ol class="big">
+        <li>The cat asks the question.</li>
+        <li>A box opens under the stage.</li>
+        <li>The script <b>waits</b> until you type and press <b>Enter</b>.</li>
+      </ol>
+    </div>
+    <div>
+      <div class="stage">
+        <img class="cat" src="cat.svg" alt="">
+        <div class="bubble long">What's your name?</div>
+        <span class="typing">Type here</span>
+        <div class="askbox"><div class="field">Sam<span class="caret"></span><span class="ok">✓</span></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="hint">Find it in <b>Sensing</b>, the light blue section. Click the white box in the block to change the question.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <span class="num">3</span>
+  <p class="kick sense">Sensing · the light blue blocks</p>
+  <h2><span class="sense">answer</span> is what you typed</h2>
+  <div class="split">
+    <div>
+      <div class="gives" style="margin-bottom:26px">
+        <div class="blockbox flat" style="margin:0"><pre class="blocks" data-scale="1.6">(answer)</pre></div>
+        <span class="arrow">→</span><span class="out">Sam</span>
+      </div>
+      <p class="lede">After you press Enter, <b>answer</b> holds what you typed. Drop it into any round hole, like the one in <b>say</b>.</p>
+      <div class="blockbox"><pre class="blocks" data-scale="1.15">ask [What's your name?] and wait
+say (answer) for (2) seconds</pre></div>
+    </div>
+    <div>
+      <div class="stage noask">
+        <img class="cat" src="cat.svg" alt="">
+        <div class="bubble">Sam</div>
+      </div>
+      <p class="stagecap">You typed Sam, so the cat says Sam.</p>
+    </div>
+  </div>
+  <p class="hint">Every new <b>ask</b> replaces the old answer.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <span class="num">4</span>
+  <span class="badge">Try it · 2 minutes</span>
+  <h2>Make the cat say your name</h2>
+  <div class="try">
+    <div class="blockbox"><pre class="blocks" data-scale="1.3">when flag clicked
+ask [What's your name?] and wait
+say (answer) for (2) seconds</pre></div>
+    <div>
+      <ol class="steps">
+        <li>Build it on the cat.</li>
+        <li>Click the green flag.</li>
+        <li>Type your name and press <b>Enter</b>.</li>
+      </ol>
+      <p class="test">It works if the cat says your name.</p>
+    </div>
+  </div>
+  <p class="hint"><b>answer</b> is in Sensing (light blue). <b>say for 2 seconds</b> is in Looks (purple).</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <span class="num">5</span>
+  <p class="kick ops">Operators · the green blocks</p>
+  <h2><span class="ops">Operators</span> do math and check things</h2>
+  <div class="cards two">
+    <div class="card round">
+      <span class="shape">Round blocks</span>
+      <h3>Give you a number or a word</h3>
+      <div class="pieces">
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">(( ) + ( ))</pre></div>
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">(pick random (1) to (10))</pre></div>
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">(join [ ] [ ])</pre></div>
+      </div>
+      <p>They fit in <b>round holes</b>, like the one in <b>say</b>.</p>
+    </div>
+    <div class="card pointy">
+      <span class="shape">Pointy blocks</span>
+      <h3>Give you true or false</h3>
+      <div class="pieces">
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">&lt;[ ] = [ ]&gt;</pre></div>
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">&lt;( ) &gt; ( )&gt;</pre></div>
+        <div class="blockbox flat"><pre class="blocks" data-scale="1.2">&lt;not &lt;&gt;&gt;</pre></div>
+      </div>
+      <p>They fit in <b>pointy holes</b>, like in <b>if &lt; &gt; then</b>.</p>
+    </div>
+  </div>
+  <p class="hint" style="margin-top:22px"><b>Click any green block</b> in Scratch, and a little bubble shows what it gives you.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <span class="num">6</span>
+  <p class="kick ops">Operators · round blocks</p>
+  <h2>Math blocks</h2>
+  <div class="cards four">
+    <div class="card mathcard"><div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.5">((3) + (4))</pre></div><span class="arrow">→</span><span class="out">7</span></div><p class="note">+ adds</p></div>
+    <div class="card mathcard"><div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.5">((10) - (4))</pre></div><span class="arrow">→</span><span class="out">6</span></div><p class="note">− takes away</p></div>
+    <div class="card mathcard"><div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.5">((3) * (4))</pre></div><span class="arrow">→</span><span class="out">12</span></div><p class="note">* means times</p></div>
+    <div class="card mathcard"><div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.5">((12) / (4))</pre></div><span class="arrow">→</span><span class="out">3</span></div><p class="note">/ means divide</p></div>
+  </div>
+  <p class="hint" style="margin-top:22px">Type numbers into the white holes, or drop in a variable like <b>Score</b>.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <span class="num">7</span>
+  <p class="kick ops">Operators · round blocks</p>
+  <h2>pick random and join</h2>
+  <div class="cards two">
+    <div class="card mid">
+      <h3>pick random</h3>
+      <div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.4">(pick random (1) to (10))</pre></div><span class="arrow">→</span><span class="out">7</span></div>
+      <p>Click it again: <span class="out" style="font-size:22px;padding:2px 12px">2</span> then <span class="out" style="font-size:22px;padding:2px 12px">9</span></p>
+      <p>A new number every time. Math Cat uses it to make a new question each turn.</p>
+    </div>
+    <div class="card mid">
+      <h3>join</h3>
+      <div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.4">(join [Hi ] [Sam])</pre></div><span class="arrow">→</span><span class="out">Hi Sam</span></div>
+      <div class="gives"><div class="blockbox flat"><pre class="blocks" data-scale="1.4">(join [Hi ] (answer))</pre></div><span class="arrow">→</span><span class="out">Hi Sam</span></div>
+      <p>Glues two things into one. Type a <b>space</b> after Hi, or you get HiSam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <span class="num">8</span>
+  <p class="kick ops">Operators · pointy blocks</p>
+  <h2>Checking blocks: <span class="ops">true</span> or <span style="color:#ff8a5c">false</span></h2>
+  <table class="check">
+    <tr><td class="b"><div class="blockbox flat"><pre class="blocks" data-scale="1.3">&lt;(answer) = [7]&gt;</pre></div></td><td class="w"><span class="out t">true</span>&nbsp; if you typed 7<br><span class="out f" style="margin-top:8px">false</span>&nbsp; if you typed anything else</td></tr>
+    <tr><td class="b"><div class="blockbox flat"><pre class="blocks" data-scale="1.3">&lt;(5) &gt; (3)&gt;</pre></div></td><td class="w"><span class="out t">true</span>&nbsp; 5 is more than 3</td></tr>
+    <tr><td class="b"><div class="blockbox flat"><pre class="blocks" data-scale="1.3">&lt;(2) &gt; (3)&gt;</pre></div></td><td class="w"><span class="out f">false</span>&nbsp; 2 is not more than 3</td></tr>
+    <tr><td class="b"><div class="blockbox flat"><pre class="blocks" data-scale="1.3">&lt;not &lt;(answer) = [7]&gt;&gt;</pre></div></td><td class="w"><span class="out t">true</span>&nbsp; if the answer is <b>not</b> 7. <b>not</b> flips true and false.</td></tr>
+  </table>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <span class="num">9</span>
+  <p class="kick">Ask + Operators</p>
+  <h2>Ask, then check</h2>
+  <div class="split">
+    <div>
+      <div class="blockbox"><pre class="blocks" data-scale="1.1">ask [What is 3 + 4?] and wait
+if &lt;(answer) = [7]&gt; then
+  say [Correct!] for (2) seconds
+end</pre></div>
+      <ol class="big" style="font-size:24px">
+        <li><b>ask</b> shows the question and waits.</li>
+        <li>You type 7. Now <b>answer</b> is 7.</li>
+        <li><b>=</b> checks: is answer the same as 7? <b>True.</b></li>
+        <li>It's true, so the cat says <b>Correct!</b></li>
+      </ol>
+    </div>
+    <div>
+      <div class="stage noask">
+        <img class="cat" src="cat.svg" alt="">
+        <div class="bubble">Correct!</div>
+      </div>
+      <p class="stagecap">The = block goes in the pointy hole of the if.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <span class="num">10</span>
+  <span class="badge">Try it · 3 minutes</span>
+  <h2>A one-question quiz</h2>
+  <div class="try">
+    <div class="blockbox"><pre class="blocks" data-scale="0.88">when flag clicked
+ask [What is 3 + 4?] and wait
+if &lt;(answer) = [7]&gt; then
+  say [Correct!] for (2) seconds
+end
+if &lt;not &lt;(answer) = [7]&gt;&gt; then
+  say [Try again] for (2) seconds
+end</pre></div>
+    <div>
+      <ol class="steps">
+        <li>Build it on the cat.</li>
+        <li>Click the green flag and type <b>7</b>.</li>
+        <li>Click it again and type <b>5</b>.</li>
+      </ol>
+      <p class="test">It works if 7 says Correct! and 5 says Try again.</p>
+    </div>
+  </div>
+  <p class="hint"><b>if then</b> is in Control (orange). <b>=</b> and <b>not</b> are in Operators (green).</p>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <span class="num">11</span>
+  <p class="kick">Now: Math Cat</p>
+  <h2>Math Cat is the same quiz,<br>with new numbers every time</h2>
+  <div class="compare">
+    <div class="h"></div><div class="h">Your quiz</div><div class="h">Math Cat</div>
+    <div class="r">The question</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.95">ask [What is 3 + 4?] and wait</pre></div></div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.95">ask (join (A) (join [ + ] (B))) and wait</pre></div></div>
+    <div class="r">The check</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.95">&lt;(answer) = [7]&gt;</pre></div></div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.95">&lt;(answer) = ((A) + (B))&gt;</pre></div></div>
+  </div>
+  <p class="hint"><b>pick random</b> gives A and B. <b>join</b> builds the question. <b>+</b> works out the right answer. Now open the Math Cat slides and start Mission 1.</p>
+</section>
+
+<script>
+document.querySelectorAll('pre.blocks').forEach(function(pre){
+  var o = {style: 'scratch3', languages: ['en'], inline: false, scale: parseFloat(pre.dataset.scale || '1')};
+  var doc = scratchblocks.parse(scratchblocks.read(pre, o), o);
+  scratchblocks.replace(pre, scratchblocks.render(doc, o), doc, o);
+});
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>

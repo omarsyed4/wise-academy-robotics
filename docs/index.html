@@ -772,7 +772,7 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   <h3 class="sub">11:00 and 12:00 · Scratch class</h3>
   <div class="ez-box green">
     <p>A younger class, twice: 11:00 to 12:00, then 12:00 to 1:00. Both groups get the same lesson, <b>Math Cat</b>: a test of the green Operators blocks.</p>
-    <p>Open the <a href="#scratch">Scratch tab</a> on the TV and follow it from the top. For the last 10 minutes, put the code slides (6 to 9) on the TV and go through the finished code together.</p>
+    <p>Open the <a href="#scratch">Scratch tab</a> on the TV and follow it from the top. Start with the <b>Asking and Operators</b> slides, 15 minutes, because the class doesn't know those blocks yet. For the last 10 minutes, put the Math Cat code slides (6 to 9) on the TV and go through the finished code together.</p>
   </div>
 
   <h3 class="sub">Coming up</h3>
@@ -1033,7 +1033,8 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <!-- ===================== SCRATCH ===================== -->
-<!-- The current week only. Students see the finished game and what it does. The code is on the last slides of
+<!-- The current week only. Students see the finished game and what it does. scratch/math-cat/lesson.pdf is a short
+     lesson on ask, answer and the Operators blocks, taught first. The code is on the last slides of
      scratch/<slug>/slides.pdf (Math Cat: slides 6 to 9), which the teacher puts on the TV for the last 10 minutes.
      scratch/<slug>/play.html is the Solution packaged with @turbowarp/packager. Older weeks are in Git history. -->
 <div id="scratch" class="scrim" role="tabpanel" aria-labelledby="tab-scratch" hidden>
@@ -1071,15 +1072,18 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   <h3 class="sub">For the teacher</h3>
   <div class="ez-box">
     <p>A younger class, twice: <b>11:00 to 12:00</b>, then <b>12:00 to 1:00</b>. Do the same lesson both times.</p>
-    <p><b>Slides 6 to 9 are the finished code</b>, for the last 10 minutes: the whole game first, then each part up close.</p>
-    <p class="ez-acts"><a class="btn" href="scratch/math-cat/slides.pdf" target="_blank" rel="noopener">Slides for the TV</a><a class="btn ghost" href="scratch/math-cat/math-cat.sb3" download>The finished game (.sb3)</a></p>
+    <p><b>Start with the Asking and Operators slides.</b> The class can already move sprites, but not ask questions or use the green blocks. It takes 15 minutes, with two short Try its.</p>
+    <p>Then the Math Cat slides. <b>Slides 6 to 9 are the finished code</b>, for the last 10 minutes: the whole game first, then each part up close.</p>
+    <p class="ez-acts"><a class="btn" href="scratch/math-cat/lesson.pdf" target="_blank" rel="noopener">1 · Asking and Operators slides</a><a class="btn" href="scratch/math-cat/slides.pdf" target="_blank" rel="noopener">2 · Math Cat slides</a><a class="btn ghost" href="scratch/math-cat/math-cat.sb3" download>The finished game (.sb3)</a></p>
   </div>
   <ol class="ez-time">
     <li><b class="at">11:00</b><div><span class="what">Show the game.</span> <span class="more">Put this page on the TV, click the green flag and play it once. Answer one sum wrong on purpose.</span>
       <span class="say">“Today is a test, and it's all about the green Operators blocks. You'll build this game yourself, in one hour.”</span></div></li>
-    <li><b class="at">11:05</b><div><span class="what">Set up, all together.</span> <span class="more">Slide 2. Read the four steps and wait for everyone. Check that each laptop has Score, A and B.</span></div></li>
-    <li><b class="at">11:10</b><div><span class="what">Students build it on their own.</span> <span class="more">Slide 3 first. Move on to slide 4, then slide 5, once most students have the missions on the slide working.</span></div></li>
-    <li><b class="at">11:40</b><div><span class="what">Check each game.</span> <span class="more">Click their green flag and answer a few sums, one of them wrong. Tick each mission that works on the tracking sheet.</span></div></li>
+    <li><b class="at">11:05</b><div><span class="what">Teach asking and operators.</span> <span class="more">Put the <b>Asking and Operators</b> slides on the TV. Everyone opens scratch.mit.edu, clicks Create and keeps the cat. Slides 4 and 10 are Try its: wait until most of the class has them working.</span>
+      <span class="say">“Click any green block and Scratch tells you what it gives you. Try it.”</span></div></li>
+    <li><b class="at">11:20</b><div><span class="what">Set up Math Cat, all together.</span> <span class="more">Drag the practice scripts back onto the blocks list to delete them. Then Math Cat slide 2: check that each laptop has Score, A and B.</span></div></li>
+    <li><b class="at">11:25</b><div><span class="what">Students build it on their own.</span> <span class="more">Slide 3 first. Move on to slide 4, then slide 5, once most students have the missions on the slide working.</span></div></li>
+    <li><b class="at">11:45</b><div><span class="what">Check each game.</span> <span class="more">Click their green flag and answer a few sums, one of them wrong. Tick each mission that works on the tracking sheet.</span></div></li>
     <li><b class="at">11:50</b><div><span class="what">The last 10 minutes: show the code.</span> <span class="more">Put slide 6 on the TV: the whole game. Then slides 7, 8 and 9, one part at a time. Point at each green block and ask the class what it does. Students fix their own game as you go.</span>
       <span class="say">“Here's the real code. Look at yours: what's different?”</span></div></li>
     <li><b class="at">11:58</b><div><span class="what">Save.</span> <span class="more">File, then Save to your computer. Then close Scratch.</span>
