@@ -36,7 +36,7 @@ Week 3 was first **Space Dodge** (fly a rocket, grab stars, dodge a bouncing pla
 - `build.py` writes `Math Cat - Solution.sb3` and copies it to `docs/scratch/math-cat/math-cat.sb3`, the "finished game" download for the teacher. There's no Starter: it's a test, built from Create.
 - `slides.html` is the TV deck. `node "Scratch Projects/03 Math Cat/render.js"` prints it to `docs/scratch/math-cat/slides.pdf` (Playwright). Slides 3 to 5 are the missions with the blocks each one needs, slides 6 to 9 are the finished code, and the code slide sizes the script to fill its box.
 - `game.png` is the title slide's picture, taken from the packaged game.
-- The tracking sheet for the class is page 2 of `docs/print/2026-11-06-tracking.pdf`.
+- Math Cat was planned for 6 November but not taught that day, so it runs on 13 November instead. The tracking sheet for the class is page 2 of `docs/print/2026-11-13-tracking.pdf`.
 
 ## Things learned building week 1
 
