@@ -469,33 +469,29 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .scrim .stud dd.focus{color:var(--ink);border-left:2px solid var(--gold);padding-left:10px}
 
 /* ============ quizzes ============ */
-.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px 14px;flex-wrap:wrap;margin-top:38px}
-.qhead h3{font-family:var(--display);font-variation-settings:"wght" 700;font-size:1.15rem;letter-spacing:-.015em;margin:0}
-.qscore{font-family:var(--mono);font-size:13px;color:var(--gold)}
 .btn{font:inherit;font-size:13.5px;font-weight:600;border-radius:4px;padding:9px 14px;cursor:pointer;color:var(--bg);background:var(--blue);border:1px solid var(--blue)}
 .btn:hover{background:#7DB1F8}
 .btn.ghost{color:var(--blue);background:none;border-color:rgba(91,155,245,.55);padding:6px 10px;font-size:12.5px}
 .btn.ghost:hover{background:rgba(91,155,245,.12)}
-.quiz{margin-top:14px;display:flex;flex-direction:column;gap:12px;max-width:820px}
+#quiz-run{max-width:820px}
+#quiz-run .q{margin-top:14px}
+.qsteps{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0}
+.qsteps li{font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink-3)}
+.qsteps li.now{border-color:var(--blue);color:var(--ink)}
+.qsteps li.done{border-color:var(--green);color:var(--ink-2)}
+.qwarn{margin:14px 0 0;font-size:14px;color:var(--gold);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn:disabled{opacity:.4;cursor:default;background:var(--blue)}
 .q{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:16px}
 .q .n{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
 .q .ask{margin:0 0 12px;font-weight:600;color:var(--ink);font-size:15px}
 .q .opts{display:grid;gap:8px}
 .q .opt{text-align:left;font:inherit;font-size:14px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer}
 .q .opt:hover:not(:disabled){border-color:var(--blue);color:var(--ink)}
-.q .opt:disabled{cursor:default}
-.q .opt.right{border-color:var(--green);color:var(--ink);background:rgba(84,204,166,.12)}
-.q .opt.wrong{border-color:var(--red);background:rgba(238,127,104,.1)}
-.q .why{margin:12px 0 0;font-size:13.5px;color:var(--ink-2)}
-.q .why b{font-weight:600}
-.q .why .yes{color:var(--green)}
-.q .why .no{color:var(--red)}
+.q .opt.picked{border-color:var(--blue);color:var(--ink);background:rgba(91,155,245,.14)}
 .six form{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;max-width:820px}
 .six input{flex:1 1 240px;min-width:0;font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
 .six input:focus{outline:2px solid var(--blue);outline-offset:1px}
-.six .got{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.six .got span{font-size:13.5px;padding:7px 11px;border:1px dashed var(--ink-3);border-radius:4px;color:var(--ink-3)}
-.six .got span.on{border:1px solid var(--green);color:var(--ink);background:rgba(84,204,166,.12)}
 
 /* ============ presentations ============ */
 .marks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:13px;color:var(--ink-3)}
@@ -628,7 +624,6 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 .ez-who label{font-weight:600;font-size:16px}
 .ez-who select{font:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:8px 10px}
 .ez-who .sent{font-size:14px;color:var(--green)}
-.quizlock{opacity:.35;pointer-events:none;filter:grayscale(.6)}
 .ez-code{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
 @media (max-width:760px){.ez-code{grid-template-columns:1fr}}
 .ez-code pre.blocks{margin:0;font-family:var(--mono);font-size:12px;line-height:1.5;white-space:pre;overflow-x:auto;color:var(--ink-2)}
@@ -1004,32 +999,25 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <!-- ===================== QUIZZES ===================== -->
+<!-- The questions are written in by scripts/build-quiz.mjs (between the QUIZ markers) from the coach-only bank in
+     admin/, with each answer hashed so the page source doesn't give it away. One try per part, one question at a
+     time, options in a different order for every student, and no answers shown: the coach goes over them with
+     everyone afterwards. Each finished part goes to the Google Form with the picks, the time taken, how often the
+     student left the page and which laptop it was. scripts/quiz-results.py reads the results sheet: only a
+     student's first try counts. To let a student redo a part, clear this site's data on that laptop. -->
 <div id="quiz" class="scrim" role="tabpanel" aria-labelledby="tab-quiz" hidden>
 <section class="ez">
-  <div class="shead"><span>FRI 13 NOV · QUIZ DAY · 9:05</span><h2>Quizzes</h2></div>
-  <p class="note">Pick your name first, then do all three parts. When you finish a part, your score goes to Coach Omar and a ✓ appears next to your name. No notes, and no helping each other.</p>
+  <div class="shead"><span>ONE TRY · NO NOTES · STAY ON THIS PAGE</span><h2>Quizzes</h2></div>
+  <p class="note">Pick your name and press Start. There are three parts, one question at a time. You get <b>one try</b>: no going back and no starting over. Answers aren't shown until everyone is done, then Coach Omar goes through them with the whole team. Stay on this page until you finish. If you leave it, Coach Omar sees.</p>
   <div class="ez-who">
     <label for="quiz-who">Your name</label>
     <select id="quiz-who"><option value="">Pick your name</option><option>Abbas</option><option>Ali</option><option>Mohamed</option><option>Husayn</option><option>Haider</option><option>Elias</option><option>Mahdi</option><option>Ammar</option></select>
+    <button class="btn" type="button" id="quiz-start" disabled>Start</button>
     <span class="sent" id="quiz-sent" aria-live="polite"></span>
   </div>
-  <div id="quiz-body" class="quizlock">
-
-  <div class="six">
-    <div class="qhead"><h3>1 · Name all six</h3></div>
-    <p class="note" style="margin:6px 0 0">Type the six FIRST Core Values from memory, in any order.</p>
-    <form id="six-form" autocomplete="off"><input id="six-in" type="text" aria-label="The six Core Values" placeholder="Discovery, …"><button class="btn" type="submit">Check</button></form>
-    <div class="got" id="six-got" aria-live="polite"></div>
-  </div>
-
-  <div class="qhead"><h3>2 · Core Values</h3><span><span class="qscore" id="cv-score" aria-live="polite"></span> <button class="btn ghost" type="button" data-reset="cv">Start over</button></span></div>
-  <div class="quiz" id="cv"></div>
-
-  <div class="qhead"><h3>3 · What would you do?</h3><span><span class="qscore" id="wwyd-score" aria-live="polite"></span> <button class="btn ghost" type="button" data-reset="wwyd">Start over</button></span></div>
-  <p class="note" style="margin:6px 0 0">Real situations from robot game, judging and the pits. Pick what you'd actually do.</p>
-  <div class="quiz" id="wwyd"></div>
-  </div>
+  <div id="quiz-run"></div>
 </section>
+<!-- QUIZ:BEGIN --><script type="application/json" id="quiz-bank">{"set":"cv-2","salt":"76025ce251ab8ab9","six":["da6f39af68bf73c1","a7025ce2da8a3313","854a5ae600cd1779","a45006eb0c5c729b","42eb18f61deaba28","7745c5c11e4e59df"],"rounds":[{"id":"cv","title":"Core Values","note":"","qs":[{"id":"cv1","ask":"Which of these is the Discovery Core Value?","opts":["We use creativity and persistence to solve problems.","We apply what we learn to improve our world.","We explore new skills and ideas.","We respect each other and embrace our differences."],"key":"33cef1af10c9997c"},{"id":"cv2","ask":"“We use creativity and persistence to solve problems.” Which Core Value is this?","opts":["Discovery","Impact","Innovation","Inclusion"],"key":"19af7607ab4a3523"},{"id":"cv3","ask":"Which of these is the Inclusion Core Value?","opts":["We are stronger when we work together.","We use creativity and persistence to solve problems.","We respect each other and embrace our differences.","We apply what we learn to improve our world."],"key":"dba7cf240cef7dfc"},{"id":"cv4","ask":"Tangled kept going too far right. Ali moved the robot a little to the left. It still missed, so he moved it more, and the second change worked. Which Core Value does that show most?","opts":["Discovery","Impact","Fun","Innovation"],"key":"7c18092ff2d0c810"},{"id":"cv5","ask":"In full rounds, Haider lets Elias launch every Blue half and coaches him from the side, without touching the robot. Which Core Value is Haider showing most?","opts":["Impact","Inclusion","Discovery","Fun"],"key":"48cc1d3f03de3c51"},{"id":"cv6","ask":"Our Innovation Project is about what happens to animals and farmers when forests are cut down, and how to help them. Which Core Value is that most?","opts":["Innovation","Discovery","Impact","Teamwork"],"key":"028e741c3035c2ce"},{"id":"cv7","ask":"Blue and Red share one robot. After Blue's last mission, Haider's program drives the robot over to Red's home so Red can finish the match. Which Core Value is that most?","opts":["Teamwork","Impact","Discovery","Fun"],"key":"ed7f84575a9a3bd2"},{"id":"cv8","ask":"You try a sensor you've never used before, just to find out what it can do. Which Core Value is that?","opts":["Innovation","Inclusion","Impact","Discovery"],"key":"2fbefc5c9a3c1262"},{"id":"cv9","ask":"Forest Elder scores zero in a round. The team still cheers for the missions that worked and high-fives the technicians. Which Core Value is that?","opts":["Inclusion","Fun","Impact","Discovery"],"key":"ed9f923868f4b0ea"},{"id":"cv10","ask":"Which of these is NOT one of the six FIRST Core Values?","opts":["Inclusion","Impact","Respect","Discovery"],"key":"00989a8621d41e6b"},{"id":"cv11","ask":"How much of our Champion's Award score comes from Core Values?","opts":["One tenth","One half","None of it","One quarter"],"key":"53b5310a7550c209"},{"id":"cv12","ask":"Outside the judging room, what else counts toward our Core Values score?","opts":["Our highest robot game score of the whole day","The referee's Gracious Professionalism score each match","Votes from the other teams at the tournament","A report that our coach hands to the judges"],"key":"f7bbc953c8d79ad4"}]},{"id":"wwyd","title":"What would you do?","note":"Real situations from the robot table, judging and the pits. Pick what you'd actually do.","qs":[{"id":"w1","ask":"The robot stalls just outside home with 40 seconds left. We've already touched it outside home once this match. What should the technician do?","opts":["Grab it and relaunch, since there's still time for a mission","Grab it: the first touch was free, so the second one is too","Leave it, unless relaunching wins us more than 15 points","Leave it no matter what, because every touch costs points"],"key":"77ea9f71b998368f"},{"id":"w2","ask":"A judge asks how a piece of our code works. You don't know, but Ali wrote it and he's standing next to you.","opts":["Explain it as well as you can, so the judge sees you know it","Say “Ali wrote that part. Ali?” and let him answer","Say you're not sure, and carry on with your own part","Start answering, and let Ali jump in if you get it wrong"],"key":"840eee54fa585983"},{"id":"w3","ask":"Another team's robot breaks in the pit. They need a part, and we have a spare one.","opts":["Keep it: a spare is for our own emergencies","Lend it after our matches are done, just in case","Lend it now, and offer to help them fit it","Lend it only if they aren't ranked above us"],"key":"6ef3c77f8d307a9b"},{"id":"w4","ask":"A teammate freezes halfway through his part of the presentation.","opts":["Take over his part, so the judges don't notice","Prompt him: “Tell them about our expert”","Skip to the next part, and come back to his later","Stay quiet: helping him might look bad to the judges"],"key":"71761100ac875dbb"},{"id":"w5","ask":"The referee marks a mission “No”, but you're sure it scored.","opts":["Ask them politely to look again, before you initial","Initial the sheet anyway: the referee's call is final","Call our coach over to talk to the referee for us","Don't initial it until they change it to “Yes”"],"key":"73065d3b958ea622"},{"id":"w6","ask":"Your program has a bug and you're at the competition table. A teammate says the fastest fix is to send the new code over Bluetooth.","opts":["Send it: Bluetooth is faster than walking back","Turn Bluetooth on just to send it, then off again","Ask the referee if Bluetooth is OK this one time","Go back to the pit and load it with the USB cable"],"key":"af0386e903d03321"},{"id":"w7","ask":"A teammate wants to try an attachment idea you're sure won't work.","opts":["Explain why it won't work, so he doesn't waste time","Let the coach decide which idea the team uses","Test yours first, and only try his if yours fails","Build a quick version of his and test both"],"key":"bffee77d521f3e2a"},{"id":"w8","ask":"All our missions are done, and there are 30 seconds left on the clock.","opts":["Stop in home and wait, so we can't lose anything","Run our spare mission, if it can't knock things over","Launch every program we have left, as fast as we can","Start packing the attachments so we're ready to leave the table"],"key":"ee6d6fc85f0af449"},{"id":"w9","ask":"A judge asks, “What did you learn this season?” and your mind goes blank.","opts":["Say “Teamwork”, because that's true for all of us","Tell one story: what failed and how we fixed it","Pass the question to our best speaker to answer","List as many things as you can, quickly"],"key":"c2c24caba0d507cd"},{"id":"w10","ask":"At lunch, you see a kid from another team sitting alone, looking nervous.","opts":["Leave him be: he's getting ready for judging","Tell a coach, so an adult can check on him","Go over, say hi, and ask him about his team's robot","Wave from our table, so he knows we're friendly"],"key":"61c51f567ff2489e"},{"id":"w11","ask":"We have a bad round, and your teammate is upset about it.","opts":["Go over what went wrong right now, while it's fresh","Say only our best round counts, and plan the next","Give him some space, and wait until he calms down","Tell him it doesn't matter, because it's only a game"],"key":"84142c4989bed235"}]}]}</script><!-- QUIZ:END -->
 </div>
 
 <!-- ===================== SCRATCH ===================== -->
@@ -1578,110 +1566,188 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
   window.addEventListener('hashchange', fromHash);
   fromHash();
 
-  // Quizzes. Each question: the ask, the options, the index of the best one, and why.
-  var quizzes = {
-    cv: [
-      ['“We explore new skills and ideas.” Which Core Value is this?', ['Discovery', 'Innovation', 'Impact', 'Fun'], 0, 'Discovery is about trying things you haven\'t done before.'],
-      ['“We use creativity and persistence to solve problems.”', ['Teamwork', 'Innovation', 'Discovery', 'Impact'], 1, 'Innovation. Persistence counts: testing again and again until it works.'],
-      ['“We apply what we learn to improve our world.”', ['Inclusion', 'Innovation', 'Impact', 'Teamwork'], 2, 'Impact. Our Innovation Project on deforestation is our impact story.'],
-      ['“We respect each other and embrace our differences.”', ['Teamwork', 'Fun', 'Discovery', 'Inclusion'], 3, 'Inclusion. Everyone brings something different, and everyone gets a real job.'],
-      ['“We are stronger when we work together.”', ['Teamwork', 'Inclusion', 'Impact', 'Fun'], 0, 'Teamwork. One robot, eight people.'],
-      ['“We enjoy and celebrate what we do!”', ['Discovery', 'Impact', 'Fun', 'Innovation'], 2, 'Fun. Judges notice a team that enjoys itself.'],
-      ['Which of these is NOT a FIRST Core Value?', ['Inclusion', 'Winning', 'Discovery', 'Impact'], 1, 'There are six: Discovery, Innovation, Impact, Inclusion, Teamwork and Fun. Winning isn\'t one of them.'],
-      ['How much of the Champion\'s Award score comes from Core Values?', ['10%', '25%', '50%', 'None. It\'s a separate award'], 1, 'A quarter. Core Values, Innovation Project, Robot Design and Robot Game count equally.'],
-      ['When are judges and referees watching our Core Values?', ['Only in the judging room', 'Only at the robot table', 'All day: judging, the robot table and the pits', 'Only at the awards'], 2, 'All day. The robot game score sheet even has a Gracious Professionalism box for the referee.'],
-      ['At the scrimmage, referees scored our Gracious Professionalism out of 4 in each round. What did we get?', ['2, 2, 3', '3, 3, 3', '4, 3, 4', '4, 4, 4'], 2, 'Two “Exceeds” and one “Accomplished”. Let\'s make it 4 every round.'],
-      ['Ali tested Tangled again and again until it worked. Which Core Value is that, most of all?', ['Fun', 'Innovation', 'Inclusion', 'Impact'], 1, 'Innovation means creativity and persistence. Not giving up on a mission is persistence.'],
-      ['A new teammate has never coded. You show him how, and give him a real job on the robot. Which Core Value?', ['Inclusion', 'Discovery', 'Impact', 'Fun'], 0, 'Inclusion: respecting differences and making room for everyone.']
-    ],
-    wwyd: [
-      ['The robot stalls outside home with 40 seconds left. We\'ve already lost one token this match. Your teammate reaches for it.', ['Grab it fast and relaunch', 'Leave it, unless relaunching wins more than 15 points', 'Ask the referee to pause the match', 'Tell the other side to grab it'], 1, 'The first touch is free, because 5 tokens still pays 50. The second costs 15. Only touch the robot if the relaunch is worth more than that.', 'Robot game'],
-      ['A judge asks how a piece of our code works. You don\'t know, but Ali wrote it and he\'s standing next to you.', ['Make up an answer', 'Say “Ali wrote that part. Ali?” and let him answer', 'Say “We don\'t know”', 'Point at the slide'], 1, 'Judges want to see every student\'s part. Handing a question to the person who did the work is teamwork.', 'Teamwork'],
-      ['Another team\'s robot breaks in the pit, and they need a part we have a spare of.', ['Keep it, we might need it', 'Lend it, and ask if they need help', 'Tell them to ask the referee', 'Tell them we\'re busy'], 1, 'Helping another team is Gracious Professionalism, and people notice it.', 'Gracious Professionalism'],
-      ['A teammate freezes halfway through his part of the presentation.', ['Take over the rest of his part', 'Give him a quick prompt, like “Tell them about the expert”, so he can carry on', 'Wait in silence until he remembers', 'Tell the judges he\'s nervous'], 1, 'A small prompt keeps it his part. Taking over would hide what he knows.', 'Teamwork'],
-      ['The referee marks a mission “No”, but you\'re sure it scored.', ['Argue until they change it', 'Before you initial the sheet, politely ask them to look again, then accept the call', 'Initial it anyway and complain later', 'Ask a coach to argue for you'], 1, 'You can ask before you sign. When a call is unclear, the rules give the team the benefit of the doubt. Stay polite either way.', 'Gracious Professionalism'],
-      ['Your program has a bug and you\'re at the competition table. The fastest fix is to send it over Bluetooth.', ['Send it over Bluetooth', 'Go back to the pit and load it with the USB cable', 'Ask another team to load it for you', 'Skip that mission for good'], 1, 'Bluetooth on in the competition area can get us disqualified. USB only.', 'Rules'],
-      ['A teammate wants to try an attachment idea you\'re sure won\'t work.', ['Tell him no', 'Let him test it, and look at the results together', 'Build yours instead without telling him', 'Make the coach decide'], 1, 'Testing settles it. Either it works and we gain an idea, or we learn why not. That\'s Discovery and Inclusion.', 'Inclusion'],
-      ['All your missions are done, and there are 30 seconds left on the clock.', ['Stand and wait', 'Run the extra mission, if it can\'t knock anything we\'ve already scored', 'Launch anything, quickly', 'Start packing up the attachments'], 1, 'That\'s Ali\'s idea: spare time is free points. Just don\'t knock over the spider or snail habitats.', 'Innovation'],
-      ['A judge asks, “What did you learn this season?” Your mind goes blank.', ['Say “A lot”', 'Give one real example: something that failed, and how you fixed it', 'Let our best speaker answer for everyone', 'Read it off the trifold'], 1, 'One true story beats a big general answer. The rubric asks what each of us learned.', 'Communicate'],
-      ['At lunch, you see a kid from another team sitting alone and looking nervous.', ['Ignore it, he\'s not on our team', 'Go and say hi, introduce yourself, and give him one of our cards', 'Tell a coach', 'Take a photo'], 1, 'Introducing ourselves to other teams is part of Core Values, and it\'s the kind thing to do.', 'Inclusion'],
-      ['We have a bad round, and your teammate is upset about it.', ['Tell him it was his fault', 'Remind him only the best round counts, and plan the next one together', 'Leave him alone', 'Complain to the referee'], 1, 'Only our best round counts, so one bad round doesn\'t cost us. Keep it fun and fix it together.', 'Fun']
-    ]
-  };
-  // Who's taking the quiz. Each finished round goes to Coach Omar's Google Form "Ctrl+Alt+Defeat quiz
-  // results", which feeds a Google Sheet in his Drive. no-cors: the page can't read the reply, only send.
-  var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSf_VJ-swvKufLOeYmn_v0LoW5ECC4uXmr4-Ei0OuBcw92mZtQ/formResponse';
-  var who = document.getElementById('quiz-who'), qbody = document.getElementById('quiz-body'), sent = document.getElementById('quiz-sent');
-  try { who.value = localStorage.getItem('cad-quiz-who') || ''; } catch (e) {}
-  function lockQuiz(){ qbody.classList.toggle('quizlock', !who.value); sent.textContent = ''; }
-  who.addEventListener('change', function(){
-    try { localStorage.setItem('cad-quiz-who', who.value); } catch (e) {}
-    lockQuiz();
-  });
-  lockQuiz();
-  function sendResult(quiz, score, details){
-    if (!who.value) return;
-    var body = new URLSearchParams({ 'entry.1683429068': who.value, 'entry.1728989231': quiz, 'entry.1073178777': score, 'entry.699806914': details });
-    fetch(FORM, { method: 'POST', mode: 'no-cors', body: body }).then(function(){
-      sent.textContent = '✓ ' + quiz + ': ' + score + ', sent to Coach Omar';
-    }).catch(function(){
-      sent.textContent = 'That didn\'t send. Check the internet, then do the round again.';
-    });
-  }
-  var quizTitles = { cv: 'Core Values', wwyd: 'What would you do?' };
-  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-  function renderQuiz(id){
-    var box = document.getElementById(id), qs = quizzes[id], right = 0, done = 0, missed = [];
-    var score = document.getElementById(id + '-score');
-    function tally(){ score.textContent = done ? right + ' / ' + done + ' right' : qs.length + ' questions'; }
-    box.innerHTML = qs.map(function(q, i){
-      return '<div class="q"><span class="n">' + (i + 1) + (q[4] ? ' · ' + esc(q[4]) : '') + '</span>' +
-        '<p class="ask">' + esc(q[0]) + '</p><div class="opts">' +
-        q[1].map(function(o, j){ return '<button type="button" class="opt" data-q="' + i + '" data-o="' + j + '">' + esc(o) + '</button>'; }).join('') +
-        '</div><p class="why" hidden></p></div>';
-    }).join('');
-    box.onclick = function(e){
-      var b = e.target.closest('.opt');
-      if (!b || b.disabled) return;
-      var q = qs[+b.dataset.q], pick = +b.dataset.o, card = b.closest('.q');
-      card.querySelectorAll('.opt').forEach(function(o, j){
-        o.disabled = true;
-        if (j === q[2]) o.classList.add('right');
-        else if (j === pick) o.classList.add('wrong');
-      });
-      var ok = pick === q[2];
-      done++; if (ok) right++; else missed.push(+b.dataset.q + 1);
-      var why = card.querySelector('.why');
-      why.innerHTML = '<b class="' + (ok ? 'yes">Right. ' : 'no">Not quite. ') + '</b>' + esc(q[3]);
-      why.hidden = false;
-      tally();
-      if (done === qs.length) sendResult(quizTitles[id], right + ' / ' + qs.length, missed.length ? 'Missed questions ' + missed.join(', ') : 'All right');
-    };
-    tally();
-  }
-  Object.keys(quizzes).forEach(renderQuiz);
-  document.querySelectorAll('[data-reset]').forEach(function(b){
-    b.addEventListener('click', function(){ renderQuiz(b.dataset.reset); });
-  });
+  // Quizzes. scripts/build-quiz.mjs writes the bank into #quiz-bank: questions and options in plain text,
+  // each answer only as sha256(salt|id|text). One try per part, one question at a time, options in a new
+  // order for every student, and nothing marked right or wrong. Progress is kept on the laptop, so a reload
+  // carries on where it stopped instead of starting over. Each finished part goes to Coach Omar's Google Form
+  // "Ctrl+Alt+Defeat quiz results" (no-cors: the page can send but not read the reply), and
+  // scripts/quiz-results.py reads the sheet. The form's entry IDs are below.
+  (function(){
+    var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSf_VJ-swvKufLOeYmn_v0LoW5ECC4uXmr4-Ei0OuBcw92mZtQ/formResponse';
+    var who = document.getElementById('quiz-who'), startBtn = document.getElementById('quiz-start');
+    var run = document.getElementById('quiz-run'), sent = document.getElementById('quiz-sent');
+    var bankEl = document.getElementById('quiz-bank');
+    var bank = bankEl ? JSON.parse(bankEl.textContent) : null;
+    if (!bank) { run.innerHTML = '<p class="note">No quiz today.</p>'; who.disabled = true; return; }
 
-  // Name all six.
-  var six = ['Discovery', 'Innovation', 'Impact', 'Inclusion', 'Teamwork', 'Fun'];
-  var got = document.getElementById('six-got');
-  function drawSix(found){
-    got.innerHTML = six.map(function(v){
-      var on = found && found.indexOf(v) >= 0;
-      return '<span class="' + (on ? 'on' : '') + '">' + (on ? v : '?') + '</span>';
-    }).join('');
-  }
-  document.getElementById('six-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    var text = ' ' + document.getElementById('six-in').value.toLowerCase().replace(/[^a-z]+/g, ' ').replace(/team work/g, 'teamwork') + ' ';
-    var found = six.filter(function(v){ return text.indexOf(' ' + v.toLowerCase() + ' ') >= 0; });
-    drawSix(found);
-    if (found.length === 6) got.insertAdjacentHTML('beforeend', '<span class="on">All six!</span>');
-    sendResult('Name all six', found.length + ' / 6', found.length === 6 ? 'All six' : 'Missing ' + six.filter(function(v){ return found.indexOf(v) < 0; }).join(', '));
-  });
-  drawSix();
+    function load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+    function save(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+    function rand(n){ var a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; }
+    function shuffle(n){ var a = []; for (var i = 0; i < n; i++) a.push(i); for (i = n - 1; i > 0; i--) { var j = rand(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    function hash(id, text){
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(bank.salt + '|' + id + '|' + text)).then(function(buf){
+        return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2, '0'); }).join('').slice(0, 16);
+      });
+    }
+    function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function clock(ms){ var s = Math.round(ms / 1000); return Math.floor(s / 60) + 'm' + String(s % 60).padStart(2, '0') + 's'; }
+
+    var KEY = 'cad-quiz:' + bank.set;
+    var device = load('cad-device');
+    if (!device) { device = Math.random().toString(36).slice(2, 6); save('cad-device', device); }
+    var parts = [{ id: 'six', title: 'Name all six' }].concat(bank.rounds);
+    var name = load(KEY + ':who'), st = null, away = false, picked = null;
+
+    function store(){ save(KEY + ':' + name, st); }
+    function current(){ return parts.filter(function(p){ return !(st.parts[p.id] && st.parts[p.id].done); })[0]; }
+    function active(){ var p = current(); return p && st.parts[p.id] && st.parts[p.id].t0 ? st.parts[p.id] : null; }
+
+    // Leaving the page mid-part (another tab, another app, the address bar, developer tools) is counted.
+    function left(){
+      var a = active();
+      if (!a || away) return;
+      away = true; a.left = (a.left || 0) + 1; store();
+    }
+    function back(){
+      if (!away) return;
+      away = false;
+      sent.textContent = 'You left the quiz page. Coach Omar will see that.';
+    }
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) left(); else back(); });
+    window.addEventListener('blur', left);
+    window.addEventListener('focus', back);
+
+    function send(p, ps){
+      var body = new URLSearchParams({ 'entry.1683429068': name, 'entry.1728989231': p.title, 'entry.1073178777': ps.score, 'entry.699806914': ps.payload });
+      return fetch(FORM, { method: 'POST', mode: 'no-cors', body: body }).then(function(){
+        ps.sent = true; store();
+        sent.textContent = '✓ ' + p.title + ' sent to Coach Omar';
+      }).catch(function(){
+        sent.textContent = 'That didn\'t send. Check the internet, then press Send again.';
+      }).then(draw);
+    }
+    function details(ps, extra){
+      return ['set=' + bank.set, 'time=' + clock(ps.t1 - ps.t0), 'left=' + (ps.left || 0), 'device=' + device].concat(extra).join(' | ');
+    }
+
+    function steps(){
+      return '<ol class="qsteps">' + parts.map(function(p, i){
+        var ps = st.parts[p.id], cls = ps && ps.done ? 'done' : (p === current() ? 'now' : '');
+        return '<li class="' + cls + '">' + (i + 1) + ' · ' + esc(p.title) + (ps && ps.done ? ' ✓' : '') + '</li>';
+      }).join('') + '</ol>';
+    }
+    function unsent(){
+      var p = parts.filter(function(p){ var ps = st.parts[p.id]; return ps && ps.done && !ps.sent; })[0];
+      return p ? '<p class="qwarn">' + esc(p.title) + ' hasn\'t reached Coach Omar yet. <button class="btn" type="button" data-resend="' + p.id + '">Send again</button></p>' : '';
+    }
+
+    function draw(){
+      if (!name) { run.innerHTML = ''; return; }
+      var p = current(), html = steps() + unsent();
+      if (!p) {
+        html += '<div class="q"><p class="ask">All ' + parts.length + ' parts are done. Well done, ' + esc(name) + '.</p>' +
+          '<p class="note" style="margin:0">' + parts.map(function(p){ return esc(p.title) + ': ' + esc(st.parts[p.id].score); }).join(' · ') +
+          '</p><p class="note" style="margin:10px 0 0">Close the laptop and wait quietly. Coach Omar goes through the answers once everyone has finished.</p></div>';
+        run.innerHTML = html; return;
+      }
+      var ps = st.parts[p.id], n = parts.indexOf(p) + 1, of = 'Part ' + n + ' of ' + parts.length + ' · ' + esc(p.title);
+      var prev = parts[n - 2], done = prev ? '<p class="note" style="margin:0 0 10px">' + esc(prev.title) + ' is done: ' + esc(st.parts[prev.id].score) + '.</p>' : '';
+      if (!ps || !ps.t0) {
+        var count = p.id === 'six' ? 'Type all six Core Values from memory.' : p.qs.length + ' questions.';
+        html += '<div class="q">' + done + '<span class="n">' + of + '</span><p class="ask">' + count + ' One try, and no going back.</p>' +
+          (p.note ? '<p class="note" style="margin:0 0 12px">' + esc(p.note) + '</p>' : '') +
+          '<button class="btn" type="button" data-begin="' + p.id + '">Start part ' + n + '</button></div>';
+      } else if (p.id === 'six') {
+        html += '<div class="q six"><span class="n">' + of + '</span><p class="ask">Type the six FIRST Core Values, in any order.</p>' +
+          '<form id="six-form" autocomplete="off"><input id="six-in" type="text" spellcheck="false" autocapitalize="off" aria-label="The six Core Values">' +
+          '<button class="btn" type="submit">Done, send it</button></form><p class="note" style="margin:10px 0 0">You can send it once, so check your spelling first.</p></div>';
+      } else {
+        var i = ps.at, q = p.qs[ps.order[i]], last = i === p.qs.length - 1;
+        html += '<div class="q"><span class="n">' + of + ' · question ' + (i + 1) + ' of ' + p.qs.length + '</span>' +
+          '<p class="ask">' + esc(q.ask) + '</p><div class="opts" role="group" aria-label="Answers">' +
+          ps.opt[i].map(function(o){ return '<button type="button" class="opt" aria-pressed="false" data-o="' + o + '">' + esc(q.opts[o]) + '</button>'; }).join('') +
+          '</div><div class="qnav"><span class="note" style="margin:0">Pick one, then press ' + (last ? 'Finish' : 'Next') + '. You can\'t come back to it.</span>' +
+          '<button class="btn" type="button" data-next disabled>' + (last ? 'Finish and send' : 'Next') + '</button></div></div>';
+      }
+      run.innerHTML = html;
+      picked = null;
+      var input = document.getElementById('six-in');
+      if (input) input.focus();
+    }
+
+    function begin(id){
+      var p = parts.filter(function(p){ return p.id === id; })[0], ps = { t0: Date.now(), left: 0 };
+      if (p.qs) { ps.at = 0; ps.picks = []; ps.order = shuffle(p.qs.length); ps.opt = ps.order.map(function(qi){ return shuffle(p.qs[qi].opts.length); }); }
+      st.parts[id] = ps; store(); sent.textContent = ''; draw();
+    }
+    function finishSix(text){
+      var p = parts[0], ps = st.parts.six;
+      var words = ' ' + text.toLowerCase().replace(/[^a-z]+/g, ' ').replace(/team work/g, 'teamwork') + ' ';
+      var uniq = words.trim().split(' ').filter(function(w, i, a){ return w && a.indexOf(w) === i; });
+      Promise.all(uniq.map(function(w){ return hash('six', w); })).then(function(hs){
+        var found = hs.filter(function(h){ return bank.six.indexOf(h) >= 0; }).length;
+        ps.t1 = Date.now(); ps.done = true; ps.score = found + ' / ' + bank.six.length;
+        ps.payload = details(ps, ['typed=' + text.replace(/[|\n\r]+/g, ' ').slice(0, 200)]);
+        store(); send(p, ps);
+      });
+    }
+    function finishRound(p, ps){
+      Promise.all(ps.order.map(function(qi, i){ var q = p.qs[qi]; return hash(q.id, q.opts[ps.picks[i]]); })).then(function(hs){
+        var missed = [], picks = [];
+        ps.order.forEach(function(qi, i){
+          var q = p.qs[qi];
+          if (hs[i] !== q.key) missed.push(q.id);
+          picks.push(q.id + ':' + 'ABCD'.charAt(ps.picks[i]));
+        });
+        ps.t1 = Date.now(); ps.done = true; ps.score = (p.qs.length - missed.length) + ' / ' + p.qs.length;
+        ps.payload = details(ps, ['missed=' + (missed.join(',') || 'none'), 'picks=' + picks.join(',')]);
+        store(); send(p, ps);
+      });
+    }
+
+    run.addEventListener('click', function(e){
+      var b = e.target.closest('button');
+      if (!b) return;
+      if (b.dataset.begin) return begin(b.dataset.begin);
+      if (b.dataset.resend) { var rp = parts.filter(function(p){ return p.id === b.dataset.resend; })[0]; b.disabled = true; return send(rp, st.parts[rp.id]); }
+      var p = current(), ps = p && st.parts[p.id];
+      if (b.classList.contains('opt')) {
+        run.querySelectorAll('.opt').forEach(function(o){ o.classList.toggle('picked', o === b); o.setAttribute('aria-pressed', o === b); });
+        picked = +b.dataset.o;
+        run.querySelector('[data-next]').disabled = false;
+      } else if (b.hasAttribute('data-next') && picked !== null) {
+        b.disabled = true;
+        ps.picks[ps.at] = picked;
+        if (ps.at === p.qs.length - 1) { store(); finishRound(p, ps); }
+        else { ps.at++; store(); draw(); }
+      }
+    });
+    run.addEventListener('submit', function(e){
+      e.preventDefault();
+      var text = document.getElementById('six-in').value.trim();
+      if (!text) return;
+      e.target.querySelector('button').disabled = true;
+      finishSix(text);
+    });
+    // Enter in the box doesn't send: only the button does, so nobody sends half a list by accident.
+    run.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target.id === 'six-in') e.preventDefault(); });
+
+    function lock(){
+      who.value = name; who.disabled = true; startBtn.hidden = true;
+      st = load(KEY + ':' + name) || { parts: {} };
+      sent.innerHTML = 'Not you? Tell Coach Omar before you answer anything.';
+      draw();
+    }
+    who.addEventListener('change', function(){
+      startBtn.disabled = !who.value;
+      startBtn.textContent = who.value ? 'Start as ' + who.value : 'Start';
+    });
+    startBtn.addEventListener('click', function(){
+      if (!who.value) return;
+      name = who.value; save(KEY + ':who', name); lock();
+    });
+    if (name) lock();
+  })();
 
   // Coaches tab. The notes are AES-GCM encrypted with a key derived from the password (PBKDF2).
   var blob = JSON.parse(document.getElementById('coaches-blob').textContent || '{}');

@@ -14,7 +14,9 @@ Season: **BIOGLOW 2026–27**, Founders Edition, Grades 4–8.
 | `FIRST LEGO League (BIOGLOW)/07 Team Docs/` | The competition-day playbook — procedures, judging scripts, trifold specs, rubric map |
 | `scripts/fetch-materials.sh` | Re-downloads every official FIRST BIOGLOW document |
 | `scripts/build-coaches.mjs` | Encrypts `admin/coaches.html` into the site's Coaches tab |
-| `admin/` (local only) | Coaches' notes, the password and transcripts. Gitignored, never pushed |
+| `scripts/build-quiz.mjs` | Writes a quiz from `admin/quiz-bank.json` into the Quizzes tab, answers hashed |
+| `scripts/quiz-results.py` | Reads the quiz results sheet: first tries, flags, question by question |
+| `admin/` (local only) | Coaches' notes, the password, transcripts and the quiz bank. Gitignored, never pushed |
 
 Everything else in the season folder is official FIRST material. It is gitignored because it
 runs to ~1.5 GB, and it is all freely downloadable — run the fetch script instead of committing it.
@@ -67,9 +69,27 @@ answer the judges, and the mock-interview log), **Quizzes** (Core Values and "Wh
 **Scratch** (the current week only, with slides whose last pages are the finished code), **Scrimmage**, **Season hub** (status, boards, missions, roles)
 and **Coaches** (password-locked).
 
-Quizzes: students pick their name first. Each finished round is sent to the Google Form
-"Ctrl+Alt+Defeat quiz results" in Omar's Drive, which feeds the Sheet "Ctrl+Alt+Defeat quiz results
-(Responses)". The form's entry IDs are at the top of the quiz script in `docs/index.html`.
+Quizzes: students pick their name and get **one try** at each part, one question at a time, with
+the options in a different order for every student and nothing marked right or wrong until the coach
+goes over it. Each finished part is sent to the Google Form "Ctrl+Alt+Defeat quiz results" in Omar's
+Drive, which feeds the Sheet "Ctrl+Alt+Defeat quiz results (Responses)". The form's entry IDs are at the
+top of the quiz script in `docs/index.html`. Along with the score, each row carries the picks, the time
+taken, how many times the student left the page, and which laptop it came from.
+
+```bash
+# write a new quiz into the page. The bank (questions, answers, explanations) is coach-only:
+# keep it in admin/. The page gets the answers hashed, so its source doesn't give them away.
+node scripts/build-quiz.mjs admin/quiz-bank.json
+
+# read the results: download the Sheet as CSV. Only each student's first try counts.
+python3 scripts/quiz-results.py results.csv --day 2026-11-20 --bank admin/quiz-bank.json
+```
+
+The build refuses a broken bank and warns when the right answers bunch up in one position or are
+usually the longest option. Give each new quiz a new `set` name. The results script flags retakes,
+leaving the page, finishing too fast, two students on one laptop and scores that don't match the picks.
+To let a student redo a part (wrong name, say), clear the site's data on that laptop and delete their
+row from the Sheet.
 
 The printable tracking sheet for a Friday goes in `docs/print/` and is linked from This week. Its source HTML sits beside
 the PDF; print it to US Letter with Playwright (`page.pdf({format: 'Letter', printBackground: true})`).
