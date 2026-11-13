@@ -77,6 +77,18 @@ the PDF; print it to US Letter with Playwright (`page.pdf({format: 'Letter', pri
 The two trifold designs (Robot Design and Innovation Project, drawn to scale) are in the **This week** tab, under the
 three groups, at `#boards`. The Season hub's "Trifold designs" link goes there.
 
+The Innovation board is generated. Its words, box sizes and "still needed" items live in
+`docs/print/innovation-board.py`; don't hand-edit the drawing between the `INNOVATION BOARD` markers in
+`docs/index.html`. When a student supplies missing words, put them in the box's text, delete its `need(...)`, then:
+
+```bash
+python3 docs/print/innovation-board.py   # rewrites the website drawing and docs/print/innovation-board.html
+node docs/print/print.mjs                # innovation-board.pdf (12x36, 24x36, 12x36 in) + innovation-print-list.pdf
+```
+
+`print.mjs` stops if any text overflows its box at true size, or if the print list runs past one Letter page.
+Only words a student said or wrote (or the agreed solution) go on the board. The expert's photo is printed, never committed.
+
 GitHub Pages sites are public on the open internet. This page names eight students and their
 school, so keep anything sensitive in the Coaches tab.
 
