@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Solution 2 Flowchart</title>
+<!-- Mohamed's Solution 2 flowchart, redrawn in the Innovation trifold's colours and fonts.
+     Colours were sampled from the trifold photo in his engineering notebook.
+     To re-export: open in Playwright at a 1200px-wide viewport, deviceScaleFactor 2, wait for
+     body[data-ready], then screenshot the page. Output: solution-2-flowchart.png beside this file. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Sans:wght@500;600;700;800&display=swap">
+<style>
+  :root{
+    --cream:#F1ECDF;   /* board background */
+    --tan:#E3DBC6;     /* cards, the Ctrl key */
+    --row:#F1EBDF;     /* light rows inside cards */
+    --blue:#2B5399;    /* Solutions panel, the Alt key, step numbers */
+    --orange:#DF4F1A;  /* DEFORESTATION, Solution 2, the Defeat key */
+    --ink:#1F1F1F;     /* FIGHTING, body text, key shadows */
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{background:var(--cream)}
+  body{width:1200px;height:760px;position:relative;overflow:hidden;
+       font-family:"Fira Sans",sans-serif;color:var(--ink)}
+  .label{position:absolute;left:56px;top:44px;font:700 17px/1 "Fira Sans",sans-serif;
+         letter-spacing:.04em;color:var(--orange);text-transform:uppercase}
+  h1{position:absolute;left:56px;top:70px;font:400 50px/1 "Archivo Black",sans-serif;letter-spacing:.005em}
+  h1 em{font-style:normal;color:var(--orange)}
+  .step{position:absolute;font:800 15px/1 "Fira Sans",sans-serif;letter-spacing:.06em;
+        color:var(--orange);text-transform:uppercase}
+  .box{position:absolute;box-shadow:7px 7px 0 var(--ink);padding:26px 30px}
+  .box p{font:600 25px/1.32 "Fira Sans",sans-serif}
+  #b1{left:56px;top:186px;width:380px;height:214px;background:var(--blue);color:#fff;
+      display:flex;align-items:center}
+  #b1 p{font-weight:700;font-size:27px}
+  #b2{left:604px;top:186px;width:540px;background:var(--tan);padding:24px 26px 26px}
+  #b2 > p{font-size:24px;margin-bottom:16px}
+  .land{display:flex;background:var(--row);margin-top:10px;min-height:76px}
+  .land b.k{flex:0 0 64px;background:var(--blue);color:#fff;display:flex;align-items:center;
+            justify-content:center;font:400 30px/1 "Archivo Black",sans-serif}
+  .land span{padding:12px 16px;font:600 21px/1.3 "Fira Sans",sans-serif;align-self:center}
+  .land span strong{font-weight:800}
+  #b3{left:188px;top:540px;width:520px;background:var(--orange);color:#fff}
+  #b3 p{font-weight:700;font-size:25px}
+  svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+</style>
+</head>
+<body>
+  <div class="label">Solution 2 &bull; A government law</div>
+  <h1>HOW THE LAW <em>WORKS</em></h1>
+
+  <div class="step" style="left:56px;top:160px">Step 1</div>
+  <div class="box" id="b1"><p>A construction worker wants to clear a forest to build a new neighborhood.</p></div>
+
+  <div class="step" style="left:604px;top:160px">Step 2</div>
+  <div class="box" id="b2">
+    <p>Environmental regulations require buying two separate pieces of land:</p>
+    <div class="land"><b class="k">A</b><span><strong>Land A:</strong> Cleared to build the new neighborhood.</span></div>
+    <div class="land"><b class="k">B</b><span><strong>Land B:</strong> Protected and used to plant new trees to replace the old.</span></div>
+  </div>
+
+  <div class="step" id="s3" style="left:188px">Step 3</div>
+  <div class="box" id="b3"><p>The worker buys both plots, builds the neighborhood on Land A, and plants the replacement forest on Land B.</p></div>
+
+  <svg id="arrows" width="1200" height="760"></svg>
+
+<script>
+  // Arrows are placed from the boxes' real positions once the fonts have loaded.
+  document.fonts.ready.then(() => {
+    const r = id => document.getElementById(id).getBoundingClientRect();
+    const b1 = r('b1'), b2 = r('b2'), b3 = r('b3');
+    // Step 3 sits under the bottom of Step 2 so the curve has room.
+    const top3 = Math.max(b2.bottom + 70, 540);
+    document.getElementById('b3').style.top = top3 + 'px';
+    document.getElementById('s3').style.top = (top3 - 26) + 'px';
+    const n3 = r('b3');
+    document.body.style.height = Math.ceil(n3.bottom + 7 + 48) + 'px';
+    const svg = document.getElementById('arrows');
+    svg.setAttribute('height', Math.ceil(n3.bottom + 60));
+    const ink = '#1F1F1F', w = 7;
+    const head = (x, y, ang) => {            // filled triangle pointing along ang (radians)
+      const L = 26, W = 15;
+      const bx = x - L*Math.cos(ang), by = y - L*Math.sin(ang);
+      const px = -Math.sin(ang)*W, py = Math.cos(ang)*W;
+      return `<polygon points="${x},${y} ${bx+px},${by+py} ${bx-px},${by-py}" fill="${ink}"/>`;
+    };
+    // 1 -> 2: straight across, centred on box 1
+    const y1 = b1.top + b1.height/2, xa = b1.right + 7 + 22, xb = b2.left - 22;
+    let s = `<line x1="${xa}" y1="${y1}" x2="${xb-20}" y2="${y1}" stroke="${ink}" stroke-width="${w}" stroke-linecap="round"/>`;
+    s += head(xb, y1, 0);
+    // 2 -> 3: curve from under box 2 down and left to box 3's right edge
+    const sx = b2.left + b2.width*0.55, sy = b2.bottom + 7 + 16;
+    const ex = n3.right + 7 + 24, ey = n3.top + n3.height/2;
+    const c1x = sx, c1y = ey, c2x = sx - 40, c2y = ey;
+    const ang = Math.atan2(ey - c2y, ex - c2x);
+    const tx = ex - 20*Math.cos(ang), ty = ey - 20*Math.sin(ang);
+    s += `<path d="M${sx},${sy} C${c1x},${c1y} ${c2x},${c2y} ${tx},${ty}" fill="none" stroke="${ink}" stroke-width="${w}" stroke-linecap="round"/>`;
+    s += head(ex, ey, ang);
+    svg.innerHTML = s;
+    document.body.dataset.ready = '1';
+  });
+</script>
+</body>
+</html>
