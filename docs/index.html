@@ -775,8 +775,8 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 
   <h3 class="sub">11:00 and 12:00 · Scratch class</h3>
   <div class="ez-box green">
-    <p>A younger class, twice: 11:00 to 12:00, then 12:00 to 1:00. Both groups get the same lesson, <b>Balloon Pop</b>: click a balloon to pop it. Much simpler than Math Cat.</p>
-    <p>Open the <a href="#scratch">Scratch tab</a> on the TV and follow it from the top. Start with the <b>Clicks, Sounds and Looks</b> slides, 15 minutes, with two Try its on the cat. For the last 10 minutes, put the Balloon Pop code slides (5 to 7) on the TV and go through the finished code together.</p>
+    <p>A younger class, twice: 11:00 to 12:00, then 12:00 to 1:00. Both groups get the same lesson, <b>Math Cat</b>: a test of the green Operators blocks.</p>
+    <p>Open the <a href="#scratch">Scratch tab</a> on the TV and follow it from the top. Start with the <b>Asking and Operators</b> slides, 15 minutes, because the class doesn't know those blocks yet. For the last 10 minutes, put the Math Cat code slides (6 to 9) on the TV and go through the finished code together.</p>
   </div>
 
   <h3 class="sub">Coming up</h3>
@@ -1067,66 +1067,69 @@ nav.links{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){
 </div>
 
 <!-- ===================== SCRATCH ===================== -->
-<!-- The current week only. Students see the finished game and what it does. scratch/balloon-pop/lesson.pdf is a short
-     lesson on clicks, sounds and looks, taught first. The code is on the last slides of
-     scratch/<slug>/slides.pdf (Balloon Pop: slides 5 to 7), which the teacher puts on the TV for the last 10 minutes.
+<!-- The current week only. Students see the finished game and what it does. scratch/math-cat/lesson.pdf is a short
+     lesson on ask, answer and the Operators blocks, taught first. The code is on the last slides of
+     scratch/<slug>/slides.pdf (Math Cat: slides 6 to 9), which the teacher puts on the TV for the last 10 minutes.
      scratch/<slug>/play.html is the Solution packaged with @turbowarp/packager. Older weeks are in Git history. -->
 <div id="scratch" class="scrim" role="tabpanel" aria-labelledby="tab-scratch" hidden>
 <section class="ez">
-  <div class="shead"><span>WEEK 4 · FRI 20 NOV · TODAY: CLICKS, SOUNDS AND LOOKS</span><h2>Balloon Pop</h2></div>
-  <p class="note">Click the balloon and it pops. You get a point, it turns a new colour, it gets a little smaller, and it jumps somewhere new. Today you build it yourself, and every block is one you'll try on the cat first.</p>
+  <div class="shead"><span>WEEK 3 · FRI 13 NOV · TODAY'S TEST: OPERATORS</span><h2>Math Cat</h2></div>
+  <p class="note">The cat asks you a sum. Type the answer and press Enter. Every right answer, the cat walks across the stage, and 10 right answers win. Today you build it yourself, in one hour, and every part needs a green <b>Operators</b> block.</p>
 
   <div class="ez-game">
     <div>
-      <div class="ez-frame"><iframe src="scratch/balloon-pop/play.html" title="Balloon Pop, the finished game" loading="lazy" allow="fullscreen"></iframe></div>
-      <p class="note" style="margin:8px 0 0">Click the green flag, then click the balloon.</p>
+      <div class="ez-frame"><iframe src="scratch/math-cat/play.html" title="Math Cat, the finished game" loading="lazy" allow="fullscreen"></iframe></div>
+      <p class="note" style="margin:8px 0 0">Click the green flag. Type each answer in the box under the stage and press Enter.</p>
     </div>
     <div>
-      <h3 class="sub" style="margin-top:0">What the balloon does</h3>
+      <h3 class="sub" style="margin-top:0">What the cat does</h3>
       <ul class="ez-sprites">
-        <li><b>1 · Pop</b><span>When you click it, it makes a Pop sound and jumps somewhere new.</span></li>
-        <li><b>2 · Score</b><span>Every pop adds 1 to Score. The green flag puts it back to 0.</span></li>
-        <li><b>3 · Colour</b><span>Every pop, it changes colour: blue, yellow, purple.</span></li>
-        <li><b>4 · Smaller</b><span>Every pop, it gets a little smaller. The green flag makes it big again.</span></li>
+        <li><b>1 · Pick</b><span>Picks two random numbers, A and B, from 1 to 10.</span></li>
+        <li><b>2 · Ask</b><span>Asks the sum, like “7 + 5”, by joining A, “ + ” and B.</span></li>
+        <li><b>3 · Right!</b><span>If the answer equals A + B, Score goes up by 1 and the cat says Correct!</span></li>
+        <li><b>4 · Wrong</b><span>If it's not, the cat tells you the right answer.</span></li>
+        <li><b>5 · Walk</b><span>The cat stands at Score × 30 − 150, so it walks right with every point.</span></li>
+        <li><b>6 · Win</b><span>When Score is more than 9, the cat says You win! and the game stops.</span></li>
       </ul>
     </div>
   </div>
 
   <h3 class="sub">Set up</h3>
   <ol class="ez-time" style="counter-reset:step">
-    <li><b class="at">1</b><div><span class="what">Delete the cat.</span> <span class="more">Click the cat under the stage, then the little bin on its corner. Your practice scripts go with it.</span></div></li>
-    <li><b class="at">2</b><div><span class="what">Add the balloon.</span> <span class="more">Click Choose a Sprite (bottom right), type <b>balloon</b>, and pick <b>Balloon1</b>.</span></div></li>
-    <li><b class="at">3</b><div><span class="what">Make a variable.</span> <span class="more">Click Variables, then Make a Variable, and name it <b>Score</b>.</span></div></li>
-    <li><b class="at">4</b><div><span class="what">A backdrop, if you like.</span> <span class="more">Choose a Backdrop (far bottom right), then <b>Blue Sky</b>.</span></div></li>
+    <li><b class="at">1</b><div><span class="what">Go to scratch.mit.edu and click Create.</span></div></li>
+    <li><b class="at">2</b><div><span class="what">Keep the cat.</span> <span class="more">Everything today goes on the cat (Sprite1). No other sprites.</span></div></li>
+    <li><b class="at">3</b><div><span class="what">Make three variables.</span> <span class="more">Click Variables, then Make a Variable, and name it <b>Score</b>. Do it twice more: <b>A</b>, then <b>B</b>.</span></div></li>
+    <li><b class="at">4</b><div><span class="what">Find the Operators.</span> <span class="more">Click the green Operators section and look at the blocks. Every mission uses one.</span></div></li>
   </ol>
-  <p class="note" style="margin-top:10px">Everything today goes on the balloon. Before you leave: <b>File</b>, then <b>Save to your computer</b>.</p>
+  <p class="note" style="margin-top:10px">Use capital letters: <b>Score</b>, <b>A</b> and <b>B</b>. Before you leave: <b>File</b>, then <b>Save to your computer</b>.</p>
 
   <h3 class="sub">For the teacher</h3>
   <div class="ez-box">
     <p>A younger class, twice: <b>11:00 to 12:00</b>, then <b>12:00 to 1:00</b>. Do the same lesson both times.</p>
-    <p><b>Start with the Clicks, Sounds and Looks slides.</b> They teach every block the game needs, on the cat: when this sprite clicked, start sound, next costume and change size. It takes 15 minutes, with two short Try its.</p>
-    <p>Then the Balloon Pop slides. <b>Slides 5 to 7 are the finished code</b>, for the last 10 minutes: the whole game first, then each part up close.</p>
-    <p class="ez-acts"><a class="btn" href="scratch/balloon-pop/lesson.pdf" target="_blank" rel="noopener">1 · Clicks, Sounds and Looks slides</a><a class="btn" href="scratch/balloon-pop/slides.pdf" target="_blank" rel="noopener">2 · Balloon Pop slides</a><a class="btn ghost" href="scratch/balloon-pop/balloon-pop.sb3" download>The finished game (.sb3)</a></p>
+    <p><b>Start with the Asking and Operators slides.</b> The class can already move sprites, but not ask questions or use the green blocks. It takes 15 minutes, with two short Try its.</p>
+    <p>Then the Math Cat slides. <b>Slides 6 to 9 are the finished code</b>, for the last 10 minutes: the whole game first, then each part up close.</p>
+    <p class="ez-acts"><a class="btn" href="scratch/math-cat/lesson.pdf" target="_blank" rel="noopener">1 · Asking and Operators slides</a><a class="btn" href="scratch/math-cat/slides.pdf" target="_blank" rel="noopener">2 · Math Cat slides</a><a class="btn ghost" href="scratch/math-cat/math-cat.sb3" download>The finished game (.sb3)</a></p>
   </div>
   <ol class="ez-time">
-    <li><b class="at">11:00</b><div><span class="what">Show the game.</span> <span class="more">Put this page on the TV, click the green flag and pop the balloon a few times.</span>
-      <span class="say">“Today is about clicking sprites, sounds, and how sprites look. First I'll show you the blocks, then you build this game yourself.”</span></div></li>
-    <li><b class="at">11:05</b><div><span class="what">Teach clicks, sounds and looks.</span> <span class="more">Put the <b>Clicks, Sounds and Looks</b> slides on the TV. Everyone opens scratch.mit.edu, clicks Create and keeps the cat. Slides 4 and 7 are Try its: wait until most of the class has them working.</span>
-      <span class="say">“Click the cat, not the green flag. What happens?”</span></div></li>
-    <li><b class="at">11:20</b><div><span class="what">Set up Balloon Pop, all together.</span> <span class="more">Balloon Pop slide 2: delete the cat, add Balloon1, make Score. Check every laptop has the balloon under the stage.</span></div></li>
-    <li><b class="at">11:25</b><div><span class="what">Students build it on their own.</span> <span class="more">Slide 3 first. Move on to slide 4 once most students have Missions 1 and 2 working.</span></div></li>
-    <li><b class="at">11:45</b><div><span class="what">Check each game.</span> <span class="more">Click their green flag and pop the balloon a few times. Tick each mission that works on page 3 of the tracking sheet.</span></div></li>
-    <li><b class="at">11:50</b><div><span class="what">The last 10 minutes: show the code.</span> <span class="more">Put slide 5 on the TV: the whole game. Then slides 6 and 7, one part at a time. Point at each block and ask the class what it does. Students fix their own game as you go.</span>
+    <li><b class="at">11:00</b><div><span class="what">Show the game.</span> <span class="more">Put this page on the TV, click the green flag and play it once. Answer one sum wrong on purpose.</span>
+      <span class="say">“Today is all about asking questions and the green Operators blocks. First I'll show you how they work, then you build this game yourself.”</span></div></li>
+    <li><b class="at">11:05</b><div><span class="what">Teach asking and operators.</span> <span class="more">Put the <b>Asking and Operators</b> slides on the TV. Everyone opens scratch.mit.edu, clicks Create and keeps the cat. Slides 4 and 10 are Try its: wait until most of the class has them working.</span>
+      <span class="say">“Click any green block and Scratch tells you what it gives you. Try it.”</span></div></li>
+    <li><b class="at">11:20</b><div><span class="what">Set up Math Cat, all together.</span> <span class="more">Drag the practice scripts back onto the blocks list to delete them. Then Math Cat slide 2: check that each laptop has Score, A and B.</span></div></li>
+    <li><b class="at">11:25</b><div><span class="what">Students build it on their own.</span> <span class="more">Slide 3 first. Move on to slide 4, then slide 5, once most students have the missions on the slide working.</span></div></li>
+    <li><b class="at">11:45</b><div><span class="what">Check each game.</span> <span class="more">Click their green flag and answer a few sums, one of them wrong. Tick each mission that works on the tracking sheet.</span></div></li>
+    <li><b class="at">11:50</b><div><span class="what">The last 10 minutes: show the code.</span> <span class="more">Put slide 6 on the TV: the whole game. Then slides 7, 8 and 9, one part at a time. Point at each green block and ask the class what it does. Students fix their own game as you go.</span>
       <span class="say">“Here's the real code. Look at yours: what's different?”</span></div></li>
-    <li><b class="at">11:58</b><div><span class="what">Save.</span> <span class="more">Slide 8: File, then Save to your computer. Then close Scratch.</span></div></li>
+    <li><b class="at">11:58</b><div><span class="what">Save.</span> <span class="more">File, then Save to your computer. Then close Scratch.</span>
+      <span class="say">“Please don't show the next class your game. They're taking the same test.”</span></div></li>
     <li><b class="at">12:00</b><div><span class="what">Second class.</span> <span class="more">The same lesson again, from 11:00.</span></div></li>
   </ol>
   <div class="ez-box blue">
     <p><b>If a student is stuck</b> for more than 3 minutes:</p>
     <ol>
-      <li>Ask: “Which mission are you on?” Then check the balloon is picked under the stage. Blocks on the Stage won't work.</li>
-      <li>Tell them the colour of the block they need: Events is yellow, Sound is pink, Motion is blue, Variables is orange, Looks is purple.</li>
-      <li>Still stuck? Show them that part of the code on your own laptop: slide 6 or 7. Keep the TV on the missions until 11:50.</li>
+      <li>Ask: “Which mission are you on?” Then check the blocks are inside the forever.</li>
+      <li>Tell them the colour of the block they need: Operators are green, Sensing (ask and answer) is light blue, Variables is dark orange, Control is orange, Looks (say) is purple.</li>
+      <li>Still stuck? Show them that part of the code on your own laptop: slide 7, 8 or 9. Keep the TV on the missions until 11:50.</li>
     </ol>
   </div>
 </section>
