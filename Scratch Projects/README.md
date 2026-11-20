@@ -11,7 +11,7 @@ Students follow the **Scratch** tab on the team website (https://omarsyed4.githu
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
 | 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a variable as a block's number (`move (Score) steps`), a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
 | 03 | Math Cat | A test of the **Operators** blocks, built alone in an hour from Create. The cat asks sums: pick random, join inside a join, + and =, not, * inside -, and >. New from Sensing: ask and wait, answer. Only the cat every new project starts with, and three variables (Score, A, B) |
-| 04 | Balloon Pop | Much simpler on purpose, built together: **when this sprite clicked** (the only new block), start sound, go to random position, a Score variable, next costume, change size. One library sprite (Balloon1), two scripts, seven blocks |
+| 04 | Balloon Pop | Much simpler on purpose, taught first with a Clicks, Sounds and Looks deck: **when this sprite clicked**, start sound, go to random position, a Score variable, next costume, change size. One library sprite (Balloon1), two scripts, seven blocks |
 
 ## What's in each week's folder
 
@@ -42,11 +42,13 @@ Week 3 was first **Space Dodge** (fly a rocket, grab stars, dodge a bouncing pla
 
 ## Week 4: Balloon Pop
 
-On 19 November Omar asked for a lesson "way simpler than last week's". Math Cat was six missions built alone, with nested joins and operator maths. Balloon Pop is four missions of one to three blocks, built **together**: the teacher puts one mission slide on the TV and waits until most of the class has it working before the next.
+On 19 November Omar asked for a lesson "way simpler than last week's", then for it to run "the same way as the last one with the slide deck and everything". So the game is much smaller than Math Cat (four missions, seven blocks, one library sprite), and the lesson has Math Cat's shape: a teaching deck first, students build alone from the mission slides, and the finished code on the last slides.
 
-- `build.py` writes `Balloon Pop - Solution.sb3` and copies it to `docs/scratch/balloon-pop/balloon-pop.sb3`. No Starter: students build it from Create, delete the cat and pick **Balloon1** from Choose a Sprite. Balloon1 already has three colours (blue, yellow, purple) and the Pop sound, so nothing is downloaded. Blue Sky is the backdrop, and it's optional.
-- `slides.html` is the TV deck; `node "Scratch Projects/04 Balloon Pop/render.js"` prints it to `docs/scratch/balloon-pop/slides.pdf`. Unlike Math Cat, **every mission slide shows the whole script so far** next to the new blocks, so a student who falls behind can copy the picture. Slide 7 is try-these in words (duplicate the balloon, -10, say Pop!, another sound), slide 8 the finished code with an if-it-doesn't-work list.
-- `game.png` is the title slide's picture, taken from the packaged game.
+- `build.py` writes `Balloon Pop - Solution.sb3` and copies it to `docs/scratch/balloon-pop/balloon-pop.sb3`. No Starter: students build it from Create, delete the cat and pick **Balloon1** from Choose a Sprite. Balloon1 already has three colours (blue, yellow, purple) and the Pop sound. Blue Sky is the backdrop, and it's optional.
+- `lesson.html` is the teaching deck, **Clicks, Sounds and Looks**, 15 minutes before the game: when this sprite clicked, start sound, next costume, set and change size, and a Score recap. Its two Try its are on the cat (click it to meow and jump; click it to change costume and shrink). Its last slide maps each block to Balloon Pop. `cat-a.svg`, `cat-b.svg` and the three `balloon-*.svg` files are the library costumes, for the drawn slides.
+- `slides.html` is the Balloon Pop deck: title, Set up (delete the cat, add Balloon1, make Score), Missions 1 and 2, Missions 3 and 4 with try-these, then **slides 5 to 7 the finished code** (the whole game, then each part up close) and Save.
+- `node "Scratch Projects/04 Balloon Pop/render.js"` prints both decks to `docs/scratch/balloon-pop/lesson.pdf` and `slides.pdf`. `game.png` is the title slide's picture, taken from the packaged game.
+- The tracking sheet for the class is page 3 of `docs/print/2026-11-20-tracking.pdf`.
 - `change size by -5`: ten pops leave the balloon at half size. Scratch won't shrink a sprite below a few pixels, and the green flag's `set size to 100 %` puts it back.
 
 ## Things learned building week 1

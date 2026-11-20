@@ -1,0 +1,299 @@
+<!doctype html>
+<!-- Clicks, Sounds and Looks: the short lesson for the TV, taught before Balloon Pop, the same way
+     Asking and Operators came before Math Cat. Nine slides, about 15 minutes with the two Try its,
+     both on the cat every new project starts with. Render with node "Scratch Projects/04 Balloon Pop/render.js",
+     which writes docs/scratch/balloon-pop/lesson.pdf next to the Balloon Pop slides.
+     cat-a.svg, cat-b.svg and the three balloon-*.svg files are the costumes from Scratch's own library. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clicks, Sounds and Looks · TV</title>
+<script src="../../docs/scratch/scratchblocks-3.7.1.min.js"></script>
+<style>
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0d1733}
+body{font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;padding:44px 56px 40px;
+  background:radial-gradient(1200px 700px at 85% -10%,#22346e 0%,rgba(34,52,110,0) 60%),linear-gradient(180deg,#121d40,#0b1430);
+  page-break-after:always;break-after:page;display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.kick{font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f7c948;margin:0}
+.kick.ev{color:#ffd24d}.kick.snd{color:#e38be0}.kick.lk{color:#b39cff}.kick.var{color:#ffab5e}
+.num{position:absolute;top:40px;right:56px;font-size:14px;color:#8a97bd}
+h1{font-size:88px;line-height:.98;margin:14px 0 26px;font-weight:800;letter-spacing:-.03em}
+h2{font-size:52px;margin:12px 0 24px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+h2 .ev{color:#ffd24d}h2 .snd{color:#e38be0}h2 .lk{color:#b39cff}h2 .var{color:#ffab5e}
+b{color:#fff}
+.hint{margin-top:auto;font-size:22px;line-height:1.4;color:#c9d2ea;background:rgba(255,255,255,.07);border-radius:8px;padding:14px 18px;border-left:5px solid #f7c948}
+.hint b{color:#f7c948}
+
+.split{display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:center;flex:1;min-height:0}
+.big{margin:0;padding-left:34px;font-size:28px;line-height:1.5}
+.big li{margin:0 0 10px;padding-left:6px}
+.lede{font-size:28px;line-height:1.45;margin:0 0 22px;color:#e6ebf7}
+.blockbox{display:inline-block;background:#f9f9f9;border-radius:14px;padding:18px 22px;box-shadow:0 18px 44px rgba(0,0,0,.45);margin:0 0 26px}
+.blockbox.flat{padding:14px 18px}
+
+/* the Scratch stage, drawn */
+.stage{position:relative;width:480px;height:360px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.stage .cat{position:absolute;left:150px;bottom:90px;width:150px}
+.stage .ptr{position:absolute;left:250px;top:150px;width:46px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.bubble{position:absolute;left:270px;top:40px;background:#fff;border:2px solid #c3c9d4;border-radius:18px;padding:10px 18px;font-size:26px;font-weight:600;color:#575e75;white-space:nowrap}
+.bubble::after{content:"";position:absolute;left:18px;bottom:-15px;width:22px;height:22px;background:#fff;border-right:2px solid #c3c9d4;border-bottom:2px solid #c3c9d4;transform:skewX(30deg) rotate(30deg);border-bottom-right-radius:4px}
+.stagecap{margin:12px 0 0;font-size:18px;color:#c9d2ea;text-align:center}
+.flag{position:absolute;left:14px;top:12px;display:flex;gap:10px}
+.flag span{width:34px;height:34px;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.flag .go{background:#e6f7e6;color:#2f9e44}.flag .stop{background:#fde8e8;color:#d9480f}
+
+.cards{display:grid;gap:22px;flex:1;min-height:0}
+.cards.two{grid-template-columns:1fr 1fr}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px 26px;display:flex;flex-direction:column;gap:16px;min-height:0}
+.card h3{font-size:32px;margin:0;font-weight:800}
+.card p{font-size:23px;line-height:1.45;margin:0;color:#e6ebf7}
+.card .blockbox{margin:0;align-self:flex-start}
+.card.ev{border-top:6px solid #ffbf00}
+
+/* costumes and sizes, drawn */
+.row{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+.pic{display:flex;flex-direction:column;align-items:center;gap:10px}
+.pic .frame{background:#fff;border-radius:12px;padding:14px;display:grid;place-items:end center;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.pic span{font-size:18px;color:#c9d2ea;font-weight:600}
+.pic span b{color:#fff}
+.arrow{font-size:40px;font-weight:800;color:#f7c948;align-self:center;padding-bottom:30px}
+
+.try{flex:1;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start;min-height:0}
+.steps{margin:0;padding-left:34px;font-size:28px;line-height:1.5}
+.steps li{margin:0 0 12px;padding-left:6px}
+.test{font-size:24px;font-weight:700;color:#f7c948;margin:18px 0 0;line-height:1.4}
+.badge{align-self:flex-start;display:inline-block;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#f7c948;color:#2a2000;border-radius:999px;padding:6px 16px;margin-bottom:6px}
+
+.compare{display:grid;grid-template-columns:170px 1fr 1fr;gap:0;flex:1;min-height:0;align-content:start}
+.compare > div{padding:8px 20px 8px 0;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center}
+.compare .h{font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fb2ff;padding-top:0}
+.compare .r{font-size:22px;font-weight:700;color:#f7c948}
+.compare .blockbox{margin:0;padding:8px 12px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+
+pre.blocks{margin:0}
+.scratchblocks svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide">
+  <span class="num">1</span>
+  <p class="kick">Scratch · Before Balloon Pop</p>
+  <div class="split">
+    <div>
+      <h1>Clicks, Sounds and Looks</h1>
+      <ul class="big">
+        <li>Start a script when you <b>click</b> a sprite.</li>
+        <li>Play a <b>sound</b>.</li>
+        <li>Change how a sprite <b>looks</b>: its costume and its size.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="stage">
+        <img class="cat" src="cat-a.svg" alt="">
+        <svg class="ptr" viewBox="0 0 24 30" aria-hidden="true"><path d="M2 2v22l6-6 4 9 4-2-4-9h8z" fill="#fff" stroke="#14213d" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <div class="bubble">Meow!</div>
+      </div>
+      <p class="stagecap">Click the cat. It meows.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <span class="num">2</span>
+  <p class="kick ev">Events · the yellow blocks</p>
+  <h2>Two ways to <span class="ev">start</span> a script</h2>
+  <div class="cards two">
+    <div class="card ev">
+      <div class="blockbox flat"><pre class="blocks" data-scale="1.5">when flag clicked</pre></div>
+      <h3>You click the green flag</h3>
+      <p>Every script with this hat starts at once. Use it to get the game ready: Score back to 0, the sprite back to normal.</p>
+    </div>
+    <div class="card ev">
+      <div class="blockbox flat"><pre class="blocks" data-scale="1.5">when this sprite clicked</pre></div>
+      <h3>You click the sprite</h3>
+      <p>This script starts <b>every time</b> you click that sprite on the stage. Click it five times, and it runs five times.</p>
+    </div>
+  </div>
+  <p class="hint" style="margin-top:22px">The round top is called a <b>hat</b>. Every script starts with one, and blocks snap on underneath.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <span class="num">3</span>
+  <p class="kick snd">Sound · the pink blocks</p>
+  <h2><span class="snd">start sound</span></h2>
+  <div class="split">
+    <div>
+      <div class="blockbox"><pre class="blocks" data-scale="1.6">start sound [Meow v]</pre></div>
+      <ol class="big">
+        <li>Plays the sound, and the script carries straight on.</li>
+        <li>The cat comes with one sound: <b>Meow</b>.</li>
+        <li>Click the little arrow to pick a different one.</li>
+      </ol>
+    </div>
+    <div>
+      <div class="stage">
+        <img class="cat" src="cat-a.svg" alt="">
+        <div class="bubble">Meow!</div>
+      </div>
+      <p class="stagecap">Every library sprite comes with its own sound.</p>
+    </div>
+  </div>
+  <p class="hint">No sound? Check the laptop's volume. To add more sounds, open the <b>Sounds</b> tab at the top left.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <span class="num">4</span>
+  <span class="badge">Try it · 2 minutes</span>
+  <h2>Click the cat: it meows and jumps</h2>
+  <div class="try">
+    <div class="blockbox"><pre class="blocks" data-scale="1.35">when this sprite clicked
+start sound [Meow v]
+go to (random position v)</pre></div>
+    <div>
+      <ol class="steps">
+        <li>Build it on the cat.</li>
+        <li>Click the <b>cat</b>, not the green flag.</li>
+        <li>Chase it round the stage and click it again.</li>
+      </ol>
+      <p class="test">It works if every click, the cat meows and jumps somewhere new.</p>
+    </div>
+  </div>
+  <p class="hint"><b>when this sprite clicked</b> is in Events (yellow). <b>go to random position</b> is in Motion (blue).</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <span class="num">5</span>
+  <p class="kick lk">Looks · the purple blocks</p>
+  <h2><span class="lk">Costumes</span>: a sprite's pictures</h2>
+  <p class="lede">A sprite can have more than one picture. <b>next costume</b> switches to the next one, and after the last it goes back to the first.</p>
+  <div class="blockbox flat" style="align-self:flex-start"><pre class="blocks" data-scale="1.5">next costume</pre></div>
+  <div class="row" style="gap:60px">
+    <div class="row">
+      <div class="pic"><div class="frame" style="width:150px;height:150px"><img src="cat-a.svg" alt="" style="width:110px"></div><span>cat-a</span></div>
+      <span class="arrow">→</span>
+      <div class="pic"><div class="frame" style="width:150px;height:150px"><img src="cat-b.svg" alt="" style="width:106px"></div><span>cat-b</span></div>
+    </div>
+    <div class="row">
+      <div class="pic"><div class="frame" style="width:110px;height:150px"><img src="balloon-blue.svg" alt="" style="height:118px"></div><span>blue</span></div>
+      <span class="arrow">→</span>
+      <div class="pic"><div class="frame" style="width:110px;height:150px"><img src="balloon-yellow.svg" alt="" style="height:118px"></div><span>yellow</span></div>
+      <span class="arrow">→</span>
+      <div class="pic"><div class="frame" style="width:110px;height:150px"><img src="balloon-purple.svg" alt="" style="height:118px"></div><span>purple</span></div>
+    </div>
+  </div>
+  <p class="hint">The cat has <b>two</b> costumes, so it looks like it's walking. Today's balloon has <b>three</b>: three colours.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <span class="num">6</span>
+  <p class="kick lk">Looks · the purple blocks</p>
+  <h2><span class="lk">Size</span>: bigger and smaller</h2>
+  <div class="split" style="grid-template-columns:1fr 1fr">
+    <div>
+      <div class="blockbox flat" style="display:block;width:max-content"><pre class="blocks" data-scale="1.4">set size to (100) %</pre></div>
+      <p class="lede" style="margin-top:-10px">100 is normal size. Use it to put the sprite back to normal.</p>
+      <div class="blockbox flat" style="display:block;width:max-content"><pre class="blocks" data-scale="1.4">change size by (-10)</pre></div>
+      <p class="lede" style="margin-top:-10px">A minus number makes it <b>smaller</b>. Type 10 instead of -10 and it gets <b>bigger</b>.</p>
+    </div>
+    <div class="row" style="justify-content:center;gap:22px;flex-wrap:nowrap">
+      <div class="pic"><div class="frame" style="width:160px;height:170px"><img src="cat-a.svg" alt="" style="width:130px"></div><span><b>100</b> %</span></div>
+      <div class="pic"><div class="frame" style="width:160px;height:170px"><img src="cat-a.svg" alt="" style="width:91px"></div><span><b>70</b> %</span></div>
+      <div class="pic"><div class="frame" style="width:160px;height:170px"><img src="cat-a.svg" alt="" style="width:52px"></div><span><b>40</b> %</span></div>
+    </div>
+  </div>
+  <p class="hint">A size change stays until something changes it back. That's why the green flag sets the size to <b>100</b>.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <span class="num">7</span>
+  <span class="badge">Try it · 3 minutes</span>
+  <h2>Click the cat: it walks and shrinks</h2>
+  <div class="try">
+    <div>
+      <div class="blockbox" style="display:block;width:max-content"><pre class="blocks" data-scale="1.15">when flag clicked
+set size to (100) %</pre></div>
+      <div class="blockbox" style="display:block;width:max-content"><pre class="blocks" data-scale="1.15">when this sprite clicked
+next costume
+change size by (-10)</pre></div>
+    </div>
+    <div>
+      <ol class="steps">
+        <li>Add these two scripts to the cat.</li>
+        <li>Click the cat five times.</li>
+        <li>Then click the <b>green flag</b>.</li>
+      </ol>
+      <p class="test">It works if every click, the cat changes costume and gets smaller, and the green flag makes it big again.</p>
+    </div>
+  </div>
+  <p class="hint">Both blocks are in <b>Looks</b> (purple). Your Try it 1 script still works too: one sprite can have lots of scripts.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <span class="num">8</span>
+  <p class="kick var">Variables · the orange blocks</p>
+  <h2>A <span class="var">Score</span>, like last week</h2>
+  <div class="split" style="grid-template-columns:1fr 1fr">
+    <div>
+      <ol class="big">
+        <li>Click <b>Variables</b>, then <b>Make a Variable</b>.</li>
+        <li>Name it <b>Score</b> and click OK.</li>
+        <li>It shows up on the stage, top left.</li>
+      </ol>
+    </div>
+    <div>
+      <div class="blockbox" style="display:block;width:max-content"><pre class="blocks" data-scale="1.25">when flag clicked
+set [Score v] to (0)</pre></div>
+      <p class="lede" style="margin-top:-8px">The green flag starts Score at 0.</p>
+      <div class="blockbox" style="display:block;width:max-content"><pre class="blocks" data-scale="1.25">change [Score v] by (1)</pre></div>
+      <p class="lede" style="margin-top:-8px">Adds 1 every time it runs.</p>
+    </div>
+  </div>
+  <p class="hint">In each orange block, click the little arrow and pick <b>Score</b>.</p>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <span class="num">9</span>
+  <p class="kick">Now: Balloon Pop</p>
+  <h2>Balloon Pop uses all of it</h2>
+  <div class="compare">
+    <div class="h"></div><div class="h">You tried</div><div class="h">In Balloon Pop</div>
+    <div class="r">Click</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.9">when this sprite clicked</pre></div></div>
+    <div style="font-size:22px;color:#e6ebf7">Click the balloon to pop it</div>
+    <div class="r">Sound</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.9">start sound [Meow v]</pre></div></div>
+    <div style="font-size:22px;color:#e6ebf7">The balloon's sound is <b>&nbsp;Pop</b></div>
+    <div class="r">Costume</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.9">next costume</pre></div></div>
+    <div style="font-size:22px;color:#e6ebf7">A new colour every pop</div>
+    <div class="r">Size</div>
+    <div><div class="blockbox flat"><pre class="blocks" data-scale="0.9">change size by (-10)</pre></div></div>
+    <div style="font-size:22px;color:#e6ebf7">A bit smaller every pop</div>
+  </div>
+  <p class="hint">The same blocks, on a <b>balloon</b> instead of the cat. Now open the <b>Balloon Pop</b> slides: Set up deletes the cat, and your practice scripts go with it.</p>
+</section>
+
+<script>
+document.querySelectorAll('pre.blocks').forEach(function(pre){
+  var o = {style: 'scratch3', languages: ['en'], inline: false, scale: parseFloat(pre.dataset.scale || '1')};
+  var doc = scratchblocks.parse(scratchblocks.read(pre, o), o);
+  scratchblocks.replace(pre, scratchblocks.render(doc, o), doc, o);
+});
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>
