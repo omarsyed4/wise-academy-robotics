@@ -53,7 +53,8 @@ Google Docs cannot be version-controlled, so these stay in Drive:
 ## Season reference
 
 - Robot game: three 2.5-minute matches, **only the best single score counts**
-- Judging: 30 minutes — 2 welcome, 5+5 project, 5+5 robot design, up to 8 feedback
+- Judging: 30 minutes — 2 welcome, 5+5 project, 5+5 robot design, up to 8 feedback. Report to the
+  judging room 10 minutes early with the robot, the computer, props and both boards
 - Four equally weighted ranks decide Champion's: Core Values, Innovation Project, Robot Design, Robot Game
 - 70 points are procedural: 20 for passing inspection inside one launch area, 50 for keeping precision tokens
 - [BIOGLOW season materials](https://www.firstinspires.org/resources/library/fll/season-materials)
