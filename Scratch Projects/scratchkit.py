@@ -195,6 +195,11 @@ def when_key(key):
     return B("event_whenkeypressed", fields={"KEY_OPTION": [key, None]})
 
 
+def when_clicked():
+    """when this sprite clicked"""
+    return B("event_whenthisspriteclicked")
+
+
 def when_receive(msg):
     return B("event_whenbroadcastreceived", fields={"BROADCAST_OPTION": [msg.name, msg.id]})
 
@@ -300,6 +305,10 @@ def switch_costume(name):
 
 def set_size(percent):
     return B("looks_setsizeto", {"SIZE": percent})
+
+
+def change_size(by):
+    return B("looks_changesizeby", {"CHANGE": by})
 
 
 def change_effect(effect, by):

@@ -1,0 +1,282 @@
+<!doctype html>
+<!-- Balloon Pop slides for the TV. Render to docs/scratch/balloon-pop/slides.pdf with
+     node "Scratch Projects/04 Balloon Pop/render.js" (needs Playwright).
+     Much simpler than Math Cat on purpose: one mission per slide, built together. Each mission
+     slide shows the new blocks on the left and the whole script so far on the right, so a
+     student can always copy the picture. Slide 8 is the finished code, for the end of class. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Balloon Pop · TV</title>
+<script src="../../docs/scratch/scratchblocks-3.7.1.min.js"></script>
+<style>
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0d1733}
+body{font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;padding:44px 56px 40px;
+  background:radial-gradient(1200px 700px at 85% -10%,#22346e 0%,rgba(34,52,110,0) 60%),linear-gradient(180deg,#121d40,#0b1430);
+  page-break-after:always;break-after:page;display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.kick{font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f7c948;margin:0}
+.num{position:absolute;top:40px;right:56px;font-size:14px;color:#8a97bd}
+h1{font-size:104px;line-height:.98;margin:14px 0 28px;font-weight:800;letter-spacing:-.03em}
+h2{font-size:56px;margin:10px 0 20px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+b{color:#fff}
+.title{display:grid;grid-template-columns:1fr 560px;gap:48px;align-items:center;flex:1}
+.title ul{margin:0;padding-left:30px;font-size:30px;line-height:1.55}
+.title li{margin:2px 0}
+.callout{margin-top:28px;background:rgba(255,255,255,.07);border-left:5px solid #f7c948;border-radius:6px;padding:14px 18px;font-size:23px;line-height:1.4;color:#e6ebf7}
+.shot{width:560px;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5);background:#fff}
+.shot img{display:block;width:100%}
+.steps{margin:0;padding-left:40px;font-size:31px;line-height:1.45;max-width:1120px}
+.steps li{margin:0 0 16px;padding-left:8px}
+.steps .opt{color:#c9d2ea}
+.hint{margin-top:auto;font-size:23px;line-height:1.4;color:#c9d2ea;background:rgba(255,255,255,.07);border-radius:8px;padding:14px 18px;border-left:5px solid #f7c948}
+.hint b{color:#f7c948}
+
+/* a mission: what to do and the new blocks on the left, the whole script so far on the right */
+.mission{display:grid;grid-template-columns:1fr 1fr;gap:44px;flex:1;min-height:0}
+.mission .do{font-size:28px;line-height:1.45;margin:0 0 22px;color:#e6ebf7}
+.need{font-size:14px;font-weight:700;letter-spacing:.12em;color:#8fb2ff;margin:0 0 12px}
+.pieces{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.pieces .p{display:flex;align-items:center;gap:10px}
+.new{font-size:13px;font-weight:800;background:#f7c948;color:#2a2000;border-radius:4px;padding:3px 8px;letter-spacing:.04em}
+.where{font-size:17px;color:#c9d2ea}
+.test{margin-top:auto;font-size:26px;line-height:1.35;font-weight:700;color:#f7c948}
+.test span{color:#fff;font-weight:600}
+.looks{display:flex;flex-direction:column;min-height:0}
+.script{background:#f9f9f9;border-radius:14px;padding:24px 28px;box-shadow:0 20px 50px rgba(0,0,0,.45);align-self:flex-start}
+.scripts{display:flex;gap:22px;align-items:flex-start}
+.mission.wide{grid-template-columns:1fr 1.25fr;gap:36px}
+
+.tries{list-style:none;margin:6px 0 0;padding:0;max-width:1120px}
+.tries li{font-size:29px;line-height:1.4;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);color:#e6ebf7}
+.tries li b{color:#f7c948}
+
+.code{display:grid;grid-template-columns:auto 1fr;gap:48px;flex:1;min-height:0;align-items:start}
+.code .side h3{font-size:26px;margin:0 0 12px;color:#f7c948}
+.code .side ul{list-style:none;margin:0;padding:0}
+.code .side li{font-size:21px;line-height:1.4;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.12);color:#e6ebf7}
+.save ol{font-size:36px;line-height:1.6;padding-left:44px;margin:10px 0 0}
+pre.blocks{margin:0}
+.scratchblocks svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide">
+  <span class="num">1</span>
+  <p class="kick">Scratch · Week 4</p>
+  <div class="title">
+    <div>
+      <h1>Balloon Pop</h1>
+      <ul>
+        <li>Click the balloon. <b>Pop!</b></li>
+        <li>You get a <b>point</b>.</li>
+        <li>It turns a <b>new colour</b> and gets a bit <b>smaller</b>.</li>
+        <li>Then it <b>jumps</b> somewhere new.</li>
+      </ul>
+      <div class="callout">One balloon, four missions. We build it together, one mission at a time.</div>
+    </div>
+    <div class="shot"><img src="game.png" alt=""></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <span class="num">2</span>
+  <p class="kick">Balloon Pop · Everyone together</p>
+  <h2>Set up</h2>
+  <ol class="steps">
+    <li>Go to <b>scratch.mit.edu</b> and click <b>Create</b>.</li>
+    <li>Delete the cat: click the cat under the stage, then the little <b>bin</b> on its corner.</li>
+    <li>Click <b>Choose a Sprite</b> (bottom right). Type <b>balloon</b> and pick <b>Balloon1</b>.</li>
+    <li class="opt">If you like: <b>Choose a Backdrop</b> (far bottom right) and pick <b>Blue Sky</b>.</li>
+  </ol>
+  <p class="hint">Everything today goes on the <b>balloon</b>. Click it under the stage before you add blocks.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <span class="num">3</span>
+  <p class="kick">Balloon Pop · Mission 1</p>
+  <h2>1 · Pop</h2>
+  <div class="mission">
+    <div style="display:flex;flex-direction:column">
+      <p class="do">When you <b>click the balloon</b>, it makes a Pop sound and jumps somewhere new.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">when this sprite clicked</pre><span class="new">NEW</span><span class="where">yellow Events</span></div>
+        <div class="p"><pre class="blocks">start sound [Pop v]</pre><span class="where">pink Sound</span></div>
+        <div class="p"><pre class="blocks">go to (random position v)</pre><span class="where">blue Motion</span></div>
+      </div>
+      <p class="test">Test it: <span>click the balloon. Pop! It jumps.</span></p>
+    </div>
+    <div class="looks">
+      <p class="need">IT LOOKS LIKE THIS</p>
+      <div class="script"><pre class="blocks" data-scale="1.25">when this sprite clicked
+start sound [Pop v]
+go to (random position v)</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <span class="num">4</span>
+  <p class="kick">Balloon Pop · Mission 2</p>
+  <h2>2 · Score</h2>
+  <div class="mission wide">
+    <div style="display:flex;flex-direction:column">
+      <p class="do">Click <b>Variables</b>, then <b>Make a Variable</b>. Name it <b>Score</b>. Every pop adds 1. The green flag starts it at 0.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">change [Score v] by (1)</pre><span class="where">under the Pop script</span></div>
+        <div class="p"><pre class="blocks">when flag clicked</pre><span class="where">a new script</span></div>
+        <div class="p"><pre class="blocks">set [Score v] to (0)</pre><span class="where">under the green flag</span></div>
+      </div>
+      <p class="test">Test it: <span>click the green flag, then pop. Score goes up.</span></p>
+    </div>
+    <div class="looks">
+      <p class="need">IT LOOKS LIKE THIS</p>
+      <div class="scripts">
+      <div class="script"><pre class="blocks" data-scale="0.9">when flag clicked
+set [Score v] to (0)</pre></div>
+      <div class="script"><pre class="blocks" data-scale="0.9">when this sprite clicked
+start sound [Pop v]
+go to (random position v)
+change [Score v] by (1)</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <span class="num">5</span>
+  <p class="kick">Balloon Pop · Mission 3</p>
+  <h2>3 · Colour</h2>
+  <div class="mission wide">
+    <div style="display:flex;flex-direction:column">
+      <p class="do">Every pop, the balloon changes colour. Balloon1 has three: <b>blue</b>, <b>yellow</b> and <b>purple</b>.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">next costume</pre><span class="where">purple Looks · at the bottom of the Pop script</span></div>
+      </div>
+      <p class="test">Test it: <span>pop it three times. Blue, yellow, purple.</span></p>
+    </div>
+    <div class="looks">
+      <p class="need">IT LOOKS LIKE THIS</p>
+      <div class="scripts">
+      <div class="script"><pre class="blocks" data-scale="0.9">when flag clicked
+set [Score v] to (0)</pre></div>
+      <div class="script"><pre class="blocks" data-scale="0.9">when this sprite clicked
+start sound [Pop v]
+go to (random position v)
+change [Score v] by (1)
+next costume</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <span class="num">6</span>
+  <p class="kick">Balloon Pop · Mission 4</p>
+  <h2>4 · Smaller</h2>
+  <div class="mission wide">
+    <div style="display:flex;flex-direction:column">
+      <p class="do">Every pop, the balloon gets a bit <b>smaller</b>, so it's harder to click. The green flag makes it big again.</p>
+      <p class="need">BLOCKS YOU NEED</p>
+      <div class="pieces">
+        <div class="p"><pre class="blocks">change size by (-5)</pre><span class="where">bottom of the Pop script</span></div>
+        <div class="p"><pre class="blocks">set size to (100) %</pre><span class="where">under the green flag</span></div>
+      </div>
+      <p class="test">Test it: <span>pop it lots. It shrinks. Green flag: big again.</span></p>
+    </div>
+    <div class="looks">
+      <p class="need">IT LOOKS LIKE THIS</p>
+      <div class="scripts">
+      <div class="script"><pre class="blocks" data-scale="0.9">when flag clicked
+set [Score v] to (0)
+set size to (100) %</pre></div>
+      <div class="script"><pre class="blocks" data-scale="0.9">when this sprite clicked
+start sound [Pop v]
+go to (random position v)
+change [Score v] by (1)
+next costume
+change size by (-5)</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <span class="num">7</span>
+  <p class="kick">Balloon Pop · All four work?</p>
+  <h2>Try these</h2>
+  <ul class="tries">
+    <li><b>Two balloons.</b> Right-click the balloon under the stage and pick <b>duplicate</b>.</li>
+    <li><b>Faster.</b> Change <b>-5</b> to <b>-10</b>. How many can you pop now?</li>
+    <li><b>Talk.</b> Make the balloon say <b>Pop!</b> for 0.5 seconds when you click it.</li>
+    <li><b>Your sound.</b> Click the <b>Sounds</b> tab, choose a new sound, and pick it in start sound.</li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <span class="num">8</span>
+  <p class="kick">Balloon Pop · The code · Last 10 minutes</p>
+  <h2>The finished code</h2>
+  <div class="code">
+    <div class="scripts">
+      <div class="script"><pre class="blocks" data-scale="0.95">when flag clicked
+set [Score v] to (0)
+set size to (100) %</pre></div>
+      <div class="script"><pre class="blocks" data-scale="0.95">when this sprite clicked
+start sound [Pop v]
+go to (random position v)
+change [Score v] by (1)
+next costume
+change size by (-5)</pre></div>
+    </div>
+    <div class="side">
+      <h3>If it doesn't work</h3>
+      <ul>
+        <li><b>Nothing happens when I click:</b> the top block must be <b>when this sprite clicked</b>, and the script goes on the balloon, not the stage.</li>
+        <li><b>Score doesn't go up:</b> click the little arrow in the orange block and pick <b>Score</b>.</li>
+        <li><b>Score never goes back to 0:</b> set Score to 0 goes under the <b>green flag</b>.</li>
+        <li><b>It stays tiny:</b> set size to 100 % goes under the green flag too.</li>
+        <li><b>No sound:</b> check the laptop's volume, and pick <b>Pop</b> in start sound.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide save">
+  <span class="num">9</span>
+  <p class="kick">Balloon Pop · Time's up</p>
+  <h2>Save your game</h2>
+  <ol>
+    <li>Click <b>File</b>, then <b>Save to your computer</b>.</li>
+    <li>Name it <b>Balloon Pop</b> and your name.</li>
+    <li>Close the Scratch tab.</li>
+  </ol>
+</section>
+
+<script>
+document.querySelectorAll('pre.blocks').forEach(function(pre){
+  var o = {style: 'scratch3', languages: ['en'], inline: false, scale: parseFloat(pre.dataset.scale || '0.9')};
+  var code = scratchblocks.read(pre, o);
+  var doc = scratchblocks.parse(code, o);
+  scratchblocks.replace(pre, scratchblocks.render(doc, o), doc, o);
+});
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>

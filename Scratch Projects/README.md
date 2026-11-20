@@ -11,6 +11,7 @@ Students follow the **Scratch** tab on the team website (https://omarsyed4.githu
 | 01 | Firefly Catcher | when-key-pressed, forever, if touching, random positions, a Score variable |
 | 02 | Shark Chase | if key pressed inside a forever, point towards, go to random position, a variable as a block's number (`move (Score) steps`), a countdown on the Stage. All library sprites (Fish, Shark, Starfish) |
 | 03 | Math Cat | A test of the **Operators** blocks, built alone in an hour from Create. The cat asks sums: pick random, join inside a join, + and =, not, * inside -, and >. New from Sensing: ask and wait, answer. Only the cat every new project starts with, and three variables (Score, A, B) |
+| 04 | Balloon Pop | Much simpler on purpose, built together: **when this sprite clicked** (the only new block), start sound, go to random position, a Score variable, next costume, change size. One library sprite (Balloon1), two scripts, seven blocks |
 
 ## What's in each week's folder
 
@@ -38,6 +39,15 @@ Week 3 was first **Space Dodge** (fly a rocket, grab stars, dodge a bouncing pla
 - `game.png` is the title slide's picture, taken from the packaged game.
 - `lesson.html` is a second, shorter TV deck, **Asking and Operators**, taught for the first 15 minutes, before Math Cat. Before the 13 November class, Omar said the class understands moving sprites but not asking or the Operators blocks. It covers ask and wait, answer, the round and pointy green blocks, the math blocks, pick random, join, = > not, and ask-then-check, with two Try its (say your name; a one-question quiz, 3 + 4). Its last slide shows how that quiz becomes Math Cat. `render.js` prints it to `docs/scratch/math-cat/lesson.pdf` alongside the Math Cat slides. `cat.svg` is the default cat, taken from the `.sb3`, for the drawn stage.
 - Math Cat was planned for 6 November but not taught that day, so it runs on 13 November instead. The tracking sheet for the class is page 2 of `docs/print/2026-11-13-tracking.pdf`.
+
+## Week 4: Balloon Pop
+
+On 19 November Omar asked for a lesson "way simpler than last week's". Math Cat was six missions built alone, with nested joins and operator maths. Balloon Pop is four missions of one to three blocks, built **together**: the teacher puts one mission slide on the TV and waits until most of the class has it working before the next.
+
+- `build.py` writes `Balloon Pop - Solution.sb3` and copies it to `docs/scratch/balloon-pop/balloon-pop.sb3`. No Starter: students build it from Create, delete the cat and pick **Balloon1** from Choose a Sprite. Balloon1 already has three colours (blue, yellow, purple) and the Pop sound, so nothing is downloaded. Blue Sky is the backdrop, and it's optional.
+- `slides.html` is the TV deck; `node "Scratch Projects/04 Balloon Pop/render.js"` prints it to `docs/scratch/balloon-pop/slides.pdf`. Unlike Math Cat, **every mission slide shows the whole script so far** next to the new blocks, so a student who falls behind can copy the picture. Slide 7 is try-these in words (duplicate the balloon, -10, say Pop!, another sound), slide 8 the finished code with an if-it-doesn't-work list.
+- `game.png` is the title slide's picture, taken from the packaged game.
+- `change size by -5`: ten pops leave the balloon at half size. Scratch won't shrink a sprite below a few pixels, and the green flag's `set size to 100 %` puts it back.
 
 ## Things learned building week 1
 
